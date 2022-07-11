@@ -1,0 +1,669 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>2. Metody numeryczne w technice</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="dbc57f20-6a0f-4daa-879f-a148ff4946ae" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🔢</span></div><h1 class="page-title">2. Metody numeryczne w technice</h1><table class="properties"><tbody><tr class="property-row property-row-select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesSelect"><path d="M7,13 C10.31348,13 13,10.31371 13,7 C13,3.68629 10.31348,1 7,1 C3.68652,1 1,3.68629 1,7 C1,10.31371 3.68652,13 7,13 Z M3.75098,5.32278 C3.64893,5.19142 3.74268,5 3.90869,5 L10.09131,5 C10.25732,5 10.35107,5.19142 10.24902,5.32278 L7.15771,9.29703 C7.07764,9.39998 6.92236,9.39998 6.84229,9.29703 L3.75098,5.32278 Z"></path></svg></span>Status</th><td><span class="selected-value select-value-color-green">Zrobione</span></td></tr><tr class="property-row property-row-person"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesPerson"><path d="M9.625,10.8465 C8.91187,10.2891 8.12088,9.926 7,9.26013 L7,8.71938 C7.21175,8.47612 7.392,8.176 7.53813,7.83213 C7.94587,7.7315 8.3125,7.33425 8.3125,7 C8.3125,6.51788 8.1095,6.32713 7.8715,6.17137 C7.8715,6.15562 7.875,6.14162 7.875,6.125 C7.875,5.41362 7.4375,3.5 5.25,3.5 C3.0625,3.5 2.625,5.4145 2.625,6.125 C2.625,6.14162 2.6285,6.15562 2.6285,6.17137 C2.3905,6.32713 2.1875,6.51788 2.1875,7 C2.1875,7.33425 2.55413,7.7315 2.96187,7.833 C3.108,8.176 3.28825,8.47612 3.5,8.71938 L3.5,9.26013 C2.37912,9.92513 1.58812,10.2882 0.875,10.8465 C0.041125,11.4984 0,12.4688 0,14 L10.5,14 C10.5,12.4688 10.4589,11.4984 9.625,10.8465 Z M13.125,7.3465 C12.4119,6.78912 11.6209,6.426 10.5,5.76013 L10.5,5.21938 C10.7118,4.97613 10.892,4.676 11.0381,4.33213 C11.4459,4.2315 11.8125,3.83425 11.8125,3.5 C11.8125,3.01787 11.6095,2.82713 11.3715,2.67138 C11.3715,2.65562 11.375,2.64162 11.375,2.625 C11.375,1.91363 10.9375,0 8.75,0 C6.5625,0 6.125,1.9145 6.125,2.625 C6.125,2.64162 6.1285,2.65562 6.1285,2.67138 C6.11188,2.68275 6.09787,2.69588 6.08125,2.70725 C7.83212,3.066 8.59688,4.54825 8.72813,5.74787 C8.97575,6.00863 9.1875,6.39625 9.1875,7 C9.1875,7.60288 8.771,8.20312 8.18388,8.51462 C8.127,8.624 8.06662,8.729 8.00275,8.82962 C8.155,8.91537 8.30025,8.99675 8.44025,9.07463 C9.08075,9.4325 9.63375,9.74137 10.164,10.1561 C10.3022,10.2638 10.4204,10.3801 10.5289,10.4991 L14,10.4991 C14,8.96875 13.9589,7.99837 13.125,7.3465 Z"></path></svg></span>Assign</th><td></td></tr></tbody></table></header><div class="page-body"><h3 id="68a8e6fd-6bdf-410b-a45c-508ec8c58b32" class=""><details open=""><summary>a) metody rozwiązywania zagadnień nieliniowych</summary></details></h3><div class="indented"><p id="5f3a358f-0d49-473a-ad7c-a4ac5e3e55ba" class=""><strong>Zagadnienia nieliniowe</strong> rozwiązuje się przy użyciu metod numerycznych nazywanych <strong><em>metodami kolejnych przybliżeń</em></strong> lub <strong><em>metodami iteracyjnymi</em></strong>. Polegają one na tym, że na określonym przedziale poszukiwane jest <strong>przybliżone położenie pierwiastka</strong>. W kolejnych krokach <strong>powtarza się obliczenia</strong> uzyskując coraz dokładniejsze położenie tego pierwiastka, <strong>aż do utrzymania zadowalająco niskiego błędu</strong> (który również powinien być szacowany przez stosowaną metodę).</p><p id="67c5ff1a-c0ed-42a7-93bb-bb79db32bf9d" class="">Wśród metod rozwiązywania zagadnień nieliniowych można wymienić metodę bisekcji, metodę regula-falsi, metodę siecznych, metodę Newtona oraz wszelkie modyfikacje metody Newtona.</p><p id="88943789-528b-44d7-aa8f-86c3ae650443" class=""><strong>Metoda bisekcji</strong></p><p id="4fdab73b-63d5-428e-8250-28a13886c777" class="">W metodzie bisekcji zakłada się, że funkcja jest ciągła na analizowanym przedziale &lt;a,b&gt;, natomiast <strong>granice tego przedziału - a i b - mają przeciwne znaki</strong>. Przeciwne znaki oznaczają, że na tym przedziale funkcja musi przecinać zero. <strong>Metoda ta znajduje tylko jeden pierwiastek funkcji</strong>, nawet jeżeli w zadanym przedziale jest ich kilka. </p><p id="b4e6604f-fb02-4c1b-890e-e94e489fc93e" class="">Na czym polega metoda bisekcji?<div class="indented"><ol type="1" id="c3ee90bf-ce0b-44e2-b59d-cbd948658e22" class="numbered-list" start="1"><li>Oblicza się wartość funkcji w środku przedziału &lt;a,b&gt;, czyli <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo stretchy="false">(</mo><msub><mi>x</mi><mn>1</mn></msub><mo>=</mo><mfrac><mrow><mi>a</mi><mo>+</mo><mi>b</mi></mrow><mn>2</mn></mfrac><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">f(x_1=\frac{a+b}{2})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.2251079999999999em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8801079999999999em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">a</span><span class="mbin mtight">+</span><span class="mord mathnormal mtight">b</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mclose">)</span></span></span></span></span><span>﻿</span></span>. <ul id="2d6c884d-3d91-4492-8431-8e458d686763" class="bulleted-list"><li style="list-style-type:disc">jeżeli wartość w tym punkcie jest równa 0 lub wystarczająco bliska 0, mamy pierwiastek (miejsce zerowe)</li></ul><ul id="ec4e1774-004f-4ac5-a0fc-d9038563594f" class="bulleted-list"><li style="list-style-type:disc">jeżeli nie, przechodzimy do kolejnego kroku</li></ul></li></ol><ol type="1" id="f86398b3-57df-416f-aaef-40d0cf8e757e" class="numbered-list" start="2"><li>Mamy dwa przedziały, czyli <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&lt;</mo><mi>a</mi><mo separator="true">,</mo><msub><mi>x</mi><mn>1</mn></msub><mo>&gt;</mo><mo separator="true">;</mo><mo>&lt;</mo><msub><mi>x</mi><mn>1</mn></msub><mo separator="true">,</mo><mi>b</mi><mo>&gt;</mo></mrow><annotation encoding="application/x-tex">&lt;a,x_1&gt;; &lt;x_1,b&gt;</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.7335400000000001em;vertical-align:-0.19444em;"></span><span class="mord mathnormal">a</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span></span><span class="base"><span class="strut" style="height:0.7335400000000001em;vertical-align:-0.19444em;"></span><span class="mpunct">;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal">b</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span></span></span></span></span><span>﻿</span></span>, czyli przedziały od punktu a do centrum całego badanego przedziału, i od centrum do końca badanego przedziału<ul id="d19dfdbf-91d5-4980-a85c-551516716c49" class="bulleted-list"><li style="list-style-type:disc">Wybieramy przedział, w którym znaki końców granic są sobie przeciwne.</li></ul><ul id="f55947e1-f508-47f4-9bc7-9990c208e5e4" class="bulleted-list"><li style="list-style-type:disc">Na wybranym przedziale ponownie wyznaczamy wartość funkcji w jego środku.</li></ul><ul id="86c72e0f-87db-42d5-a73f-6db2c1386cce" class="bulleted-list"><li style="list-style-type:disc">Jeżeli otrzymana wartość jest równa 0 lub wystarczająco bliska 0, mamy pierwiastek (miejsce zerowe)</li></ul><ul id="b4f5ccd9-806d-46d5-a021-e9d5c1c0b2bc" class="bulleted-list"><li style="list-style-type:disc">jeżeli nie, powtarzamy znowu ten krok.</li></ul></li></ol></div></p><p id="9ea1c464-5c56-482d-8002-2a0178354e7b" class="">Obliczenia kończy się, gdy uzyskany przedział jest wystarczająco mały, żeby z wystarczającą pewnością założyć położenie pierwiastka funkcji.</p><p id="fe043dd8-33b8-4eb6-9098-691cace2d456" class="">Z zasady działania, metoda ta nazywana jest czasem metodą połowienia lub metodą równego podziału.</p><p id="3f29aa0e-c3bd-436b-95fe-12af70938cbc" class=""><strong>Metoda regula-falsi</strong></p><p id="14a58f91-d4d4-4d3b-a77f-4bae79ee00e5" class="">Metoda regula-falsi jest nazywana też <em>metodą fałszywego założenia liniowości funkcji</em>. Przyjmuje się w niej założenia, że <strong>funkcja ma dwie ciągłe pochodne niezerowe</strong>, przy czym <strong>ich znaki na przedziale &lt;a,b&gt; są stałe</strong>. <strong>Znaki granic przedziału a i b muszą być sobie przeciwne</strong> - co oznacza, że funkcja na tym przedziale przecina oś x. </p><figure id="869984dd-4718-4353-8c47-e1136fdbe280" class="image"><a href="2%20Metody%20numeryczne%20w%20technice%20dbc57f206a0f4daa879fa148ff4946ae/Untitled.png"><img style="width:874px" src="2%20Metody%20numeryczne%20w%20technice%20dbc57f206a0f4daa879fa148ff4946ae/Untitled.png"/></a></figure><p id="3ad483d6-deb1-4f60-a9d9-d7f3250a1792" class="">Metoda polega na tym, że prowadzi się <em>cięciwę</em> od punktu A(a, f(a)) do punktu B(b, f(b)). Cięciwa przecina w jakimś miejscu oś x - miejsce to można określić jako x1 i jest ono przybliżeniem pierwiastka. Jeżeli ma wystarczającą dokładność - to jest to koniec rozumowania.</p><figure id="241d5676-c503-4892-8feb-3e6257d71b4a" class="image"><a href="2%20Metody%20numeryczne%20w%20technice%20dbc57f206a0f4daa879fa148ff4946ae/Untitled%201.png"><img style="width:844px" src="2%20Metody%20numeryczne%20w%20technice%20dbc57f206a0f4daa879fa148ff4946ae/Untitled%201.png"/></a></figure><p id="fe8d6309-222e-4114-af07-98f221604516" class="">Jeżeli jednak dokładność nie jest zadowalająca, to prowadzi się kolejną cięciwę, tym razem od punktu C(x1, f(x1)) do punktu A albo B, zależnie od tego, w którym funkcja ma znak przeciwny do f(x1). Ponownie, punkt w którym cięciwa przecina oś x jest kolejnym przybliżeniem pierwiastka i można go użyć jako miejsca zerowego, jeżeli dokładność jest zadowalająca. </p><p id="d161ace4-4182-4410-8131-5c8fd00d2318" class=""><strong>Metoda siecznych</strong></p><p id="e1dfa006-1e7a-4cc8-b2e8-6d37a6e7cb30" class=""><strong>Metoda siecznych</strong> to modyfikacja metody regula falsi, która jest od niej szybsza. W przypadku metody siecznych, <strong>nie wymaga się, żeby w punktach wyznaczających kolejną cięciwę funkcja miała przeciwne znaki</strong>. </p><p id="5e909af2-62dc-4bde-9528-07d29d901822" class="">Do kolejnych przybliżeń wykorzystuje się punkty x1, x2 itd. Obliczenia w tej metodzie mogą po uzyskaniu określonego przybliżenia zacząć generować coraz większe niepewności. Moment, w którym odchyłki są najmniejsze od zera, uznaje się za końcowy moment obliczeń, a gdy potrzebna jest większa dokładność, proces iteracji zaczyna się od początku, ale na zmniejszonym przedziale. </p><p id="c7dbf217-72f0-4b90-a0e8-218d91099c77" class=""><strong>Metoda Newtona</strong></p><p id="97baf0ed-fe86-49cb-85d9-78f31be3cc59" class="">Metoda Newtona nazywana jest też metodą Newtona-Raphsona lub metodą stycznych. W tej metodzie wybieramy tylko jeden punkt początkowy rozwiązywania równania. W punkcie tym prowadzona jest styczna do wykresu funkcji. Przecięcie tej stycznej z osią x jest pierwszym przybliżeniem pierwiastka.</p><p id="08f2a644-cff3-4187-90e4-dace2528b882" class="">Jeżeli przybliżenie nie jest zadowalające, to w punkcie pierwszego przybliżenia oblicza się wartość funkcji i ponownie prowadzi styczną do tego punktu wykresu funkcji. Ponownie, punkt przecięcia jest kolejnym przybliżeniem. Równania te wykonuje się ponownie aż do uzyskania zadowalającego przybliżenia. </p><figure id="9cc3783a-c999-47b2-8496-d1059d3ebea9" class="image"><a href="2%20Metody%20numeryczne%20w%20technice%20dbc57f206a0f4daa879fa148ff4946ae/Untitled%202.png"><img style="width:678px" src="2%20Metody%20numeryczne%20w%20technice%20dbc57f206a0f4daa879fa148ff4946ae/Untitled%202.png"/></a></figure><p id="079ef4bc-6d18-4f4a-ab76-6c60c60514c7" class="">Metodę Newtona można rozszerzyć na układy równań nieliniowych. </p><h3 id="761da9ad-e7d1-44c1-97a0-25475e5c60a2" class="">Najważniejsze punkty</h3><ul id="a3d546b2-a8f8-4901-a782-c8603901d74f" class="bulleted-list"><li style="list-style-type:disc">rozwiązywanie zagadnień nieliniowych rozumiemy jako szukanie miejsc zerowych funkcji nieliniowych</li></ul><ul id="0e7781ea-0697-448d-b6a5-4bf37204e45d" class="bulleted-list"><li style="list-style-type:disc">szukanie miejsc zerowych funkcji polega na iteracyjnym analizowaniu jej przebiegu w sposób zależny od wybranego algorytmu</li></ul><ul id="8773e70c-6198-40c4-822e-a6d70c9a3e9c" class="bulleted-list"><li style="list-style-type:disc">przykładowe algorytmy: metoda bisekcji, regula-falsi, siecznych, Newtona</li></ul><ul id="723cb3da-2711-4c3e-9803-5caf2df22e97" class="bulleted-list"><li style="list-style-type:disc">metoda bisekcji: wybór przedziału i dzielenie go na pół tak długo, aż połowa wypadnie wystarczająco blisko miejsca zerowego</li></ul><ul id="e6b6deb5-6c29-4d5a-88b9-c3e31ac3aacd" class="bulleted-list"><li style="list-style-type:disc">metoda Newtona: poprowadzenie stycznej do przebiegu funkcji - przecięcie stycznej (funkcji liniowej) z zerem jest przybliżeniem miejsca zerowego</li></ul><h3 id="a4ec41c2-6bdf-460d-ac78-2f64eb46d53f" class=""><strong>Źródła</strong></h3><p id="14c4ecb5-9543-44f7-8e8a-dcea882ffe98" class="">[1] Pańczyk, Łukasik, Sikora, Guziak - <em>Metody numeryczne w przykładach - </em><a href="http://www.math.uni.wroc.pl/~ikrol/metody_num.pdf">http://www.math.uni.wroc.pl/~ikrol/metody_num.pdf</a></p></div><h3 id="d64b4b2f-3cdd-4370-9cc0-382686dc43cd" class=""><details open=""><summary>b) analityczne metody optymalizacyjne</summary></details></h3><div class="indented"><p id="97bda85b-da9d-40cd-96c2-2985571ad6b7" class=""><strong>Metody optymalizacyjne</strong> to w skrócie metody numeryczne mające na celu <strong>znalezienie ekstremum</strong> zadanej funkcji (nazywanej też <strong>funkcją celu</strong>). Metody analityczne optymalizacji opierają się na znajomości postaci analitycznej badanej funkcji (lub zestawu badanych funkcji). </p><p id="8117341b-3e2d-4002-a17b-01ab944fbe77" class=""><strong>Algorytmy optymalizacji funkcji jednej zmiennej</strong></p><p id="71d90bcb-3c00-4c96-b8f1-77d8b3534fdf" class=""><strong>Grupa algorytmów do optymalizacji funkcji jednej zmiennej ma na celu znalezienie minimum tej funkcji</strong>, czyli min(f(x)). Algorytmy te można wykorzystać również w celu znajdowania maksimów - wtedy po prostu wyszukuje się minimum funkcji o znaku przeciwnym, czyli min(-f(x)). </p><p id="68913ad4-e4e5-4d50-b749-fc85d45305dd" class="">Wyróżnia się <strong>metody bezpośrednich poszukiwań</strong> oraz <strong>metody oparte na gradientach</strong>. Metody bezpośrednich poszukiwań bazują po prostu na obliczanych wartościach funkcji celu. Metody gradientowe uwzględniają natomiast również pochodne pierwszego i/lub drugiego rzędu funkcji celu.</p><p id="efe65c3a-573a-431b-bd33-ec9215839c28" class="">Metody optymalizacji funkcji jednej zmiennej zakładają, że funkcja jest unimodalna - czyli ma tylko jedno minimum; w praktyce jednak <strong>funkcję dzieli się na fragmenty</strong> i <strong>dla każdego z nich szuka minimum</strong>. </p><p id="444257b9-4d3e-470a-9e9f-f1a970c868f4" class="">Znajdowanie minimum funkcji odbywa się w dwóch krokach. W pierwszym, ustala się przedział, w którym znajduje się minimum. Dopiero w drugim znajduje się minimum z odpowiednią dokładnością. </p><p id="e319fbc8-f427-4af4-96ed-6b362102f3f2" class="">Wśród metod ustalania przedziału, w którym znajduje się minimum funkcji można wymienić:</p><ul id="80151ca9-cdde-44ae-83d1-d21449aeae36" class="bulleted-list"><li style="list-style-type:disc"><strong>metodę wyczerpującego poszukiwania</strong> - porównuje ona wartości funkcji celu w kilku punktach przy równych odstępach i wybiera przedział, w którym funkcja zdaje się mieć minimum</li></ul><ul id="53926e4f-40a0-4fe2-989f-c05e53ce7150" class="bulleted-list"><li style="list-style-type:disc"><strong>metodę przyspieszonego poszukiwania</strong> - opiera się ona o jeden punkt startowy i kierunek poszukiwań, a krok sprawdzania wartości może się tu zmieniać wykładniczo (lub wolniej lub szybciej).</li></ul><p id="4fb68fd8-6b30-4129-a98a-79803294f385" class="">Natomiast wśród metod znajdowania minimum z określoną dokładnością można wymienić:</p><ul id="24ea9aa3-919d-45bf-9149-12f47d3700eb" class="bulleted-list"><li style="list-style-type:disc"><strong>metody eliminowania obszarów</strong> - np. metoda dzielenia obszaru na pół, metoda złotego podziału, metoda liczb Fibonaciego - w tych metodach w każdym kolejnym kroku iteracji pomniejsza się obszar, w którym poszukiwane jest minimum - aż do uzyskania zadowalająco małego przedziału;</li></ul><ul id="719a65ad-4a16-42a1-988d-339ba25e1778" class="bulleted-list"><li style="list-style-type:disc"><strong>metody estymacji punktowej</strong> - np. metoda interpolacji kwadratowej Powella - oprócz informacji o wartości funkcji w różnych punktach, metody te wykorzystują informację o wielkości różnic wartości funkcji; </li></ul><ul id="f7e7fef3-a817-4f66-8d39-675f23b8e5e3" class="bulleted-list"><li style="list-style-type:disc"><strong>metody oparte na gradientach </strong>- np. metoda Newtona-Raphsona, metoda siecznych - metody te oprócz informacji o wartości funkcji, do znajdowania minimów wykorzystują również informacje o pochodnych analizowanych funkcji celu. </li></ul><p id="2560266b-68b9-4ad7-b28d-57ce557d15dd" class=""><strong>Algorytmy optymalizacji funkcji wielu zmiennych</strong></p><p id="c324bb3d-884b-4b4b-99bd-fc36d2107204" class="">Metody te analogicznie polegają na poszukiwaniu minimów funkcji, przy czym mówimy tutaj o funkcjach wielu zmiennych - niejako wielowymiarowych. Stąd, złożoność obliczeniowa jest odpowiednio większa. </p><p id="28138cef-7d78-48e4-bf0c-21ad5b599c3c" class="">Wśród metod optymalizacji funkcji wielu zmiennych można wymienić metody bezpośrednich poszukiwań oraz metody gradientowe. </p><p id="71e2ec32-2145-4d68-bb84-b5a5f2a55cae" class=""><strong>Metody bezpośrednich poszukiwań</strong> bazują na określaniu wartości funkcji w różnych punktach. Można tu wyróżnić:</p><ul id="38dfa51e-cfb8-403c-8f29-32a8e37ad2e8" class="bulleted-list"><li style="list-style-type:disc"><strong>metodę hipersześcianu</strong>: w przestrzeni wielowymiarowej wybiera się <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mi>N</mi></msup><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">2^N+1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.924661em;vertical-align:-0.08333em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8413309999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.10903em;">N</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span></span><span>﻿</span></span> punktów, z czego jeden jest środkiem, pozostałe wierzchołkami hipersześcianu. Wybiera się punkt z najmniejszą wartością funkcji. Jeśli był on wcześniej wierzchołkiem, to teraz staje się centrum hipersześcianu. Jeżeli był centrum, to zmniejsza się hipersześcian i tak aż do uzyskania odpowiedniej niepewności.</li></ul><ul id="3d2cb8f6-d8c2-4d75-9f55-829c038134d5" class="bulleted-list"><li style="list-style-type:disc"><strong>metodę sympleksu Neldera-Meada</strong>: zamiast hipersześcianu, na przestrzeni funkcji celu rysuje się sympleks - figurę, która ma liczbę wierzchołków o 1 większą niż liczba zmiennych funkcji celu. Czyli w przypadku funkcji dwóch zmiennych, w przestrzeni trójwymiarowej pojawia się trójkąt. Punkty takiego trójkąta nie mogą być na jednej linii (albo punkty czworokąta nie mogłyby być na jednej płaszczyźnie na funkcji 3 zmiennych). Sympleks z każdą iteracją jest zmniejszany.</li></ul><ul id="ba47b17c-47ed-4e62-ae7a-995e30308afd" class="bulleted-list"><li style="list-style-type:disc"><strong>metodę kierunków sprzężonych Powella</strong>: najpopularniejsza z tych metod; tworzy się N liniowo niezależnych kierunków poszukiwań minimum i sekwencyjnie wykonuje się serię poszukiwań w tych kierunkach, startując za każdym razem z poprzednio znalezionego punktu.</li></ul><p id="b79b482c-a4df-48a8-8181-f17c437364ec" class="">W przypadku <strong>metod gradientowych</strong>, oblicza się gradient funkcji celu - ponieważ gradient opisuje kierunek najszybszego wzrostu wartości funkcji. Minus gradient natomiast oznacza najszybszy spadek. Wśród metod gradientowych, można wymienić:</p><ul id="694d0a5a-37e2-4484-96ae-6ce69c800fa5" class="bulleted-list"><li style="list-style-type:disc"><strong>metodę Cauchy’ego</strong>: oblicza się (ujemny) gradient funkcji a następnie poszukiwania minimum wykonuje się w kierunku tego gradientu; określa się tu liczbę iteracji, bo im bliżej minimum tym gradient mniejszy i tym więcej iteracji trzeba żeby zwiększać dokładność o coraz mniejszy krok; im dalej znajduje się punkt początkowy od minimum funkcji, tym algorytm jest sprawniejszy</li></ul><ul id="4903921c-e719-4d10-93cf-6a98ae7b3c6f" class="bulleted-list"><li style="list-style-type:disc"><strong>metodę Newtona</strong>: metoda ta operuje na szeregach Taylora, ale pomijając niuanse matematyczne, jej istotną cechą jest to, że najlepiej sprawdza się gdy punkt początkowy działania algorytmu znajduje się blisko minimum</li></ul><ul id="ed6c5e0c-2ebb-4daf-b30b-f5e339869f22" class="bulleted-list"><li style="list-style-type:disc"><strong>metodę Marquardta</strong>: metoda ta na początku stosuje algorytm Cauchy’ego, a następnie - bliżej minimum - zaczyna stosować algorytm metody Newtona. Dlatego jest najbardziej efektywna z nich obu. </li></ul><p id="cf113185-9ea9-48c5-9561-614bf70404f6" class="">W przypadku, <strong>gdy poszukujemy minimów funkcji o ograniczonym obszarze</strong>, stosuje się jeszcze inne metody. Są to <strong>metoda funkcji kar i barier</strong> oraz <strong>metoda Rosena rzutowanego gradientu</strong>. </p><h3 id="737a647a-f615-4be4-92de-e1add8b50e29" class="">Najważniejsze punkty</h3><ul id="1dcf818a-bc81-4de8-9981-1e292955b559" class="bulleted-list"><li style="list-style-type:disc">analityczne metody optymalizacyjne to algorytmy służące do poszukiwania minimum analizowanych funkcji w sposób czysto matematyczny</li></ul><ul id="081fe08c-7c02-4aeb-9d11-61188f180a36" class="bulleted-list"><li style="list-style-type:disc">wyróżnia się metody bezpośrednich poszukiwań oraz gradientowe</li></ul><ul id="30fb59ac-c375-45c2-bee7-2cceb0722e65" class="bulleted-list"><li style="list-style-type:disc">metody bezpośrednich poszukiwań analizują wartości funkcji i iteracyjnie zawężają obszar poszukiwań - np. metody eliminowania obszarów, metoda hipersześcianu, metoda sympleksu</li></ul><ul id="0e9aba7c-b7ab-4df2-97c0-897797807044" class="bulleted-list"><li style="list-style-type:disc">metody gradientowe opierają się o analizę gradientu (lub pochodnej) funkcji i na tej podstawie szukają minimów - np. metoda siecznych, Cauchy’ego, Newtona</li></ul><ul id="ebb21b1f-333f-49f7-9386-244a837e8348" class="bulleted-list"><li style="list-style-type:disc">metoda hipersześcianu: w przestrzeni funkcji definiuje się hipersześcian (3 wymiary - hipersześcian 4-wymiarowy); wierzchołek lub centrum, jeżeli funkcja w ich miejscu ma najmniejszą wartość, stają się środkiem nowego, mniejszego hipersześcianu aż do znalezienia minimum</li></ul><ul id="78ba3428-84f8-4c02-aedd-870c67007046" class="bulleted-list"><li style="list-style-type:disc">metoda Cauchy’ego: oblicza się ujemny gradient funkcji i poszukuje minimum w kierunku najszybszych zmian tego gradientu </li></ul><h3 id="4fdcd333-2709-42f6-885a-4038c3817574" class=""><strong>Źródła</strong></h3><p id="c4b10835-c9af-4337-ad7e-387283dc266f" class="">[1] <a href="https://pl.wikipedia.org/wiki/Optymalizacja_(matematyka)">https://pl.wikipedia.org/wiki/Optymalizacja_(matematyka)</a></p><p id="a6432f6a-c3d5-4551-8862-39218fbc2004" class="">[2] <a href="https://en.wikipedia.org/wiki/Mathematical_optimization#Iterative_methods">https://en.wikipedia.org/wiki/Mathematical_optimization#Iterative_methods</a></p><p id="905a8f3b-eb4f-498d-845b-2c3bb59f57cf" class="">[3] Michał Lewandowski - <em>Metody optymalizacji - teoria i wybrane algorytmy</em> <a href="https://web.sgh.waw.pl/~mlewan1/Site/MO_files/mo_skrypt_21_12.pdf">https://web.sgh.waw.pl/~mlewan1/Site/MO_files/mo_skrypt_21_12.pdf</a></p><p id="6d173d84-0541-4793-9404-68fba7ab5d63" class="">[4] Dahlquist - <em>Metody Numeryczne</em></p></div><h3 id="55ffca83-875d-4826-be16-07b8308e0517" class=""><details open=""><summary>c) metaheurystyczne algorytmy optymalizacyjne</summary></details></h3><div class="indented"><p id="713eef22-3e02-409a-b727-7eff7f87e8a1" class=""><strong>Heurystyka </strong>to z definicji algorytm znajdowania rozwiązań, pozwalający na znalezienie “zadowalającego” rozwiązania w krótkim czasie. Heurystyki stosuje się tam, gdzie algorytm szukający dokładnego rozwiązania jest zbyt skomplikowany lub czasochłonny.</p><p id="06bd345f-8d8d-401a-ad2d-6c4799aac814" class=""><strong>Metaheurystyka</strong> to ogólny algorytm (heurystyka) do rozwiązywania problemów. Metaheurystyka nie rozwiązuje problemu, metaheurystyka podaje sposób na utworzenie odpowiedniego algorytmu do rozwiązania problemu. </p><p id="15b420bc-084a-406e-91b2-d342ac4d6ce3" class="">Metody metaheurystyczne są często inspirowane mechanizmami biologicznymi czy fizycznymi i można wśród nich wymienić algorytmy ewolucyjne, sztuczne sieci neuronowe, systemy rozmyte, algorytmy immunologiczne czy systemy mrówkowe. </p><p id="1571713a-7be4-498d-bee7-d975dd782df2" class=""><strong>Metody metaheurystyczne dzieli się na:</strong></p><ul id="e6ae7932-a5a9-487e-88bf-f757355f1cc7" class="bulleted-list"><li style="list-style-type:disc"><strong>lokalne i globalne</strong>: zależnie od tego, czy szukają minimów lokalnych czy minimów globalnych</li></ul><ul id="bb9f8e11-b565-4b9b-9284-e9b242a1d50d" class="bulleted-list"><li style="list-style-type:disc"><strong>pojedyncze rozwiązania lub rozwiązania oparte na populacji</strong>: w tym pierwszym przypadku jest jedna ścieżka, która jest zmieniana w trakcie algorytmu, w drugim - istnieje kilka równoległych ścieżek na podstawie których wybierane są optymalne</li></ul><ul id="81039792-63e5-4732-9e91-2457f12d006c" class="bulleted-list"><li style="list-style-type:disc"><strong>Hybrydowe i memetyczne</strong>: algorytmy hybrydowe wiążą metaheurystykę i tradycyjne metody optymalizacyjne; algorytmy memetyczne opierają się jedynie na środowisku do którego zostały stworzone</li></ul><ul id="d5a52f83-d5c5-4542-8e9a-fcb2930d8308" class="bulleted-list"><li style="list-style-type:disc"><strong>Równoległe metaheurystyki</strong>: opierają się na uruchomieniu kilku równolegle działających algorytmów</li></ul><ul id="48437be8-bfc4-4007-81ca-a0d7956ea5a4" class="bulleted-list"><li style="list-style-type:disc"><strong>Inspirowane naturą metaheurystyki</strong>: wspomniane już wyżej metody bazujące na analogiach do natury.</li></ul><p id="ef56cbb9-39fc-4dee-8bb6-c40b9645e82b" class="">Poniżej opisano przykładowe algorytmy metaheurystyczne:</p><p id="ed5519d4-ed95-4811-83ea-d49e13ebb515" class=""><strong>Symulowane wyżarzanie (simulated annealing)</strong></p><p id="b8949a90-32b5-407c-8b96-04c00a5a9c3f" class="">Proces symulowanego wyżarzania opiera się na analogii tego, w jaki sposób metal schładza się. Przyjmuje się, że na początku algorytm ma “temperaturę wirtualną”. Algorytm ten losowo wybiera punkt startowy i sprawdza wartość funkcji w tym miejscu. Następnie “temperatura” jest obniżana, co ogranicza możliwość algorytmu o przeskakiwanie z miejsca losowego do innego losowego - ogranicza zakres funkcji, w której algorytm szuka optimum.</p><p id="5fc0e1b7-e56f-43cd-b6e2-c1e5c53963bf" class="">Ta sztuczna temperatura ogranicza w zasadzie możliwość przeskakiwania algorytmu z miejsca w miejsce. Na początku, algorytm może przeskakiwać z miejsca w miejsce po całej przestrzeni funkcji. Z każdym obniżeniem temperatury, możliwość skoku się zawęża i im niższa temperatura, tym mniejszy skok może wykonać algorytm. Poniżej GIF ilustrujący ten algorytm, na przykładzie poszukiwana najwyższej wartości wartości na wykresie.</p><figure id="276ff88e-6def-4f19-a55f-8a21ac543d0d" class="image"><a href="2%20Metody%20numeryczne%20w%20technice%20dbc57f206a0f4daa879fa148ff4946ae/Hill_Climbing_with_Simulated_Annealing.gif"><img style="width:500px" src="2%20Metody%20numeryczne%20w%20technice%20dbc57f206a0f4daa879fa148ff4946ae/Hill_Climbing_with_Simulated_Annealing.gif"/></a></figure><p id="07b6f720-0557-4926-83e7-63a9f8be82fb" class=""><strong>Poszukiwanie Tabu</strong></p><p id="3432f3cd-9527-45ec-a1ea-2ef503964875" class="">Algorytm wybiera sobie punkt na przestrzeni funkcji i w jego sąsiedztwie poszukuje punktów bardziej optymalnych. Jeżeli znajdzie punkt najbardziej optymalny w danym sąsiedztwie, to wybiera go na lokalne optimum. Jeżeli nie ma już bardziej “optymalnych” punktów, to to potencjalne optimum zostaje oznaczone jako tabu i algorytm przestaje poszukiwać w jego miejscu nowych rozwiązań - przeskakuje do nowego sąsiedztwa i zaczyna ponowne poszukiwanie minimum.</p><p id="a233d1c3-18a4-4f33-a741-2844f418562c" class=""><strong>Algorytm mrówkowy</strong></p><p id="d8d50884-561f-497d-acf7-a0f043819126" class="">Algorytm ten jest analogią do mrówek poszukujących pożywienia dla kolonii. Mrówki poruszają się w sposób losowy, ale gdy jedna z nich zaznaczy ścieżkę, reszta zaczyna podążać tą ścieżką. Oznaczanie odbywa się przez feromony. Feromony na dłuższych ścieżkach od jedzenia do mrowiska mają więcej czasu na odparowanie, dlatego mrówki z czasem skracają ścieżkę na taką, która możliwie najbardziej skróci drogę. Ostatecznie wszystkie mrówki idą tą samą drogą. </p><p id="d8f79140-0e34-41eb-b990-a25d3c192d7f" class="">Tę obserwację można zastosować w algorytmach metaheurystycznych. W nich na początku wybiera się dwie “ścieżki feromonowe”, a następnie aktualizuje je. Takie sztucznie tworzone ścieżki po pewnym czasie działania algorytmu prowadzą do znajdowania optimów funkcji.</p><p id="8ff8fca3-fdea-4338-8307-0b61746e9dc1" class=""><strong>Algorytmy immunologiczne</strong></p><p id="0a0732c1-a635-44a2-9552-528eb3d5c556" class="">Tego typu algorytmy naśladują systemy odpornościowe jako bardzo odporne, adaptujące się do warunków, samoorganizujące się i działające w sposób równoległy. W skład odporności wchodzą różnego rodzaju komórki i przeciwciała, pełniące różne funkcje. Ponadto wyróżnia się odporność wrodzoną i nabytą. </p><p id="2bfa5cb6-9c4b-4656-8778-2ed87e6ead66" class=""><strong>Inne</strong></p><p id="f371c775-b780-40a6-b152-5c6743578929" class="">Ogólnie rzecz ujmując, inne algorytmy mogą opierać się na podobnego typu analogiach. Algorytmy oparte o naturę często nazywa się <strong>algorytmami ewolucyjnymi</strong>. Mogą naśladować - oprócz mrówek i systemów odpornościowych - również pszczoły, kukułki czy embriogenezę. </p><h3 id="3479cd03-6c07-4210-b272-c9343a0ef066" class="">Najważniejsze punkty</h3><ul id="5f86bc75-dfe4-4e69-aaa2-981beb750e1c" class="bulleted-list"><li style="list-style-type:disc">metaheurystyka to ogół algorytmów optymalizacyjnych niekorzystających z metod czysto analitycznych</li></ul><ul id="ae79fdf2-6d52-4980-99ae-365bc7ee38c3" class="bulleted-list"><li style="list-style-type:disc">metaheurystyczne algorytmy optymalizacyjne to algorytmy, które w uproszczony, nieanalityczny sposób poszukują minimów funkcji, bazując na mechanizmach znanych z przyrody: wyrzażanie metalu, ruch mrówek, odporność organizmu</li></ul><ul id="78f69403-26ec-470d-9839-3313bdcb0ca2" class="bulleted-list"><li style="list-style-type:disc">metody metaheurystyczne oferują krótki czas poszukiwań przy ograniczonej dokładności działania</li></ul><ul id="22fc9d90-ed7f-48c1-8501-ff109de2be25" class="bulleted-list"><li style="list-style-type:disc">wyrzażanie metalu: na początku algorytm może skakać jak elektron w gorącym metalu, z dowolnego miejsca w inne dowolne miejsce; gdy “temperatura spada”, skoki są ograniczone i algorytm w końcu może skakać tylko w pobliżu znalezionego maksimum / minimum</li></ul><h3 id="ce8d9c4a-3c0c-481a-b8e5-4aa7aee35de6" class=""><strong>Źródła</strong></h3><p id="425ffef2-9008-4e08-bdd0-fc624ee30361" class="">[1] <a href="https://en.wikipedia.org/wiki/Heuristic_(computer_science)">https://en.wikipedia.org/wiki/Heuristic_(computer_science)</a></p><p id="fbd99c3d-b1b9-4cb2-8ad0-b1f31f3d3eba" class="">[2] <a href="https://en.wikipedia.org/wiki/Metaheuristic">https://en.wikipedia.org/wiki/Metaheuristic</a> </p><p id="2f76eb40-f798-4a76-9f92-db6705509ac6" class="">[3] <a href="https://en.wikipedia.org/wiki/Mathematical_optimization#Iterative_methods">https://en.wikipedia.org/wiki/Mathematical_optimization#Iterative_methods</a></p><p id="163756ca-029c-48af-805a-b97ac6f6030e" class="">[4] <a href="https://www.dbc.wroc.pl/Content/23599/PDF/Janiak_Advanced_algorithms.pdf">https://www.dbc.wroc.pl/Content/23599/PDF/Janiak_Advanced_algorithms.pdf</a></p><p id="1165bf46-2d17-4364-965c-c0b203bc245e" class="">[5] <a href="http://www.imio.polsl.pl/mh-mibm.aspx">http://www.imio.polsl.pl/mh-mibm.aspx</a></p><p id="9035be9c-271b-4110-ae6f-ad06502fcfe4" class="">[6] <a href="https://en.wikipedia.org/wiki/List_of_metaphor-based_metaheuristics">https://en.wikipedia.org/wiki/List_of_metaphor-based_metaheuristics</a></p><p id="587c653e-8aec-4d61-874f-97651483632b" class="">[7] <a href="https://en.wikipedia.org/wiki/Evolutionary_algorithm#Comparison_to_biological_processes">https://en.wikipedia.org/wiki/Evolutionary_algorithm#Comparison_to_biological_processes</a></p></div><h3 id="bdf87f3b-59a9-431d-a0ef-0bc5a6a72370" class=""><details open=""><summary>d) metoda elementów skończonych</summary></details></h3><div class="indented"><p id="d9b7f430-8dfa-4950-9a0d-960034a41794" class=""><strong>Równanie różniczkowe cząstkowe</strong> to równanie, w którym występuje niewiadoma funkcja dwóch lub więcej zmiennych oraz niektóre z jej pochodnych cząstkowych. <strong>Metoda elementów skończonych</strong> to metoda numeryczna służąca właśnie do rozwiązywania równań różniczkowych cząstkowych w dwóch lub trzech zmiennych przestrzennych. </p><p id="ab725ff9-c559-4dfe-a016-9581ba56dda5" class="">W celu rozwiązania takiego równania różniczkowego, MES (FEM) dzieli duże systemy na mniejsze, prostsze części nazywane <strong>elementami skończonymi</strong>. Odbywa się to przez <strong>dyskretyzację przestrzeni</strong> w jej wymiarach - w uproszczeniu, przestrzeń funkcji dzieli się na siatkę mniejszych elementów o skończonej liczbie punktów. </p><figure id="86356195-09fe-4595-8f11-f5db431dd9c0" class="image"><a href="2%20Metody%20numeryczne%20w%20technice%20dbc57f206a0f4daa879fa148ff4946ae/Untitled%203.png"><img style="width:618px" src="2%20Metody%20numeryczne%20w%20technice%20dbc57f206a0f4daa879fa148ff4946ae/Untitled%203.png"/></a></figure><p id="5c1df645-5131-4b42-bdac-89f326f59af5" class="">Taki podział przestrzeni jest bardzo istotny: zamiast dopasowywać jakiś wielomian czy inną funkcję do zadanego modelu, <strong>model dzieli się na mniejsze elementy i rozpatruje przez pryzmat prostszych funkcji</strong> - na przykład funkcję jednej zmiennej, zamiast opisywać wielomianem, można opisać od jednego do drugiego kawałka odcinkami prostymi i wyznaczać po prostu ich wartości. <strong>Im mniejsze elementy, tym większa dokładność odwzorowania rzeczywistości, jednak wymaga to coraz większej mocy obliczeniowej.</strong></p><figure id="4860fb7a-8a93-406a-a4ba-1ad5cd2ec837" class="image"><a href="2%20Metody%20numeryczne%20w%20technice%20dbc57f206a0f4daa879fa148ff4946ae/Untitled%204.png"><img style="width:1002px" src="2%20Metody%20numeryczne%20w%20technice%20dbc57f206a0f4daa879fa148ff4946ae/Untitled%204.png"/></a></figure><p id="e2632f9e-c1ac-4e9e-9d1d-c856bfe4bfb5" class="">Po takim podziale i obliczeniu, pomniejsze elementy są ponownie składane w duży model początkowy. Po powrocie do tego modelu, MES aproksymuje rozwiązanie matematyczne poprzez analityczne minimalizowanie związanej z nią funkcji błędu. </p><p id="1b8dc3e8-2386-48ee-abc8-2a154652747e" class="">Podstawowa zaleta MES to możliwość uzyskania rozwiązań dla obszarów o skomplikowanych kształtach, gdzie ścisłe obliczenia analityczne są trudne lub niewykonalne. MES jest dlatego stosowana często zwłaszcza w obliczeniach mechanicznych, termodynamicznych czy elektromagnetycznych. </p><p id="4f2375ab-ddb5-45eb-ad26-64f52598f811" class="">Wadą MES jest to, że obliczenia wymagają dużej mocy, a na dodatek są wykonywane iteracyjnie, więc <strong>małe błędy z czasem mogą rosnąć w duże</strong> - co wymaga dodatkowego uodparniania algorytmu. </p><p id="308dcbef-bd0a-4612-8ad5-2e7af35d0c83" class=""><strong>MES może zawierać różne błędy</strong> w swoich rozwiązaniach. Między innymi są to:</p><ul id="06a16699-f0c7-43b0-961f-412b01425162" class="bulleted-list"><li style="list-style-type:disc"><strong>błąd modelowania</strong>: model matematyczny nieoddający idealnie rzeczywistych warunków</li></ul><ul id="35e9cd31-5e2d-4237-988f-f74ea6fd721a" class="bulleted-list"><li style="list-style-type:disc"><strong>błąd wartości współczynników</strong>: założenia co do materiałów, etc. są obarczone błędem, co przekłada się na błąd współczynników równań różniczkowych w symulacji</li></ul><ul id="ff1fbaf4-b279-4ece-b798-2ab55c6ddc36" class="bulleted-list"><li style="list-style-type:disc"><strong>błąd odwzorowania obszaru</strong>: np. model trójwymiarowy ma wymiary nie do końca oddające wymiary obiektu rzeczywistego</li></ul><ul id="d1395717-b66f-4a2b-987d-ce8aebd52c1a" class="bulleted-list"><li style="list-style-type:disc"><strong>błąd numeryczny</strong>: np. błąd dyskretyzacji, czyli za mały krok do obliczeń lub błąd maszynowy</li></ul><ul id="2cdeffe9-645a-4820-aadb-ef44f0c01ab1" class="bulleted-list"><li style="list-style-type:disc"><strong>błąd zaokrągleń</strong>: reprezentacja liczb w komputerze ma skończoną liczbę znaków, więc są one po prostu ucinane.</li></ul><p id="539d9533-b6e9-40ab-88c5-2c3f461e7714" class="">Inną wadą MES jest to, że symulacje nie mogą być wykonywane w czasie rzeczywistym, bo policzenie układu może zajmować bardzo dużo czasu.</p><h3 id="75df68c2-3dbb-4813-96e4-40b21a8eaa3f" class="">Najważniejsze punkty</h3><ul id="ad38838f-b8a4-474c-bc5e-180658f664ca" class="bulleted-list"><li style="list-style-type:disc">metoda elementów skończonych to metoda pozwalająca na obliczanie złożonych równań różniczkowych cząstkowych</li></ul><ul id="39aa9429-d198-46d4-b7fd-5ec1162736f6" class="bulleted-list"><li style="list-style-type:disc">działanie MES polega na dzieleniu złożonej funkcji na mniejsze obszary, analizowaniu każdego z nich, a następnie składaniu ich z powrotem w duży obszar - pozwala to uniknąć poszukiwań funkcji opisujących złożone obiekty i ich kształt, etc.</li></ul><ul id="f4069370-fb31-4c2d-a102-12421b0fffc1" class="bulleted-list"><li style="list-style-type:disc">MES daje możliwość analizy złożonych i skomplikowanych obiektów</li></ul><ul id="19afecbc-ae12-4bf5-89c4-e9d6d724c09a" class="bulleted-list"><li style="list-style-type:disc">MES jest bardzo złożona obliczeniowo, a iteracyjność procesu sprawia, że nawet małe błędy w modelu obiektu mogą prowadzić do dużych błędów w wynikach</li></ul><h3 id="b886f074-e509-4ade-a638-adc6fe1a17c2" class=""><strong>Źródła</strong></h3><p id="509e3e2f-bdde-4b16-9f56-d55eb39c4a37" class="">[1] <a href="https://pl.wikipedia.org/wiki/Metoda_element%C3%B3w_sko%C5%84czonych">https://pl.wikipedia.org/wiki/Metoda_elementów_skończonych</a></p><p id="a04fff08-6e6e-4429-8bd0-81c90255af06" class="">[2] <a href="https://en.wikipedia.org/wiki/Finite_element_method">https://en.wikipedia.org/wiki/Finite_element_method</a></p></div></div></article></body></html>

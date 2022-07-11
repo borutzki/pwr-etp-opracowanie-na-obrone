@@ -1,0 +1,670 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>13. Automatyka napędu elektrycznego</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="a4a9ebbd-1ea6-4acf-b820-9dac7a258190" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🦾</span></div><h1 class="page-title">13. Automatyka napędu elektrycznego</h1><table class="properties"><tbody><tr class="property-row property-row-select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesSelect"><path d="M7,13 C10.31348,13 13,10.31371 13,7 C13,3.68629 10.31348,1 7,1 C3.68652,1 1,3.68629 1,7 C1,10.31371 3.68652,13 7,13 Z M3.75098,5.32278 C3.64893,5.19142 3.74268,5 3.90869,5 L10.09131,5 C10.25732,5 10.35107,5.19142 10.24902,5.32278 L7.15771,9.29703 C7.07764,9.39998 6.92236,9.39998 6.84229,9.29703 L3.75098,5.32278 Z"></path></svg></span>Status</th><td><span class="selected-value select-value-color-green">Zrobione</span></td></tr><tr class="property-row property-row-person"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesPerson"><path d="M9.625,10.8465 C8.91187,10.2891 8.12088,9.926 7,9.26013 L7,8.71938 C7.21175,8.47612 7.392,8.176 7.53813,7.83213 C7.94587,7.7315 8.3125,7.33425 8.3125,7 C8.3125,6.51788 8.1095,6.32713 7.8715,6.17137 C7.8715,6.15562 7.875,6.14162 7.875,6.125 C7.875,5.41362 7.4375,3.5 5.25,3.5 C3.0625,3.5 2.625,5.4145 2.625,6.125 C2.625,6.14162 2.6285,6.15562 2.6285,6.17137 C2.3905,6.32713 2.1875,6.51788 2.1875,7 C2.1875,7.33425 2.55413,7.7315 2.96187,7.833 C3.108,8.176 3.28825,8.47612 3.5,8.71938 L3.5,9.26013 C2.37912,9.92513 1.58812,10.2882 0.875,10.8465 C0.041125,11.4984 0,12.4688 0,14 L10.5,14 C10.5,12.4688 10.4589,11.4984 9.625,10.8465 Z M13.125,7.3465 C12.4119,6.78912 11.6209,6.426 10.5,5.76013 L10.5,5.21938 C10.7118,4.97613 10.892,4.676 11.0381,4.33213 C11.4459,4.2315 11.8125,3.83425 11.8125,3.5 C11.8125,3.01787 11.6095,2.82713 11.3715,2.67138 C11.3715,2.65562 11.375,2.64162 11.375,2.625 C11.375,1.91363 10.9375,0 8.75,0 C6.5625,0 6.125,1.9145 6.125,2.625 C6.125,2.64162 6.1285,2.65562 6.1285,2.67138 C6.11188,2.68275 6.09787,2.69588 6.08125,2.70725 C7.83212,3.066 8.59688,4.54825 8.72813,5.74787 C8.97575,6.00863 9.1875,6.39625 9.1875,7 C9.1875,7.60288 8.771,8.20312 8.18388,8.51462 C8.127,8.624 8.06662,8.729 8.00275,8.82962 C8.155,8.91537 8.30025,8.99675 8.44025,9.07463 C9.08075,9.4325 9.63375,9.74137 10.164,10.1561 C10.3022,10.2638 10.4204,10.3801 10.5289,10.4991 L14,10.4991 C14,8.96875 13.9589,7.99837 13.125,7.3465 Z"></path></svg></span>Assign</th><td></td></tr></tbody></table></header><div class="page-body"><h3 id="9e04086c-7166-41a1-b54e-0c7c568893d1" class=""><details open=""><summary>a) rodzaje regulatorów w układach napędowych na przykładzie napędu prądu stałego, zjawisko windup w regulatorach PI/PID</summary></details></h3><div class="indented"><p id="371ad366-437a-4a7f-bab6-90853fa28b24" class="">W układach napędowych można wyróżnić regulatory:</p><ul id="0688a47a-3a46-4e46-8b46-dfc7797dc9ee" class="bulleted-list"><li style="list-style-type:disc">liniowe P, PI, PID, etc.</li></ul><ul id="1efc50a7-34d1-493a-93a1-3205570c834a" class="bulleted-list"><li style="list-style-type:disc">stanu</li></ul><ul id="61422b8b-2f8a-412f-8a41-27d3ff488f8a" class="bulleted-list"><li style="list-style-type:disc">ślizgowe</li></ul><ul id="ed7ed474-48a2-42e7-9af0-561560791e7c" class="bulleted-list"><li style="list-style-type:disc">predykcyjne</li></ul><ul id="360b2a42-187e-4fef-af47-78dd5dcdf3d3" class="bulleted-list"><li style="list-style-type:disc">rozmyte</li></ul><ul id="02dd317f-ec66-4e69-b5d0-844b52e56755" class="bulleted-list"><li style="list-style-type:disc">neuronowe</li></ul><p id="be6556ae-10cf-414a-b79e-ea11cc3b841c" class=""><strong>Regulatory liniowe PID</strong> opierają się na przetwarzaniu sygnału wejściowego w sposób liniowy, wykonując na nim podstawowe operacje różniczkowe: całkowanie, różniczkowanie, wzmacnianie. Tego typu regulatory mogą składać się ze wszystkich trzech członów lub tylko z wybranych.</p><figure id="fbd80672-9ad1-4b80-b18a-815a58e1c2fa" class="image"><a href="13%20Automatyka%20nape%CC%A8du%20elektrycznego%20a4a9ebbd1ea64acfb8209dac7a258190/Untitled.png"><img style="width:1692px" src="13%20Automatyka%20nape%CC%A8du%20elektrycznego%20a4a9ebbd1ea64acfb8209dac7a258190/Untitled.png"/></a></figure><p id="b2263144-399e-4332-8546-8e05628c6d26" class=""><strong>Regulatory stanu</strong> opierają się o sterowanie silnikiem w oparciu o znane lub estymowane zmienne stanu. Struktura regulatora stanu pozwala na jednoczesną kontrolę dużej liczby sygnałów - regulator składa się z zestawu wzmocnień w pętlach sprzężeń zwrotnych zmiennych sterowanych. Sygnały sprzężeń zwrotnych są sumowane i wszystkie naraz tworzą uchyb sygnału sterującego. </p><figure id="5ad25307-15f4-493b-8caa-2c37bbdc0869" class="image"><a href="13%20Automatyka%20nape%CC%A8du%20elektrycznego%20a4a9ebbd1ea64acfb8209dac7a258190/Untitled%201.png"><img style="width:454px" src="13%20Automatyka%20nape%CC%A8du%20elektrycznego%20a4a9ebbd1ea64acfb8209dac7a258190/Untitled%201.png"/></a></figure><p id="04b99cf2-b085-4368-84f3-70e33b2b4c1f" class=""><strong>Regulatory ślizgowe</strong> są regulatorami dwustanowymi, których sposobem przełączania np. napięcia steruje funkcja sterowania. W układach tego typu występuje regulacja oparta o naprzemienne załączanie dwóch stanów wartości sterowanej, np. napięcia, zależnie od trajektorii <strong>funkcji przełączeń</strong> na płaszczyźnie fazowej.</p><figure id="0bc511ae-73d5-42e5-ba15-acbf5c6d8f4d" class="image"><a href="13%20Automatyka%20nape%CC%A8du%20elektrycznego%20a4a9ebbd1ea64acfb8209dac7a258190/Untitled%202.png"><img style="width:1126px" src="13%20Automatyka%20nape%CC%A8du%20elektrycznego%20a4a9ebbd1ea64acfb8209dac7a258190/Untitled%202.png"/></a></figure><p id="0aa16299-b56a-43df-ad0c-ea0af9aeab85" class=""><strong>Regulatory predykcyjne</strong> wykorzystują przewidywane przyszłe stany obiektu sterowanego, obliczone na podstawie modelu matematycznego. Definiuje się <strong>funkcję celu</strong> jako <strong>wskaźnik jakości sterowania</strong> oparty o model matematyczny. Operując na obliczeniach możliwych przyszłych stanów obiektu wybiera się takie sterowanie, by zapewnić minimalizację wybranego wskaźnika jakości sterowania. </p><p id="bf8fa9a2-1339-47b3-8e86-b5f31231f0bd" class="">W <strong>regulatorach rozmytych</strong> stosowana jest <strong>logika rozmyta</strong>, oparta o przesłanki i konkluzje. Regulatory rozmyte często są regulatorami nieliniowymi. Definiuje się w nich pewne reguły, w oparciu o które na podstawie sygnałów wejść dobierane są sygnały wyjść. Bazuje się tu na przedziałach wielkości i to na ich podstawie wykonywana jest cała logika.</p><figure id="d12771ee-16a2-4523-9bf1-06a8dfc44668" class="image"><a href="13%20Automatyka%20nape%CC%A8du%20elektrycznego%20a4a9ebbd1ea64acfb8209dac7a258190/Untitled%203.png"><img style="width:419px" src="13%20Automatyka%20nape%CC%A8du%20elektrycznego%20a4a9ebbd1ea64acfb8209dac7a258190/Untitled%203.png"/></a></figure><figure id="f79bc0af-dc92-47f8-b939-11d5f7afbf14" class="image"><a href="13%20Automatyka%20nape%CC%A8du%20elektrycznego%20a4a9ebbd1ea64acfb8209dac7a258190/Untitled%204.png"><img style="width:428px" src="13%20Automatyka%20nape%CC%A8du%20elektrycznego%20a4a9ebbd1ea64acfb8209dac7a258190/Untitled%204.png"/></a></figure><p id="da33cbe9-10c7-4621-9bd0-77e88de2fee7" class=""><strong>Regulatory neuronowe</strong> natomiast są oparte o sieci neuronowe, których na studiach nie było. Wyższa informatyka.</p><p id="917df7f5-9c0f-45e0-ab4a-2a56453945fb" class=""><strong>Zjawisko windup</strong></p><p id="c9ae03b2-03d2-4557-bc69-98e81ca8066b" class="">W typowych układach regulacji napędów, stosuje się ograniczenia wartości wyjściowej sygnału regulatora - wynika to z ograniczeń silników, np. przeciążalności prądowej. Ograniczenie można zrealizować np. przez wprowadzenie nasycenia sygnału wyjściowego.</p><p id="dfa24c3d-21ea-4a6c-b8e1-6fdbeb3f2ac7" class="">W stanach dynamicznych, np. przy rozruchu, regulator PI początkowo działa w obszarze nasycenia. Im bliżej zadanej wartości, np. odpowiedniej prędkości obrotowej, tym sygnał regulatora jest niższy i regulator zaczyna wychodzić ze stanu nasycenia. </p><p id="ed1aea3e-253a-4f50-9a5b-748e63e1be7e" class="">Regulator PI ma tę wadę, że człon całkujący, po wyjściu przez regulator ze stanu nasycenia, nadal generuje duży sygnał wyjściowy. Dzieje się tak, ponieważ przez cały czas sumował on sygnał uchybu. Takie zjawisko nazywa się zjawiskiem windup.</p><p id="7e88a626-6810-4ae8-935a-740be464b76d" class="">Aby zapobiec zjawisku windup, stosuje się kilka strategii, których ideą główną jest ograniczenie maksymalnego sygnału członu całkującego. Sprowadzają się one do mniejszych lub większych modyfikacji struktury regulatora PI. Modyfikacje te nazywa się układami anti-windup</p><p id="ed7c97b2-ddf3-4229-b754-68ac4922e29a" class="">Przykładowymi realizacjami układu anti-windup są:</p><ul id="d324d5c0-c44b-4c47-9146-1825f1eb40e6" class="bulleted-list"><li style="list-style-type:disc">ustawienie takiego samego ograniczenia dla członu całkującego i sygnału wyjściowego całego regulatora</li></ul><ul id="8188f48a-5338-4d07-95af-305687c6e1a9" class="bulleted-list"><li style="list-style-type:disc">zastosowanie dodatkowego sprzężenia zwrotnego od różnicy sygnałów sprzed i zza ograniczenia regulatora; otrzymany w ten sposób uchyb osłabia sygnał członu całkującego</li></ul><ul id="16130824-ca0d-4a53-a30c-b16f59267b55" class="bulleted-list"><li style="list-style-type:disc">Zastosowanie regulatora przyrostowego PI z ograniczeniem całki na wyjściu. Budowa tego regulatora wynika z prostych przekształceń różniczkowych przesuwających całkę na koniec układu</li></ul><ul id="d5268b4b-d67e-4750-94f1-4bd3ffea3fb7" class="bulleted-list"><li style="list-style-type:disc">zastosowanie regulatora przyrostowego IP z ograniczeniem całki na wyjściu. Zasadniczą cechą tego układu jest przesunięcie członu proporcjonalnego do pętli sprzężenia zwrotnego, co eliminuje konieczność stosowania filtru wejściowego. </li></ul><p id="17cffc33-508c-4aad-ab8f-b04f7fac5c3c" class=""><strong>Źródła:</strong></p><p id="ad80e3a8-c224-458b-8f5b-8bd7fb9ef57b" class="">[1] Materiały i notatki z wykładu <em>Automatyka napędu elektrycznego - zagadnienia wybrane</em></p><p id="70687aee-8788-47a0-aeac-c5d744ce620f" class="">[2] Materiały i notatki z wykładu <em>Komputerowo sterowane modelowanie i projektowanie układów regulacji</em></p></div><h3 id="1ccfd153-cf2f-468c-995d-99cbac019970" class=""><details open=""><summary>b) podobieństwo metod sterowania wektorowego dla układu z falownikiem napięcia i silnikiem indukcyjnym oraz dla przekształtnika sieciowego AC/DC</summary></details></h3><div class="indented"><p id="a4c850d2-dbef-4d54-a318-d3bac957963b" class="">W układach z <strong>silnikiem indukcyjnym i falownikiem</strong> napięcia sterowanych wektorowo, korzystamy z <strong>transformaty Clarke</strong> w celu przekształcenia układu trzech prądów fazowych do jednego zapisu wektorowego, a następnie z <strong>transformaty Parka</strong>, żeby <strong>zmienić układ współrzędnych ze stacjonarnego na wirujący</strong>.</p><p id="e3f926b4-b7ca-4dba-937e-22fa5481ec85" class="">Podobnie, w metodach sterowania <strong>przekształtnikami sieciowymi AC/DC</strong> stosuje się te same transformaty, żeby <strong>trójfazową sieć elektroenergetyczną</strong> z punktu widzenia przekształtnika zamienić na pojedynczy wektor <strong>wirujący</strong>. </p><p id="11526a4f-3d4a-4fae-a4f4-6137a2d8ac4f" class="">Kolejne podobieństwo polega na tym, że sterowanie odbywa się poprzez <strong>regulację składowych wirującego wektora prądu</strong>. W przypadku silników indukcyjnych, składowe prądu odpowiadają za strumień elektromagnetyczny oraz moment elektromagnetyczny silnika. Gdy mowa o przekształtnikach, to zależnie od metody sterowania, poszczególne składowe wirującego wektora odpowiadają za wartość napięcia oraz pobieraną przez przekształtnik moc bierną. </p><p id="758a6af9-5b38-479d-9127-6ed79b49322e" class="">Zarówno w przypadku wektorowych metod sterowania przekształtnikiem, jak i silnikiem, <strong>jedną ze składowych staramy się minimalizować i stabilizować, natomiast zasadnicze sterowanie polega na kontrolowaniu drugiej z nich</strong>.</p><p id="310d1176-fdf9-441f-8bf4-28b03abad6d6" class="">Idąc dalej, można wykazać <strong>podobieństwa metod zorientowanych napięciowo dla przekształtnika AC/DC do metod zorientowanych polowo dla silnika</strong> AC. Za poszczególne wartości odpowiadają poszczególne składowe.</p><p id="e5d1a2de-ea23-4d45-b7f8-78580a3cf4ac" class="">Natomiast <strong>metody DPC dla przekształtników AC/DC są analogiczne do metod DTC dla silników</strong> prądu przemiennego. W obu przypadkach operuje się poprzez odpowiednie kluczowanie tak, by osiągnąć bezpośrednią kontrolę nad wielkością sterowaną. Dla silników jest to moment elektromagnetyczny; dla przekształtników - moce czynna i bierna. </p><p id="ce25e4cc-61a2-4ead-aa7f-342d13a7e1f4" class=""><strong>Źródła:</strong></p><p id="1c2de687-5ad1-4e4b-867d-80f1ad1bf3b0" class="">[1] Materiały i notatki z wykładu <em>Automatyka napędu elektrycznego - zagadnienia wybrane</em></p></div><h3 id="3927708e-2b0e-4846-993e-c6a15b03accc" class=""><details open=""><summary>c) metody odtwarzania zmiennych stanu i parametrów dla silników prądu przemiennego</summary></details></h3><div class="indented"><p id="e9ae6f53-07fe-4b29-ad3a-27c0b475c3a4" class="">W silnikach prądu przemiennego, w celu odtwarzania trudno mierzalnych zmiennych stanu i parametrów, stosuje się kilka różnorodnych podejść do estymacji. Wyróżnia się tu metody fizykalne, algorytmiczne oraz neuronowe.</p><h3 id="31435ef7-5f94-4f7f-b6f5-e0c3e84d4d06" class=""><strong>Metody fizykalne</strong></h3><p id="ab5c2b06-569d-4f0c-9ce6-5e37830a5ae8" class="">Metody fizykalne bazują na <strong>asymetrii magnetycznej maszyny</strong> i na podstawie pomiaru pewnych wartości i znajomości pewnych zjawisk fizycznych pozwalają na określenie innych wartości fizycznych. Metody te wymagają rzeczywistych układów pomiarowych - dawniej do pomiaru strumienia poosiowego, współcześnie - do pomiaru prądów silnika. </p><p id="12e71ce2-49e7-4c8f-8d96-3675157d5300" class="">Fizykalne metody estymacji opierają się o <strong>analizę spektralną harmonicznych prądu lub strumienia</strong>. Przy estymacji wielkości, zakłada się w nich stacjonarność sygnału, wskutek czego <strong>stany dynamiczne wprowadzają pewien błąd estymacji</strong>.</p><p id="5f4bc921-b384-40b6-904e-69b2663321e5" class="">Zaletą metod fizykalnych jest <strong>dokładne obliczanie wielkości estymowanych</strong> oraz <strong>niezależność od parametrów silnika</strong>. Wadą tych metod jest to, że nie radzą sobie ze stanami dynamicznymi układów napędowych, a oprócz tego tracą dokładność przy niewielkich prędkościach obrotowych silnika. </p><h3 id="51881256-8e0a-4708-a528-32547d034fbc" class=""><strong>Metody algorytmiczne</strong></h3><p id="2f133f60-95dc-475f-869a-ec8f628c8792" class="">Metody algorytmiczne opierają się o model matematyczny silnika indukcyjnego (lub innego, zależnie od układu napędowego). Wśród nich można wyróżnić symulatory zmiennych stanu, obserwatory zmiennych stanu oraz filtry Kalmana. </p><p id="abc7e752-607d-4dd9-89e3-579f3c935570" class=""><strong>Symulatory zmiennych stanu</strong> w oparciu o część modelu matematycznego silnika i pewne mierzone wielkości pozwalają na obliczenie innych potrzebnych wielkości, np. na podstawie równań obwodu wirnika i pomiaru prądu można określić strumień wirnika. W układach tych nie uwzględnia się zmian parametrów silnika, więc każda taka zmiana wprowadza błąd estymacji. Oprócz tego, sama niedokładność określenia parametrów silnika uwzględnionych w symulatorze wprowadza błąd estymacji. </p><figure id="89555853-8fb6-4e97-89e4-387e04965ed4" class="image"><a href="13%20Automatyka%20nape%CC%A8du%20elektrycznego%20a4a9ebbd1ea64acfb8209dac7a258190/Untitled%205.png"><img style="width:1733px" src="13%20Automatyka%20nape%CC%A8du%20elektrycznego%20a4a9ebbd1ea64acfb8209dac7a258190/Untitled%205.png"/></a></figure><p id="969e1e82-0f7b-467d-a38f-74fed0e8c288" class=""><strong>Obserwatory zmiennych stanu</strong> działają podobnie do symulatorów zmiennych stanu, ale z uwzględnieniem sprzężenia zwrotnego od rzeczywistych wartości silnika - np. estymowaną na podstawie zastosowanego modelu wartość prądu porównuje się z jego rzeczywistą, mierzoną wartością. Dzięki wykorzystaniu informacji o błędzie estymacji, uzyskuje się mniejszą wrażliwość estymatora na niedokładność określenia lub zmienność parametrów silnika. Istnieje kilka typów obserwatorów zmiennych stanu, różniących się stopniem złożoności - obserwatory nieliniowe, liniowe niestacjonarne, rozszerzone i tzw. “sliding-mode”. </p><figure id="f336d7fd-42dc-4bd5-8eb5-567b74073755" class="image"><a href="13%20Automatyka%20nape%CC%A8du%20elektrycznego%20a4a9ebbd1ea64acfb8209dac7a258190/Untitled%206.png"><img style="width:583px" src="13%20Automatyka%20nape%CC%A8du%20elektrycznego%20a4a9ebbd1ea64acfb8209dac7a258190/Untitled%206.png"/></a></figure><p id="3ebdbe37-74ce-4d41-b07f-c457d5ec28a6" class=""><strong>Filtry Kalmana</strong> nazywa się optymalnymi estymatorami. W estymacji zmiennych stanu silnika uwzględniają fakt, że sygnały są zakłócone - zarówno sygnały pomiarowe, jak i parametry obiektów. Filtry Kalmana działają w oparciu o algorytmy rekurencyjne, nie analityczne. W przypadku zakłóceń sygnałów pomiarowych o rozkładzie gaussowskim, można mówić o optymalnej estymacji - filtr Kalmana minimalizuje błąd średniokwadratowy estymowanych zmiennych stanu. Wadą filtrów Kalmana jest duża złożoność obliczeniowa - mikroprocesor musi wykonywać dużą liczbę operacji macierzowych w krótkim czasie.</p><figure id="02ae096a-fc5d-420f-b1ef-bb12aa4ac207" class="image"><a href="13%20Automatyka%20nape%CC%A8du%20elektrycznego%20a4a9ebbd1ea64acfb8209dac7a258190/Untitled%207.png"><img style="width:1013px" src="13%20Automatyka%20nape%CC%A8du%20elektrycznego%20a4a9ebbd1ea64acfb8209dac7a258190/Untitled%207.png"/></a></figure><figure id="f32c6b15-9225-40d6-a059-67fd8ef39ff6" class="image"><a href="13%20Automatyka%20nape%CC%A8du%20elektrycznego%20a4a9ebbd1ea64acfb8209dac7a258190/Untitled%208.png"><img style="width:1510px" src="13%20Automatyka%20nape%CC%A8du%20elektrycznego%20a4a9ebbd1ea64acfb8209dac7a258190/Untitled%208.png"/></a></figure><h3 id="2c89a781-057b-4181-b2bd-0a6335116edc" class=""><strong>Metody neuronowe</strong></h3><p id="e56c8603-cc5f-4e48-8eb4-2d4e02a36f1a" class="">Metody neuronowe estymacji zmiennych stanu opierają się o sieci neuronowe. Rozróżnia się metody neuronowe off-line oraz on-line, zależnie od sposobu trenowania sieci neuronowych.</p><p id="ece01a03-df81-4839-9ff2-d4ca6a8e8262" class=""><strong>Metoda off-line (bazująca na neuronowej identyfikacji)</strong>, w której trenuje się sieć neuronową przed umieszczeniem estymatora w rzeczywistym obiekcie. Estymator przygotowany w ten sposób powinien odzwierciedlać prędkość na podstawie mierzalnych wejść. Lepsze parametry estymacji można osiągnąć stosując także wejścia od próbek spóźnionych, np. dwóch do tyłu - czyli de facto “wartości historycznych”.</p><p id="d7859e36-e416-42ca-a0aa-63c61cae67b1" class=""><strong>Metoda on-line (bazująca na neuronowym modelowaniu) </strong>jest uczona na bieżąco, podczas stosowania na obiekcie sterowanym, gdzie algorytm uczący wykorzystuje jako sprzężenie zwrotne wartość błędu między wielkością estymowaną i mierzoną określonego sygnału. Jest to metoda działająca w oparciu o ideę podobną do estymatorów typu MRAS.</p><p id="c6f3d2dd-e74e-40b3-a3bd-424e92c2d84b" class=""><strong>Źródła:</strong></p><p id="16cee2e1-b003-43f5-ae22-8f0ffe2a91bf" class="">[1] Materiały i notatki z wykładu <em>Automatyka napędu elektrycznego - zagadnienia wybrane</em></p></div><h3 id="052a0a54-363a-4b05-a4a4-8753538faa4c" class=""><details open=""><summary>d) podstawowe struktury sterowania napędem z połączeniem sprężystym</summary></details></h3><div class="indented"><p id="d3b2aed3-b566-47cf-a321-dc87913b9032" class="">W układach napędowych z połączeniem sprężystym można wykorzystać kilka różnych struktur sterowania. Można tu wymienić struktury kaskadowe z dodatkowymi sprzężeniami zwrotnymi, regulatory stanu oraz regulatory rozmyte, ślizgowe czy adaptacyjne.</p><p id="c256ae9e-aecd-46fb-9649-ead7a9fe44c5" class="">W <strong>strukturze kaskadowej</strong>, stosuje się <strong>dodatkowe sprzężenia zwrotne</strong> od pewnych zmiennych stanu. Wyróżnia się trzy grupy dodatkowych sprzężeń zwrotnych i zastosowanie każdej z nich pozwalają na osiągnięcie różnych parametrów sterowania. Można zastosować <strong>dwa dodatkowe sprzężenia zwrotne</strong>, co pozwala na <strong>pełne sterowanie dynamiką układu</strong> - zarówno rozłożeniem biegunów, jak i współczynnikiem tłumienia.</p><figure id="7fac14d4-be53-406d-9c86-12a819c4d718" class="image"><a href="13%20Automatyka%20nape%CC%A8du%20elektrycznego%20a4a9ebbd1ea64acfb8209dac7a258190/Untitled%209.png"><img style="width:782px" src="13%20Automatyka%20nape%CC%A8du%20elektrycznego%20a4a9ebbd1ea64acfb8209dac7a258190/Untitled%209.png"/></a></figure><figure id="e40173a5-98bc-4906-be7b-95efe6cb5600" class="image"><a href="13%20Automatyka%20nape%CC%A8du%20elektrycznego%20a4a9ebbd1ea64acfb8209dac7a258190/Untitled%2010.png"><img style="width:805px" src="13%20Automatyka%20nape%CC%A8du%20elektrycznego%20a4a9ebbd1ea64acfb8209dac7a258190/Untitled%2010.png"/></a></figure><figure id="aed571b5-ee05-4868-b45d-d22d73d31248" class="image"><a href="13%20Automatyka%20nape%CC%A8du%20elektrycznego%20a4a9ebbd1ea64acfb8209dac7a258190/Untitled%2011.png"><img style="width:818px" src="13%20Automatyka%20nape%CC%A8du%20elektrycznego%20a4a9ebbd1ea64acfb8209dac7a258190/Untitled%2011.png"/></a></figure><p id="c69ad5e8-ef54-4348-b8ec-42f52d92acc3" class="">Do sterowania układami dwumasowymi można wykorzystywać również <strong>regulatory stanu</strong>, które uwzględniają zmienne stanu połączenia sprężystego, takie jak moment skrętny i prędkość obrotowa po stronie maszyny roboczej. Należy jednak mieć na uwadze, że <strong>stosowanie regulatorów stanu wymaga wykorzystania estymatora tych zmiennych</strong> - np. obserwatora Luenbergera. </p><figure id="765f5e9c-144a-41d9-b09f-7a94fa364024" class="image"><a href="13%20Automatyka%20nape%CC%A8du%20elektrycznego%20a4a9ebbd1ea64acfb8209dac7a258190/Untitled%2012.png"><img style="width:1440px" src="13%20Automatyka%20nape%CC%A8du%20elektrycznego%20a4a9ebbd1ea64acfb8209dac7a258190/Untitled%2012.png"/></a></figure><figure id="046c6bae-c4a2-4583-97e7-98eec53f8385" class="image"><a href="13%20Automatyka%20nape%CC%A8du%20elektrycznego%20a4a9ebbd1ea64acfb8209dac7a258190/Untitled%2013.png"><img style="width:1640px" src="13%20Automatyka%20nape%CC%A8du%20elektrycznego%20a4a9ebbd1ea64acfb8209dac7a258190/Untitled%2013.png"/></a></figure><p id="392bc4f5-49c6-4c9c-8310-8cbc9a6a32cc" class="">Układy dwumasowe można sterować również korzystając z rozmytych i ślizgowych układów regulacji automatycznej, a także przy wykorzystaniu różnego rodzaju układów adaptacyjnych. Każda z tych metod ma pewne unikalne właściwości - np. sterowanie adaptacyjne typu MRAS pozwala na uodpornienie układu na zmiany parametrów napędu.</p><p id="2092a6ae-9d1a-4088-aa8c-0a849b24b552" class=""><strong>Źródła:</strong></p><p id="c6647373-648d-4c4e-ab98-6390828a990f" class="">[1] Materiały i notatki z wykładu <em>Automatyka napędu elektrycznego - zagadnienia wybrane</em></p><p id="0846351e-df52-49ed-bef5-6d69eb8213a1" class="">[2] Materiały i notatki z wykładu <em>Komputerowo wspomagane projektowanie układów regulacji</em></p></div><p id="2a4178c7-9f06-4a47-a65f-806a0d7ab657" class="">
+</p></div></article></body></html>

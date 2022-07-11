@@ -1,0 +1,669 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>12. Komputerowe wspomaganie projektowania w energetyce</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="d01bfe32-9b7a-43c1-b286-f84e02482394" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🖥️</span></div><h1 class="page-title">12. Komputerowe wspomaganie projektowania w energetyce</h1><table class="properties"><tbody><tr class="property-row property-row-select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesSelect"><path d="M7,13 C10.31348,13 13,10.31371 13,7 C13,3.68629 10.31348,1 7,1 C3.68652,1 1,3.68629 1,7 C1,10.31371 3.68652,13 7,13 Z M3.75098,5.32278 C3.64893,5.19142 3.74268,5 3.90869,5 L10.09131,5 C10.25732,5 10.35107,5.19142 10.24902,5.32278 L7.15771,9.29703 C7.07764,9.39998 6.92236,9.39998 6.84229,9.29703 L3.75098,5.32278 Z"></path></svg></span>Status</th><td><span class="selected-value select-value-color-green">Zrobione</span></td></tr><tr class="property-row property-row-person"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesPerson"><path d="M9.625,10.8465 C8.91187,10.2891 8.12088,9.926 7,9.26013 L7,8.71938 C7.21175,8.47612 7.392,8.176 7.53813,7.83213 C7.94587,7.7315 8.3125,7.33425 8.3125,7 C8.3125,6.51788 8.1095,6.32713 7.8715,6.17137 C7.8715,6.15562 7.875,6.14162 7.875,6.125 C7.875,5.41362 7.4375,3.5 5.25,3.5 C3.0625,3.5 2.625,5.4145 2.625,6.125 C2.625,6.14162 2.6285,6.15562 2.6285,6.17137 C2.3905,6.32713 2.1875,6.51788 2.1875,7 C2.1875,7.33425 2.55413,7.7315 2.96187,7.833 C3.108,8.176 3.28825,8.47612 3.5,8.71938 L3.5,9.26013 C2.37912,9.92513 1.58812,10.2882 0.875,10.8465 C0.041125,11.4984 0,12.4688 0,14 L10.5,14 C10.5,12.4688 10.4589,11.4984 9.625,10.8465 Z M13.125,7.3465 C12.4119,6.78912 11.6209,6.426 10.5,5.76013 L10.5,5.21938 C10.7118,4.97613 10.892,4.676 11.0381,4.33213 C11.4459,4.2315 11.8125,3.83425 11.8125,3.5 C11.8125,3.01787 11.6095,2.82713 11.3715,2.67138 C11.3715,2.65562 11.375,2.64162 11.375,2.625 C11.375,1.91363 10.9375,0 8.75,0 C6.5625,0 6.125,1.9145 6.125,2.625 C6.125,2.64162 6.1285,2.65562 6.1285,2.67138 C6.11188,2.68275 6.09787,2.69588 6.08125,2.70725 C7.83212,3.066 8.59688,4.54825 8.72813,5.74787 C8.97575,6.00863 9.1875,6.39625 9.1875,7 C9.1875,7.60288 8.771,8.20312 8.18388,8.51462 C8.127,8.624 8.06662,8.729 8.00275,8.82962 C8.155,8.91537 8.30025,8.99675 8.44025,9.07463 C9.08075,9.4325 9.63375,9.74137 10.164,10.1561 C10.3022,10.2638 10.4204,10.3801 10.5289,10.4991 L14,10.4991 C14,8.96875 13.9589,7.99837 13.125,7.3465 Z"></path></svg></span>Assign</th><td></td></tr></tbody></table></header><div class="page-body"><h3 id="47f454f7-60a4-4f60-bafc-84296912c6e2" class=""><details open=""><summary>a) ogólna charakterystyka programów typu CAD do projektowania instalacji elektrycznych</summary></details></h3><div class="indented"><p id="bc4a9437-c5f5-45db-ac90-8f7696abed96" class=""><strong>CAD</strong> - <em>Computer Aided Design - </em>komputerowo wspomagane projektowanie; </p><p id="39396002-4a20-4ee5-a5bd-12aab8f27864" class=""><strong>CAE</strong> - <em>Computer Aided Engineering</em> - komputerowo wspomagana inżynieria.</p><p id="10c4cd44-77cd-4e3f-8e95-f5517ec010eb" class="">Obydwie powyższe definicje dotyczą pakietów oprogramowania, przeznaczonych do <strong>komputerowego wspomagania prac inżynierskich, rysowania i projektowania</strong>. Wśród programów CAD można wyróżnić <strong>programy uniwersalne</strong>, opracowywane przez niezależnych producentów, oraz <strong>programy dedykowane</strong>, opracowywane przez poszczególne firmy z branży - w tym wypadku elektroenergetycznej. </p><p id="1a60b50f-664c-4cc6-b7a6-28820a714684" class="">Programy <strong>uniwersalne</strong> posiadają <strong>otwarte bazy różnego rodzaju rozwiązań</strong>, natomiast <strong>oprogramowanie dedykowane</strong> na ogół zawiera <strong>bazy rozwiązań</strong> (elementów instalacji, etc.) <strong>konkretnego producenta</strong>. </p><p id="d47b462f-10ed-457f-8ed0-54fdb0d57be9" class="">Wśród programów CAD do projektowania instalacji elektrycznych, można wymienić:</p><ul id="d02b9334-811c-4159-9700-9d273cec3f84" class="bulleted-list"><li style="list-style-type:disc"><strong>programy obliczeniowe</strong> - służą do <strong>wykonywania obliczeń</strong> instalacji elektrycznych, znacząco przyspieszając <strong>proces doboru przekroju przewodów oraz aparatów elektrycznych</strong> i zabezpieczeń w różnych typach instalacji, w tym instalacji oświetleniowych; przykłądy: <em>Relux, Dialux, Pająk, Simaris;</em></li></ul><ul id="910a35f3-b5df-4b49-af50-1fa321b4f57e" class="bulleted-list"><li style="list-style-type:disc"><strong>programy do tworzenia planów instalacji</strong> - programy te służą do planowania położenia instalacji elektrycznych w rzeczywistych obiektach - czyli de facto do przygotowywania projektów wykonawczych instalacji; przykłady: <em>Revit, AutoCAD Electrical, WSCAD;</em></li></ul><ul id="221769f3-7a8f-4d9e-bceb-afecf92815e0" class="bulleted-list"><li style="list-style-type:disc"><strong>konfiguratory - </strong>ich głównym zadaniem jest konfiguracja szaf elektrycznych, porównywanie charakterystyk czasowo-prądowych urządzeń, dobór układów rozruchowych, wyłączników, etc. Konfiguratory występują na ogół w postaci funkcji w programach innego typu.</li></ul><ul id="8d39e499-da67-401c-8279-958f305ff0ea" class="bulleted-list"><li style="list-style-type:disc"><strong>programy do projektowania rozdzielnic - </strong>służą do doboru aparatów elektrycznych oraz ich umiejscowienia, a często także wymiarowania oraz kosztorysowania rozdzielnic; przykłady: <em>XL PRO2, ETI-pro, XPD;</em></li></ul><p id="a63cf655-3dad-485c-a18a-3c2658559187" class="">Podstawowymi typami programów do projektowania instalacji są zatem programy obliczeniowe oraz programy do tworzenia planów instalacji. </p><p id="af7f0e4b-b40f-4b75-8feb-18ed45cf67af" class=""><strong>Programy obliczeniowe</strong> pozwalają na projektowanie rozbudowanych sieci elektrycznych. <strong>Na podstawie zadanych parametrów</strong> układu, takich jak napięcie górne i dolne transformatora, układ, częstotliwość czy rezerwy - <strong>wprowadzonych przy użyciu środowiska graficznego</strong> - <strong>programy obliczeniowe obliczają wymagane parametry komponentów elektrycznych</strong>, w tym przekrój przewodów, prądy i napięcia aparatury, etc. </p><p id="dab88ed6-28e6-4ea1-8f5c-211fce38b91c" class="">Na ogół, <strong>programy tego typu (</strong>przykład: Simaris, Pająk) <strong>umożliwiają</strong> także <strong>prostą edycję ręczną</strong> poszczególnych <strong>komponentów instalacji</strong>, a także szybkie <strong>wykonywanie dokumentacji graficznej</strong> (schematy jednokreskowe) <strong>i tekstowej</strong> (spis aparatury i wyników obliczeń) rozpatrywanej instalacji.</p><p id="a1a27d10-03e7-49cc-a792-ca1d96f1083b" class=""><strong>Programy do tworzenia planów instalacji</strong> pozwalają natomiast na <strong>wykonywanie przestrzennych projektów instalacji</strong>, obejmujących <strong>umiejscowienie poszczególnych elementów układu</strong> takich jak rozdzielnice, gniazdka, położenie przewodów i rodzaj ich poprowadzenia. W takich przypadkach stosuje się programy typu Revit czy AutoCAD, coraz częściej także Solidworks. Programy te służą również często do wykonywania <strong>wizualizacji projektów</strong>. </p><p id="8b70df59-686b-4856-86f6-14d0fcf7d198" class=""><strong>Źródła</strong></p><p id="535635ad-4b72-420d-8aa4-e9bc77b662ad" class="">[1] Robert Leśniak - <em>Opracowanie do wykładu Komputerowe systemy CAD projektowania w elektroenergetyce</em></p><p id="45900a0f-e19a-4bf8-9c0e-992767c58311" class="">[2] Materiały z wykładu <em>Komputerowe systemy CAD projektowania w elektroenergetyce</em></p></div><h3 id="83493e6e-5fe2-481c-91f6-17697cd13f14" class=""><details open=""><summary>b) zasady projektowania oświetlenia wnętrz i oświetlenia terenów zewnętrznych. Wykorzystanie oprogramowania typu CAD do projektowania oświetlenia</summary></details></h3><div class="indented"><h3 id="f615da2a-f46e-41bb-be4c-ff8a51341032" class=""><strong>Zasady projektowania oświetlenia wnętrz</strong></h3><p id="02141da2-d25b-458f-ba61-450d42442438" class="">Projektując oświetlenie wnętrz, należy zadbać o to, by spełnione zostały określone normami parametry oświetlenia. Wartości tych parametrów zależą głównie od typu budynku i charakteru oświetlenia. Ponadto, źródła światła powinny spełniać wymogi otoczenia, czyli mieć odpowiednią klasę IK oraz IP. </p><p id="ce28ff8e-eabf-40c0-b40b-1a53aa57bb55" class="">Projektowanie sprowadza się do doboru rodzajów źródeł światła oraz umiejscowienia ich na terenie budynku lub pomieszczenia w taki sposób, by spełnione zostały warunki co do następujących parametrów:</p><ul id="13efe9fd-ebd8-475c-893a-7c4412cb93fb" class="bulleted-list"><li style="list-style-type:disc"><strong>natężenie oświetlenia</strong> - <em>gęstość powierzchniowa strumienia świetlnego</em>, padającego na daną powierzchnię, wyrażona w [lx] - przynajmniej 200 lx w płaszczyźnie roboczej;</li></ul><ul id="5e965c70-6044-44c5-85fe-a76dbb50bee4" class="bulleted-list"><li style="list-style-type:disc"><strong>równomierność oświetlenia </strong>- <em>iloraz z najmniejszej zmierzonej wartości natężenia oświetlenia na danej płaszczyźnie do średniego oświetlenia na tej płaszczyźnie;</em> na ogół wartość ta powinna być większa niż 0,7;</li></ul><ul id="eb87ba15-26ce-4e92-916f-c694b65f15ff" class="bulleted-list"><li style="list-style-type:disc"><strong>rozkład luminancji</strong> -<strong> </strong>luminancja to miara natężenia oświetlenia padającego w danym kierunku, wyrażona jako [cd/m2]; rozkład luminancji podaje się w formie współczynników odbicia ścian, sufitu i podłogi i im jest większy, tym lepiej światło odbija się od tych miejsc</li></ul><ul id="7d4c4aa3-b333-4e16-a36f-e4ce5ee1c272" class="bulleted-list"><li style="list-style-type:disc"><strong>współczynnik olśnienia przykrego</strong> - <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>U</mi><mi>G</mi><mi>R</mi></mrow><annotation encoding="application/x-tex">UGR</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">U</span><span class="mord mathnormal" style="margin-right:0.00773em;">GR</span></span></span></span></span><span>﻿</span></span> - współczynnik ten wyznacza się na etapie projektowania instalacji i powinien mieć odpowiednio niską wartość, by zjawisko olśnienia nie występowało; zjawisko to jest dyskomfortem wywołanym dużymi kontrastami oświetlenia w otoczeniu lub poprzez bezpośrednie spojrzenie na źródło światła lub odbitego światła</li></ul><ul id="192cdeb6-2c76-446e-9659-9b3faff7a749" class="bulleted-list"><li style="list-style-type:disc"><strong>barwa światła -</strong> de facto temperatura barwowa; jej wartość na ogół powinna rosnąć wraz ze wzrostem średniej wartości wymaganego natężenia oświetlenia</li></ul><ul id="eb6893a3-1303-418f-bf95-1f60f3d2a662" class="bulleted-list"><li style="list-style-type:disc"><strong>wskaźnik oddawania barw - </strong>parametr ten wskazuje na właściwości oddawania barw przez źródła światła i powinien być możliwie wysoki, minimum 80; w pobliżu 100 jeżeli praca jest wrażliwa na kolory.</li></ul><ul id="e4ff9f4a-19fe-4ad0-ae1f-d6e7c4dffd17" class="bulleted-list"><li style="list-style-type:disc"><strong>migotanie i efekt stroboskopowy </strong>- powinno się unikać układów zasilania 50 Hz dla opraw oświetleniowych pracujących w otoczeniu maszyn wirujących - mogą one prowadzić do zjawiska stroboskopowego.</li></ul><h3 id="c62760c2-c0cb-48c6-b630-ac9d20738a65" class=""><strong>Zasady projektowania oświetlenia terenów zewnętrznych</strong></h3><p id="937fd0ee-e92c-4a86-bc3c-3e554258d13e" class="">Projektowanie oświetlenia terenów zewnętrznych również wymaga spełnienia pewnych parametrów oświetleniowych, z tym że określają to inne normy. </p><p id="77fc55bd-cdbe-41b9-a503-82ba69bd1f2e" class="">Projektowanie oświetlenia terenów zewnętrznych można podzielić na 3 etapy:</p><ol type="1" id="6f7b197f-c1ff-4703-9e32-892f7007a31a" class="numbered-list" start="1"><li><strong>Określenie założeń projektowych</strong> takich, jak rodzaj oświetlenia drogi, jej wymiary, przeznaczenie, rodzaj nawierzchni, otoczenie, użytkownicy drogi i prędkość ruchu, etc.</li></ol><ol type="1" id="54038ea8-2d05-4b5c-b857-4bb96458e1c7" class="numbered-list" start="2"><li><strong>Wybór określonej sytuacji oświetleniowej oraz klasy oświetlenia i określenie wymagań oświetleniowych</strong>, zgodnie z normami.</li></ol><ol type="1" id="fc1ac747-a9d0-4191-8092-1d2e47bb6523" class="numbered-list" start="3"><li><strong>Wybór źródeł światła i opraw oświetleniowych</strong> w taki sposób, by cały czas były zachowane wszystkie wymagane parametry oświetleniowe.</li></ol><ol type="1" id="d05bba31-01d3-4df1-956c-4b53f139925a" class="numbered-list" start="4"><li><strong>Dobór sposobu rozmieszczenia punktów świetlnych i geometrii systemu świetlnego.</strong></li></ol><ol type="1" id="f23f65b3-44f1-4803-b5d1-2f68eb4ec1b5" class="numbered-list" start="5"><li><strong>Wykonanie obliczeń parametrów oświetleniowych i sprawdzenie pod kątem spełnienia norm.</strong></li></ol><p id="abd4e043-fc36-4e05-be37-57929ec15733" class="">Wśród parametrów wybieranych na potrzeby oświetlenia zewnętrznego, zwłaszcza drogowego, znajdują się:</p><ul id="884e50da-52db-4b18-b3e6-e37bd899fb05" class="bulleted-list"><li style="list-style-type:disc"><strong>luminancja</strong>: jaskrawość powierzchni, widziana przez obserwatora poruszającego się w określonym kierunku - zależy od poziomu natężenia oświetlenia, rodzaju opraw, jasności drogi, odbić od powierzchni</li></ul><ul id="76b50e71-e501-4595-8c5a-9ef8d0d2a58c" class="bulleted-list"><li style="list-style-type:disc"><strong>poziom luminancji drogi</strong> - utrzymanie odpowiedniego poziomu luminancji na drodze gwarantuje dobrą widoczność</li></ul><ul id="63e58530-a3a5-4443-8bf3-c326134b44d5" class="bulleted-list"><li style="list-style-type:disc"><strong>równomierność luminancji drogi</strong> - im większa, tym lepsze warunki jazdy - brak stref jasnych i ciemnych; minimum to 0,4</li></ul><ul id="7cdd5d4e-4bcd-46d6-af0f-1d282638ce89" class="bulleted-list"><li style="list-style-type:disc"><strong>ograniczanie olśnienia</strong> - wskaźnik progu kontrastu TI powinien być mniejszy niż 10; oprawy powinny dobrze rozprowadzać światło, nie kierować go w oczy kierowców;</li></ul><ul id="e932baf1-3b62-4463-9137-b65db9cc7af8" class="bulleted-list"><li style="list-style-type:disc"><strong>prowadzenie wzrokowe</strong> - odpowiednie instalacje dają dodatkowe informacje - np. przy zjazdach, zakrętach itp. powinien być stosowany inny rodzaj oświetlenia niż na drogach prostych (inna wysokość, inna barwa światła, etc.)</li></ul><h3 id="2d3cff95-ae02-4478-baf6-c4ef33b7a103" class="">Wykorzystanie oprogramowania typu CAD do projektowania oświetlenia</h3><p id="7d2b155d-ffad-4bcc-9a90-ea0852bd2d05" class="">Do projektowania oświetlenia można wykorzystać oprogramowanie typu DIALUX lub RELUX, które pozwala na wygodny dobór opraw ulicznych, planowanie ich rozmieszczenia w rzutach trójwymiarowych lub dwuwymiarowych. </p><p id="be7d45ec-b8e6-4800-b55e-3646a536098b" class="">Dobrane w ten sposób oprawy i ich rozmieszczenie można wprowadzić do modułu obliczeniowego, by przeliczyć parametry świetlne w różnych punktach i ich zgodność z normami. </p><p id="6fa9f058-4ef4-4070-ad53-dec3935a9a21" class="">Nowoczesne programy pozwalają na obliczenia wartości światła dziennego, mają zawarte modele 3D do planowania otoczenia, umożliwiają współpracę z innym oprogramowaniem CAD oraz zawierają pakiety norm dla różnych obszarów.</p><p id="dc4a259d-3493-4145-b2da-3f1b4da4984d" class="">Programy CAD projektowania oświetlenia pozwalają również na wykonanie dokumentacji rysunkowej i tekstowej.</p><h3 id="aa3bc148-ead8-4bc5-ac7f-ee596b078796" class="">Źródła</h3><p id="d705498f-ebb6-45c1-a721-2b4634ee049c" class="">[1] Robert Leśniak - <em>Opracowanie do wykładu Komputerowe systemy CAD projektowania w elektroenergetyce</em></p><p id="ebdf39b3-a220-47ae-b0de-d374c2e7d330" class="">[2] Materiały z wykładu <em>Komputerowe systemy CAD projektowania w elektroenergetyce</em></p><p id="fe8b153f-c6ae-430a-8325-4c33fb640373" class="">[3] Opracowanie do wykładu Komputerowe systemy CAD projektowania w elektroenergetyce z poprzedniego rocznika studiów<em> </em></p><p id="d9676549-4103-4e8f-aea1-d16a3c120149" class="">[4] <a href="https://www.ciop.pl/CIOPPortalWAR/appmanager/ciop/pl?_nfpb=true&amp;_pageLabel=P30001831335539182278&amp;html_tresc_root_id=23200&amp;html_tresc_id=23217&amp;html_klucz=19558&amp;html_klucz_spis=#3">https://www.ciop.pl/CIOPPortalWAR/appmanager/ciop/pl?_nfpb=true&amp;_pageLabel=P30001831335539182278&amp;html_tresc_root_id=23200&amp;html_tresc_id=23217&amp;html_klucz=19558&amp;html_klucz_spis=#3</a></p><p id="4c9bf3a9-96e5-47ff-b23c-2308ed16bc35" class="">[5] <a href="http://nop.ciop.pl/m6-7/m6-7_3.htm">http://nop.ciop.pl/m6-7/m6-7_3.htm</a></p><p id="50c47720-a613-4546-9884-bc62f1822b1d" class="">[6] <a href="https://ledline.pl/strony/olsnienie-przykre-oraz-ocena-ugr">https://ledline.pl/strony/olsnienie-przykre-oraz-ocena-ugr</a></p></div><h3 id="f920ef73-75a8-48d7-8e7d-fe7a6b58aad1" class=""><details open=""><summary>c) zasady projektowania rozdzielnic elektrycznych niskiego napięcia. Charakterystyka programów CAD do projektowania rozdzielnic</summary></details></h3><div class="indented"><h3 id="ea02ea28-811f-42b1-9bed-6608ad792f92" class="">Zasady projektowania rozdzielnic elektrycznych niskiego napięcia</h3><p id="11ddd096-6b3e-4a10-89e4-d8c1c299e50b" class="">Projektując rozdzielnice elektryczne niskiego napięcia, należy mieć na uwadze takie czynniki jak bezpieczeństwo obsługi, wygodę eksploatacji (łatwe wykonywanie wszelkiego rodzaju łączeń), łatwy montaż i eksploatację, dużą niezawodność, możliwość rozbudowy oraz niewielki koszt i małe gabaryty.</p><p id="34299d59-c292-4a18-aecb-7978522d1246" class="">Projektując rozdzielnice trzeba mieć już gotowy zestaw danych aparatów potrzebnych do rozdziału energii w miejscu jej zastosowania. Stąd, projektowanie rozdzielnic niskiego napięcia nie zawsze może być wykonywane w oderwaniu od projektowania instalacji elektrycznych.</p><h3 id="7e1b6abe-c533-46fd-878f-ddfa2d8762bb" class="">Charakterystyka programów CAD do projektowania rozdzielnic</h3><p id="73e90ced-5070-4df4-ad15-d6d5a12017d4" class="">Programami do projektowania rozdzielnic są m.in. XL PRO 2 lub SBC. </p><p id="9049b9f7-c7cc-4647-bf09-03ba57417f2b" class="">Korzystanie z programu XL PRO 2 sprowadza się do trzech etapów:</p><ol type="1" id="716b4f93-176f-4990-a15e-76fbe422ff4f" class="numbered-list" start="1"><li><strong>Konfiguracja rozdzielnicy</strong>. <p id="ee5eef70-90e6-496c-8df6-4420ae7bf608" class="">Służą do tego moduły Zestawienie, Układ i Schemat. Zestawienie pozwala na dobór aparatów bez rozmieszczenia ich w rozdzielnicy. Moduł Układ pozwala na umiejscowienie aparatów. Moduł Schemat pozwala natomiast na wizualizację schematu elektrycznego rozdzielnicy. </p><p id="34e4fab5-6b4f-4e76-9326-004d774d1156" class="">W skrócie, wybiera się aparaty, ich rozmieszczenie oraz układy połączeń.</p></li></ol><ol type="1" id="6c28170b-7de7-48b2-a9eb-3a4906bb43b2" class="numbered-list" start="2"><li><strong>Dobór rozdzielnicy</strong><p id="2ed6aac5-fd5b-41da-b01d-986232518939" class="">Na podstawie dobranych aparatów, wybiera się obudowę rozdzielnicy spośród opcji proponowanych przez oprogramowanie. Można także wybierać niektóre akcesoria, takie jak drzwiczki, osłony itp. Moduł ten dobiera także akcesoria montażowe i uzupełnia o nie listę materiałów.</p></li></ol><ol type="1" id="23842a48-3114-411e-9c7e-2138ffefa0b3" class="numbered-list" start="3"><li><strong>Wizualizacja</strong><p id="5e8c8bb3-7164-45ec-9cf4-3dcfacbc6040" class="">Moduł Widok umożliwia sprawdzenie końcowego wyglądu rozdzielnicy w formie wizualizacji. Na tym etapie można także dodać różnego rodzaju akcesoria takie jak zamek do drzwi, etc. Można tu również modyfikować rozmieszczenie i sposób montażu aparatów. </p></li></ol><ol type="1" id="219b2e09-5145-4d7d-9d68-af16bf7e6c37" class="numbered-list" start="4"><li><strong>Kosztorysowanie</strong><p id="9e083d2d-07db-4bde-b64e-d2d88332e7cb" class="">Na tym etapie, korzystając z listy urządzeń i cennika Legrand, można wykonać kosztorys zaprojektowanej rozdzielnicy.</p></li></ol><ol type="1" id="13121876-3ada-4a4f-9a06-4fc34d0db55d" class="numbered-list" start="5"><li><strong>Wydruki</strong><p id="94a20558-f17d-47d5-8ef5-bd99b94578a5" class="">Na ostatnim etapie projektowania rozdzielnicy można wykonać listę dokumentów takich jak widoki, schemat elektryczny, kosztorys czy lista materiałów - i łatwo te dokumenty wyeksportować. </p></li></ol><h3 id="e80eef93-8428-496a-8bee-20ff9c919cf4" class="">Źródła</h3><p id="84cd3d1f-ab7e-47f2-950d-ead2fa8e92ff" class="">[1] Robert Leśniak - <em>Opracowanie do wykładu Komputerowe systemy CAD projektowania w elektroenergetyce</em></p><p id="0912fd14-39a1-4621-b81f-517bb4e91ec7" class="">[2] Opracowanie do wykładu Komputerowe systemy CAD projektowania w elektroenergetyce z poprzedniego rocznika studiów<em> </em></p></div><h3 id="159d93e5-2380-42fc-b11e-0c6d8fbfacb2" class=""><details open=""><summary>d) zasady tworzenia dokumentacji projektowej. Charakterystyka programów typu CAD do tworzenia dokumentacji projektowej</summary></details></h3><div class="indented"><h3 id="0869773e-875b-40e5-a9d6-ed0913dc7468" class=""><strong>Zasady tworzenia dokumentacji projektowej</strong></h3><p id="dee2d40a-3f9b-40a1-b5b4-7552bb79cea6" class="">Podstawową koncepcją tworzenia dokumentacji projektowej jest wieloetapowe podejście, przy czym poszczególne etapy różnią się od siebie celem i poziomem szczegółowości. Etapami opracowywania dokumentacji projektowej są:</p><ol type="1" id="1a4bb6cf-4fe8-4cea-9791-19093f1ff59a" class="numbered-list" start="1"><li><strong>Koncepcja projektowa</strong><p id="87449ad5-56ea-465f-9739-14799cb7d62c" class="">Etap ten nie zawsze jest konieczny. Rozpoznaje się tu stan sieci i urządzeń elektroenergetycznych na terenie projektowanej inwestycji, przygotowuje wstępne zestawienie odbiorników energii i bilansu mocy i energii zapotrzebowanej, a przy tym opracowuje koncepcję rozwiązania podstawowych instalacji wewnątrz i na zewnątrz obiektu, sposobu zasilania budynku oraz plany zewnętrznych linii i ich powiązania z istniejącymi. Określa się też lokalizację stacji elektroenergetycznych.</p></li></ol><ol type="1" id="469070ca-46d3-4625-a2d2-71950270b1c0" class="numbered-list" start="2"><li><strong>Program funkcjonalno-użytkowy</strong><p id="427d837f-7c5c-414d-8eeb-8f3b99ae81ee" class="">Na tym etapie ustala się koszty prac projektowych i robót budowlanych i przygotowuje oferty. Przyjmuje się tu zakładane funkcjonalności w obiekcie. Etap ten to wstęp do opracowania projektu budowlanego, nie jest więc etapem wiążącym i może zajść potrzeba korekcji ustaleń. </p></li></ol><ol type="1" id="05973bfb-a358-4367-8f91-ccac68a5739a" class="numbered-list" start="3"><li><strong>Projekt budowlany</strong><p id="d4fb0c2d-1c04-4f9f-9f26-b60c9784a629" class="">Projekt budowlany to opracowanie planów inwestycji budowlanej, wymagane aby uzyskać pozwolenie na budowę. Układ i zawartość projektów budowlanych są regulowane przez prawo budowlane. </p><p id="80b3ff67-12a9-454b-9aa1-23ab68ec6e5b" class="">Projekt budowlany musi uwzględniać wytyczne miejscowego planu zagospodarowania przestrzennego, obowiązujących warunków zabudowy oraz wymogi urzędowe. Dokumentacja na tym etapie powinna dzielić się na projekt zagospodarowania terenu oraz projekt architektoniczno-budowlany. </p><p id="3801c020-5deb-4e51-8a0c-25b89d378b7f" class=""><strong>Projekt architektoniczno-budowlany</strong> powinien zawierać rozwiązania instalacji elektrycznych, teletechnicznych oraz odgromowych, a także sposób ich powiązania z istniejącymi sieciami. Powinny się także znaleźć przyjęte założenia wstępne oraz wyniki obliczeń i uzasadnienie doboru urządzeń.</p><p id="2e34244e-780f-4696-af01-342d2b3e6874" class="">Oprócz tego, w projekcie architektoniczno-budowlanym powinna znaleźć się charakterystyka energetyczna obiektu (bilans mocy, etc.), charakterystyka ekologiczna instalacji i urządzeń (wszelkiego rodzaju emisje) oraz warunki ochrony przeciwpożarowej.</p></li></ol><ol type="1" id="0b213c22-eaaf-48c3-8c84-e536f3b7d1f8" class="numbered-list" start="4"><li><strong>Projekt wykonawczy</strong><p id="a0615815-6988-4074-91c6-ae874bf8de99" class="">Projekt wykonawczy zawiera szczegółowe rozwiązania projektowe z podziałem na branże. musi zawierać wszystkie opisowa i rysunkowe elementy niezbędne do realizacji inwestycji, takie jak schematy instalacji elektrycznych, rzuty i przekroje obiektu, schematy i rysunki montażowe, dane techniczne urządzeń, wykaz materiałów, aparatów i urządzeń, wskazówki dot. eksploatacji, koniecznych zabiegów konserwacyjnych i ich terminów oraz kryteria badań tych elementów.</p><p id="a347cc25-4bc2-44f0-9967-d244db39331f" class="">Projekt wykonawczy jest niezbędny dla oceny prawidłowości wykonania robót w zakresie zgodności z projektem wykonawczym oraz osiągniętych parametrów i wyników pomiarów na etapie rozruchu. Jest on również częścią dokumentacji która powinna zawierać wielkość zużycia materiałów i ogólnie kosztorysy.</p></li></ol><ol type="1" id="3b21d52f-c899-418b-a2e3-4a905d8ed393" class="numbered-list" start="5"><li><strong>Rysunki warsztatowe</strong><p id="7a5a4f4b-5cfd-4891-964d-ffaad379778d" class="">Rysunki warsztatowe obejmują wszelkiego rodzaju rysunki, wykazy i zestawienia, wraz ze szczegółami połączeń między elementami. Są niezbędne do prefabrykacji elementów wykorzystywanych na inwestycji. Rysunki warsztatowe zawierają nie tylko wymiary i listę materiałów, lecz również technologię wykonania poszczególnych elementów konstrukcji.</p><p id="8a225756-f2fd-419c-9266-b15edf411522" class="">Rysunki warsztatowe są wykonywane przez Wykonawcę, Podwykonawcę, Producenta lub Dystrybutora. </p></li></ol><h3 id="3638a072-bd4f-4995-82da-fa3bbc90799f" class="">Charakterystyka programów typu CAD do tworzenia dokumentacji projektowej</h3><p id="0e2858c1-1ac9-4bd2-b6b6-911385d11c0b" class="">De facto każdy branżowy program CAD typu Simaris, Dialux, Relux, etc. jest również programem do tworzenia dokumentacji projektowej. Na podstawie zadanych parametrów i dobranych aparatów, urządzeń itp. sporządzane są projekty poszczególnych instalacji wraz z kosztorysami. Mogą to być dokumenty tworzone zasadniczo na każdym etapie projektu. </p><p id="e79f896f-eadb-4d6e-9102-354ac3d81ea0" class="">Wspomniane programy projektowania instalacji elektrycznych, oświetleniowych i rozdzielnic mają możliwości eksportowania dokumentacji tekstowej i rysunkowej oraz listy materiałów. </p><h3 id="961532fa-c578-425b-a943-42013b2a7764" class="">Źródła</h3><p id="6cd116d9-ec75-4033-b576-fc4e30922c41" class="">[1] Robert Leśniak - <em>Opracowanie do wykładu Komputerowe systemy CAD projektowania w elektroenergetyce</em></p><p id="a7fd58c3-b322-4dc4-931f-54606ee78ea9" class="">[2] Materiały z wykładu <em>Komputerowe systemy CAD projektowania w elektroenergetyce</em></p><p id="5a5e1aa4-c3a5-487a-ade9-b7e8441a290b" class="">[3] Opracowanie do wykładu Komputerowe systemy CAD projektowania w elektroenergetyce z poprzedniego rocznika studiów<em> </em></p></div></div></article></body></html>

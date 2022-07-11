@@ -1,0 +1,669 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>6. Miernictwo wysokonapięciowe i diagnostyka izolacji</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="e3b6a304-bb4a-48aa-b263-21e25122f1fe" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">⚡</span></div><h1 class="page-title">6. Miernictwo wysokonapięciowe i diagnostyka izolacji</h1><table class="properties"><tbody><tr class="property-row property-row-select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesSelect"><path d="M7,13 C10.31348,13 13,10.31371 13,7 C13,3.68629 10.31348,1 7,1 C3.68652,1 1,3.68629 1,7 C1,10.31371 3.68652,13 7,13 Z M3.75098,5.32278 C3.64893,5.19142 3.74268,5 3.90869,5 L10.09131,5 C10.25732,5 10.35107,5.19142 10.24902,5.32278 L7.15771,9.29703 C7.07764,9.39998 6.92236,9.39998 6.84229,9.29703 L3.75098,5.32278 Z"></path></svg></span>Status</th><td><span class="selected-value select-value-color-green">Zrobione</span></td></tr><tr class="property-row property-row-person"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesPerson"><path d="M9.625,10.8465 C8.91187,10.2891 8.12088,9.926 7,9.26013 L7,8.71938 C7.21175,8.47612 7.392,8.176 7.53813,7.83213 C7.94587,7.7315 8.3125,7.33425 8.3125,7 C8.3125,6.51788 8.1095,6.32713 7.8715,6.17137 C7.8715,6.15562 7.875,6.14162 7.875,6.125 C7.875,5.41362 7.4375,3.5 5.25,3.5 C3.0625,3.5 2.625,5.4145 2.625,6.125 C2.625,6.14162 2.6285,6.15562 2.6285,6.17137 C2.3905,6.32713 2.1875,6.51788 2.1875,7 C2.1875,7.33425 2.55413,7.7315 2.96187,7.833 C3.108,8.176 3.28825,8.47612 3.5,8.71938 L3.5,9.26013 C2.37912,9.92513 1.58812,10.2882 0.875,10.8465 C0.041125,11.4984 0,12.4688 0,14 L10.5,14 C10.5,12.4688 10.4589,11.4984 9.625,10.8465 Z M13.125,7.3465 C12.4119,6.78912 11.6209,6.426 10.5,5.76013 L10.5,5.21938 C10.7118,4.97613 10.892,4.676 11.0381,4.33213 C11.4459,4.2315 11.8125,3.83425 11.8125,3.5 C11.8125,3.01787 11.6095,2.82713 11.3715,2.67138 C11.3715,2.65562 11.375,2.64162 11.375,2.625 C11.375,1.91363 10.9375,0 8.75,0 C6.5625,0 6.125,1.9145 6.125,2.625 C6.125,2.64162 6.1285,2.65562 6.1285,2.67138 C6.11188,2.68275 6.09787,2.69588 6.08125,2.70725 C7.83212,3.066 8.59688,4.54825 8.72813,5.74787 C8.97575,6.00863 9.1875,6.39625 9.1875,7 C9.1875,7.60288 8.771,8.20312 8.18388,8.51462 C8.127,8.624 8.06662,8.729 8.00275,8.82962 C8.155,8.91537 8.30025,8.99675 8.44025,9.07463 C9.08075,9.4325 9.63375,9.74137 10.164,10.1561 C10.3022,10.2638 10.4204,10.3801 10.5289,10.4991 L14,10.4991 C14,8.96875 13.9589,7.99837 13.125,7.3465 Z"></path></svg></span>Assign</th><td></td></tr></tbody></table></header><div class="page-body"><h3 id="69cecc1f-f558-41d2-b68b-0cbe11d2ced8" class=""><details open=""><summary>a) dzielniki wysokiego napięcia przemiennego - budowa, dobór elementów, niepewność pomiarowa</summary></details></h3><div class="indented"><p id="7b7fed96-f4b3-4489-9b31-fcdb33c85fb7" class=""><strong>Budowa dzielnika</strong></p><p id="b07609ae-0aa4-4ccd-be80-24e12f555d30" class="">W najprostszej wersji, dzielnik wysokiego napięcia przemiennego składa się z dwóch kondensatorów - jest to dzielnik pojemnościowy. Pojemności kondensatorów określają przekładnię dzielników. </p><figure id="f75c0729-1bc1-4558-ae2f-045cff3d5e59" class="image"><a href="6%20Miernictwo%20wysokonapie%CC%A8ciowe%20i%20diagnostyka%20izola%20e3b6a304bb4a48aab26321e25122f1fe/Untitled.png"><img style="width:305px" src="6%20Miernictwo%20wysokonapie%CC%A8ciowe%20i%20diagnostyka%20izola%20e3b6a304bb4a48aab26321e25122f1fe/Untitled.png"/></a></figure><p id="d4af8f9b-f3e9-41fe-909a-11e5b783e5f5" class="">Przekładnię dzielnika jak na powyższym obrazku można przedstawić zależnością <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ϑ</mi><mo>=</mo><mfrac><mrow><msub><mi>C</mi><mn>1</mn></msub><mo>+</mo><msub><mi>C</mi><mn>2</mn></msub></mrow><msub><mi>C</mi><mn>1</mn></msub></mfrac><mo>=</mo><mfrac><mi>U</mi><msub><mi>U</mi><mn>2</mn></msub></mfrac></mrow><annotation encoding="application/x-tex">\vartheta=\frac{C_1+C_2}{C_1}=\frac{U}{U_2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathnormal">ϑ</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.3335309999999998em;vertical-align:-0.44509999999999994em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8884309999999999em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31731428571428577em;"><span style="top:-2.357em;margin-left:-0.07153em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.4101em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31731428571428577em;"><span style="top:-2.357em;margin-left:-0.07153em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span><span class="mbin mtight">+</span><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31731428571428577em;"><span style="top:-2.357em;margin-left:-0.07153em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.44509999999999994em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.317431em;vertical-align:-0.44509999999999994em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.872331em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.10903em;">U</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31731428571428577em;"><span style="top:-2.357em;margin-left:-0.10903em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.10903em;">U</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.44509999999999994em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span><span>﻿</span></span>. </p><p id="2cb55f00-8c30-4f20-aa57-81c513d99c26" class="">Po uwzględnieniu pojemności doziemnej, schemat zastępczy dzielnika przedstawia się następująco:</p><figure id="4b71e406-db7e-4fec-9a83-1ad8c14fb1c5" class="image"><a href="6%20Miernictwo%20wysokonapie%CC%A8ciowe%20i%20diagnostyka%20izola%20e3b6a304bb4a48aab26321e25122f1fe/Untitled%201.png"><img style="width:308px" src="6%20Miernictwo%20wysokonapie%CC%A8ciowe%20i%20diagnostyka%20izola%20e3b6a304bb4a48aab26321e25122f1fe/Untitled%201.png"/></a></figure><p id="41f3f230-ae47-42ba-a7ab-ac83a6491dfd" class=""><strong>Dobór elementów dzielnika</strong></p><p id="26e1af65-4e9d-4b71-9ba1-08d4d804670e" class="">Kondensator C2 jest kondensatorem wzorcowym. Jego pojemność musi być możliwie mała, żeby reaktancja była duża - co pozwala na uzyskanie dużej wartości przekładni. W celu uzyskania małej pojemności, stosuje się duże odstępy izolacyjne między elektrodami - co zwiększa jednocześnie wytrzymałość układu.</p><p id="5a1e363a-79b9-4236-8fe4-1739299caf87" class="">Zgodnie ze schematem zastępczym, wypadkowa przekładnia zależy od stosunku pojemności doziemnej do pojemności kondensatora strony wysokonapięciowej. Stąd, duża pojemność tego kondensatora ogranicza wpływ pojemności doziemnej, powoduje jednak zmniejszenie przekładni.</p><p id="689bd532-b528-4796-8128-ba96659133d8" class=""><strong>Niepewność pomiarowa</strong></p><p id="3b87b90f-d2da-4273-8e0c-9a48220cd745" class="">Główną przyczyną niepewności pomiarowej przy korzystaniu z dzielnika napięcia przemiennego jest pojemność doziemna układu. Powoduje ona wprowadzenie niedokładności przekładni takiego dzielnika. Z tego powodu, przekładnię dzielnika pojemnościowego wyznacza się drogą pomiarową, nie obliczeniową.</p><figure id="c238bd69-08a8-4095-a74d-139ac271f4e6" class="image"><a href="6%20Miernictwo%20wysokonapie%CC%A8ciowe%20i%20diagnostyka%20izola%20e3b6a304bb4a48aab26321e25122f1fe/Untitled%202.png"><img style="width:274px" src="6%20Miernictwo%20wysokonapie%CC%A8ciowe%20i%20diagnostyka%20izola%20e3b6a304bb4a48aab26321e25122f1fe/Untitled%202.png"/></a></figure><p id="5e2d9ada-c74d-4a31-9111-fc007a48a89b" class="">Niepewność pomiaru wartości skutecznej przy wykorzystaniu dzielnika napięcia określa zależność <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>δ</mi><mo>≈</mo><mfrac><mn>1</mn><mrow><mn>2</mn><msup><mi>ω</mi><mn>2</mn></msup><msubsup><mi>C</mi><mn>2</mn><mn>2</mn></msubsup><msup><mi>R</mi><mn>2</mn></msup></mrow></mfrac></mrow><annotation encoding="application/x-tex">\delta \approx\frac{1}{2\omega^2 C^2_2 R^2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.03785em;">δ</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≈</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.436748em;vertical-align:-0.5916399999999999em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.62642em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">ω</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7463142857142857em;"><span style="top:-2.786em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8051142857142857em;"><span style="top:-2.188485714285714em;margin-left:-0.07153em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight">2</span></span></span><span style="top:-2.8448em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.31151428571428574em;"><span></span></span></span></span></span></span><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7463142857142857em;"><span style="top:-2.786em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.5916399999999999em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span><span>﻿</span></span>. Oznacza to, że dokładniejsze wartości pomiarów możemy uzyskać  przy pomiarach napięć o wyższych częstotliwościach, wykorzystując kondensatory wzorcowe o większych pojemnościach oraz zwiększając rezystancję odbiornika - czyli np. impedancję układu pomiarowego. </p><h3 id="df9319ff-c4bd-4ab5-84c3-485daff76945" class="">Najważniejsze punkty</h3><ul id="c7b3128a-e68c-4d5a-a575-ac19f4a6265e" class="bulleted-list"><li style="list-style-type:disc">dzielnik napięcia przemiennego to dwa kondensatory: wysokonapięciowy oraz wzorcowy</li></ul><ul id="ad5d87ef-c530-4be6-8b17-0c5ff93a28d8" class="bulleted-list"><li style="list-style-type:disc">kondensator wysokonapięciowy: mała pojemność to mała przekładnia, ale jednocześnie mniejszy wpływ pojemności doziemnej</li></ul><ul id="8b1543fa-1164-4446-a3a9-8bd4b3290705" class="bulleted-list"><li style="list-style-type:disc">kondensator wzorcowy: wymagana mała pojemność w celu uzyskania dużej przekładni</li></ul><ul id="646490b7-f6e6-4748-83bc-5b54eb4a81db" class="bulleted-list"><li style="list-style-type:disc">błąd pomiarowy bierze się z częstotliwości, pojemności C2 i oporu wewnętrznego strony niskiego napięcia - im wielkości te większe, tym niepewność mniejsza</li></ul><h3 id="b388c262-6e94-4871-b0da-43b9135c9ac6" class=""><strong>Źródło</strong></h3><p id="d3effd9c-2d0a-42fb-b80c-a67ce5246d01" class="">[1] Materiały z wykładu prof. Wieczorka</p></div><h3 id="535af0e6-a8bb-4ea6-aae2-6220451f5fff" class=""><details open=""><summary>b) dzielniki napięć udarowych - budowa, dobór elementów, współpraca z aparaturą pomiarowo-rejestrującą</summary></details></h3><div class="indented"><p id="79300546-eb1e-4521-b450-9349967b5a24" class=""><strong>Budowa dzielnika</strong></p><p id="0e6b266d-fdce-48db-90de-f5058152c4d0" class="">Dzielniki napięć udarowych buduje się jako rezystancyjne, pojemnościowe lub pojemnościowo-rezystancyjne. Najważniejsze jest, by charaktery impedancji strony wysokiej i strony niskiej były identyczne. </p><figure id="e908fb5d-0179-4701-a3e8-0b103f4fbfb0" class="image"><a href="6%20Miernictwo%20wysokonapie%CC%A8ciowe%20i%20diagnostyka%20izola%20e3b6a304bb4a48aab26321e25122f1fe/Untitled%203.png"><img style="width:392px" src="6%20Miernictwo%20wysokonapie%CC%A8ciowe%20i%20diagnostyka%20izola%20e3b6a304bb4a48aab26321e25122f1fe/Untitled%203.png"/></a></figure><p id="e8759a5b-1499-4688-8a5c-86636763a245" class="">W przypadku dzielników napięć szczytowych, istotnymi parametrami są czas odpowiedzi na impuls prostokątny oraz częstotliwość rezonansowa dzielnika dla odpowiedzi periodycznej. </p><p id="3e595b58-81bc-4e0d-a2b9-729dfdb0bdc9" class=""><strong>Dobór elementów dzielnika</strong></p><p id="a7372ed9-183e-4099-9131-81c3a125f4ed" class="">W przypadku dzielników napięć udarowych, należy zadbać przede wszystkim o to, żeby przekładnia pozostawała stała dla szerokiego zakresu częstotliwości napięć oraz dla szerokiego zakresu warunków pomiaru. </p><p id="4e313466-af79-494b-8ab1-88e17b10a011" class="">Sprowadza się to do doboru takich elementów, które charakteryzują się bardzo małymi parametrami pasożytniczymi - czyli pojemność i indukcyjność w przypadku dzielnika rezystancyjnego. Układ z minimalną indukcyjnością charakteryzuje się najlepszą odpowiedzią - stała czasowa jest pomijalna. </p><p id="575a29b0-e7e9-44ef-9a1c-b8128525750b" class="">Indukcyjności można kompensować specjalnie wykonanymi rezystorami. Pojemności - stosując ekranowanie dzielnika. </p><p id="cf33a8a2-e4ea-47f1-a694-2c64a7262788" class=""><strong>Niepewność pomiarowa</strong></p><p id="dc712fd9-5a8b-46a6-a83b-6a555d10b293" class="">Jak już wspomniano wyżej, źródłem błędów pomiarowych w dzielnikach napięć udarowych są parametry pasożytnicze elementów dzielnika - pojemność i indukcyjność przy dzielnikach rezystancyjnych, indukcyjność przy dzielnikach pojemnościowych i pojemnościowo-rezystancyjnych. </p><h3 id="d4e99a09-8a3f-4cfb-bc7d-9e0d0e6d694c" class=""><strong>Najważniejsze punkty</strong></h3><ul id="2def9a6a-ad0c-4305-a832-69b0aa3e2cdf" class="bulleted-list"><li style="list-style-type:disc">dzielniki udarowe: R, C, lub RC</li></ul><ul id="9a478bf0-66dd-47eb-8410-366ce9d86943" class="bulleted-list"><li style="list-style-type:disc">niepewności pomiarowe biorą się z pasożytniczych parametrów R, L, C</li></ul><ul id="d81a1019-f13a-4602-97d0-95ab277e2b74" class="bulleted-list"><li style="list-style-type:disc">dobór elementów: odpowiednia konstrukcja, jak najniższe parametry pasożytnicze</li></ul><ul id="2e2e917a-3d84-40ca-915b-d18fca364637" class="bulleted-list"><li style="list-style-type:disc">praca z aparaturą: przebieg udarowy trzeba zarejestrować żeby mieć o nim jakieś informacje, więc aparatura musi być odpowiednio szybka</li></ul><h3 id="0121d518-3d9e-478e-94c6-56b2a52f6bf5" class=""><strong>Źródła:</strong></h3><p id="c3768430-d69e-420c-81e1-0d719de10d0c" class="">[1] Fleszyński - Miernictwo wysokonapięciowe i laboratorium wysokich napięć</p><p id="c0ebd2fd-d05f-4aaa-8fe9-a861bc3641cb" class="">[2] Materiały z wykładu prof. Wieczorka</p></div><h3 id="08ba7afd-736b-4b9a-8d3b-94209bb483e2" class=""><details open=""><summary>c) pomiary wyładowań niezupełnych w badaniach diagnostycznych izolacji wysokonapięciowej, model dielektryka z wtrąciną gazową, parametry wyładowań niezupełnych, metody elektryczne pomiaru, metody akustyczne pomiaru, lokalizacja wyładowań niezupełnych</summary></details></h3><div class="indented"><p id="19efb7e1-127e-4e63-9b5d-567878e1a7ea" class=""><strong>Pomiary wyładowań niezupełnych w badaniach diagnostycznych izolacji wysokonapięciowej</strong></p><p id="c0b9f1a6-b7e6-4c59-b7f9-0f60b814ba4c" class="">Pomiary wyładowań niezupełnych są konieczne w badaniach diagnostycznych izolacji wysokonapięciowej, ponieważ dostarczają informacji o stanie badanej izolacji. Wyładowania niezupełne mogą znacząco skrócić żywotność izolacji, powodując degradację materiału izolacyjnego.  </p><p id="512f73f8-27f5-4a62-823b-0ebdd69df031" class="">O ile pomiary kąta stratności pozwalają na wyznaczenie progu jonizacji (napięcia początkowego wyładowań niezupełnych), o tyle pomiary wyładowań niezupełnych skupiają się na określeniu intensywności tych wyładowań.</p><p id="0619c064-823a-4290-ade7-b9a4d85c79e3" class="">Warto pamiętać, że wśród wyładowań niezupełnych można wyróżnić wyładowania ulotowe, powierzchniowe i wewnętrzne.</p><p id="7341ab22-b528-4832-b5b9-a5d5bc7804cd" class="">Celem diagnostycznym badań wyładowań niezupełnych jest ich detekcja, określenie intensywności, lokalizacji, rodzaju defektu izolacji oraz przybliżonego czasu życia izolacji. </p><p id="7bb93cef-4c32-4ab2-9763-ea225813099f" class=""><strong>Model dielektryka z wtrąciną gazową</strong></p><p id="343c2f4b-a91a-4e1f-b59e-e631ec8332d5" class="">Do analizy zjawiska wyładowań niezupełnych w objętości izolacji wykorzystuje się model dielektryka z wnęką gazową. Można przyjąć, że pojemność C3 to pojemność otoczenia wtrąciny powietrznej, pojemność C2 - pojemność elementów izolacji pod i nad wtrąciną, natomiast pojemność C1 - pojemność samej wtrąciny.</p><figure id="db8d5828-104d-499a-9ee4-8af5d3648c20" class="image"><a href="6%20Miernictwo%20wysokonapie%CC%A8ciowe%20i%20diagnostyka%20izola%20e3b6a304bb4a48aab26321e25122f1fe/Untitled%204.png"><img style="width:482px" src="6%20Miernictwo%20wysokonapie%CC%A8ciowe%20i%20diagnostyka%20izola%20e3b6a304bb4a48aab26321e25122f1fe/Untitled%204.png"/></a></figure><p id="ea9aa306-9ca6-4b56-b82e-6ecc65cdde93" class="">Wyładowania niezupełne występują wtedy, gdy napięcie zasilające przekracza wartość napięcia krytycznego (wytrzymałości elektrycznej) wtrąciny. W tej sytuacji, można przyjąć, że następuje zwarcie wtrąciny - napięcie na niej spada do 0 i łuk gaśnie. Dalszy wzrost napięcia zasilającego - wzrost sinusoidy - powoduje ponowne zwiększenie napięcia na tej wtrącinie i ponowne pojawienie się wyładowania.  </p><p id="37e7ecb1-3f54-4c76-b437-11fef8e85140" class=""><strong>Parametry wyładowań niezupełnych</strong></p><p id="24f64a05-f334-42b4-bd2b-9614a22e3306" class="">Podstawowym parametrem wyładowań niezupełnych jest ładunek odpowiadający rzeczywistemu ładunkowi przepływającemu we wtrącinie podczas wyładowania. Jednak jego bezpośredni pomiar jest niemożliwy. Dlatego stosuje się układy pomiarowe, w których zamiast tego mierzona jest wartość ładunku przepływającego przez impedancję pomiarową przy wyładowaniu - czyli wartość ładunku, który dopływa do miejsca wyładowania. Ładunek przepływający przez impedancję układu pomiarowego powoduje wygenerowanie fali napięciowej.</p><p id="49b295b4-9e96-42fc-b02d-23f39271fda4" class="">Ładunek płynący do miejsca wyładowania nazywa się <strong>ładunkiem pozornym</strong>. Jest to podstawowa miara intensywności wyładowań niezupełnych. Ładunek pozorny nie jest równy co do wartości rzeczywistemu ładunkowi wyładowania - jest do niego proporcjonalny. </p><p id="3773cb19-37e1-4bf8-9e83-c747871f7a93" class="">Drugim podstawowym parametrem wyładowań niezupełnych jest <strong>częstotliwość powtarzania impulsów wyładowań</strong>. </p><p id="fbc60a36-ac48-4ac5-9cd1-e22b7ce72a0d" class="">Na podstawie tych dwóch parametrów można wyznaczyć pozostałe parametry tzw. sumarycznej intensywności wyładowań, czyli średni prąd wyładowań niezupełnych, średni kwadrat ładunków wyładowań oraz moc wyładowań. </p><p id="efff3987-aeb3-4eb9-8cce-094abfa2b56a" class="">Innymi parametrami są :</p><ul id="c250b60e-195b-4d74-b8dd-8bc1203990de" class="bulleted-list"><li style="list-style-type:disc"><strong>napięcie początkowe wyładowań</strong> - najniższa wartość napięcia, przy której obserwuje się wyładowania za pomocą układu probierczego na którym napięcie przyłożone jest zwiększane</li></ul><ul id="a9953b5e-edca-458a-ab8b-28ef411649c3" class="bulleted-list"><li style="list-style-type:disc"><strong>napięcie gaśnięcia</strong> - najniższa wartość napięcia, przy której obserwuje się wyładowania za pomocą układu probierczego na którym napięcie przyłożone jest zmniejszane</li></ul><ul id="25da6783-5bc6-4e9a-8bf4-50a2a0b910ab" class="bulleted-list"><li style="list-style-type:disc">kąt fazowy pojedynczego impulsu</li></ul><ul id="a025acbf-ff2e-4953-9d8f-82522f14c980" class="bulleted-list"><li style="list-style-type:disc">ładunek maksymalny wyładowań </li></ul><p id="c8dd47e5-6eb2-4e7d-991a-95f4100c2c8d" class=""><strong>Metody elektryczne pomiaru</strong></p><p id="05e2ef5c-5304-417b-a5d4-0b9f2bac3acd" class="">W pomiarach wyładowań niezupełnych, stosuje się układy w których mierzona jest wartość ładunku pozornego. Opisuje je schemat jak na rysunku poniżej: </p><figure id="dcfd37f3-ff1f-47d1-a101-b71f6e75a9a0" class="image"><a href="6%20Miernictwo%20wysokonapie%CC%A8ciowe%20i%20diagnostyka%20izola%20e3b6a304bb4a48aab26321e25122f1fe/Untitled%205.png"><img style="width:720px" src="6%20Miernictwo%20wysokonapie%CC%A8ciowe%20i%20diagnostyka%20izola%20e3b6a304bb4a48aab26321e25122f1fe/Untitled%205.png"/></a></figure><p id="c3e5c552-1d52-46c5-9011-1ac73b69abe7" class="">Oprócz powyższych, stosuje się także układy mostkowe. Układy do pomiarów wyładowań niezupełnych metodami elektrycznymi wymagają kalibracji, są przy tym podatne na różne źródła zakłóceń od aparatury, sieci itd. </p><p id="1ce669c0-cd10-4add-a6e0-773313eed95f" class="">Oprócz układów do określenia ładunku pozornego, stosuje się również układy takie jak mostek Scheringa do określenia kąta stratności materiału izolacyjnego. Do pewnego poziomu napięcia tangens delta jest stały, powyżej pewnej wartości rośnie. Ta wartość to właśnie napięcie zapoczątkowania wyładowań niezupełnych. </p><p id="545873bc-1d69-4758-9fc3-993edc87dfd6" class=""><strong>Metody akustyczne pomiaru</strong></p><p id="75f6b9cd-c5c7-4645-974f-4c4395a79c3b" class="">Wyładowania niezupełne są źródłem impulsów napięciowych i prądowych w obwodzie, można je więc badać metodami elektrycznymi. Jednak oprócz tego, są one źródłem impulsów mechanicznych: lokalnych zmian ciśnienia. Zmiana ciśnienia to de facto fala akustyczna. Dlatego do pomiaru wyładowań niezupełnych można wykorzystać bardzo czułe mikrofony. </p><p id="6131dad8-a9fe-4f7b-8ee8-9c4339e83d3b" class="">Energia fali akustycznej jest proporcjonalna do prądu wyładowania niezupełnego, co pozwala na określenie intensywności wyładowań. Zaletą tego typu pomiarów jest też odporność na zakłócenia wskutek działania promieniowania elektromagnetycznego. </p><p id="a79e121e-5ce6-4b9f-9bb4-07d97bded34c" class="">Do pomiarów akustycznych wykorzystuje się:</p><ul id="4b4c69a7-d8b5-4a3d-8517-98860563a8f5" class="bulleted-list"><li style="list-style-type:disc">hydrofony, przeznaczone do pomiarów ciśnienia w ośrodku ciekłym</li></ul><ul id="94bca05b-bb18-4d6a-b24f-35b9c0fd5504" class="bulleted-list"><li style="list-style-type:disc">przetworniki stykowe, mikrofonowe, przeznaczone do pomiarów ciśnienia w ośrodku stałym</li></ul><ul id="7477dddf-2948-4db9-8557-60cdd47b9175" class="bulleted-list"><li style="list-style-type:disc">przetworniki stykowe rezonansowe, służące do pomiaru przyspieszenia - akcelerometry. </li></ul><p id="80e2b40f-c908-422d-91c4-044317d07736" class="">Czyli de facto można tu stosować mikrofony lub czujniki ciśnienia. </p><p id="ada7364f-7118-4b18-a156-26e8b8fce81b" class=""><strong>Lokalizacja wyładowań niezupełnych</strong></p><p id="93ec3bc2-0910-47fd-87d7-ae1b8a99b705" class="">Wyróżnia się dwie metody lokalizacji wyładowań niezupełnych:</p><ul id="369143f9-406e-401f-9417-6bbdaa7f66b6" class="bulleted-list"><li style="list-style-type:disc">metoda triangulacyjna: polega na pomiarach czasów opóźnienia, z jakimi sygnały docierają do przetworników pomiarowych, rozmieszczonych w różnych punktach badanego urządzenia</li></ul><ul id="917672da-ce74-4653-ba1d-c1e7c8204bd3" class="bulleted-list"><li style="list-style-type:disc">metoda największej głośności: polega na znalezieniu miejsca na obudowie urządzenia, w którym amplitudy sygnałów akustycznych są największe. </li></ul><p id="b6716f71-9847-4818-a3a6-0166b995300c" class=""><strong>Źródła</strong></p><p id="91e0f8a8-1efb-4e52-8268-9f3c78bbf80b" class="">[1] Materiały z wykładu prof. Wieczorka</p><p id="6d7ee4de-408b-4631-b13b-2789b24ceebe" class="">[2] J. Fleszyński - <em>Miernictwo wysokonapięciowe i laboratorium wysokich napięć</em></p><p id="b7a2f376-05f6-4778-9b7f-fc00b63ae6e5" class="">[3] J. Fleszyński - <em>Laboratorium wysokonapięciowe w dydaktyce i elektroenergetyce</em></p></div><h3 id="eae4aadb-9344-4df1-a658-5bc39319bc02" class=""><details open=""><summary>d) badania diagnostyczne transformatorów elektroenergetycznych</summary></details></h3><div class="indented"><p id="3eed0b3c-549a-425f-a5cd-78c1b972b5e8" class="">Istnieje kilka badań diagnostycznych wykonywanych na transformatorach, które sumarycznie dają wiele informacji na temat stanu jego izolacji. Dla transformatorów na ogół prowadzi się dzienniki, w których zapisane są ich najważniejsze parametry w różnych punktach czasu - od badania do badania. Porównanie wartości tych wskaźników pozwala na ocenę aktualnego stanu izolacji względem stanu wyjściowego. </p><p id="e178877e-4a10-4226-b486-f8c2baacbe0f" class=""><strong>Indeks rezystancyjny</strong></p><p id="0b2959a4-b6cc-4a9d-b3db-9513885f3689" class="">Do układu izolacyjnego doprowadza się napięcie stałe, z narastającą stopniami wartością, na określony czas każdy stopień. Sprawdzana jest wartość prądu pojemnościowego w izolacji transformatora. Zmiany prądu w zależności od napięcia probierczego pokazują, w jakim stanie jest izolacja transformatora. Uzyskane wyniki porównuje się do wyników uzyskanych dla tego transformatora przy odbiorze.</p><p id="440cb407-4033-485b-8211-a4d4ae296b67" class="">Układ pomiarowy wygląda jak poniżej:</p><figure id="c7e4eeed-093d-4019-938a-fd2224e947da" class="image"><a href="6%20Miernictwo%20wysokonapie%CC%A8ciowe%20i%20diagnostyka%20izola%20e3b6a304bb4a48aab26321e25122f1fe/Untitled%206.png"><img style="width:591px" src="6%20Miernictwo%20wysokonapie%CC%A8ciowe%20i%20diagnostyka%20izola%20e3b6a304bb4a48aab26321e25122f1fe/Untitled%206.png"/></a></figure><p id="6c4bbeb6-d095-422a-b862-217631cbc90d" class="">Przy czym wyniki pomiarów wyglądają jak poniżej:</p><figure id="091923b2-a096-44a2-b010-535334119df0" class="image"><a href="6%20Miernictwo%20wysokonapie%CC%A8ciowe%20i%20diagnostyka%20izola%20e3b6a304bb4a48aab26321e25122f1fe/Untitled%207.png"><img style="width:590px" src="6%20Miernictwo%20wysokonapie%CC%A8ciowe%20i%20diagnostyka%20izola%20e3b6a304bb4a48aab26321e25122f1fe/Untitled%207.png"/></a></figure><p id="87a92fdf-e73a-4e81-b1b8-cacc94d3aab9" class=""><strong>Pomiar napięcia powrotnego</strong></p><p id="49cf8ab5-e418-4044-baae-9b95ca2dd1ba" class="">Jednym z badań stanu izolacji transformatora jest badanie napięcia powrotu, czyli przebiegu krzywej napięcia pojawiającego się na zaciskach uzwojenia po naładowaniu transformatora, a następnie rozładowaniu go. </p><p id="b2410aa0-408d-4ea1-9e04-260db8f02c90" class="">Wykorzystuje się tu układ jak poniżej:</p><figure id="5f91e99f-9199-4065-b107-ddb61d7082e7" class="image"><a href="6%20Miernictwo%20wysokonapie%CC%A8ciowe%20i%20diagnostyka%20izola%20e3b6a304bb4a48aab26321e25122f1fe/Untitled%208.png"><img style="width:473px" src="6%20Miernictwo%20wysokonapie%CC%A8ciowe%20i%20diagnostyka%20izola%20e3b6a304bb4a48aab26321e25122f1fe/Untitled%208.png"/></a></figure><p id="9865c8a3-7583-4720-860a-cca14216e858" class="">Natomiast otrzymywane przebiegi mają kształt jak poniżej: </p><figure id="d55f7872-21c3-4ab7-a6fe-ed77e03bac70" class="image"><a href="6%20Miernictwo%20wysokonapie%CC%A8ciowe%20i%20diagnostyka%20izola%20e3b6a304bb4a48aab26321e25122f1fe/Untitled%209.png"><img style="width:357px" src="6%20Miernictwo%20wysokonapie%CC%A8ciowe%20i%20diagnostyka%20izola%20e3b6a304bb4a48aab26321e25122f1fe/Untitled%209.png"/></a></figure><p id="b62a1343-4a7a-4ac8-9db7-868b8bb13204" class="">Przy czym t_c to czas ładowania, natomiast t_d to czas rozładowania transformatora. Ponownie, uzyskane charakterystyki porównuje się z charakterystykami uzyskanymi dla nowo odebranego transformatora. </p><p id="88d0cfdb-9b06-483b-a4ea-cbdc647e7f24" class=""><strong>Diagnostyka wibroakustyczna</strong></p><p id="be784775-810a-4f05-a824-f8aecf98362d" class="">Wśród metod diagnostyki transformatorów można wymienić również metodę wibroakustyczną, czyli analizę zmian poziomu drgań w czasie. Bada się tu stan rozruchu transformatora nieobciążonego. </p><p id="2c9f893e-b22e-47fb-b049-fd5e037732d3" class=""><strong>Badania oleju</strong></p><p id="6b39f200-5aa0-41a1-9ab3-d2c837bf26bb" class="">Jednym z kluczowych badań diagnostycznych transformatora elektroenergetycznego jest analiza próbki oleju. Badania oleju są znormalizowane i mają na celu określenie wartości napięcia przebicia, współczynnika strat dielektrycznych oraz przebiegu jego zmian w funkcji temperatury, a także zbadanie rezystywności oleju i jej zmian w funkcji temperatury.</p><p id="a07b64e1-2631-4522-a450-67e819166da0" class="">Oprócz parametrów elektrycznych, bada się także parametry fizykochemiczne oleju, takie jak napięcie powierzchniowe, liczba kwasowa, zawartość wody, PCB, furanów czy gazów rozpuszczonych w oleju. </p><p id="fff7e639-e870-43f5-b615-7c131822e292" class="">Wszystkie te wskaźniki oczywiście odnotowuje się w dzienniku maszyny i porównuje z wartościami uzyskanymi w ramach badań nowego transformatora. Każdy z tych parametrów pozwala ocenić, w jakim stanie jest olej transformatora, czyli realnie w jakim stanie jest transformator i czy może być dalej eksploatowany. </p><p id="aa2a27c6-fd48-4207-8355-825229924c9f" class=""><strong>Pozostałe próby napięciowe</strong></p><p id="93611797-97f5-4129-90bc-08ecf8e14a9d" class="">Oprócz powyższych, podczas badań diagnostycznych prowadzi się także inne badania, takie jak współczynnik stratności izolacji transformatora i przepustu, pomiar pojemności transformatora i przepustu, pomiar wyładowań niezupełnych. </p><p id="dc1bf876-22a6-410c-8514-5ca79a8d29db" class=""><strong>Źródła</strong></p><p id="468ca4f5-4684-496c-94ec-a8b07c2acc52" class="">[1] Materiały z wykładu prof. Wieczorka</p><p id="2b2a0866-808a-4d9b-a251-963694992ef4" class="">[2] <a href="http://elektroonline.pl/a/6054,Badania-diagnostyczne-w-eksploatacji-transformatorow,,Energetyka">http://elektroonline.pl/a/6054,Badania-diagnostyczne-w-eksploatacji-transformatorow,,Energetyka</a> </p></div><h3 id="0cbfbe7e-29b1-48e2-bdf7-6a4046af98db" class=""><details open=""><summary>e) próby napięciowe izolacji, układy probiercze</summary></details></h3><div class="indented"><p id="493b3161-cb04-4ab1-872f-e6526527ae50" class="">Wśród prób napięciowych izolacji urządzeń elektroenergetycznych można wymienić następujące:</p><h3 id="c861a578-e0e5-4913-8a25-90168c3e8876" class=""><strong>Indeks rezystancyjny</strong></h3><p id="57d8ec78-aa40-42d8-aeb5-abb0ceb2377d" class="">Indeks rezystancyjny to badania oporności izolacji urządzeń elektroenergetycznych, współczynnika absorpcji tej izolacji oraz prądu przewodnościowego.</p><p id="afd0393e-0ba3-4d00-bb56-af6c92ac4f83" class="">Wykonuje się tu pomiary rezystancji po różnych czasach przyłożenia napięcia, często po 60 sekundach i 300 sekundach. Pomiary wykonuje się między fazami oraz do ziemi. Wskaźniki rezystancji izolacji zależą od wymiarów geometrycznych.</p><p id="98b24707-aa7c-46af-a8b0-6a80e86db31f" class=""><strong>Współczynnik absorpcji</strong> jest de facto stosunkiem różnych wskaźników rezystancji, najczęściej R60/R15, czyli opisuje jak zmienia się rezystancja w czasie przyłożenia napięcia. Pomiary te wykonuje się przy napięciu 2,5 kV, przy wykorzystaniu megaomomierzy.</p><p id="f2a698c8-dea8-4d19-a44d-0fca0cd4a5ac" class=""><strong>Prąd przewodnościowy</strong> jest mierzony przy wyższych napięciach - ostatni pomiar jest wykonywany przy dwukrotnej wartości napięcia znamionowego. Szybki wzrost wartości prądu przewodzenia podczas próby wskazuje na osłabienie stanu izolacji. </p><p id="b521f392-11cf-4855-bd64-ac6b58790a9f" class="">Pomiary indeksów rezystancyjnych wykonuje się metodą schodkową: przykłada się na 10 minut coraz większe wartości napięcia. </p><figure id="7516e0b9-b56c-48f7-b490-194e1c9cde17" class="image"><a href="6%20Miernictwo%20wysokonapie%CC%A8ciowe%20i%20diagnostyka%20izola%20e3b6a304bb4a48aab26321e25122f1fe/Untitled%2010.png"><img style="width:594px" src="6%20Miernictwo%20wysokonapie%CC%A8ciowe%20i%20diagnostyka%20izola%20e3b6a304bb4a48aab26321e25122f1fe/Untitled%2010.png"/></a></figure><h3 id="8cc6cb02-1e2e-4e46-a0e9-1caba21202a7" class=""><strong>Indeks pojemnościowy</strong></h3><p id="fb81275e-4d1a-418f-b49b-b939648a1a1c" class="">Wskaźnikami typu pojemnościowego są współczynnik stratności (tangens delta), wartość pojemności badanego obiektu i napięcie powrotne.</p><p id="bfd25f67-f378-43af-9358-1250521a5a8d" class=""><strong>Współczynnik stratności</strong> zależy od poziomu zawilgocenia i zestarzenia izolacji oraz od poziomu wyładowań niezupełnych, a także od temperatury i poziomu napięcia. Współczynnik ten mierzy się korzystając z układu opartego o mostek Scheringa.</p><figure id="f97d529a-4569-4545-b142-72ce5e2a5cf5" class="image"><a href="6%20Miernictwo%20wysokonapie%CC%A8ciowe%20i%20diagnostyka%20izola%20e3b6a304bb4a48aab26321e25122f1fe/Untitled%2011.png"><img style="width:556px" src="6%20Miernictwo%20wysokonapie%CC%A8ciowe%20i%20diagnostyka%20izola%20e3b6a304bb4a48aab26321e25122f1fe/Untitled%2011.png"/></a></figure><p id="86bd1842-39de-4549-8ac1-59edf75c07b1" class="">Pomiary <strong>pojemności izolacji</strong> mogą wskazywać na zmianę stanu jej zawilgocenia - wnikanie wody wgłąb izolacji zwiększa jej przenikalność elektryczną, co pozwala dielektrykowi kumulować więcej ładunku. Powoduje to większe straty dielektryczne. </p><p id="7f23f65a-a646-483a-8265-ce8ffc171182" class="">Pomiary pojemności układu izolacyjnego wykonuje się przy częstotliwości napięcia 2 Hz i 50 Hz, a następnie oblicza się wskaźnik C2/C50. Wskaźnik ten maleje przy wzroście zawilgocenia.</p><p id="5785d2ef-5655-4866-af82-9d30adfbb2bd" class="">Drugim wskaźnikiem jest pojemność wyznaczona przy różnych temperaturach: <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>80</mn><mi mathvariant="normal">°</mi><mi>C</mi><mo separator="true">,</mo><mn>20</mn><mi mathvariant="normal">°</mi><mi>C</mi></mrow><annotation encoding="application/x-tex">80\degree C, 20\degree C</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord">80°</span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">20°</span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span></span></span></span></span><span>﻿</span></span>. Oblicza się wtedy wskaźnik będący stosunkiem C80/C20, który rośnie przy wzroście zawilgocenia izolacji. </p><p id="21eb95a6-418e-4efd-8912-d9223979f04a" class="">Pojemność układu izolacyjnego można zmierzyć korzystając z mostka Scheringa, jak w poprzednim podpunkcie.</p><p id="a4f14846-1dc4-4755-87dd-073355b01fc7" class="">Im większa zdolność do polaryzacji dielektryka, tym mocniejsze jest zjawisko <strong>napięcia powrotnego</strong>, czyli zjawiska utrzymywania się napięcia na zaciskach transformatora pewnego poziomu napięcia. Pomiar napięcia powrotnego stosowany jest właśnie w diagnostycznych pomiarach izolacji transformatorów.</p><p id="b4b26955-69a5-47bd-9e88-f9f2b16dc075" class="">Napięcie powrotne mierzy się poprzez pomiar napięcia na zaciskach uzwojenia transformatora po jego uprzednim naładowaniu i rozładowaniu. Transformator ładuje się napięciem 2 kV, a następnie bada stromość narastania napięcia powrotnego. </p><p id="4dc19feb-6132-4db4-a445-f6063beb696e" class="">Wykorzystuje się tu układ jak poniżej:</p><figure id="4094ac69-3072-4352-b2c7-8b0821082de4" class="image"><a href="6%20Miernictwo%20wysokonapie%CC%A8ciowe%20i%20diagnostyka%20izola%20e3b6a304bb4a48aab26321e25122f1fe/Untitled%208.png"><img style="width:473px" src="6%20Miernictwo%20wysokonapie%CC%A8ciowe%20i%20diagnostyka%20izola%20e3b6a304bb4a48aab26321e25122f1fe/Untitled%208.png"/></a></figure><p id="c1c6a094-4aae-4a83-81e9-990981645def" class="">Natomiast otrzymywane przebiegi mają kształt jak poniżej: </p><figure id="49cdcd21-d5de-42bc-9a00-d0de12d22202" class="image"><a href="6%20Miernictwo%20wysokonapie%CC%A8ciowe%20i%20diagnostyka%20izola%20e3b6a304bb4a48aab26321e25122f1fe/Untitled%209.png"><img style="width:357px" src="6%20Miernictwo%20wysokonapie%CC%A8ciowe%20i%20diagnostyka%20izola%20e3b6a304bb4a48aab26321e25122f1fe/Untitled%209.png"/></a></figure><p id="ee1fa086-1489-448d-ac4f-a63ed131fc06" class="">Przy czym t_c to czas ładowania, natomiast t_d to czas rozładowania transformatora. Ponownie, uzyskane charakterystyki porównuje się z charakterystykami uzyskanymi dla nowo odebranego transformatora. </p><h3 id="ea111c26-c207-4312-905b-e1aa9a9e50f3" class=""><strong>Widmo polaryzacji dielektryka</strong></h3><p id="9d1d4655-c495-432d-8e8b-897848c44ae7" class="">Dla dielektryków, można także zbadać widmo polaryzacji, czyli zależność przenikalności elektrycznej od częstotliwości napięcia. Badania te wykonuje się korzystając z mostków Scheringa przy częstotliwościach od 50 Hz do częstotliwości akustycznych, lub układami do pomiaru napięcia powrotnego w zakresie bardzo małych częstotliwości. </p><h3 id="f2483da2-743e-416f-97c9-e962c8d45823" class=""><strong>Pomiar wyładowań niezupełnych</strong></h3><p id="0c525aa5-5201-48c5-907c-4ff85217dc9e" class="">Inną miarą stanu izolacji jest pomiar wyładowań niezupełnych. Pomiary tych wyładowań polegają na badaniu wielkości ładunku przepływającego przez impedancję pomiarową do miejsca wyładowania niezupełnego w izolacji. Wielkość i częstotliwość wyładowań niezupełnych są większe w zestarzałych izolacjach, przy czym jednocześnie powodują one zwiększenie tempa dalszego starzenia izolacji.</p><figure id="6bbf32dc-ea6b-4e8f-a784-b02996afdf01" class="image"><a href="6%20Miernictwo%20wysokonapie%CC%A8ciowe%20i%20diagnostyka%20izola%20e3b6a304bb4a48aab26321e25122f1fe/Untitled%205.png"><img style="width:720px" src="6%20Miernictwo%20wysokonapie%CC%A8ciowe%20i%20diagnostyka%20izola%20e3b6a304bb4a48aab26321e25122f1fe/Untitled%205.png"/></a></figure><h3 id="edb109c1-f113-4a17-86ca-9ca3b537f733" class=""><strong>Badania stromym udarem</strong></h3><p id="3275c9d3-3fc7-496e-8318-53c4939df622" class="">W przypadku badań izolatorów kompozytowych, stosuje się metodę opartą o strome udary. Poddanie izolatora oddziaływaniu wysokiego udaru powinno spowodować przeskok w powietrzu, nie na samej próbce. Pomiary wykonuje się zgodnie z wymaganiami opisanymi w normie PN-IEC, co gwarantuje odpowiednie parametry udaru, takie jak czas narastania czy wartość szczytowa. </p><figure id="26740c21-6ba8-47ae-a0a9-3af0b67c25ee" class="image"><a href="6%20Miernictwo%20wysokonapie%CC%A8ciowe%20i%20diagnostyka%20izola%20e3b6a304bb4a48aab26321e25122f1fe/Untitled%2012.png"><img style="width:468px" src="6%20Miernictwo%20wysokonapie%CC%A8ciowe%20i%20diagnostyka%20izola%20e3b6a304bb4a48aab26321e25122f1fe/Untitled%2012.png"/></a></figure><p id="a52170cd-2ae5-4f5b-9cf0-51e2e02ddb3f" class=""><strong>Źródła</strong></p><p id="ec765235-7a6d-4bdf-9f3d-4b3b3d192a2f" class="">[1] Materiały z wykładu prof. Wieczorka</p></div><h3 id="645ad89d-609f-4583-a603-d4f5f51f9a70" class="block-color-yellow_background"><details open=""><summary>f) współczynnik strat dielektrycznych tgδ – zależność od częstotliwości, temperatury, napięcia; pomiar mostkiem Scheringa</summary></details></h3><div class="indented"><p id="8b9155f1-582e-4364-9c8d-7494011f9cf7" class="">Współczynnik strat dielektrycznych tgδ to kąt pomiędzy idealnym prądem pojemnościowym a rzeczywistym prądem mierzonym na izolacji (w zapisie wektorowym). Kąt ten mówi nam, jaka jest stratność dielektryczna badanego materiału, sam tangens delta jest proporcjonalny do strat cieplnych na izolacji. Większy kąt delta oznacza, że spadła rezystancja badanej izolacji. </p><p id="16535dd2-547e-4859-9cf8-afd0664fbef3" class="">Pomiary współczynnika strat dielektrycznych pozwalają na określenie stanu izolacji: procesy starzeniowe, zawilgocenie izolacji czy oddziaływanie wyładowań niezupełnych powodują zwiększenie tego współczynnika.</p><p id="71660eea-f83c-4b14-ba49-8e4384e59328" class="">Wartość współczynnika strat dielektrycznych rośnie wraz ze wzrostem przyłożonego napięcia, od pewnego etapu - progu wyładowań niezupełnych.  </p><figure id="3d9e897c-3e12-4c15-9041-86641a2de6c4" class="image"><a href="6%20Miernictwo%20wysokonapie%CC%A8ciowe%20i%20diagnostyka%20izola%20e3b6a304bb4a48aab26321e25122f1fe/Untitled%2013.png"><img style="width:603px" src="6%20Miernictwo%20wysokonapie%CC%A8ciowe%20i%20diagnostyka%20izola%20e3b6a304bb4a48aab26321e25122f1fe/Untitled%2013.png"/></a></figure><p id="6c259e78-44f2-474f-8406-5d9e28f2eb5a" class="">Natomiast wpływ częstotliwości i temperatury zależy od tego, który z mechanizmów strat dielektrycznych bierze górę: straty typu relaksacyjnego (związanych z ruchem nośników, których zdolność do przemieszczania się w dielektryku jest ograniczona), czy straty przewodnościowe (związane z ruchem nośników swobodnych, w całym zakresie częstotliwości. </p><p id="01e9d87a-5cf6-45b2-a14f-42ce2a4570e8" class="">Charakterystyki strat można przedstawiono na poniższym obrazku:</p><figure id="03e9c7e6-f858-474e-9190-90d2e1f0657a" class="image"><a href="6%20Miernictwo%20wysokonapie%CC%A8ciowe%20i%20diagnostyka%20izola%20e3b6a304bb4a48aab26321e25122f1fe/Untitled%2014.png"><img style="width:1148px" src="6%20Miernictwo%20wysokonapie%CC%A8ciowe%20i%20diagnostyka%20izola%20e3b6a304bb4a48aab26321e25122f1fe/Untitled%2014.png"/></a></figure><p id="8b108d30-2508-4486-a806-3392b4e3630d" class=""><strong>Pomiar mostkiem Scheringa</strong></p><p id="7a9bb728-ca96-4b82-9cc0-5c4c8e90b207" class="">Mostek Scheringa przedstawiono na poniższym obrazku: </p><figure id="56880c52-e987-42dc-8a99-566490137914" class="image"><a href="6%20Miernictwo%20wysokonapie%CC%A8ciowe%20i%20diagnostyka%20izola%20e3b6a304bb4a48aab26321e25122f1fe/Untitled%2015.png"><img style="width:845px" src="6%20Miernictwo%20wysokonapie%CC%A8ciowe%20i%20diagnostyka%20izola%20e3b6a304bb4a48aab26321e25122f1fe/Untitled%2015.png"/></a></figure><p id="73adffe4-46af-414e-b2ea-b7879626033e" class="">Pomiary mostkiem Scheringa wykonuje się przy wysokim napięciu, bo mechanizmy stratności zależą od natężenia pola elektrycznego. Pomiar polega na zrównoważeniu potencjałów 3 i 4 poprzez spełnienie warunków równowagi (iloczyny przeciwległych impedancji powinny być sobie równe). Konstrukcja mostka i dobór kondensatora wzorcowego musi umożliwiać wyzerowanie mostka. </p><p id="da72d8a0-a566-4fda-b152-5cd4af55ee2e" class="">Równowagę potencjałów uzyskuje się poprzez dobór odpowiednich składowych impedancji poszczególnych gałęzi. W mostku Scheringa, elementem wzorcowym jest kondensator Cn, elementem mierzonym - pojemność Cx. Zrównanie iloczynów uzyskuje się przez sterowanie rezystorami R3 i R4 oraz pojemnością C4. </p><p id="68b59c86-2e59-4b77-a06c-7d839ac54028" class="">W celu uniknięcia wpływu zakłóceń elektromagnetycznych, część mostka można ekranować klatką Faradaya. Pomiar mostkiem Scheringa można wykonać zdalnie. </p><p id="7eaf5a33-7e48-43a6-b569-462f9b8c67b4" class="">Pomiar mostkiem Scheringa pozwala na wyznaczenie kąta strat dielektrycznych oraz pojemności badanej próbki.</p><p id="b7940e9a-08eb-4f28-b372-9b1b33edd4b3" class=""><strong>Źródła:</strong></p><p id="bf8c359a-eacc-4c54-965b-82912c3b5578" class="">[1] <a href="https://www.dbc.wroc.pl/Content/1148/podstawy_inzynierii_materialowej.pdf">https://www.dbc.wroc.pl/Content/1148/podstawy_inzynierii_materialowej.pdf</a></p><p id="cf7f836e-11af-478c-92fa-e40c8b35d676" class="">[2] J. Fleszyński - <em>Miernictwo wysokonapięciowe i laboratorium wysokich napięć</em></p><p id="1f1496e0-80e2-4d91-bc13-a3c6c236edc7" class="">[3] Materiały z wykładu prof. Wieczorka</p><p id="76524bb7-61ab-4007-8a64-0a9a51864005" class="">[4] Materiały z wykładu <em>Miernictwo Elektryczne 2</em></p></div></div></article></body></html>

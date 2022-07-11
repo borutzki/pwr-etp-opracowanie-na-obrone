@@ -1,0 +1,669 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>8. Materiały elektromagnetyczne</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="4e0387d9-8152-4ead-b37f-077d2ba63c3c" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🔬</span></div><h1 class="page-title">8. Materiały elektromagnetyczne</h1><table class="properties"><tbody><tr class="property-row property-row-select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesSelect"><path d="M7,13 C10.31348,13 13,10.31371 13,7 C13,3.68629 10.31348,1 7,1 C3.68652,1 1,3.68629 1,7 C1,10.31371 3.68652,13 7,13 Z M3.75098,5.32278 C3.64893,5.19142 3.74268,5 3.90869,5 L10.09131,5 C10.25732,5 10.35107,5.19142 10.24902,5.32278 L7.15771,9.29703 C7.07764,9.39998 6.92236,9.39998 6.84229,9.29703 L3.75098,5.32278 Z"></path></svg></span>Status</th><td><span class="selected-value select-value-color-green">Zrobione</span></td></tr><tr class="property-row property-row-person"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesPerson"><path d="M9.625,10.8465 C8.91187,10.2891 8.12088,9.926 7,9.26013 L7,8.71938 C7.21175,8.47612 7.392,8.176 7.53813,7.83213 C7.94587,7.7315 8.3125,7.33425 8.3125,7 C8.3125,6.51788 8.1095,6.32713 7.8715,6.17137 C7.8715,6.15562 7.875,6.14162 7.875,6.125 C7.875,5.41362 7.4375,3.5 5.25,3.5 C3.0625,3.5 2.625,5.4145 2.625,6.125 C2.625,6.14162 2.6285,6.15562 2.6285,6.17137 C2.3905,6.32713 2.1875,6.51788 2.1875,7 C2.1875,7.33425 2.55413,7.7315 2.96187,7.833 C3.108,8.176 3.28825,8.47612 3.5,8.71938 L3.5,9.26013 C2.37912,9.92513 1.58812,10.2882 0.875,10.8465 C0.041125,11.4984 0,12.4688 0,14 L10.5,14 C10.5,12.4688 10.4589,11.4984 9.625,10.8465 Z M13.125,7.3465 C12.4119,6.78912 11.6209,6.426 10.5,5.76013 L10.5,5.21938 C10.7118,4.97613 10.892,4.676 11.0381,4.33213 C11.4459,4.2315 11.8125,3.83425 11.8125,3.5 C11.8125,3.01787 11.6095,2.82713 11.3715,2.67138 C11.3715,2.65562 11.375,2.64162 11.375,2.625 C11.375,1.91363 10.9375,0 8.75,0 C6.5625,0 6.125,1.9145 6.125,2.625 C6.125,2.64162 6.1285,2.65562 6.1285,2.67138 C6.11188,2.68275 6.09787,2.69588 6.08125,2.70725 C7.83212,3.066 8.59688,4.54825 8.72813,5.74787 C8.97575,6.00863 9.1875,6.39625 9.1875,7 C9.1875,7.60288 8.771,8.20312 8.18388,8.51462 C8.127,8.624 8.06662,8.729 8.00275,8.82962 C8.155,8.91537 8.30025,8.99675 8.44025,9.07463 C9.08075,9.4325 9.63375,9.74137 10.164,10.1561 C10.3022,10.2638 10.4204,10.3801 10.5289,10.4991 L14,10.4991 C14,8.96875 13.9589,7.99837 13.125,7.3465 Z"></path></svg></span>Assign</th><td></td></tr></tbody></table></header><div class="page-body"><h3 id="2fbe642f-7045-419b-bfa9-e943cb23ac5c" class=""><details open=""><summary>a) parametry materiałowe opisujące oddziaływanie materii z polem elektrycznym i magnetycznym</summary></details></h3><div class="indented"><p id="5e59237b-f294-4743-8b16-b5d904e86717" class=""><strong>Przenikalność elektryczna i magnetyczna</strong></p><p id="d69e0a4d-da2f-46b2-82ae-f0c948f43a58" class="">Podstawowe dwa parametry, charakteryzujące materiały pod względem użyteczności w procesach z silnymi polami, to przenikalność elektryczna <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ε</mi></mrow><annotation encoding="application/x-tex">\varepsilon</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">ε</span></span></span></span></span><span>﻿</span></span> oraz przenikalność magnetyczna <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>μ</mi></mrow><annotation encoding="application/x-tex">\mu</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathnormal">μ</span></span></span></span></span><span>﻿</span></span>. Obydwie te wielkości mówią, jak dużo energii z pól elektromagnetycznych są w stanie zgromadzić w sobie materiały. </p><p id="e9e18843-c505-486a-86bd-aa09f91b7ca8" class="">Wynika to z zależności:</p><figure id="006e1254-f34c-489b-a808-56ad740d494a" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>W</mi><mrow><mi>V</mi><mi>H</mi></mrow></msub><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mi>B</mi><mi>H</mi></mrow><annotation encoding="application/x-tex">W_{VH}=\frac{1}{2}BH</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">W</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.22222em;">V</span><span class="mord mathnormal mtight" style="margin-right:0.08125em;">H</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.00744em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.32144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span></span></span></span></span></div></figure><figure id="51c8382b-19f4-47ab-add6-ba8d8f60ba31" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>W</mi><mrow><mi>V</mi><mi>E</mi></mrow></msub><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mi>D</mi><mi>E</mi></mrow><annotation encoding="application/x-tex">W_{VE}=\frac{1}{2}DE</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">W</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.22222em;">V</span><span class="mord mathnormal mtight" style="margin-right:0.05764em;">E</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.00744em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.32144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span></span></span></span></span></div></figure><p id="f4d47ae6-6d17-4629-98a2-1a961eb76378" class="">Przy czym wielkości w obydwu równaniach wiążą się ze sobą poprzez przenikalność odpowiednio magnetyczną i elektryczną, co opisują poniższe zależności:</p><figure id="d8d3cdbd-8a1a-43c9-8fba-686d015b2053" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>D</mi><mo>=</mo><mi>ε</mi><msub><mi>ε</mi><mn>0</mn></msub><mi>E</mi></mrow><annotation encoding="application/x-tex">D=\varepsilon \varepsilon_0E</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord mathnormal">ε</span><span class="mord"><span class="mord mathnormal">ε</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span></span></span></span></span></div></figure><figure id="77c842fa-c575-4dce-95cc-cbbc3bc821c2" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>B</mi><mo>=</mo><mi>μ</mi><msub><mi>μ</mi><mn>0</mn></msub><mi>H</mi></mrow><annotation encoding="application/x-tex">B=\mu \mu_0H</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8777699999999999em;vertical-align:-0.19444em;"></span><span class="mord mathnormal">μ</span><span class="mord"><span class="mord mathnormal">μ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span></span></span></span></span></div></figure><p id="4c7693f4-a573-4e6d-8f1c-3d0d3e259808" class=""><strong>Parametry elektryczne</strong></p><p id="0c706914-6f06-47e0-a8ec-f718aa214187" class="">Istnieje kilka parametrów materiałów, które opisują ich oddziaływanie z polem elektrycznym. Na początek można wyróżnić <strong>rezystywność</strong> i jej odwrotność, <strong>konduktywność</strong> - które dla danego materiału opisują, jak duża ilość nośników ładunku jest w stanie przepływać przez materiał, po przyłożeniu do niego pola elektrycznego. </p><p id="9ae0b15d-bec1-4dda-b67e-47bd68dcb08b" class="">Jedną z istotnych wielkości opisujących parametry materiału w obecności pola elektrycznego jest <strong>wytrzymałość elektryczna</strong>. Jest to maksymalna wartość natężenia pola elektrycznego, przy której nie dochodzi do wyładowań w materiale. Wytrzymałość elektryczna wraz z przenikalnością elektryczną mówią, jak dużo energii jest w stanie zgromadzić materiał.</p><p id="9cc6f15d-2162-4365-a540-76dc8a558634" class="">Najważniejszym parametrem materiałowym, który opisuje oddziaływanie pola elektrycznego na materię, jest jednak <strong>przenikalność elektryczna,</strong> która opisuje zdolność dielektryków do gromadzenia energii w polu elektrycznym. Przenikalność elektryczną określa się jako stosunek pojemności kondensatora wypełnianego wybranym dielektrykiem do pojemności tego samego kondensatora <em>wypełnionego</em> próżnią. <strong>Przenikalność zależy od stanu skupienia dielektryka, rodzajów polaryzacji, temperatury i częstotliwości</strong>.</p><p id="299c31fe-1702-4c7f-af7d-ce2b90148822" class="">W przypadku materiałów przewodzących, czyli metali, istnieje multum wolnych nośników ładunku, które przemieszczają się w zależności od działającego pola. W dielektrykach sprawa ma się inaczej. Wszystkie ładunki są złączone z określonymi atomami co sprawia, że mogą się poruszać jedynie na małe odległości, w obrębie atomu lub cząsteczki. Stąd biorą się różne zjawiska polaryzacji. </p><p id="1ee4181d-70fe-4773-b91a-114f9c4ce260" class="">Na <strong>polaryzację</strong> składa się kilka różnych mechanizmów. Pole elektryczne, oddziałując na ładunki związane w atomach i cząstkach powoduje ich przesuwanie. W najmniejszej skali, czyli atomowej, pojawia się <strong>polaryzacja elektronowa</strong>, czyli przesuwanie ładunków dodatnich i ujemnych w atomie. Kolejna jest <strong>polaryzacja jonowa,</strong> która polega na przesuwaniu ujemnych i dodatnich ładunków w polu elektrycznym w obrębie cząstki, co powoduje powstawanie dipoli. Poza tym, działa również <strong>polaryzacja dipolowa,</strong> czyli obracanie się w polu elektrycznym cząstek, które na stałe są dipolami. Ostatnia jest <strong>polaryzacja makroskopowa,</strong> czyli przemieszczanie się wolnych nośników ładunku w dielektryku zgodnie z kierunkiem działania sił pola.</p><p id="d3a4b7b7-f05f-4525-9152-dfb55a6f9c89" class="">Dodatkowo, można wyróżnić <strong>podatność elektryczną.</strong> Jest to niemianowana wielkość, która opisuje, jak materiał jest w stanie gromadzić energię poprzez polaryzację. Jest to wielkość bezpośrednio związana z przenikalnością elektryczną materiału (<style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ε</mi><mo>=</mo><mn>1</mn><mo>+</mo><mi>χ</mi></mrow><annotation encoding="application/x-tex">\varepsilon=1+\chi</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">ε</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathnormal">χ</span></span></span></span></span><span>﻿</span></span>).</p><p id="a1a443db-3907-4671-b66e-9f9a18579360" class=""><strong>Parametry magnetyczne</strong></p><p id="b7dc20c7-3da4-4afa-8e3d-a8343a61a584" class="">Materiały magnetyczne klasyfikuje się na podstawie <strong>podatności magnetycznej</strong>, czyli proporcji magnetyzacji (momentu magnetycznego przypadającego na jednostkę objętości materiału) do przyłożonego pola zewnętrznego. Materiały podatności niższej od zera klasyfikowane są jako diamagnetyki. Materiały, których podatność jest w zakresie od 0 do 1 są nazywane paramagnetykami, natomiast materiały o większej podatności magnetycznej nazywa się ferromagnetykami.</p><p id="c56ea500-e188-40b6-98c0-6d3a6c3d6eea" class="">Podatność paramagnetyków i ferromagnetyków zależy od temperatury. Właściwości magnetyczne wraz z temperaturą są osłabiane, a przy temperaturze zwanej <strong>temperaturą Curie</strong>, ferromagnetyki stają się paramagnetykami. Paramagnetyki natomiast wykazują coraz mniejszą podatność magnetyczną wraz ze wzrostem temperatury.</p><p id="650dfd1f-01b5-4615-bce2-5947b3280b1d" class="">W przypadku pól magnetycznych, podstawowym parametrem opisującym materiał jest <strong>przenikalność magnetyczna</strong>. Opisuje ona, ile energii pola magnetycznego jest w stanie zgromadzić materiał. W przypadku materiałów ferromagnetycznych, przenikalność magnetyczna materiału zmienia się wraz ze wzrostem natężenia pola magnetycznego. Z tej właściwości wynika pętla histerezy materiału.</p><p id="fa1fb9ac-89df-48c2-8466-b6335a4b5b32" class=""><strong>Źródła</strong></p><p id="cc3dd191-c957-4c54-b6eb-40976b5e08d1" class="">[1] Opracowanie do przedmiotu <em>Silne pola elektromagnetyczne w procesach przemysłowych</em></p><p id="fafe317a-1c4e-480c-a4c7-8b841fe5f91d" class="">[2] David J. Griffiths - <em>Introduction to electrodynamics</em></p><p id="27639d80-234e-4d54-8534-22a6aa6d5024" class="">[3] Materiały z wykładu <em>Materiały elektromagnetyczne</em></p></div><h3 id="67199cfb-5501-453b-a7bf-97ab7cd410f2" class=""><details open=""><summary>b) przewodnictwo elektryczne metali czystych i stopów, reguła Matthiessena, prawo Wiedemanna-Franza</summary></details></h3><div class="indented"><p id="ecfebb5f-a025-4d14-a0b0-62d083621df7" class="">Materiałoznawstwo elektrotechniczne: strona 78 - 91</p><p id="e321a9ed-581d-4d16-b866-7c93ae33c992" class=""><strong>Przewodnictwo elektryczne metali czystych</strong></p><p id="881866b1-1554-417d-8e80-2a6d91ee9193" class="">Zgodnie z <strong>elektronową teorią przewodnictwa</strong>, w metalach znajdują się wolne elektrony, niezwiązane z jonami siatki krystalicznej, które domyślnie poruszają się zgodnie w sposób chaotyczny, z energiami kinetycznymi zależnymi od temperatury - jest to tzw. ruch cieplny. Jony siatki krystalicznej natomiast drgają wokół położeń równowagi. </p><p id="989832ad-be19-43ac-adcb-0424ed3968f6" class="">W momencie przyłożenia pola elektrycznego, swobodne elektrony - nośniki ładunku - zaczynają oprócz ruchów losowych, przemieszczać się powoli, w sposób uporządkowany, w kierunku przeciwnym do linii sił pola elektrycznego. Ten powolny ruch elektronów w określonym kierunku nazywa się <strong>dryfem</strong>. Prędkość dryfu nazywa się <strong>prędkością unoszenia,</strong> natomiast proporcja prędkości unoszenia a natężeniem pola elektrycznego jest nazywana <strong>ruchliwością elektronów</strong>. </p><p id="9dd7b320-8c5e-4714-be78-cb8d19240b44" class="">Rezystancja (lub konduktywność) materiału jest w tej teorii rozumiana jako ilość zderzeń elektronów z jonami siatki krystalicznej. Im wyższa temperatura, tym wyższe ruchy cieplne i większe drgania siatki, stąd większe prawdopodobieństwo zderzenia - ruchliwość elektronów maleje, prędkość unoszenia się zmniejsza. Stąd definiuje się <strong>temperaturowy współczynnik rezystancji.</strong></p><p id="7eb06436-2bd5-47fa-b154-f88523291558" class="">Innymi teoriami, którymi można wyjaśnić przewodnictwo metali są <strong>teoria kwantowa</strong> oraz <strong>teoria pasmowa</strong>. </p><p id="0edb4889-b146-4047-9c80-dc1c082bcc21" class=""><strong>Teoria kwantowa</strong> opiera się na założeniu jamy potencjału - cząstki na zewnątrz metalu mają najwyższy poziom energii, wewnątrz - najniższy. Jako, że cząstki dążą do minimum energii, najniższe poziomy energetyczne są wypełnione, natomiast poziom najwyższy - jako pusty - pozwala na przewodnictwo. Poziom ten nazywa się poziomem Fermiego.</p><p id="df21f99b-9122-46dd-b464-b63a772e493b" class="">W <strong>teorii pasmowej</strong>, metale traktuje się jako duże atomy. Bliskość wielu atomów sprawia, że ich poziomy energetyczne (patrz: model atomu Bohra) są zbliżone, ale nie nakładają się na siebie - co można interpretować jako pasma energetyczne. Pasma energetyczne mogą być od siebie oddzielone lub nie. Jeżeli nie są oddzielone (jak w metalach), to materiały są w stanie przewodzić prąd przy minimalnym polu elektrycznym, tj. minimalnej dostarczonej energii - więc są traktowane jako przewodniki.</p><p id="7be87a59-0a67-481f-868f-4637ad760d0b" class=""><strong>Przewodnictwo elektryczne stopów metali</strong></p><p id="bc743204-d60b-4ebb-9e7d-2f629e12e718" class="">Wszelkiego rodzaju defekty sieci krystalicznej, domieszki i zanieczyszczenia powodują zmniejszenie drogi swobodnej elektronów w przewodniku. Oznacza to, że stopy metali oraz wszelkiego rodzaju domieszki zawsze będą posiadać mniejszą przewodność niż metale czyste. Wynika to z faktu, że wszelkie domieszki powodują zakłócenia regularnej budowy siatki krystalicznej, co zwiększa opory ruchu elektronów swobodnych. </p><p id="b4ebf7dd-53f0-42fb-9c3a-2f49517ad396" class="">Spadki konduktywności  mogą być znaczne, przy czym w stopach aluminium są większe niż w stopach miedzi. Ponadto, w stopach jednorodnych (tworzących roztwory stałe) rezystywność jest znacznie większa niż rezystywności metali składowych. Natomiast w stopach niejednorodnych, rezystywność zależy od procentowego udziału dwóch metali. Najwyższej wartości rezystywności można spodziewać się przy stosunku metali w stopie równym 1:1.</p><p id="0e2425f9-4773-408a-98f0-fef912af4437" class=""><strong>Reguła Matthiessena</strong></p><p id="14cf20e7-996b-40b3-a7f4-85ed8113b88e" class="">Reguła Matthiessena opisuje rezystywność materiału jako sumę dwóch składowych: składowej termicznej oraz składowej strukturalnej. </p><p id="eb1f5b58-8e86-469f-8c42-9c44f7985b41" class=""><strong>Składowa termiczna</strong> jest związana z drganiami siatki krystalicznej wywołanymi temperaturą. Składowa ta zanika wraz z dążeniem temperatury do 0 Kelvina. <strong>Składowa strukturalna</strong> dotyczy natomiast rezystywności wynikającej z wszelkich defektów siatki krystalicznej i nawet przy zerze kelwina, jej wartość jest niezerowa.</p><p id="3bf6e5fa-07cc-46e1-a50a-2882f2240473" class="">W praktyce oznacza to, że przy zerze kelwina, rezystywności materiałów nie opadają do 0.  </p><p id="866ba825-997a-467c-a428-527f0559fef2" class=""><strong>Prawo Wiedemanna-Franza</strong></p><p id="c506b305-53f3-4ebd-a9b8-46c2f088c84c" class="">Prawo Wiedemanna-Franza to prawo fizyczne, zgodnie z którym stosunek przewodności cieplnej do przewodności elektrycznej metali jest proporcjonalny do temperatury. Wielkości te wiąże stała Lorenza, zgodnie ze wzorem:</p><figure id="0ae5dbb0-cced-499a-92c3-82186baf8b14" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mfrac><mi>κ</mi><mi>σ</mi></mfrac><mo>=</mo><mi>L</mi><mi>T</mi></mrow><annotation encoding="application/x-tex">\frac{\kappa}{\sigma}=LT</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.7935600000000003em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.10756em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">σ</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">κ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal">L</span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span></span></span></span></span></div></figure><p id="cafcae52-f8a4-4ae1-bb1e-41d70fc906c0" class="">Prawo to zostało wyprowadzone empirycznie jeszcze w XIX wieku. W 2011 i 2016 roku znaleziono materiały, które dowodzą, że prawo Wiedemanna-Franza nie w każdym przypadku obowiązuje - czyli że jego pierwotna forma przestała być aktualna.</p><p id="63c982a3-7eec-404c-8986-5d9c76db696d" class=""><strong>Źródła:</strong></p><p id="565f1916-bd99-4d01-8b22-717a0ed923c2" class="">[1] Zdzisław Celiński - <em>Materiałoznawstwo elektrotechniczne</em></p><p id="71a93983-e52a-4136-b907-e43636d9c5a0" class="">[2] Materiały z wykładu <em>Materiały elektromagnetyczne</em></p><p id="2daf7c6c-5354-48bc-a86b-57407664ddaf" class="">[3] <a href="http://www.ifmpan.poznan.pl/~urbaniak/cwiczenie1b.pdf">http://www.ifmpan.poznan.pl/~urbaniak/cwiczenie1b.pdf</a></p><p id="cbeeb141-8041-4504-8cad-b5a038c22027" class="">[4] <a href="https://en.wikipedia.org/wiki/Wiedemann%E2%80%93Franz_law">https://en.wikipedia.org/wiki/Wiedemann–Franz_law</a></p></div><h3 id="c72078eb-0d84-4ae4-8526-4763154f102f" class="block-color-yellow_background"><details open=""><summary>c) przewodnictwo elektryczne półprzewodników krystalicznych, półprzewodniki samoistne i domieszkowe</summary></details></h3><div class="indented"><p id="a8de0cdc-578d-4ef5-9c19-0eddbea8c5f1" class=""><strong>Przewodnictwo elektryczne półprzewodników krystalicznych</strong></p><p id="01689901-3a20-4664-a99b-b830085a4093" class="">Półprzewodniki to materiały, których przewodność elektryczna jest mniejsza niż przewodność metali, natomiast większa niż przewodność dielektryków. Przy tym, konduktywność półprzewodników silnie zależy od warunków zewnętrznych, takich jak pole elektryczne, temperatura czy promieniowanie. </p><p id="cab51359-4262-46f9-915f-7f43771378c5" class="">Przewodnictwo elektryczne półprzewodników najlepiej wyjaśnia <strong>teoria pasmowa</strong>. Półprzewodnikami są materiały, w których siatce krystalicznej elektrony są silnie związane z atomami, a ich oderwanie wymaga dostarczenia z zewnątrz relatywnie dużej porcji energii, zwanej <strong>energią aktywacji</strong>. Ilość wymaganej energii do aktywacji półprzewodnika jest zależna od <strong>pasma wzbronionego</strong>, czyli pasma energetycznego pomiędzy pasmami przewodnictwa i walencyjnym w pasmowym modelu półprzewodnika. </p><p id="cacc3896-acc7-4638-8baa-24c1aa86f8e6" class=""><strong>Pasmo walencyjne</strong> jest zakresem energii, jaką mają elektrony walencyjne związane z jądrem atomu. <strong>Pasmo przewodnictwa</strong> to zakres energii, którą mają elektrony uwolnione z atomu, będące (po uwolnieniu) nośnikami swobodnymi. </p><figure id="0d995d1a-affe-4bc1-92fc-040239a1ee41" class="image"><a href="8%20Materia%C5%82y%20elektromagnetyczne%204e0387d981524eadb37f077d2ba63c3c/Untitled.png"><img style="width:1272px" src="8%20Materia%C5%82y%20elektromagnetyczne%204e0387d981524eadb37f077d2ba63c3c/Untitled.png"/></a></figure><p id="06deb725-a8c0-4ea3-8659-c194496af4d6" class=""><strong>Półprzewodniki samoistne</strong></p><p id="24cdaf45-3073-4f73-a3fc-f2af62e09747" class="">Półprzewodniki samoistne to materiały, w których same <strong>drgania cieplne elektronów walencyjnych mogą powodować ich wzbudzenie</strong>, czyli przejście do pasma przewodnictwa. Przejście elektronu do pasma przewodnictwa powoduje powstanie <strong>pary elektron-dziura</strong>: elektron przeskakuje do innego pasma energetycznego, natomiast dziura jest de facto ubytkiem w paśmie walencyjnym - czyli, można powiedzieć, ładunkiem dodatnim (brakiem ładunku ujemnego) w tym paśmie. </p><p id="283ca04e-4616-417a-85e6-6ed24f1d9ac5" class="">Proces powstawania par elektron-dziura nazywa się procesem <strong>jonizacji</strong>. Procesem odwrotnym do jonizacji jest proces <strong>rekombinacji</strong>, w którym pary dziura-elektron zostają zneutralizowane wskutek przeskoczenia elektronu do pasma walencyjnego. </p><p id="9d295bdd-3876-498b-9429-58af3295e3f3" class="">Elektrony w pasmie przewodnictwa stanowią niewielką liczbę wszystkich elektronów, co sprawia, że przewodność takiego półprzewodnika jest niewielka, np. w porównaniu do przewodności metali. </p><p id="3bf6ae6c-1250-4377-b2b8-c8516d7c7d77" class="">Dziury zachowują się podobnie do swobodnych ładunków - tu też może odbywać się ruch nośników, tylko w kierunku odwrotnym do kierunku elektronów. Oznacza to, że <strong>prąd płynący przez półprzewodnik jest wypadkowo sumą ruchu ładunków dodatnich i ujemnych</strong>.</p><p id="7b76632f-1d1b-45d3-b41e-1b2575b9bb14" class=""><strong>Półprzewodniki domieszkowe</strong></p><p id="866c0efa-1676-4a48-818f-3fb6db244e61" class="">Półprzewodniki domieszkowe to przewodniki, w których do materiałów bazowych (german, krzem) dodawane są odpowiednio dobrane domieszki. <strong>Zależnie od dobranej domieszki, można uzyskać półprzewodnik typu n lub typu p.</strong> Wprowadzenie atomów domieszkowych sprawia, że w półprzewodniku powstają dodatkowe poziomy energetyczne.</p><figure id="6ed55e90-8d5c-4f6b-b48c-9d3a14deb5c7" class="image"><a href="8%20Materia%C5%82y%20elektromagnetyczne%204e0387d981524eadb37f077d2ba63c3c/Untitled%201.png"><img style="width:1220px" src="8%20Materia%C5%82y%20elektromagnetyczne%204e0387d981524eadb37f077d2ba63c3c/Untitled%201.png"/></a></figure><p id="dae8a5d7-9f57-424f-ac6e-05234c3c323e" class=""><strong>Półprzewodnik typu n (negative) </strong>to taki, w którym domieszka sprawia, że w sieci krystalicznej pojawia się dodatkowy, słabo związany elektron. Taki elektron łatwo przechodzi do pasma przewodnictwa. Ta właściwość sprawia, że w półprzewodnikach typu n, większość nośników ładunku to elektrony, czyli mamy do czynienia z <strong>elektronowym charakterem przewodnictwa elektrycznego</strong> - stąd nazwa. </p><p id="d512ed8b-c08a-4876-8bb5-f40048b8c005" class="">W <strong>półprzewodniku typu p (positive)</strong>, domieszka sprawia, że nad pasmem walencyjnym pojawia się dodatkowe pasmo energetyczne. Przez to, większościowym nośnikiem ładunku stają się dziury elektronowe, więc mamy do czynienia z <strong>przewodnictwem dziurowym.</strong></p><p id="e2afd891-4da3-4acc-938f-44d7fbbd8c3c" class=""><strong>Źródła</strong></p><p id="1cdc2472-d57f-4535-b54a-b8e07631bc45" class="">[1] Zdzisław Celiński - <em>Materiałoznawstwo elektrotechniczne</em></p></div><h3 id="93a3ecf7-0a77-4147-bb8e-db1df7398abf" class=""><details open=""><summary>d) mieszaniny dielektryczne</summary></details></h3><div class="indented"><p id="8debef2b-c83a-4392-883f-b8087a4bc1b8" class="">Mieszaniny dielektryczne to po prostu <strong>połączenie różnych rodzajów dielektryków</strong>. Stosuje się je <strong>w celu uzyskania pożądanej przenikalności elektrycznej</strong>. Wśród mieszanin dielektrycznych można wyróżnić mieszaniny regularne oraz mieszaniny nieregularne.</p><p id="68f4a798-b515-4768-9aeb-8fa85819daf0" class=""><strong>Mieszaniny regularne</strong> to takie, w których występuje regularność geometryczna. W tego typu mieszaninach, wypadkową przenikalność elektryczną można wyznaczyć analitycznie, w funkcji przenikalności i objętości materiałów składowych. Zależnie od ilości składników i ich proporcji, stosuje się różne równania - np. Clausuis’a-Mossottiego, Boetchera czy Rayleigha. </p><p id="090fa97d-586d-4a3f-a863-18f1ff79e5f6" class=""><strong>Mieszaniny nieregularne</strong> to natomiast takie, w których nie ma regularności geometrycznej. Oznacza to, że mogą składać się ze zmieszanych ziaren o różnej wielkości (częściowo uporządkowane), mogą być zawiesinami (jeden składnik jest ośrodkiem dla drugiego) albo zbudowane tak, że ziarna jednego otaczają ziarna drugiego - i odwrotnie (mieszaniny równouprawnione). </p><p id="d5c82d05-404a-4c76-8431-a67f8396029f" class="">W <strong>mieszaninach nieregularnych dwuskładnikowych</strong>, przenikalność elektryczną przedstawia się jako charakterystyki, tzw. <strong>krzywe Wienera</strong>, które są krzywymi granicznymi. Rzeczywista przenikalność mieszaniny zawiera się między tymi krzywymi granicznymi. Dlaczego? Bo pierwsza krzywa graniczna daje przenikalność elektryczną jak w przypadku szeregowego ustawienia materiałów, druga - jak w przypadku równoległego. W mieszaninach nieregularnych, układ materiałów jest gdzieś po środku. <strong>Krzywe Wienera są zależne od kształtu ziaren</strong>. </p><p id="9247bb4a-fe8f-4b6b-a738-690fcaaf3974" class="">Jeżeli <strong>kształt ziaren nie gra roli</strong>, przenikalność mieszanin nieregularnych oblicza się za pomocą zależności podanych przez <strong>Lichtenkera</strong>, które są bardziej uogólnionym przypadkiem zależności Wienera. </p><p id="de3173ad-afb7-4bb1-988d-a34da1929b7d" class="">W przypadku mieszanin dielektrycznych w układach kompozytowych dielektryk-przewodnik, można mówić też o <strong>zjawisku tunelowania</strong>. W tym zjawisku chodzi o to, że ładunki z rozłożonych w dielektryku cząstek przewodzących mają pewne prawdopodobieństwo przeskoku przez barierę dielektryczną. Gdyby nie to, materiał tego typu byłby nieprzewodzący.</p><p id="5dc5cfb4-ec39-4070-84de-717eb3c38ea5" class=""><strong>Źródła:</strong></p><p id="d0b0a346-910e-4a4e-bb31-7f6e35586cb2" class="">[1] Materiały z wykładu <em>Materiały elektromagnetyczne</em></p><p id="9b22c694-279d-4334-8a5d-bf3a6a9c4e93" class=""> </p></div></div></article></body></html>

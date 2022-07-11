@@ -1,0 +1,669 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>7. Ochrona odgromowa i przepięciowa w obiektach budowlanych</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="bafadebf-f50f-4cc8-b062-a8aa1f12de1c" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🌩️</span></div><h1 class="page-title">7. Ochrona odgromowa i przepięciowa w obiektach budowlanych</h1><table class="properties"><tbody><tr class="property-row property-row-select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesSelect"><path d="M7,13 C10.31348,13 13,10.31371 13,7 C13,3.68629 10.31348,1 7,1 C3.68652,1 1,3.68629 1,7 C1,10.31371 3.68652,13 7,13 Z M3.75098,5.32278 C3.64893,5.19142 3.74268,5 3.90869,5 L10.09131,5 C10.25732,5 10.35107,5.19142 10.24902,5.32278 L7.15771,9.29703 C7.07764,9.39998 6.92236,9.39998 6.84229,9.29703 L3.75098,5.32278 Z"></path></svg></span>Status</th><td><span class="selected-value select-value-color-green">Zrobione</span></td></tr><tr class="property-row property-row-person"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesPerson"><path d="M9.625,10.8465 C8.91187,10.2891 8.12088,9.926 7,9.26013 L7,8.71938 C7.21175,8.47612 7.392,8.176 7.53813,7.83213 C7.94587,7.7315 8.3125,7.33425 8.3125,7 C8.3125,6.51788 8.1095,6.32713 7.8715,6.17137 C7.8715,6.15562 7.875,6.14162 7.875,6.125 C7.875,5.41362 7.4375,3.5 5.25,3.5 C3.0625,3.5 2.625,5.4145 2.625,6.125 C2.625,6.14162 2.6285,6.15562 2.6285,6.17137 C2.3905,6.32713 2.1875,6.51788 2.1875,7 C2.1875,7.33425 2.55413,7.7315 2.96187,7.833 C3.108,8.176 3.28825,8.47612 3.5,8.71938 L3.5,9.26013 C2.37912,9.92513 1.58812,10.2882 0.875,10.8465 C0.041125,11.4984 0,12.4688 0,14 L10.5,14 C10.5,12.4688 10.4589,11.4984 9.625,10.8465 Z M13.125,7.3465 C12.4119,6.78912 11.6209,6.426 10.5,5.76013 L10.5,5.21938 C10.7118,4.97613 10.892,4.676 11.0381,4.33213 C11.4459,4.2315 11.8125,3.83425 11.8125,3.5 C11.8125,3.01787 11.6095,2.82713 11.3715,2.67138 C11.3715,2.65562 11.375,2.64162 11.375,2.625 C11.375,1.91363 10.9375,0 8.75,0 C6.5625,0 6.125,1.9145 6.125,2.625 C6.125,2.64162 6.1285,2.65562 6.1285,2.67138 C6.11188,2.68275 6.09787,2.69588 6.08125,2.70725 C7.83212,3.066 8.59688,4.54825 8.72813,5.74787 C8.97575,6.00863 9.1875,6.39625 9.1875,7 C9.1875,7.60288 8.771,8.20312 8.18388,8.51462 C8.127,8.624 8.06662,8.729 8.00275,8.82962 C8.155,8.91537 8.30025,8.99675 8.44025,9.07463 C9.08075,9.4325 9.63375,9.74137 10.164,10.1561 C10.3022,10.2638 10.4204,10.3801 10.5289,10.4991 L14,10.4991 C14,8.96875 13.9589,7.99837 13.125,7.3465 Z"></path></svg></span>Assign</th><td></td></tr></tbody></table></header><div class="page-body"><h3 id="358ff37e-76a0-4a78-9140-e4554cb8ccfb" class=""><details open=""><summary>a) parametry piorunów chmura-ziemia</summary></details></h3><div class="indented"><p id="2b8532d2-6174-4dd7-a6e0-7c714b5790ff" class="">Podstawowymi parametrami, charakteryzującymi prąd piorunowy wyładowania doziemnego są:</p><ul id="f5d36106-5872-464f-aba5-eb8a426fff04" class="bulleted-list"><li style="list-style-type:disc"><strong>wartość szczytowa udarów prądowych I [kA]</strong> - decyduje o zagrożeniu przepięciami przewodzonymi i siłami dynamicznymi. Im większa wartość szczytowa, tym bardziej destrukcyjne wyładowanie.</li></ul><ul id="ac40589c-ab60-431a-a16b-5fc758e4dfa3" class="bulleted-list"><li style="list-style-type:disc"><strong>stromość narastania czoła prądu piorunu </strong><em><strong>S = di/dt </strong></em><strong>[kA/s] </strong>- wpływa na zagrożenia powodowane przepięciami indukowanymi - przy dużej stromości narastania udaru, w pobliskich obiektach przewodzących może dochodzić do indukowania napięć o bardzo dużych wartościach</li></ul><ul id="49484db7-ab99-4276-8c08-968ac8fb601e" class="bulleted-list"><li style="list-style-type:disc"><strong>ładunek przenoszony prądem wyładowania </strong><strong><em>Q</em></strong><strong> [As]</strong> - decyduje o wpływie działań termicznych na wejściu do elementów przewodzących - czyli im większy ładunek, tym bardziej taki “styk” piorun-instalacja się topi. </li></ul><ul id="bdc34c87-cc45-4a89-b118-6d47c2b6f014" class="bulleted-list"><li style="list-style-type:disc"><strong>energia właściwa </strong><em><strong>W/R </strong></em><strong>[J/Ohm]</strong> - energia wydzielona przez prąd piorunowy na rezystorze o jednostkowej rezystancji. Im wyższa energia właściwa, tym mocniej nagrzewają się przewody przez które płynie prąd oraz tym silniej na siebie oddziaływują.</li></ul><ul id="ecfab7c2-d8d5-4b0e-a601-423810b09e41" class="bulleted-list"><li style="list-style-type:disc"><strong>czas narastania czoła T1 - </strong>czas, w którym udar piorunowy wciąż narasta do wartości maksymalnej </li></ul><ul id="d15f07d1-2819-4da7-b718-a890cd3bd0f3" class="bulleted-list"><li style="list-style-type:disc"><strong>czas trwania do połowy wartości szczytowej na grzbiecie fali prądu piorunowego T2 </strong>- czas, po którym fala udarowa opada do połowy swojej wartości szczytowej.</li></ul><figure id="6c34d280-28f0-47e0-8fef-e5358523ef01" class="image"><a href="7%20Ochrona%20odgromowa%20i%20przepie%CC%A8ciowa%20w%20obiektach%20bu%20bafadebff50f4cc8b062a8aa1f12de1c/Untitled.png"><img style="width:1060px" src="7%20Ochrona%20odgromowa%20i%20przepie%CC%A8ciowa%20w%20obiektach%20bu%20bafadebff50f4cc8b062a8aa1f12de1c/Untitled.png"/></a></figure><p id="0796ef7a-04b6-454c-b6c0-77faf052dacc" class=""><strong>Źródła:</strong></p><p id="5fc62c9c-74da-4883-a146-5424a0f2803b" class="">[1] Materiały z wykładu <em>Ochrona odgromowa i przepięciowa w obiektach budowlanych</em></p><p id="aeffa86d-b2bb-49e2-b5ec-baf4a6c08f16" class="">[2] <a href="http://zwnike.iem.pw.edu.pl/zajecia/wtwn/7-8_TWN.pdf">http://zwnike.iem.pw.edu.pl/zajecia/wtwn/7-8_TWN.pdf</a></p></div><h3 id="0c93fc5b-da63-4679-add2-186158516adf" class="block-color-yellow_background"><details open=""><summary>b) koordynacja izolacji</summary></details></h3><div class="indented"><p id="1b4c8a79-5a93-46af-b94f-1b9f8bf0d9b5" class=""><strong>Koordynacja izolacji</strong> to <strong>zbiór działań, których celem jest dobór izolacji urządzeń elektrycznych oraz stosowanych środków ochrony przeciwprzepięciowej</strong>.</p><p id="0ae622c8-d933-4e78-a1c0-0bb44a34ca5e" class=""><strong>Izolacja</strong> powinna być <strong>zwymiarowana w taki sposób, żeby nie dochodziło do jej przebicia</strong>, a w przypadku jego wystąpienia - dotyczyło to tylko tych części izolacji równoległej, których przebicie nie powoduje trwałych uszkodzeń - np. izolacji powietrznej. </p><p id="a8c929ca-ea99-4d84-9acd-7bbf8df22aee" class="">Izolacja i zabezpieczenia powinny także <strong>maksymalnie ograniczać zakłócenia ruchowe</strong> - czyli zakłócenia w pracy urządzeń. </p><p id="5427a32c-8b4a-4a69-8efd-50a28b79b273" class="">W praktyce, koordynacja izolacji to <strong>stopniowanie wytrzymałości elektrycznej izolacji</strong> oraz <strong>stosowanie ograniczników przepięć</strong>, obniżających największe wartości przepięć do wartości mniejszych niż założony <strong>poziom ochrony</strong>. </p><p id="53f0ce1c-5837-4a91-b6d9-d1b3cf0fdd87" class=""><strong>Poziom ochrony</strong> jest poziomem napięcia, do którego ograniczone są przepięcia za pomocą środków ochrony przeciwprzepięciowej. Poziom ten określa się zależnie od rodzaju i warunków pracy układu.</p><p id="4c3cff5f-1272-46bb-b019-554b3dc9305e" class="">Żeby zdefiniować poziom ochrony, definiuje się też <strong>poziom podstawowy </strong>napięcia, czyli wytrzymałość elektryczną najsłabszych części izolacji, których przebicie nie pociąga za sobą większych strat - np. izolacja powietrzna. Izolacja stała czy ciekła mają wyższy poziom wytrzymałości - a więc <strong>wyższy poziom izolacji</strong><em><strong><strong> </strong></strong></em><em>- </em>i można tu mówić o wewnętrznej koordynacji izolacji.</p><p id="258b138d-b40a-413d-823d-29fcfa461e7b" class="">W koordynacji izolacji, <strong>marginesy bezpieczeństwa</strong> - czyli różnicę napięć wytrzymywanych (probierczych - łączeniowych lub piorunowych) i szczytowych wartości przepięć -  dobiera się dla określonych urządzeń w sposób arbitralny, bazując na kosztach urządzenia itp.</p><p id="51011758-927f-4980-8792-52900d26e18b" class=""><strong>Napięcia wytrzymywane (probiercze)</strong> mają unormowane wartości, o określonej stromości narastania, czasu do półszczytu, kształcie itp. </p><p id="d9281ba1-6fdc-4f37-abbb-5706774858c5" class="">Wśród <strong>metod koordynacji izolacji</strong> można wymienić:</p><ul id="28831bd6-88d0-42df-974a-1c2982304c2b" class="bulleted-list"><li style="list-style-type:disc"><strong>Metodę deterministyczną</strong>: sprowadza się do marginesu koordynacyjnego, czyli różnicy między poziomem podstawowym izolacji a poziomiem ochronym. Margines określany jest przez współczynnik ochrony, który dobiera się adekwatnie do urządzenia. Postępowanie w tej metodzie sprowadza się do porównania i doboru charakterystyk udarowych (napięciowo-czasowych) chronionej izolacji oraz urządzenia służącego jej ochronie w taki sposób, by się na siebie nie nakładały (jak w zabezpieczeniach instalacji).</li></ul><ul id="31a00f0b-b7e0-4413-aa54-a005b6790803" class="bulleted-list"><li style="list-style-type:disc"><strong>Metody statystyczne: </strong>pełną i uproszczoną. Dotyczą tylko izolacji regenerującej się - czyli powietrznej lub występującej na styku powietrze-dielektryk stały. Przyjmuje się tu obliczenia w oparciu o metodę statystyczną i rozkład prawdopodobieństwa pojawienia się przepięć. </li></ul><p id="e7487eb8-9187-4f32-805b-fef2433f70c7" class=""><strong>Źródła:</strong></p><p id="8395fd34-2438-42b2-b794-f8191297d1c8" class="">[1] Henryk Markiewicz - <em>Urządzenia elektroenergetyczne</em></p><p id="d14f8eb1-58a6-419a-a9e0-13323b13c079" class="">[2] Zdobysław Flisowski - <em>Technika wysokich napięć</em></p></div><h3 id="bf96747c-48a6-4b23-a23f-12eca03a1683" class="block-color-yellow_background"><details open=""><summary>c) urządzenia zewnętrznej i wewnętrznej ochrony odgromowej</summary></details></h3><div class="indented"><p id="92f3015f-3d3b-4306-afa2-b5a1ab9a5238" class="">Po pierwsze, należy zdefiniować dwa terminy:</p><ul id="cfb32216-2317-4684-99c7-88912e181413" class="bulleted-list"><li style="list-style-type:disc"><strong>ochrona zewnętrzna</strong>: zespół środków chroniących obiekt przed bezpośrednim uderzeniem pioruna;</li></ul><ul id="56016a85-992d-439e-b49f-bf61d3d57499" class="bulleted-list"><li style="list-style-type:disc"><strong>ochrona wewnętrzna</strong>: zespół środków chroniących wnętrze obiektu przed skutkami rozpływu prądu pioruna w urządzeniu piorunochronnym.</li></ul><p id="3864c5b5-2225-45c0-b114-1aa11e9ad6b8" class=""><strong>Urządzenia zewnętrznej ochrony odgromowej</strong></p><p id="ee5d6764-19db-42c6-8b92-cdd93267b946" class="">Urządzenia do ochrony zewnętrznej składają się ze zwodów, przewodów odprowadzających, przewodów uziemiających i uziomów. Mogą to być urządzenia naturalne - czyli występujące już w obiekcie - lub sztuczne, czyli instalowane specjalnie w tym celu. W pierwszej kolejności stosuje się na ogół elementy naturalne.</p><p id="18b9248f-7f93-404b-ad21-901462042ab8" class="">Wśród urządzeń ochrony zewnętrznej, można wymienić:</p><ul id="36ddcd52-551a-446c-a272-59a0ec926ce3" class="bulleted-list"><li style="list-style-type:disc"><strong>zwody</strong>: zewnętrzne warstwy metalowe pokrycia dachu i ścian bocznych, a także metalowe dźwigary i wewnętrzne warstwy pokrycia dachu, etc. Stosuje się tu też elementy metalowe wystające nad dach i osłony typu klatkowego (zwody poziome). Urządzenia te mają na celu przechwycenie doziemnego wyładowania atmosferycznego.</li></ul><ul id="307bb8c6-0e53-4b0a-91cd-7f26892d3e6c" class="bulleted-list"><li style="list-style-type:disc"><strong>przewody odprowadzające</strong> - wszelkiego rodzaju stalowe i żelbetowe słupy nośne i pionowe metalowe elementy (pręty zbrojeniowe, rynny, drabinki, etc.). Przewody odprowadzające mają na celu bezpieczne odprowadzenie prądu pioruna.</li></ul><ul id="aa9cedfa-63fd-4184-834b-21ed5ea63b41" class="bulleted-list"><li style="list-style-type:disc"><strong>uziomy</strong> - zbrojone stopy, ławy i płyty fundamentowe oraz rurociągi i różne części metalowe w gruncie, jeżeli nie są izolowane. Uziomy mają na celu rozproszenie prądu pioruna w ziemi. </li></ul><p id="7542ed89-7191-412c-a499-3b3458b1bb2b" class="">Urządzenia ochrony zewnętrznej dobiera się metodą toczącej się kuli, metodą kąta ochronnego lub metodą oczkową. </p><p id="b7d7180e-5418-4360-a99e-5fcec061b1f9" class=""><strong>Urządzenia wewnętrznej ochrony odgromowej</strong></p><p id="5b87b2f4-bffe-40a4-9389-caa1a2623427" class="">Wśród środków wewnętrznej ochrony odgromowej można wymienić ekwipotencjalizację, minimalne odstępy izolacyjne i dodatkowe zabezpieczenia. Mówiąc dokładniej:</p><ul id="8fe2a5fc-b667-4ed9-a5e3-629f488fd06a" class="bulleted-list"><li style="list-style-type:disc"><strong>ekwipotencjalizacja - połączenia eliminujące różnice potencjałów</strong> - należy do najsilniejszych środków ochrony i powinna obejmować przede wszystkim wprowadzane do budynku instalacje metalowe. Ekwipotencjalizację realizuje się za pomocą połączeń bezpośrednich (gdy na elementach instalacji metalowej łączonych z urządzeniem piorunochronnym nie ma normalnie napięcia) lub ogranicznikowych (gdy łączone z urządzeniem piorunochronnym przewody znajdują się pod napięciem). </li></ul><ul id="6b65140e-a84b-473c-a9f4-e65f3fd73496" class="bulleted-list"><li style="list-style-type:disc"><strong>minimalny odstęp izolacyjny</strong> - jeżeli połączenia wyrównawcze nie są dopuszczalne, to w miejscu zbliżenia instalacji metalowej do przewodu urządzenia piorunochronnego musi być zapewniony odstęp zapobiegający powstawaniu iskry. Odstęp nie jest jednak wymagany, gdy konstrukcja obiektu jest stalowa lub żelbetowa lub gdy na drodze iskry nie może znaleźć się człowiek lub materiał palny. </li></ul><ul id="f765efa8-f6aa-480c-a96b-19389ab3a00b" class="bulleted-list"><li style="list-style-type:disc"><strong>dodatkowe zabezpieczenia</strong> - mają na celu zabezpieczenie wyposażenia obiektu (urządzeń sterowniczych, sygnalizacyjnych, komputerów, etc.) przed skutkami spadków napięć oraz napięć indukowanych pod wpływem wyładowań piorunowych. Wśród środków ochrony dodatkowej wymienić można:<ul id="ae091bce-389e-4b2a-9981-8e7a4368fd98" class="bulleted-list"><li style="list-style-type:circle">ekrany</li></ul><ul id="f5ff35b8-5217-42d4-860c-2cc9299abfd1" class="bulleted-list"><li style="list-style-type:circle">elektromagnetyczne rozdzielanie obwodów</li></ul><ul id="297cd79e-3865-4352-baad-4c64b5ad6791" class="bulleted-list"><li style="list-style-type:circle">ograniczniki jedno- i wielostopniowe.</li></ul></li></ul><p id="758827cf-8a8c-488c-8888-b6dea697b254" class="">Wśród ograniczników przepięć można wymienić:</p><ul id="daa2faa3-e9bd-4025-9a15-c88aa0730fb7" class="bulleted-list"><li style="list-style-type:disc"><strong>iskierniki </strong>- najprostsze ograniczniki, składające się z dwóch elektrod rozdzielonych dielektrykiem gazowym - czyli powietrzem. Ich działanie następuje w przypadku wystąpienia przepięć większych niż wytrzymałość przerwy powietrznej iskiernika, co powoduje zwarcie obwodu z ziemią i spadek napięcia do zera. Wadą iskierników jest to, że po zadziałaniu płynie prąd następczy wywołany napięciem roboczym, który trzeba przerwać np. odpowiednim wyłącznikiem. </li></ul><ul id="cb8be407-bc10-429c-be4b-9e023538af1d" class="bulleted-list"><li style="list-style-type:disc"><strong>odgromniki wydmuchowe </strong>- ich podstawowym elementem jest iskiernik umieszczony w rurze z materiału gazującego. Materiał gazowy pełni funkcję szybkiego wyłącznika przerywającego prąd następczy płynący po zadziałaniu odgromnika. Gaszenie łuku następuje wskutek wydmuchu gazów wydzielających się pod wpływem łuku ze ścianek rury osłaniającej iskiernik. Strumień gazów chłodzi łuk i kolumnę połukową, co powoduje zgaszenie go. </li></ul><ul id="6c50193a-f075-413e-8ba8-062a8667b757" class="bulleted-list"><li style="list-style-type:disc"><strong>zaworowe ograniczniki przepięć</strong> - są zbudowane z iskierników oraz rezystorów o nieliniowej charakterystyce, mających małą rezystancję dla dużych prądów i dużą rezystancję dla niewielkich prądów. W przypadku przepięć powodujących zadziałanie iskiernika, występuje przepływ prądu wyładowczego o znacznej wartości - spadek napięcia na ograniczniku jest niewielki, więc napięcie łuku jest niewielkie. Ten spadek napięcia na rezystancji nosi nazwę <strong>napięcia obniżonego</strong>. Przy napięciu roboczym, rezystancja ograniczników powinna mieć odpowiednio wysoki poziom, by ograniczyć prąd następczy do wartości, przy której może zostać przerwany przez iskiernik.</li></ul><ul id="ba68371a-6706-4984-bd5b-a5ea2ca40a94" class="bulleted-list"><li style="list-style-type:disc"><strong>warystorowe ograniczniki przepięć</strong> - stosuje się w nich bloki warystorowe w hermetycznej obudowie. Takie ograniczniki przyłącza się na stałe między przewód roboczy a ziemię. Charakterystyka warystorów sprawia, że przy napięciach roboczych mają one bardzo dużą rezystancję - więc mały prąd, rzędu 1 mA - natomiast przy przepięciach, spada ona niemal do zera co powoduje odprowadzenie prądu wyładowczego o znacznej wartości do ziemi. Po krótkim czasie warystor odzyskuje swoją pierwotną rezystancję - więc prąd następczy praktycznie nie występuje. </li></ul><p id="2b3ee796-ba7b-4a6d-9c33-94167368e968" class=""><strong>Źródła</strong></p><p id="e5f807eb-5c2c-41d5-8200-74281f71ab2f" class="">[1] Henryk Markiewicz - <em>Urządzenia elektroenergetyczne</em></p><p id="2206cb3e-5e4e-4541-bcd4-c743cdf62bec" class="">[2] Zdobysław Flisowski - <em>Technika wysokich napięć</em></p><p id="5e71a5b6-b29a-43ee-8e94-67fb6da8c4e5" class="">[3] Materiały z wykładu <em>Ochrona odgromowa i przepięciowa w obiektach budowlanych</em></p></div><h3 id="cbfd1908-1c55-4d91-ab47-16a60e2ce94f" class=""><details open=""><summary>d) ochrona przepięciowa instalacji elektrycznej budynków</summary></details></h3><div class="indented"><p id="d6fe909d-7ceb-4377-b2cc-cedd1e88cdc4" class="">W instalacjach elektrycznych można wyróżnić przepięcia powodowane:</p><ul id="e9ca7957-5eda-49ab-b636-f4270ac16713" class="bulleted-list"><li style="list-style-type:disc">czynnościami łączeniowymi (przepięcia wewnętrzne)</li></ul><ul id="3671415e-c3bb-40ef-96d6-52b556f587fa" class="bulleted-list"><li style="list-style-type:disc">wyładowaniami atmosferycznymi (przepięcia zewnętrzne)</li></ul><ul id="c8e18715-9a01-4070-abf1-c33f8f1b86b4" class="bulleted-list"><li style="list-style-type:disc">elektrycznością statyczną.</li></ul><p id="51204614-8852-431e-8b24-884995c25cf3" class=""><strong>Przepięcia wewnętrzne</strong></p><p id="66419625-f67f-4c04-801c-a301c2aa1a1b" class="">Przepięcia wewnętrzne mogą występować w sieciach uszkodzonych i nieuszkodzonych. Wywoływane są m.in. przez załączenia niektórych odbiorników (kondensatory, transformatory, etc.), wyłączanie zwarć czy brak urządzeń regulacyjnych nadążających za zmianami obciążenia. Przepięcia łączeniowe mogą mieć wartości kilkukrotnie większe niż amplitudy napięć znamionowych urządzeń. Mogą więc prowadzić do uszkodzenia wrażliwych odbiorników.</p><p id="1e4cc451-011e-44f6-95d0-9868fe521394" class="">Ochrona przed przepięciami wewnętrznymi oznacza w instalacjach <strong>stosowanie układów RC</strong>, <strong>diod Zenera</strong> oraz <strong>ograniczników przepięć z elementami warystorowymi</strong>. Układy RC i diody Zenera stosuje się przede wszystkim w urządzeniach o niewielkich mocach. Natomiast ograniczniki z elementami warystorowymi, jako zapewniające skuteczną ochronę przy prostej budowie, stosowane są w instalacjach powszechnie, zwłaszcza tam, gdzie instalowane są odbiorniki indukcyjne (maszyny elektryczne).</p><p id="3f7239b6-b021-44fa-bd8b-f0a0f71c64b7" class=""><strong>Przepięcia zewnętrzne</strong></p><p id="e88c9a9e-6ef1-4304-bda9-bdcbba7f5c6d" class="">Przepięcia zewnętrzne spowodowane są wyładowaniami atmosferycznymi i charakteryzują się bardzo dużymi wartościami prądów szczytowych, dużą stromością narastania i krótkim czasem trwania. Mogą prowadzić m.in. do indukowania się w pobliskich liniach napięć o dużych wartościach, co też stwarza ryzyko uszkodzenia urządzeń. </p><p id="658e8844-2fa6-4ae4-9335-f29e6710566c" class="">Ochronę przed skutkami przepięć atmosferycznych w sieciach niskiego napięcia realizuje się za pomocą <strong>iskiernikowych ograniczników przepięć</strong>, zwanych dawniej odgromnikami. Najpowszechniej stosuje się tu <strong>ograniczniki przepięć zbudowane z iskierników i warystorów</strong>. Oferują one wysoką rezystancję dla małych prądów i wysoką dla dużych, co pozwala na samoczynne ograniczanie prądów następczych wyładowań w iskierniku. </p><p id="63182537-4fa3-4ab3-b974-4bb5620bc423" class=""><strong>Elektryczność statyczna</strong></p><p id="e11e61b2-a80c-4c4f-9d62-5670f24b7f82" class="">Natomiast elektryczność statyczna jest związana stricte z tryboelektryzacją i faktyczne zagrożenia sprawia przede wszystkim w procesach przemysłowych. W celu niwelowania skutków elektryczności statycznej stosuje się neutralizatory. </p><p id="2a3eab2b-ab29-4668-b774-8318a5ae0fdd" class=""><strong>Projektowanie instalacji z uwzględnieniem ochrony przepięciowej</strong></p><p id="e29396d5-0e82-4e45-a45c-f9fdc1c8d891" class="">W normach wyróżnia się cztery typy urządzeń elektrycznych ze względu na kategorie przepięć. W praktyce, spełnienie wymagania norm oznacza zastosowanie w różnych miejscach instalacji ograniczników przepięć o różnych parametrach i właściwościach, które ograniczają przepięcia do wartości granicznych dopuszczalnych w określonych kategoriach instalacji. </p><p id="3bed8337-1a71-4dff-9f3e-a4b700a2eb75" class="">Same ograniczniki przepięć można wyróżnić na klasy ze względu na docelowe zastosowania - np. klasa A to ochrona odgromowa linii napowietrznych niskiego napięcia, a klasa C - ochrona przepięciowa instalacji urządzeń elektrycznych w III kategorii przepięciowej. </p><figure id="e4fe174d-c5bc-4dd8-b25b-e7b261bd2b16" class="image"><a href="7%20Ochrona%20odgromowa%20i%20przepie%CC%A8ciowa%20w%20obiektach%20bu%20bafadebff50f4cc8b062a8aa1f12de1c/Untitled%201.png"><img style="width:749px" src="7%20Ochrona%20odgromowa%20i%20przepie%CC%A8ciowa%20w%20obiektach%20bu%20bafadebff50f4cc8b062a8aa1f12de1c/Untitled%201.png"/></a></figure><p id="854cc6ce-84ab-4079-81c3-ecf253c380db" class=""><strong>Źródła:</strong></p><p id="6ce37052-6fa7-4d6b-9745-48c5a82b6ec2" class="">[1] Henryk Markiewicz - <em>Instalacje elektryczne</em></p></div></div></article></body></html>

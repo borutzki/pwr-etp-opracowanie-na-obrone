@@ -1,0 +1,669 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>5. Zakłócenia w układach elektroenergetycznych</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="4ff393b4-33c6-4457-b657-e98401ec757c" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">⚠️</span></div><h1 class="page-title">5. Zakłócenia w układach elektroenergetycznych</h1><table class="properties"><tbody><tr class="property-row property-row-select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesSelect"><path d="M7,13 C10.31348,13 13,10.31371 13,7 C13,3.68629 10.31348,1 7,1 C3.68652,1 1,3.68629 1,7 C1,10.31371 3.68652,13 7,13 Z M3.75098,5.32278 C3.64893,5.19142 3.74268,5 3.90869,5 L10.09131,5 C10.25732,5 10.35107,5.19142 10.24902,5.32278 L7.15771,9.29703 C7.07764,9.39998 6.92236,9.39998 6.84229,9.29703 L3.75098,5.32278 Z"></path></svg></span>Status</th><td><span class="selected-value select-value-color-green">Zrobione</span></td></tr><tr class="property-row property-row-person"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesPerson"><path d="M9.625,10.8465 C8.91187,10.2891 8.12088,9.926 7,9.26013 L7,8.71938 C7.21175,8.47612 7.392,8.176 7.53813,7.83213 C7.94587,7.7315 8.3125,7.33425 8.3125,7 C8.3125,6.51788 8.1095,6.32713 7.8715,6.17137 C7.8715,6.15562 7.875,6.14162 7.875,6.125 C7.875,5.41362 7.4375,3.5 5.25,3.5 C3.0625,3.5 2.625,5.4145 2.625,6.125 C2.625,6.14162 2.6285,6.15562 2.6285,6.17137 C2.3905,6.32713 2.1875,6.51788 2.1875,7 C2.1875,7.33425 2.55413,7.7315 2.96187,7.833 C3.108,8.176 3.28825,8.47612 3.5,8.71938 L3.5,9.26013 C2.37912,9.92513 1.58812,10.2882 0.875,10.8465 C0.041125,11.4984 0,12.4688 0,14 L10.5,14 C10.5,12.4688 10.4589,11.4984 9.625,10.8465 Z M13.125,7.3465 C12.4119,6.78912 11.6209,6.426 10.5,5.76013 L10.5,5.21938 C10.7118,4.97613 10.892,4.676 11.0381,4.33213 C11.4459,4.2315 11.8125,3.83425 11.8125,3.5 C11.8125,3.01787 11.6095,2.82713 11.3715,2.67138 C11.3715,2.65562 11.375,2.64162 11.375,2.625 C11.375,1.91363 10.9375,0 8.75,0 C6.5625,0 6.125,1.9145 6.125,2.625 C6.125,2.64162 6.1285,2.65562 6.1285,2.67138 C6.11188,2.68275 6.09787,2.69588 6.08125,2.70725 C7.83212,3.066 8.59688,4.54825 8.72813,5.74787 C8.97575,6.00863 9.1875,6.39625 9.1875,7 C9.1875,7.60288 8.771,8.20312 8.18388,8.51462 C8.127,8.624 8.06662,8.729 8.00275,8.82962 C8.155,8.91537 8.30025,8.99675 8.44025,9.07463 C9.08075,9.4325 9.63375,9.74137 10.164,10.1561 C10.3022,10.2638 10.4204,10.3801 10.5289,10.4991 L14,10.4991 C14,8.96875 13.9589,7.99837 13.125,7.3465 Z"></path></svg></span>Assign</th><td></td></tr></tbody></table></header><div class="page-body"><h3 id="2749f161-e134-4126-86b9-022fe5f78907" class=""><details open=""><summary>a) identyfikacja zwarć w systemie el. en. – algorytmy detekcji, klasyfikacji oraz określania kierunku zwarcia</summary></details></h3><div class="indented"><h3 id="cb9fde65-865b-4515-beea-9399fda9ca65" class=""><strong>Detekcja zwarć (</strong><em><strong><strong>fault detection)</strong></strong></em></h3><p id="eda0e74f-a068-48dd-9a7c-73ff80401018" class="">Detekcja zwarć jest potrzebna w celu umożliwienia zadziałania urządzeń zabezpieczających. Zasadniczym <strong>celem detekcji zwarcia jest wyodrębnienie przebiegu na interwały przed-zwarciowy i zwarciowy</strong> (tzw. fault interval). </p><p id="4dbe3e70-6d84-41b3-ad20-b200ff317436" class="">W celu detekcji zwarć mierzy się różne wartości elektryczne, zależnie od użytej automatyki. Przykładami są amplitudy prądów fazowych, napięcia fazowe, impedancje fazowe czy prądy kolejności zerowej. Często operuje się też na pochodnych tych sygnałów. </p><p id="e1a957fc-5c30-44a5-a6b9-fbcb820fa694" class="">Można wyróżnić dwa główne algorytmy detekcji zwarć:</p><ul id="535f9a66-ed91-4472-a755-e25bd8c4db72" class="bulleted-list"><li style="list-style-type:disc"><strong>algorytm próbka-po-próbce</strong>: porównuje się dwie kolejne próbki ze sobą. Jeżeli różnica między nimi jest zbyt duża (powyżej ustalonego progu), aktywowany jest licznik. Jeżeli różnice kolejnych próbek wciąż są duże, licznik się przepełnia i aktywowane jest urządzenie zabezpieczające. </li></ul><ul id="5e13223f-e234-4c31-a709-23deedb72251" class="bulleted-list"><li style="list-style-type:disc"><strong>algorytm okres-po-okresie:</strong> porównuje się ze sobą aktualną próbkę i jej odpowiednik w poprzednim okresie (próbkę przesuniętą w czasie o 20 ms w przypadku sieci 50 Hz). Jeżeli różnica między tymi próbkami jest większa niż zakładane maksimum, to - podobnie jak wcześniej - aktywowany jest licznik i jeżeli kolejne różnice są również zbyt duże, licznik się przepełnia i aktywowane jest urządzenie zabezpieczające.</li></ul><figure id="4553a781-0b6d-4203-9809-5081ed0771d3" class="image"><a href="5%20Zak%C5%82o%CC%81cenia%20w%20uk%C5%82adach%20elektroenergetycznych%204ff393b433c64457b657e98401ec757c/Untitled.png"><img style="width:1184px" src="5%20Zak%C5%82o%CC%81cenia%20w%20uk%C5%82adach%20elektroenergetycznych%204ff393b433c64457b657e98401ec757c/Untitled.png"/></a></figure><p id="11a5e255-71bc-4d71-8b78-9849657543bf" class="">Wartości progowe można określić np. na podstawie typowego przebiegu, gdzie największe różnice między próbkami zachodzą w pobliżu zera prądu czy napięcia, a najmniejsze - w szczytowych momentach sinusoidy. </p><figure id="1246a7e8-17c3-408e-a952-75baec2f5e49" class="image"><a href="5%20Zak%C5%82o%CC%81cenia%20w%20uk%C5%82adach%20elektroenergetycznych%204ff393b433c64457b657e98401ec757c/Untitled%201.png"><img style="width:602px" src="5%20Zak%C5%82o%CC%81cenia%20w%20uk%C5%82adach%20elektroenergetycznych%204ff393b433c64457b657e98401ec757c/Untitled%201.png"/></a></figure><p id="cf8ffb72-735b-45f5-9e1f-9dc623e75373" class="">W każdym razie, ustawia się pewien próg, nazywany wartością progową, którego przekroczenie powoduje aktywację automatyki zabezpieczającej. Próg ten jest jakąś krotnością wybranej wartości, np. 1,2 spodziewanego prądu - ale wartość jest różna zależnie od sytuacji stosowania zabezpieczenia. Dotyczy to obydwu algorytmów.</p><figure id="abb2586e-e510-49c9-9fe9-292ef7c550e1" class="image"><a href="5%20Zak%C5%82o%CC%81cenia%20w%20uk%C5%82adach%20elektroenergetycznych%204ff393b433c64457b657e98401ec757c/Untitled%202.png"><img style="width:972px" src="5%20Zak%C5%82o%CC%81cenia%20w%20uk%C5%82adach%20elektroenergetycznych%204ff393b433c64457b657e98401ec757c/Untitled%202.png"/></a></figure><figure id="7b84cb0f-9332-4a64-8a93-21c722a7fec7" class="image"><a href="5%20Zak%C5%82o%CC%81cenia%20w%20uk%C5%82adach%20elektroenergetycznych%204ff393b433c64457b657e98401ec757c/Untitled%203.png"><img style="width:1071px" src="5%20Zak%C5%82o%CC%81cenia%20w%20uk%C5%82adach%20elektroenergetycznych%204ff393b433c64457b657e98401ec757c/Untitled%203.png"/></a></figure><h3 id="6b0ae20c-0db5-405a-9084-ce84af55ffb0" class=""><strong>Określenie kierunków zwarć (</strong><strong><em>fault direction discrimination)</em></strong></h3><p id="c45c7397-13fa-4971-9b55-3cbb26565bdc" class=""><strong>Określenie kierunku zwarcia to obliczenie mające odpowiedzieć na pytanie, w którą stronę przebiega zwarcie</strong>. Informacja ta jest potrzebna, ponieważ urzą<strong>dzenia zabezpieczające zabezpieczają przed różnymi typami zwarć, mianowicie zwarciami do przodu lub do tyłu względem rozpatrywanego punktu</strong> (przykład: urządzenia przeciwzwarciowe odległościowe mogą zabezpieczać np. 85% długości linii przed zwarciami w określonym kierunku, ale jednocześnie nie reagują w ogóle na zwarcia przebiegające w drugą stronę). </p><p id="4471b379-14c5-4525-94a7-bdc8e5ffb093" class="">W celu określenia kierunku zwarcia, <strong>wyznacza się impedancję przyrostową dla składowej zgodnej napięcia i prądu</strong>. Impedancja przyrostowa to po prostu zmiana impedancji po wystąpieniu zwarcia. Liczy się ją z poniższego wzoru:</p><figure id="f3246990-dfb5-41ce-b032-9b81ffad1080" class="image"><a href="5%20Zak%C5%82o%CC%81cenia%20w%20uk%C5%82adach%20elektroenergetycznych%204ff393b433c64457b657e98401ec757c/Untitled%204.png"><img style="width:767px" src="5%20Zak%C5%82o%CC%81cenia%20w%20uk%C5%82adach%20elektroenergetycznych%204ff393b433c64457b657e98401ec757c/Untitled%204.png"/></a></figure><p id="f5a2dda4-ce3a-471b-bbfd-41bab6d1bd8e" class="">A mówiąc bardziej po ludzku, impedancja przyrostowa dla składowej zgodnej to impedancja, w której zamiast tradycyjnego U/I, na górze daje się różnicę między składową zgodną napięcia w trakcie zwarcia i przed zwarciem, a na dole - różnicę między składową zgodną prądu w trakcie zwarcia i przed zwarciem.</p><p id="c77edd07-954c-4e74-9a2f-85b67741a0ae" class="">Jak już mamy przyrost impedancji, to <strong>określenie kierunku zwarcia zależy tylko od położenia impedancji przyrostowej na płaszczyźnie zespolonej</strong>. Jeżeli <strong>impedancja jest w trzeciej ćwiartce, zwarcie jest zwarciem do przodu</strong>. Jeżeli <strong>impedancja jest w pierwszej ćwiartce, zwarcie jest zwarciem do tyłu</strong>. Tak po prawdzie, wystarczy znać znak reaktancji, żeby określić kierunek zwarcia.</p><figure id="92a39afd-23d0-4a2e-9558-78973808c988" class="image"><a href="5%20Zak%C5%82o%CC%81cenia%20w%20uk%C5%82adach%20elektroenergetycznych%204ff393b433c64457b657e98401ec757c/Untitled%205.png"><img style="width:1214px" src="5%20Zak%C5%82o%CC%81cenia%20w%20uk%C5%82adach%20elektroenergetycznych%204ff393b433c64457b657e98401ec757c/Untitled%205.png"/></a></figure><h3 id="fd320e62-ca1a-423e-852b-64c4566317ce" class=""><strong>Klasyfikacja zwarć (</strong><em><strong>phase selection)</strong></em></h3><p id="5b2637e0-7aa7-45be-9f90-f711716c71f8" class=""><strong>Klasyfikacja zwarć to określenie rodzaju zwarcia - które fazy biorą w nim udział</strong> (zwarcie jednofazowe, dwufazowe, trójfazowe) oraz <strong>czy jest to zwarcie z udziałem ziemi,</strong> czy bez. Informacja ta jest potrzebna w celu określenia odpowiedniej pętli zwarciowej.</p><p id="8d9e032a-b91f-44c9-aaf1-e5cc07b22aab" class=""><strong>Według informacji z wykładu, w celu klasyfikacji zwarć wykorzystuje się informacje o amplitudach składowej zgodnej, przeciwnej i zerowej prądu. Na podstawie informacji o tych składowych oblicza się kąty alfa, alfa przyrostowy oraz beta.</strong> Kąt alfa to kąt stosunku składowej przeciwnej do zgodnej (liczby zespolone!), kąt przyrostowy alfa to kąt stosunku składowej zgodnej do przyrostu składowej zgodnej, natomiast kąt beta to kąt stosunku składowej przeciwnej do składowej zerowej). </p><p id="797f7958-4e74-4564-8986-0a2395f792e1" class=""><strong>Ogólnie, bierze się tu pod uwagę stosunek składowej przeciwnej do zgodnej, składowej przeciwnej do składowej zerowej oraz duże zmiany składowej zgodnej przy braku pozostałych składowych.</strong></p><p id="c728d769-b0ef-43ed-8a89-659784d403e2" class="">Z powyższego, klasyfikację zwarć można opisać poniższym algorytmem. Wielkości oznaczone w nawiasach {x} to wielkości opcjonalne w klasyfikacji. Kąty alfa są uwzględniane zawsze, kąt beta tylko przy niesymetrycznych zwarciach z udziałem ziemi</p><figure id="d5ef1b36-fdba-4885-8a01-28ec1e84f273" class="image"><a href="5%20Zak%C5%82o%CC%81cenia%20w%20uk%C5%82adach%20elektroenergetycznych%204ff393b433c64457b657e98401ec757c/Untitled%206.png"><img style="width:859px" src="5%20Zak%C5%82o%CC%81cenia%20w%20uk%C5%82adach%20elektroenergetycznych%204ff393b433c64457b657e98401ec757c/Untitled%206.png"/></a></figure><p id="0dcd0f72-39a5-4419-9590-05b12a9151bf" class="">Opisując to słowami:</p><ol type="1" id="5ecddba2-9eaa-4fee-a5ec-8e3dd47b15bc" class="numbered-list" start="1"><li><strong>Zwarcie trójfazowe symetryczne</strong> to zwarcie w którym następuje <strong>przyrost składowej zgodnej</strong>, natomiast <strong>nie pojawiają się w ogóle składowa zgodna i przeciwna</strong>. </li></ol><ol type="1" id="564cdc39-fc61-4b6d-8b7d-fb77b37310d0" class="numbered-list" start="2"><li><strong>Zwarcia z udziałem ziemi:</strong> w tych zwarciach pojawia się składowa zerowa, więc pojawia się kąt beta. Są tu zwarcia jednofazowe (doziemne) oraz dwufazowe niesymetryczne. </li></ol><ol type="1" id="a13a7741-3c46-4162-af9f-202055eeed92" class="numbered-list" start="3"><li><strong>Zwarcia izolowane: </strong>zwarcia te nie mają składowej zerowej, są bez udziału ziemi. Liczy się tylko kąt alfa, kąt beta nie jest uwzględniany bo składowa zerowa jest równa 0. </li></ol><figure id="8478e42e-ca39-4f11-80d9-3fe38e25c649" class="image"><a href="5%20Zak%C5%82o%CC%81cenia%20w%20uk%C5%82adach%20elektroenergetycznych%204ff393b433c64457b657e98401ec757c/Untitled%207.png"><img style="width:1214px" src="5%20Zak%C5%82o%CC%81cenia%20w%20uk%C5%82adach%20elektroenergetycznych%204ff393b433c64457b657e98401ec757c/Untitled%207.png"/></a></figure><h3 id="62483703-0b28-4f3e-971f-bb6ae0b14755" class="">Najważniejsze punkty</h3><ul id="29c7e29b-cc46-48a2-9845-c2705b6e4589" class="bulleted-list"><li style="list-style-type:disc">detekcja zwarć: algorytm próbka-po-próbce lub okres-po-okresie; chodzi o wykrycie czy w ciągu próbki lub okresu jakaś wartość wyskoczyła ponad wartość graniczną zadziałania zabezpieczenia</li></ul><ul id="1b898c23-b075-448c-acb9-fc254efe0d84" class="bulleted-list"><li style="list-style-type:disc">określanie kierunku zwarcia: obliczenie impedancji przyrostowej (zmiany impedancji) dla składowej zgodnej; na podstawie jej położenia na płaszczyźnie zespolonej określa się kierunek zwarcia</li></ul><ul id="155a425c-7129-483b-88a5-a6c79256e0f8" class="bulleted-list"><li style="list-style-type:disc">klasyfikacja zwarć: oblicza się składowe symetryczne i kąty między nimi, a na tej podstawie można określić typ zwarcia (symetryczne, niesymetryczne jednofazowe/dwufazowe, doziemne, etc.)</li></ul><h3 id="3a5de14c-7d1a-40f8-a149-eb679d329900" class=""><strong>Źródła</strong></h3><p id="c0b0657a-8c35-4cd3-a3e3-fa5c3fa83599" class="">[1] Materiały z wykładu <em>Zakłócenia w układach elektroenergetycznych</em></p><p id="5e98815a-d38a-42e9-8745-3c7598412e0c" class="">[2] Jan Iżykowski - <em>Power System Faults</em></p></div><h3 id="fbb59819-d12a-4b83-a83d-b974f5aedc45" class=""><details open=""><summary>b) obliczanie prądów i napięć podczas zwarć symetrycznych i niesymetrycznych w sieciach wysokiego napięcia z punktem neutralnym uziemionym bezpośrednio</summary></details></h3><div class="indented"><p id="ffe4ab97-5f2b-4025-8f2e-9b90ab3f5127" class=""><strong>Zwarcia symetryczne</strong> to zwarcia w których wektory prądów przewodowych i napięć fazowych są symetryczne - czyli są to zwarcia 3-fazowe. <strong>Zwarcia niesymetryczne</strong> to zwarcia w których fazy obciążone są nierównomiernie - czyli zwarcia 1-fazowe (<strong>doziemne</strong>), 2-fazowe oraz 2-fazowe z ziemią. </p><p id="04daceef-57c0-4858-ab4d-4e56fc88e9f6" class="">Do obliczania prądów i napięć podczas zwarć w sieciach wysokiego napięcia stosuje się <strong>metodę składowych symetrycznych</strong>. Ponadto, praca z bezpośrednio uziemionym punktem neutralnym oznacza, że punkt neutralny N oraz ziemia E są ze sobą elektrycznie połączone. Przekształcenia napięć i prądów fazowych na składowe symetryczne przedstawiono poniżej:</p><figure id="910408f1-2c56-4008-85b9-ff52d6403a7e" class="image"><a href="5%20Zak%C5%82o%CC%81cenia%20w%20uk%C5%82adach%20elektroenergetycznych%204ff393b433c64457b657e98401ec757c/Untitled%208.png"><img style="width:906px" src="5%20Zak%C5%82o%CC%81cenia%20w%20uk%C5%82adach%20elektroenergetycznych%204ff393b433c64457b657e98401ec757c/Untitled%208.png"/></a></figure><p id="384f818f-5fd5-4f58-8526-15e6dfe8c1c5" class="">W obliczeniach przyjmuje się, że zwarcie dotyczy jednego węzła sieci, a w stanie przed zwarciem panują warunki symetrii fazowej napięć i prądów - czyli składowe zgodne są różne od zera, składowe zerowe i przeciwne - równe zeru. </p><p id="a728af01-7501-4b34-9dee-c6f46cb923df" class=""><strong>Zwarcia symetryczne</strong></p><p id="517d22ed-8d0e-4fab-a066-32c7f07f7771" class="">W przypadku zwarć trójfazowych, zakłada się że zwarcie trzech faz nastąpiło przez symetryczną impedancję. Prądy i napięcia składowej zgodnej są niezerowe, pozostałych składowych - równe zeru. </p><figure id="8f94799b-f9a6-4a14-a391-d41def2cad37" class="image"><a href="5%20Zak%C5%82o%CC%81cenia%20w%20uk%C5%82adach%20elektroenergetycznych%204ff393b433c64457b657e98401ec757c/Untitled%209.png"><img style="width:1040px" src="5%20Zak%C5%82o%CC%81cenia%20w%20uk%C5%82adach%20elektroenergetycznych%204ff393b433c64457b657e98401ec757c/Untitled%209.png"/></a></figure><p id="0d4c4c1a-2419-4844-9247-9bf3785da50e" class="">W przypadku zwarcia trójfazowego, można przyjąć że prądy i napięcia w poszczególnych fazach są takie same, co upraszcza obliczenia. Do samych obliczeń stosuje się metodę Thevenina. Rozpatrywany układ przedstawia się jako uproszczony schemat zastępczy, a na to stosuje się zasadę superpozycji - sieć zastępuje się dwiema sieciami zastępczymi, w których jedna jest siecią w normalnym stanie pracy, druga - stanem uzupełniającym. Stan uzupełniający to sieć w której doprowadza się w punkcie zwarcia napięcie o kierunku zgodnym z napięciem przed zwarciem. </p><figure id="358cbac5-7250-4975-a445-008143641a9e" class="image"><a href="5%20Zak%C5%82o%CC%81cenia%20w%20uk%C5%82adach%20elektroenergetycznych%204ff393b433c64457b657e98401ec757c/Untitled%2010.png"><img style="width:1058px" src="5%20Zak%C5%82o%CC%81cenia%20w%20uk%C5%82adach%20elektroenergetycznych%204ff393b433c64457b657e98401ec757c/Untitled%2010.png"/></a></figure><p id="03f76e26-f7a0-45b7-b1ab-cfd006f796bc" class="">Po wykonaniu superpozycji, sieć upraszcza się do jednego elementu zastępczego Thevenina, z którego można policzyć składową zgodną prądu i napięcia  - która jako jedyna występuje podczas tego typu zwarcia. </p><p id="47584141-b676-476f-8aea-6f6abd153939" class=""><strong>Zwarcie jednofazowe</strong></p><p id="bd5960c9-a1da-43fd-8bc6-a77fe5723e76" class="">W przypadku zwarć jednofazowych rozpatruje się jako graficzną interpretację składowych symetrycznych. W takim zwarciu sieci dla składowych zgodnej, przeciwnej i zerowej są ze sobą połączone szeregowo. Suma napięć poszczególnych składowych jest równa zeru, natomiast składowe prądu są sobie równe dla wszystkich składowych. </p><figure id="5736e5c0-a363-4b85-a12f-ec9c0f214cbb" class="image"><a href="5%20Zak%C5%82o%CC%81cenia%20w%20uk%C5%82adach%20elektroenergetycznych%204ff393b433c64457b657e98401ec757c/Untitled%2011.png"><img style="width:1060px" src="5%20Zak%C5%82o%CC%81cenia%20w%20uk%C5%82adach%20elektroenergetycznych%204ff393b433c64457b657e98401ec757c/Untitled%2011.png"/></a></figure><p id="f0ffbfa0-9246-4cb5-a1f6-f279451df851" class="">Ponownie, zwarcie oblicza się stosując metodę Thevenina z zastępczym źródłem i obciążeniem. Analizę prądów i napięć prowadzi się w oparciu o składowe symetryczne. </p><p id="fd2b17a6-fab2-457e-9942-8ecfbb71550e" class="">W przypadku zwarć jednofazowych, pojawienie się zakłócenia w jednej z faz wpływa na inne fazy. </p><p id="adad4a6d-00a7-44b7-8e96-3b77bf47c523" class=""><strong>Zwarcia dwufazowe</strong></p><p id="8eb7c6fb-3190-4c95-b8af-c8252464ba39" class="">W przypadku zwarcia między dwiema fazami bez udziału ziemi, układ rozpatrujemy jako taki, w którym pojawiają się składowa zgodna i przeciwna, ale nie pojawia się składowa zerowa. W rozpatrywanym układzie sieci składowej zgodnej i przeciwnej przedstawia się jako połączone równolegle do siebie poprzez impedancję zwarcia.  </p><figure id="11091272-d854-459f-9fc2-231a5849bddd" class="image"><a href="5%20Zak%C5%82o%CC%81cenia%20w%20uk%C5%82adach%20elektroenergetycznych%204ff393b433c64457b657e98401ec757c/Untitled%2012.png"><img style="width:1054px" src="5%20Zak%C5%82o%CC%81cenia%20w%20uk%C5%82adach%20elektroenergetycznych%204ff393b433c64457b657e98401ec757c/Untitled%2012.png"/></a></figure><p id="a7bfea91-0b52-4a98-96d4-8b8f09069315" class="">Ponownie, do obliczeń stosuje się metodę Thevenina i upraszcza obwód. Prądy i napięcia oblicza się kolejno z praw Ohma i Kirchhoffa dla przyjętych impedancji poszczególnych składowych symetrycznych oraz impedancji zwarcia.</p><figure id="dd0eef4d-de44-47d1-bb38-a84abf99a688" class="image"><a href="5%20Zak%C5%82o%CC%81cenia%20w%20uk%C5%82adach%20elektroenergetycznych%204ff393b433c64457b657e98401ec757c/Untitled%2013.png"><img style="width:1060px" src="5%20Zak%C5%82o%CC%81cenia%20w%20uk%C5%82adach%20elektroenergetycznych%204ff393b433c64457b657e98401ec757c/Untitled%2013.png"/></a></figure><p id="91b4da7a-722f-4c78-ac7c-40bc4ac15040" class=""><strong>Zwarcia dwufazowe z ziemią</strong></p><p id="3d895558-a420-4df0-83f7-124502d6f093" class="">W przypadku zwarcia dwóch faz z ziemią, suma ich prądów płynie do ziemi.  Odpowiada to trzykrotnej wartości składowej zerowej prądu zwarcia. Stąd, w schemacie składowych symetrycznych, łączy się je ze sobą w jednym węźle. W obwodzie składowej zerowej pojawia się natomiast trzykrotność impedancji zwarcia.</p><figure id="b53d390c-9238-4144-8b60-b36f85e86d98" class="image"><a href="5%20Zak%C5%82o%CC%81cenia%20w%20uk%C5%82adach%20elektroenergetycznych%204ff393b433c64457b657e98401ec757c/Untitled%2014.png"><img style="width:1032px" src="5%20Zak%C5%82o%CC%81cenia%20w%20uk%C5%82adach%20elektroenergetycznych%204ff393b433c64457b657e98401ec757c/Untitled%2014.png"/></a></figure><p id="179cc469-1f8a-4f86-acba-6e0a0dbe2bca" class="">W każdym razie, ponownie do obliczenia prądów i napięć zwarciowych stosuje się metodę Thevenina, a potem kolejne wartości prądów, napięć i impedancji oblicza na podstawie praw Kirchhoffa i Ohma. </p><p id="f65ad0db-f2ff-4ce2-a0f8-16ffeae9758e" class=""><strong>Podsumowanie</strong></p><p id="46d0134b-9974-42a6-a509-a4a625ab316f" class="">Ogólnie rzecz ujmując, w przypadku obliczania prądów i napięć podczas zwarć w sieciach wysokiego napięcia z punktem neutralnym bezpośrednio uziemionym, stosuje się w każdym przypadku metodę składowych symetrycznych. </p><p id="f3621682-c129-470c-8ca3-de0de2f4df18" class="">Prądy, napięcia i impedancje dla poszczególnych składowych symetrycznych przedstawia się w postaci schematów zastępczych. Schematy te są ze sobą połączone w różne sposoby, zależnie od rodzaju zwarcia. </p><p id="ba830084-583e-4114-aef2-dcbd2018e4f2" class="">Przyjęte schematy zastępcze oblicza się następnie, korzystając z twierdzenia Thevenina oraz praw Kirchhoffa i Ohma. Otrzymane wartości poszczególnych składowych symetrycznych przekształca się z powrotem do układu trójfazowego. </p><p id="e9a85b33-b6ca-4fd7-bebb-5e648d7322ed" class="">A poniżej garść wzorów dla sportu.</p><figure id="c05a388b-890d-466d-a6ee-36d9120b9701" class="image"><a href="5%20Zak%C5%82o%CC%81cenia%20w%20uk%C5%82adach%20elektroenergetycznych%204ff393b433c64457b657e98401ec757c/Untitled%2015.png"><img style="width:869px" src="5%20Zak%C5%82o%CC%81cenia%20w%20uk%C5%82adach%20elektroenergetycznych%204ff393b433c64457b657e98401ec757c/Untitled%2015.png"/></a></figure><h3 id="5b8daf16-9c2e-46a7-ae31-d1f74e32d7f2" class="">Najważniejsze punkty</h3><ul id="047f7030-6ebf-43ab-b1be-ef92732f0ff2" class="bulleted-list"><li style="list-style-type:disc">obliczanie prądów i napięć zwarć w sieciach WN uziemionych bezpośrednio sprowadza się do analizy składowych symetrycznych i metody Thevenina</li></ul><ul id="5599a126-1fcf-4429-a962-af2fb7dbe6d9" class="bulleted-list"><li style="list-style-type:disc">w pierwszym kroku oblicza się wartości poszczególnych składowych symetrycznych</li></ul><ul id="4c66fe4f-9c4b-4d5f-a6c4-b2bfc2379f8b" class="bulleted-list"><li style="list-style-type:disc">zależnie od rodzaju zwarcia, rysuje się odpowiedni schemat zastępczy dla składowych symetrycznych i upraszcza obwód</li></ul><ul id="a3d240da-d6ca-4464-9685-c1d71b17d682" class="bulleted-list"><li style="list-style-type:disc">schemat zastępczy - prądy i napięcia miejsca zwarcia - liczy się za pomocą metody Thevenina</li></ul><h3 id="58ffcd28-b4a3-498e-b978-5e1da0601d83" class=""><strong>Źródła</strong></h3><p id="60e35149-f0a3-41b0-8d2f-e8961a292597" class="">[1] Kacejko, Machowski - <em>Zwarcia w systemach elektroenergetycznych</em></p></div><h3 id="d38b3d1f-2464-47b2-a2d9-ee4724a22b87" class=""><details open=""><summary>c) zjawiska prądowe i napięciowe towarzyszące zwarciom doziemnym w sieciach rozdzielczych średniego napięcia</summary></details></h3><div class="indented"><p id="cd73aa71-2ee1-47bf-919b-096da370f052" class="">Sieci rozdzielcze średniego napięcia, w przeciwieństwie do sieci WN, są często sieciami z <strong>izolowanym punktem neutralnym</strong> lub z <strong>punktem neutralnym uziemionym przez dławik, rezystor lub obydwa</strong>. Ta sytuacja sprawia, że w przypadku zwarć doziemnych, <strong>składowa zerowa prądu zwarciowego ma małą wartość</strong>. Wskutek tego, w analizie zachodzących zjawisk należy uwzględniać pojemności sieci równoległą do impedancji składowej zerowej.</p><p id="4f6a2071-5d0d-4649-a479-5e755f765148" class="">  </p><figure id="62c37a82-5e58-4de9-8951-7755cdc72dd0" class="image"><a href="5%20Zak%C5%82o%CC%81cenia%20w%20uk%C5%82adach%20elektroenergetycznych%204ff393b433c64457b657e98401ec757c/Untitled%2016.png"><img style="width:771px" src="5%20Zak%C5%82o%CC%81cenia%20w%20uk%C5%82adach%20elektroenergetycznych%204ff393b433c64457b657e98401ec757c/Untitled%2016.png"/></a></figure><figure id="04c57773-211e-4201-bd43-8c3ddaa80879" class="image"><a href="5%20Zak%C5%82o%CC%81cenia%20w%20uk%C5%82adach%20elektroenergetycznych%204ff393b433c64457b657e98401ec757c/Untitled%2017.png"><img style="width:887px" src="5%20Zak%C5%82o%CC%81cenia%20w%20uk%C5%82adach%20elektroenergetycznych%204ff393b433c64457b657e98401ec757c/Untitled%2017.png"/></a></figure><p id="23037b01-3f58-4af4-8fa3-d0d2ed1540fe" class="">Zjawiska prądowe i napięciowe w przypadku zwarć doziemnych zależą od tego, w jaki sposób uziemiony (lub izolowany) jest punkt zerowy układu. Izolowany punkt neutralny i uziemienie przez dławik (kompensację sieci) stosuje się w relatywnie niewielkich sieciach SN. Rezystory stosowane są natomiast w sieciach rozległych </p><p id="c20fa50f-7b7f-4e82-95e5-cae27fc957f3" class="">W każdym przypadku można jednak zakładać, że wskutek wyładowania pojemności fazy zwieranej i doładowania pojemności faz zdrowych, nastąpią duże przepięcia, szybkie oscylacje i zapalenie łuku elektrycznego. </p><p id="c5830c98-67c4-44fe-ae3d-ea0f1765e4a1" class="">Stąd, można wyróżnić trzy przypadki:</p><ol type="1" id="8e821bcb-ba24-479a-9f7a-493acf52cfe6" class="numbered-list" start="1"><li><strong>Izolowany punkt zerowy</strong><p id="fbbf6ccf-43b4-4f6a-8494-3c6f60cfd2dd" class="">W przypadku izolowanego punktu zerowego, impedancja dla składowej zerowej jest bardzo duża. Prąd zwarcia ma zatem charakter pojemnościowy. Prąd zwarciowy największą wartość ma w miejscu zwarcia, a im bliżej do źródła zasilania, tym jest ona niższa - co wynika z rozłożonej pojemności linii. </p><p id="93191268-7b2a-494e-a1d5-2f52f1ea097f" class="">Jeżeli chodzi o napięcia, to napięcie fazy ze zwarciem spada do 0, natomiast napięcia pozostałych faz wzrastają do wartości międzyfazowej. Pojawia się jednak przy tym niebezpieczne zjawisko polegające na wyładowaniu pojemności linii dla faz zdrowych, mających dużą wartość napięcia w czasie zwarcia. Rozładowanie tych pojemności może spowodować duże oscylacje i bardzo silne przepięcia w układzie. Może pojawić się tu też przerywany łuk elektryczny.</p></li></ol><ol type="1" id="e0f4af83-fd29-4ac1-9aef-d392c04716e9" class="numbered-list" start="2"><li><strong>Punkt zerowy uziemiony przez dławik</strong><p id="b975efe0-3d55-4b8f-aaac-10a988fd67e9" class="">W celu kompensacji prądu pojemnościowego, sieć może być uziemiona przez dławik - jest nim np. cewka Petersena lub transformator Baucha albo Reithoffera. W celu takiego uziemienia, muszą być stosowane specjalne transformatory uziemiające. </p><p id="04cec6d1-5a3f-4a24-b95a-00ee416665c8" class="">W idealnym przypadku, kompensacja pojemności przez cewkę prowadzi do osiągnięcia prądu zwarcia równego 0. Składowe symetryczne napięcia w tej sytuacji stają się identyczne jak w przypadku sieci z izolowanym punktem neutralnym. Napięcie uszkodzonej fazy spada do zera, natomiast napięcia faz zdrowych wzrastają do wartości międzyprzewodowej. Prąd zwarciowy jest najmniejszy w miejscu zwarcia, a największy w punkcie gwiazdowym transformatora. </p><p id="e21acc73-952d-4b60-ab20-be4ef9018f49" class="">W przypadku uziemienia cewką powstają warunki do szybszego gaszenia łuku, co sprawia, że napięcia faz wracają do poziomu sprzed wystąpienia zwarcia w relatywnie krótkim czasie. Co ciekawe, sieć uziemiona przez cewkę Petersena może działać przez dłuższy czas w stanie zwarcia.</p><p id="5801c77a-1791-4419-a582-865deee9e891" class="">W praktyce jednak nie istnieje idealna kompensacja (cewka jest dobrana tylko na podstawową harmoniczną), a co więcej - powodowałaby ona największe przepięcia w układzie przy rozładowywaniu pojemności. Cewki Petersena stosuje się wraz ze sterowaniem ich reaktancją. </p></li></ol><ol type="1" id="4c599810-84f9-43b4-b1ba-38efefd33752" class="numbered-list" start="3"><li><strong>Punkt zerowy uziemiony przez rezystor lub rezystor równoległy z dławikiem</strong><p id="329acc79-a2e0-4be7-b103-00d685730815" class="">Stosowanie rezystora to metoda mieszcząca się między siecią z izolowanym punktem pracy a siecią skutecznie uziemioną. Tego typu uziemienia stosuje się po to, żeby w kontrolowany sposób zwiększyć prąd zwarciowy w celu przyspieszenia zadziałania zabezpieczeń - ustala się poziom prądu zwarciowego na od kilkudziesięciu amperów do kilkuset amperów. </p><p id="ab351259-54b0-4160-8f02-f03d96360a9d" class="">Zapewnienie odpowiedniej rezystancji podnóży stacji elektroenergetycznych jest trudne do zapewnienia, więc stosuje się też układ R-L równoległy. Rezystor działa w czasie zwarcia, natomiast cewka w normalnym stanie pracy (kompensuje ona sieć). </p><p id="53cc81ea-cc78-4092-b55c-c296f68881c6" class="">Przełączenie na rezystor można opóźnić - kompensacja zwarcia przez cewkę w początkowej fazie może ułatwić zgaszenie łuku elektrycznego. </p></li></ol><ol type="1" id="05cd22ba-7ec4-4996-b9ad-ecaaed3a9c7b" class="numbered-list" start="4"><li><strong>Punkt zerowy uziemiony bezpośrednio</strong><p id="3d1a6090-0690-40c6-86cd-4a8a855f7942" class="">Ten wariant raczej nie będzie potrzebny do zaliczenia egzaminu, ale można o nim wspomnieć. W przypadku, gdy dojdzie do zwarcia doziemnego w sieci z uziemionym bezpośrednio punktem neutralnym, przepływ prądu zwarciowego przez ziemię i jego transformacja przez transformator na stronę sieci sprawiają, że generator zasilający sieć obciążony jest prądem zwarciowym w dwóch fazach. </p><p id="2d1915e0-e38f-4b00-939b-3aa3697f99e3" class="">Jeżeli punkt zerowy jest uziemiony, to ma on dużą wartość. Ma ona znacznie większe znaczenie niż składowa pojemnościowa prądu. Oczywiście znowu pojawia się zjawisko rozładowania pojemności fazy ze zwarciem i doładowania faz zdrowych, ale fazy zdrowe tym razem nie mają zwiększonej wartości napięcia, więc przebiegi i oscylacje są odpowiednio mniejsze. </p></li></ol><h3 id="de67216e-7275-4bc9-adbb-f2dd7ceeae86" class="">Najważniejsze punkty</h3><ul id="56cd6b70-db00-47aa-8e29-0e41992c2027" class="bulleted-list"><li style="list-style-type:disc">zwarcia doziemne w sieciach SN ze względu na izolowanie punktu neutralnego lub uziemienie przez rezystor lub dławik, uwidaczniają zjawiska związane z pojemnościami linii</li></ul><ul id="071daf16-574a-426e-8196-4190a4156b78" class="bulleted-list"><li style="list-style-type:disc">podczas zwarć doziemnych, można spodziewać się rozładowania pojemności fazy ze zwarciem i doładowania pojemności faz zdrowych i wzrostu napięcia w nich</li></ul><ul id="a5c284d7-1f81-4f33-b2a2-9f70d252917e" class="bulleted-list"><li style="list-style-type:disc">rozładowania i doładowania pojemności prowadzą do dużych przepięć, szybkich oscylacji oraz powstawania łuku elektrycznego</li></ul><ul id="7172275d-265b-427c-9151-322388e57b1e" class="bulleted-list"><li style="list-style-type:disc">uziemienie przez dławik może kompensować sieć, czyli sprowadzać prąd zwarciowy do 0</li></ul><ul id="a944b1f7-a082-46bf-8be0-87132e53e0be" class="bulleted-list"><li style="list-style-type:disc">uziemienie przez rezystor służy do odpowiedniego zwiększenia prądu zwarciowego tak, by zadziałały zabezpieczenia</li></ul><p id="13a8d96a-a970-4aee-8a21-6dc91cf4f9f8" class=""><strong>Źródła</strong></p><p id="4bd04bec-5b37-47b3-8619-63425a4e1dfc" class="">[1] Iżykowski - <em>Power system faults</em></p><p id="1af5048d-7495-4b7f-a291-4fae973cae4b" class="">[2] Kacejko, Machowski - <em>Zwarcia w systemach elektroenergetycznych</em></p></div><h3 id="c780732b-9f8a-494c-b472-6edd13a35a24" class=""><details open=""><summary>d) zapady napięcia i przerwy w zasilaniu - przyczyny, skutki i sposoby ochrony</summary></details></h3><div class="indented"><p id="210ad17f-725a-473c-88f3-509867089855" class="">Z definicji, <strong>zapad napięcia</strong> to <strong>nagłe zmniejszenie się napięcia zasilającego do wartości zawartej w przedziale od 90% do 1% napięcia znamionowego Un, po którym następuje wzrost napięcia do poprzedniej wartości</strong>. Umownie, czas trwania zapadu napięcia wynosi od 10 ms do 1 minuty.</p><p id="0b4a8ce9-c514-4155-aff3-281f62aaaaf3" class=""><strong>Przerwa w zasilaniu</strong> jest natomiast <strong>całkowitym odizolowaniem odbiorcy od źródła zasilania</strong>. Z definicji wyróżnia się krótkie przerwy w zasilaniu (do 1 minuty) oraz długie przerwy w zasilaniu (powyżej 1 minuty). </p><figure id="cccdba1e-6f83-44ed-bf2d-6e63ac209f9d" class="image"><a href="5%20Zak%C5%82o%CC%81cenia%20w%20uk%C5%82adach%20elektroenergetycznych%204ff393b433c64457b657e98401ec757c/Untitled%2018.png"><img style="width:1046px" src="5%20Zak%C5%82o%CC%81cenia%20w%20uk%C5%82adach%20elektroenergetycznych%204ff393b433c64457b657e98401ec757c/Untitled%2018.png"/></a></figure><p id="010fcc41-4320-4b1d-bc0f-ac52612399b9" class=""><strong>Parametry</strong></p><p id="752833c1-eec6-42c7-9e18-978d8d20a235" class="">Zapady napięcia oraz przerwy w zasilaniu charakteryzuje się następującymi wielkościami:</p><ul id="e33624e6-cd86-4966-b59e-aaa832fdedb3" class="bulleted-list"><li style="list-style-type:disc">wartością zapadu napięcia</li></ul><ul id="dd9689c1-c8d2-4653-854b-8e47fe73d2f5" class="bulleted-list"><li style="list-style-type:disc">czasem trwania</li></ul><ul id="b71c0eaf-3611-44a9-9f28-a2622f974310" class="bulleted-list"><li style="list-style-type:disc">głębokością zapadu napięcia</li></ul><ul id="c9961479-9e77-4b2a-a195-1fcb11378af0" class="bulleted-list"><li style="list-style-type:disc">wielkością zapadu napięcia</li></ul><figure id="5a129d40-dcfa-405c-912c-da8454ff9052" class="image"><a href="5%20Zak%C5%82o%CC%81cenia%20w%20uk%C5%82adach%20elektroenergetycznych%204ff393b433c64457b657e98401ec757c/Untitled%2019.png"><img style="width:671px" src="5%20Zak%C5%82o%CC%81cenia%20w%20uk%C5%82adach%20elektroenergetycznych%204ff393b433c64457b657e98401ec757c/Untitled%2019.png"/></a></figure><p id="676a645f-937f-426d-a6e8-e9e69484bf2c" class=""><strong>Przyczyny</strong></p><p id="dd8b7d81-c103-4734-aaa9-b6d2f3128f2a" class="">Wśród przyczyn zapadów napięcia, można wyróżnić przyczyny wewnętrzne i zewnętrzne. </p><p id="83f29e0f-2651-4057-bb1a-9aa7e2d6df44" class=""><strong>Przyczyny zewnętrzne</strong> to przyczyny pojawiające się w systemie elektroenergetycznym i można do nich zaliczyć:</p><ul id="b3f16413-43d9-4369-94b3-e092c1d16d67" class="bulleted-list"><li style="list-style-type:disc">zmiany konfiguracji sieci, prowadzące do wzrostu impedancji źródła (czyli np. zbyt duża impedancja nowej linii, transformatora i spadek napięcia na niej)</li></ul><ul id="9f7e1912-8ab3-4972-82f2-177d4453e5a4" class="bulleted-list"><li style="list-style-type:disc">zwarcia w sieci </li></ul><ul id="8219a697-c70e-4611-a7bc-30b3deb2f6ea" class="bulleted-list"><li style="list-style-type:disc">nieprawidłowa praca regulatora napięcia transformatora</li></ul><p id="23571e3e-ba37-4d25-a8e8-07315c48f24a" class=""><strong>Przyczyny wewnętrzne</strong> to natomiast przyczyny występujące w instalacji odbiorcy. Można wśród nich wymienić:</p><ul id="8ec9756c-cbfb-489b-9339-a80ede4120ed" class="bulleted-list"><li style="list-style-type:disc">Załączanie dużych odbiorników statycznych, np. pieców oporowych</li></ul><ul id="95bf71d6-fb8a-4902-b169-626f302a67c9" class="bulleted-list"><li style="list-style-type:disc">Rozruch bezpośredni dużych silników asynchronicznych</li></ul><ul id="eda6afe3-4ca7-4ffc-9a41-3f8e2dcaf5a5" class="bulleted-list"><li style="list-style-type:disc">Zwarcia w instalacji odbiorcy</li></ul><p id="27392b8f-42a9-4470-af25-6b858a6d1aa4" class="">Na podstawie powyższych, można wymienić trzy podstawowe, zasadnicze przyczyny zapadów:</p><ul id="c48defa3-5cf3-477d-b3f8-33aa8d06de86" class="bulleted-list"><li style="list-style-type:disc"><strong>duże prądy</strong>: powodują one znacznie większy spadek napięcia na impedancjach sieci lub instalacji, więc w miejscu odbiornika napięcie jest niższe</li></ul><ul id="da7366cc-4fba-4b71-a0d9-011beea05ce6" class="bulleted-list"><li style="list-style-type:disc"><strong>impedancje sieci</strong>: jeżeli impedancje między źródłem zasilania a odbiornikiem są duże, napięcie na zaciskach odbiornika jest znacznie obniżone</li></ul><ul id="210790c5-b926-4927-ba47-2a7dde41fc57" class="bulleted-list"><li style="list-style-type:disc"><strong>regulacja</strong>: jeżeli np. przy regulatorze napięcia transformatora coś działa nieprawidłowo, napięcie może zostać obniżone do poziomu poniżej wartości progowej.</li></ul><p id="40f4e230-ba1c-4ba4-8ede-a0b5ff230ffc" class=""><strong>Skutki</strong></p><p id="932b5710-41a1-4701-9715-1e54b90eefc5" class="">Podstawowym skutkiem zapadów napięcia jest fakt, że urządzenia odbiorcze nie otrzymują wymaganej ilości energii elektrycznej, więc przestają działać prawidłowo. Dotyczy to zarówno bezpośrednio odbiorników, jak i układów regulacji. </p><p id="0076d3ff-ecc5-4b49-b2c3-70f05fb31c54" class="">Stąd, wśród skutków zapadów napięcia można wymienić:</p><ul id="c969b1eb-78a2-468c-a898-4c983af3723b" class="bulleted-list"><li style="list-style-type:disc">nieprawidłowe działanie wrażliwych odbiorników energii elektrycznej takich jak napędy elektryczne z regulacją prędkości, sprzęt informatyczny, urządzenia elektroniczne itd.</li></ul><ul id="2343fdff-8e0c-4605-8973-71659c233559" class="bulleted-list"><li style="list-style-type:disc">zbędne wyłączenia odbiorników przez styczniki lub układ sterowania</li></ul><ul id="da8ee629-428b-4499-a9de-69c283829acb" class="bulleted-list"><li style="list-style-type:disc">zbędne wyłączenia odbiorników przez zabezpieczenie podnapięciowe</li></ul><ul id="a6883440-0d77-4fdc-acd9-24f108f4232b" class="bulleted-list"><li style="list-style-type:disc">zbędne wyłączenia silników przez zabezpieczenia od asymetrii zasilania</li></ul><p id="5a44aabc-8e24-46af-8762-bf6ed978b3f9" class=""><strong>Sposoby ochrony</strong></p><p id="8516912c-e827-40be-ac43-d906220b38c1" class="">Istnieje kilka różnych podejść mających na celu ochronę przed skutkami zapadów napięcia lub zapobiegających takim zjawiskom w systemie elektroenergetycznym. Celami nadrzędnymi są redukcja czasu trwania zapadu, redukcja częstotliwości występowania zapadów oraz uodparnianie urządzeń na zapady napięcia. Wszystkie te zjawiska sprowadzają się natomiast do ograniczania skutków zwarć.</p><p id="522416ee-2296-41b8-818b-3d692cb23d0a" class="">Stąd, można wymienić następujące metody ochrony przed negatywnymi skutkami zapadów napięcia:</p><ol type="1" id="bd89cd8f-5bc9-4217-bdd3-6ffebfebbb58" class="numbered-list" start="1"><li><strong>Redukcja liczby zwarć</strong><p id="38924ecd-4a79-4ca3-b1b6-c804175f6aca" class="">Redukcję liczby zwarć można osiągnąć metodami bardzo konwencjonalnymi. Zastępuje się linie napowietrzne liniami kablowymi lub stosuje się w nich izolowane przewody. Przycina się drzewa w strefie tych linii i instaluje osłony przed zwierzętami. Ekranuje się przewody napowietrzne, zwiększa poziom izolacji i instaluje liniowe odgromniki. Można też po prostu zwiększyć częstotliwość remontów, przeglądów, mycia izolatorów itp.</p></li></ol><ol type="1" id="110fdc9e-bdf1-40d4-be9e-21acfb9d99c8" class="numbered-list" start="2"><li><strong>Redukcja czasu eliminacji zwarć</strong><p id="845f1de3-07e5-41e8-9e3a-40c347e8f4c8" class="">Redukcja czasu zwarć łagodzi ich skutki, nie ogranicza ich rzadszego występowania. Najprościej, stosuje się bezpieczniki z ograniczeniem prądu. Redukcja czasu eliminacji zwarć nie oznacza natomiast skrócenia czasu przerwy w zasilaniu. </p></li></ol><ol type="1" id="c233eff0-7217-456c-b684-303ddefd542f" class="numbered-list" start="3"><li><strong>Zmiana konfiguracji systemu zasilającego</strong><p id="8105b557-92b1-478c-9914-81dd6b68c4b5" class="">Rozwiązania tego typu są kosztowne, zwłaszcza w sieciach wysokich napięć, bo sprowadzają się do redundancji. Można zainstalować generator w pobliżu czułych odbiorów. Można zwiększyć liczbę szyn i rozdzielni w celu ograniczenia ilości odbiorców odczuwających zakłócenia lub instalować dławiki zwarciowe w celu zwiększenia elektrycznej odległości od miejsca zwarcia. Można też zasilać czułych odbiorców równolegle z kilku rozdzielni - wtedy zapad napięcia na jednej jest redukowany zasilaniem z innej. </p></li></ol><ol type="1" id="9f24e43c-772e-4ecb-bec7-a623a18bf2e8" class="numbered-list" start="4"><li><strong>Włączenie specjalnych urządzeń pomiędzy sieć zasilającą i zaciski czułego sprzętu (stabilizatory napięcia)</strong><p id="7a2a6f30-2f2a-42d9-a8f8-2b06ebc93e94" class="">Stabilizatory napięcia to najpowszechniej stosowane zabezpieczenie przed negatywnymi skutkami zapadów. Mogą być stosowane tak po stronie sieci jak i odbiorcy, ale raczej stosuje się je właśnie po stronie odbiorcy. Urządzenia tego typu mają na celu w razie zaburzenia szybko przełączyć urządzenie na zasilanie z alternatywnego źródła energii, zapewniając przy tym odpowiednie parametry zasilania. De facto są to wszelkiego rodzaju zasilacze UPS.</p></li></ol><ol type="1" id="1a1a088c-41d0-4ece-a666-af3a771d9fd4" class="numbered-list" start="5"><li><strong>Poprawa odporności urządzeń</strong><p id="c0bf68c2-c108-4929-865d-a33266a2dc9f" class="">Dobrą metodą ograniczania skutków zapadów napięcia, zwłaszcza u odbiorców przemysłowych, jest dobór urządzeń o odpowiedniej odporności na zakłócenia. W idealnym świecie można by na podstawie informacji o pracy systemu w danym miejscu dobrać urządzenia o odpowiedniej czułości lub w oparciu o tę informację zdecydować się na UPS (bo tańszy). Niestety, aktualnie nie ma żadnych standardów tego typu i ciężko jest te informacje otrzymać. Stąd, poprawa odporności urządzeń sprowadza się do ich odpowiedniego zaprojektowania już na etapie produkcji. </p></li></ol><h3 id="65bd7998-f0bc-4036-80bd-6b3bcdb614e7" class="">Najważniejsze punkty</h3><ul id="d945436a-a2e5-4ded-ba73-e4dbdec07adb" class="bulleted-list"><li style="list-style-type:disc">zapad napięcia to spadek napięcia w sieci do wartości 1-90% wartości znamionowej na czas do 1 minuty; powyżej tego czasu mówimy o przerwie w zasilaniu</li></ul><ul id="7144d8eb-9c49-412a-8754-cf5839d8fc71" class="bulleted-list"><li style="list-style-type:disc">zapady napięcia mają przyczyny zewnętrzne (poza instalacją odbiorczą) oraz wewnętrzne (wynikające z działania instalacji); wszystkie te przyczyny sprowadzają się do dużych prądów i spadków napięć na impedancjach linii lub do nieprawidłowej pracy układów regulacji</li></ul><ul id="1d2a5ba8-0c9f-4ada-ba92-9ca388f70814" class="bulleted-list"><li style="list-style-type:disc">przyczyny zewnętrzne: zwarcia i awarie w systemie, zmiany konfiguracji sieci, nieprawidłowa praca regulacji transformatora </li></ul><ul id="3e9138c0-92bd-4cd2-8894-9978801b95a6" class="bulleted-list"><li style="list-style-type:disc">przyczyny wewnętrzne: załączanie dużych odbiorników, rozruch silników, zwarcia</li></ul><ul id="8f78d570-a55a-4e97-bfa0-507a1a186165" class="bulleted-list"><li style="list-style-type:disc">skutki: nieprawidłowa praca odbiorników, nieplanowane wyłączenia odbiorników przez zabezpieczenia i wiążące się z tym straty finansowe</li></ul><ul id="aa7a0fd7-9cff-4eba-adac-0072730f148d" class="bulleted-list"><li style="list-style-type:disc">zapobieganie: odpowiednie projektowanie urządzeń, redukcja liczby i czasu eliminacji zwarć, stosowanie zasilaczy UPS, zmiana konfiguracji zasilania (dodatkowy generator, druga linia zasilająca itp.)</li></ul><p id="d65aa815-0c8a-4da5-9c98-41e876beb7aa" class=""><strong>Źródła</strong></p><p id="bf4f2447-c2d5-47bf-a1c6-fa58814d5230" class="">[1] Materiały z wykładu <em>Zakłócenia w układach elektroenergetycznych</em></p><p id="e00e0ce1-8a46-43c7-8ae9-55cf96571a78" class="">[2] <a href="https://www.cire.pl/pliki/2/hanzelka-zapady1.pdf">https://www.cire.pl/pliki/2/hanzelka-zapady1.pdf</a></p><p id="a7b091fc-dd6a-440f-bb65-0bf9bd497fae" class="">[3] <a href="https://pl.wikipedia.org/wiki/Zapad_napi%C4%99cia">https://pl.wikipedia.org/wiki/Zapad_napięcia</a></p></div></div></article></body></html>

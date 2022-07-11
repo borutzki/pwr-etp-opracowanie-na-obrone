@@ -1,0 +1,670 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>11. Przekształtniki statyczne w układach zasilania i sterowania</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="4f4e0c81-cd42-4000-9095-08bf6605d2e9" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">〰️</span></div><h1 class="page-title">11. Przekształtniki statyczne w układach zasilania i sterowania</h1><table class="properties"><tbody><tr class="property-row property-row-select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesSelect"><path d="M7,13 C10.31348,13 13,10.31371 13,7 C13,3.68629 10.31348,1 7,1 C3.68652,1 1,3.68629 1,7 C1,10.31371 3.68652,13 7,13 Z M3.75098,5.32278 C3.64893,5.19142 3.74268,5 3.90869,5 L10.09131,5 C10.25732,5 10.35107,5.19142 10.24902,5.32278 L7.15771,9.29703 C7.07764,9.39998 6.92236,9.39998 6.84229,9.29703 L3.75098,5.32278 Z"></path></svg></span>Status</th><td><span class="selected-value select-value-color-green">Zrobione</span></td></tr><tr class="property-row property-row-person"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesPerson"><path d="M9.625,10.8465 C8.91187,10.2891 8.12088,9.926 7,9.26013 L7,8.71938 C7.21175,8.47612 7.392,8.176 7.53813,7.83213 C7.94587,7.7315 8.3125,7.33425 8.3125,7 C8.3125,6.51788 8.1095,6.32713 7.8715,6.17137 C7.8715,6.15562 7.875,6.14162 7.875,6.125 C7.875,5.41362 7.4375,3.5 5.25,3.5 C3.0625,3.5 2.625,5.4145 2.625,6.125 C2.625,6.14162 2.6285,6.15562 2.6285,6.17137 C2.3905,6.32713 2.1875,6.51788 2.1875,7 C2.1875,7.33425 2.55413,7.7315 2.96187,7.833 C3.108,8.176 3.28825,8.47612 3.5,8.71938 L3.5,9.26013 C2.37912,9.92513 1.58812,10.2882 0.875,10.8465 C0.041125,11.4984 0,12.4688 0,14 L10.5,14 C10.5,12.4688 10.4589,11.4984 9.625,10.8465 Z M13.125,7.3465 C12.4119,6.78912 11.6209,6.426 10.5,5.76013 L10.5,5.21938 C10.7118,4.97613 10.892,4.676 11.0381,4.33213 C11.4459,4.2315 11.8125,3.83425 11.8125,3.5 C11.8125,3.01787 11.6095,2.82713 11.3715,2.67138 C11.3715,2.65562 11.375,2.64162 11.375,2.625 C11.375,1.91363 10.9375,0 8.75,0 C6.5625,0 6.125,1.9145 6.125,2.625 C6.125,2.64162 6.1285,2.65562 6.1285,2.67138 C6.11188,2.68275 6.09787,2.69588 6.08125,2.70725 C7.83212,3.066 8.59688,4.54825 8.72813,5.74787 C8.97575,6.00863 9.1875,6.39625 9.1875,7 C9.1875,7.60288 8.771,8.20312 8.18388,8.51462 C8.127,8.624 8.06662,8.729 8.00275,8.82962 C8.155,8.91537 8.30025,8.99675 8.44025,9.07463 C9.08075,9.4325 9.63375,9.74137 10.164,10.1561 C10.3022,10.2638 10.4204,10.3801 10.5289,10.4991 L14,10.4991 C14,8.96875 13.9589,7.99837 13.125,7.3465 Z"></path></svg></span>Assign</th><td></td></tr></tbody></table></header><div class="page-body"><h3 id="5e9e17ee-6af0-421b-9e93-fd0a325bee43" class=""><details open=""><summary>a) przekształtniki AC – DC, prostowniki niesterowane i sterowane, praca w zakresie prądów ciągłych i impulsowych, korektory współczynnika mocy – PFC</summary></details></h3><div class="indented"><p id="93ba8563-0c29-4f65-b2f2-cd5b7e8c44eb" class=""><strong>Przekształtniki AC-DC</strong></p><p id="34fc5b18-5bda-43f8-a09c-f1a8d401d534" class="">Przekształtniki AC-DC to po prostu układy prostownicze, przekształcające przemienne napięcia na napięcia stałe o różnych parametrach (mniejsza lub większa wartość, mniej lub bardziej wygładzone). Przekształtniki AC-DC dzieli się na sterowane i niesterowane oraz zależnie od liczby pulsów (liczby elementów elektronicznych). Wyróżnia się też dwa stany pracy - w zakresie prądów ciągłych i impulsowych.</p><p id="efe7f328-221b-46d9-af57-9b27666d9887" class=""><strong>Prostowniki niesterowane i sterowane</strong></p><p id="fdb09e02-1881-4a48-83bb-71af72c80d9d" class=""><strong>Prostowniki niesterowane</strong> to najprostsze możliwe układy, w których komutacja napięć i prądów zachodzi w sposób naturalny, bez żadnego sterowania z zewnątrz. Przekształtniki tego typu <strong>oparte są o różne układy diod</strong>. </p><p id="17caef5d-7919-43d7-82e8-52f228522466" class=""><strong>Prostowniki sterowane</strong> w przeciwieństwie do prostowników niesterowanych, umożliwiają kontrolę nad wyjściowymi wartościami napięć oraz prądów. W tego typu przekształtnikach, <strong>zamiast diod stosuje się tyrystory lub tranzystory z odpowiednimi układami sterowania</strong>, najczęściej poprzez modulację szerokości impulsów. </p><p id="100a7a74-2564-41e8-8029-db0ffa77c7b8" class="">Prostowniki sterowane i niesterowane występują w analogicznych topologiach, różnią się natomiast typem urządzeń prostujących (diody albo tranzystory / tyrystory). Ogólnie, można wśród nich wyróżnić:</p><ul id="d7b4fb8a-fd51-4d25-a925-dae75c3f0c33" class="bulleted-list"><li style="list-style-type:disc"><strong>prostowniki jednofazowe jednopulsowe</strong>: stosuje się w nich jedną diodę, przepuszczającą tylko jedną połówkę sinusoidy<figure id="cd376041-2591-492c-ad88-7a15bdf84ab4" class="image"><a href="11%20Przekszta%C5%82tniki%20statyczne%20w%20uk%C5%82adach%20zasilania%20%204f4e0c81cd424000909508bf6605d2e9/Untitled.png"><img style="width:966px" src="11%20Przekszta%C5%82tniki%20statyczne%20w%20uk%C5%82adach%20zasilania%20%204f4e0c81cd424000909508bf6605d2e9/Untitled.png"/></a></figure></li></ul><ul id="1b53afeb-6a92-453a-bc29-b1f70674bdbe" class="bulleted-list"><li style="list-style-type:disc"><strong>prostowniki jednofazowe dwupulsowe</strong>: układy te składają się z dwóch lub czterech diod, które umożliwiają przekształcanie obydwu połówek sinusoidy napięcia na jedną stronę, co zapewnia brak przerw w przebiegach<figure id="3d076c8d-f755-40cb-9c05-3a64a3e8f760" class="image"><a href="11%20Przekszta%C5%82tniki%20statyczne%20w%20uk%C5%82adach%20zasilania%20%204f4e0c81cd424000909508bf6605d2e9/Untitled%201.png"><img style="width:1458px" src="11%20Przekszta%C5%82tniki%20statyczne%20w%20uk%C5%82adach%20zasilania%20%204f4e0c81cd424000909508bf6605d2e9/Untitled%201.png"/></a></figure></li></ul><ul id="8a802881-c724-4b79-aae5-7d9d2867db05" class="bulleted-list"><li style="list-style-type:disc"><strong>prostowniki trójfazowe jednopołówkowe:</strong> układy tego typu posiadają jeden element prostujący w każdej fazie, co powoduje że na wyjściu pojawiają się nałożone napięcia tylko “górnych” połówek sinusoid wejściowych napięć<figure id="5be1e2ff-4660-466e-aa4e-f889d1388b00" class="image"><a href="11%20Przekszta%C5%82tniki%20statyczne%20w%20uk%C5%82adach%20zasilania%20%204f4e0c81cd424000909508bf6605d2e9/Untitled%202.png"><img style="width:1010px" src="11%20Przekszta%C5%82tniki%20statyczne%20w%20uk%C5%82adach%20zasilania%20%204f4e0c81cd424000909508bf6605d2e9/Untitled%202.png"/></a></figure></li></ul><ul id="4ef611ef-bca1-4642-9392-1c32fa232847" class="bulleted-list"><li style="list-style-type:disc"><strong>prostowniki trójfazowe dwupołówkowe:</strong> układy te są najczęściej stosowane w przypadku sterowania silnikami, ponieważ charakteryzują się przetwarzaniem górnych i dolnych połówek sinusoid, co zapewnia najmniejsze pulsacje napięcia na wyjściu takiego układu. <figure id="8c2bc379-8972-4880-b240-a306a48cff97" class="image"><a href="11%20Przekszta%C5%82tniki%20statyczne%20w%20uk%C5%82adach%20zasilania%20%204f4e0c81cd424000909508bf6605d2e9/Untitled%203.png"><img style="width:1006px" src="11%20Przekszta%C5%82tniki%20statyczne%20w%20uk%C5%82adach%20zasilania%20%204f4e0c81cd424000909508bf6605d2e9/Untitled%203.png"/></a></figure></li></ul><p id="366a41d4-9497-44a7-858b-5ee69fb9df21" class="">Generalnie przyjmuje się, że im więcej pulsów ma napięcie wyjściowe, tym lepsza jest jakość zasilania odbiornika DC oraz tym lepszy jest współczynnik mocy prostownika - czyli wypadkowo jego wydajność. </p><p id="00def0dc-6a95-43a4-becd-f81577b66d72" class="">Układy powyższych prostowników można budować również jako prostowniki sterowane. Wtedy układ sterowania powinien załączać w odpowiednich chwilach element sterowany (tyrystor lub tranzystor) tak, by na wyjściu pojawiało się napięcie o pożądanej wartości średniej. Poniżej przedstawiono animację pokazującą, jak działa tyrystor (niebieski sygnał to sygnał załączający przewodzenie tyrystora).</p><p id="48b1940a-a0f2-45cc-be14-9c2be1b30953" class="">Zasadniczą zaletą prostowników sterowanych jest fakt, że umożliwiają dwukierunkowy przepływ energii - mogą więc działać również w stanie pracy falownikowej.</p><p id="2635ea48-0261-403f-a0b6-aceb72a501f6" class="">
+</p><figure id="a1a852f6-e295-4ac0-b983-02f03b6160f4" class="image"><a href="https://upload.wikimedia.org/wikipedia/commons/0/07/Regulated_rectifier.gif"><img src="https://upload.wikimedia.org/wikipedia/commons/0/07/Regulated_rectifier.gif"/></a></figure><p id="f8fac277-b4f1-4729-a6fc-d36e81b9b967" class=""><strong>Praca w zakresie prądów ciągłych i impulsowych</strong></p><p id="bce90e1b-9d93-4dcc-a8a2-b53350a07a13" class="">Pracujący w zakresie prądów ciągłych prostownik ma składową stałą prądu większą, niż składowa zmienna. Jeżeli składowa zmienna staje się większa niż składowa stała, to pulsujący prąd w pewnych odcinkach czasu jest równy (lub mniejszy) 0. Mówi się wtedy o zakresie pracy prądów impulsowych. </p><p id="b01fc0e2-eb66-4888-991b-7a71a1b381ac" class="">Pracę prądów nieciągłych można osiągnąć przy dużym wysterowaniu prostownika, przy niewielkiej indukcyjności odbiornika lub w przypadku, gdy odbiornik jest odbiorem RE lub RLE, gdzie prąd płynie tylko w chwilach, gdy napięcie na wyjściu prostownika jest wyższe niż napięcie na odbiorniku. </p><figure id="9ab1c543-8325-465a-afe2-ceb857568509" class="image"><a href="11%20Przekszta%C5%82tniki%20statyczne%20w%20uk%C5%82adach%20zasilania%20%204f4e0c81cd424000909508bf6605d2e9/Untitled%204.png"><img style="width:779px" src="11%20Przekszta%C5%82tniki%20statyczne%20w%20uk%C5%82adach%20zasilania%20%204f4e0c81cd424000909508bf6605d2e9/Untitled%204.png"/></a></figure><p id="eca7450e-e77d-4033-8f93-6fe14b8d5fd4" class="">Podczas pracy w zakresie prądów nieciągłych, napięcie przestaje zmieniać się proporcjonalnie do współczynnika wypełnienia tyrystora. Charakterystyka sterowania staje się nieliniowa i <em>miękka</em>. Żeby utrzymać stały poziom napięcia, trzeba zmieniać kąt wysterowania.</p><p id="2f8bd88e-3fae-4689-b8fb-71ebdb828b5d" class="">Innymi wadami pracy nieciągłej jest pozorny wzrost impedancji wyjścia przekształtnika, napięcie staje się silnie zależne od odbioru przekształtnika, można też stracić nad nim kontrolę w przypadku szybkich zmian odbioru. </p><p id="be55f303-82c4-4d52-bb11-948f4cacc482" class=""><strong>Korektory współczynnika mocy</strong></p><p id="cc6c466d-e0b1-47ae-9437-068cd43ae5c5" class="">Prąd pobierany z sieci przez prostowniki (oraz ogólnie, zasilacze), jest na ogół silnie odkształcony, zwłaszcza w przypadku prostowników jednopulsowych. Prąd w takich układach jest często impulsowy (np. do ładowania kondensatora), w związku z czym współczynnik mocy utrzymuje się na niskim poziomie - co jest niejako wyznacznikiem jakości zasilania. </p><p id="bee7152c-6976-476a-87e0-6c70e3f0bd9f" class="">Korekcję współczynnika mocy PFC można wykonywać w sposób pasywny i aktywny. </p><p id="c7f4e78c-1af9-4cfc-a2e5-c0c03f8b50ab" class=""><strong>Pasywna korekcja</strong> polega na stosowaniu <strong>filtrów pasywnych</strong>, czyli <strong>elementów LC wpiętych do obwodu prostownika</strong>. Stosuje się tu filtry LC na wyjściu lub wejściu prostownika. Mogą to też być po prostu cewki lub kondensatory. Innym podejściem jest wstawienie układów filtrów pasmowo-przepustowych ograniczających wysokie harmoniczne prądu. </p><figure id="9d25b1f3-a5fd-44c4-8ef7-7c32b02ad2af" class="image"><a href="11%20Przekszta%C5%82tniki%20statyczne%20w%20uk%C5%82adach%20zasilania%20%204f4e0c81cd424000909508bf6605d2e9/Untitled%205.png"><img style="width:1667px" src="11%20Przekszta%C5%82tniki%20statyczne%20w%20uk%C5%82adach%20zasilania%20%204f4e0c81cd424000909508bf6605d2e9/Untitled%205.png"/></a></figure><p id="80ae61d6-abc6-496b-9f22-01350c2c736e" class="">Korekcja tego typu pozwala na poprawę współczynnika mocy tylko do pewnego stopnia. Układy te są proste w konstrukcji, nie generują zakłóceń elektromagnetycznych i nie generują strat mocy na przełączenia. Są jednak często duże gabarytowo.</p><p id="be981aaa-deb0-41e2-a576-b45fa6799082" class=""><strong>Aktywna korekcja </strong>współczynnika mocy polega na stosowaniu dodatkowego przekształtnika za obwodem prostownika, najczęściej przkeształtnika typu Boost. Jest to przekształtnik sterowany ze sprzężeniem zwrotnym od docelowej wartości napięcia wyjściowego.</p><figure id="5d733977-f101-4d00-b3f1-a284c447ab1d" class="image"><a href="11%20Przekszta%C5%82tniki%20statyczne%20w%20uk%C5%82adach%20zasilania%20%204f4e0c81cd424000909508bf6605d2e9/Untitled%206.png"><img style="width:591px" src="11%20Przekszta%C5%82tniki%20statyczne%20w%20uk%C5%82adach%20zasilania%20%204f4e0c81cd424000909508bf6605d2e9/Untitled%206.png"/></a></figure><p id="f3c6662b-7661-4ab7-8795-c7482fed3cec" class="">Istnieje kilka różnych podejść do korekcji aktywnej współczynnika mocy. Można rozróżnić układy z ciągłym, nieciągłym lub granicznym prądem dławika (CICM vs. DCM vs. BCM). Korektory projektuje się na ogół do pracy z ciągłym lub granicznym prądem dławika (niespadającym do zera). Prąd cewki przekształtnika jest sterowany w określony sposób za pomocą PWM - kluczowanie następuje w przypadku wykrycia przejścia prądu przez zero.</p><p id="aa748fa4-d1c3-4eee-855e-4675bdd0c826" class="">Dopasowanie napięcia wyjściowego za prostownikiem diodowym pozwala na ograniczanie prądów wyższych harmonicznych, zwiększenie współczynnika mocy oraz zmniejszenie kondensatora filtrującego, przy zapewnieniu lepszego sterowania napięciem na wyjściu. </p><p id="a364cbbf-b112-4a52-a64b-55af089f17d3" class=""><strong>Źródła</strong></p><p id="cc843933-7446-4f36-9876-71f9b98e9fda" class="">[1] <a href="https://pl.wikipedia.org/wiki/Prostownik">https://pl.wikipedia.org/wiki/Prostownik</a></p><p id="8328d287-a262-4106-bb32-130c9d657947" class="">[2] <a href="https://eia.pg.edu.pl/documents/184045/282792/prostownik_DML.pdf">https://eia.pg.edu.pl/documents/184045/282792/prostownik_DML.pdf</a></p><p id="99aeb882-a7b3-4483-88eb-47e2dc8ed43e" class="">[3] Ned Mohan - <em>Power Electronics</em></p><p id="74f36555-c35e-41a2-8cd4-fdf055bde58f" class="">[4] <a href="https://elektronikab2b.pl/technika/15244-pasywne-i-aktywne-uklady-korekcji-wspolczynnika-mocy/strona/1">https://elektronikab2b.pl/technika/15244-pasywne-i-aktywne-uklady-korekcji-wspolczynnika-mocy/strona/1</a></p></div><h3 id="f97a735e-13c5-4655-b71e-21edc47398af" class=""><details open=""><summary>b) prostowniki aktywne</summary></details></h3><div class="indented"><p id="4f0e6e68-350b-4b86-92de-3e660a06b92f" class=""><strong>Prostowniki aktywne</strong> to układy prostowników, w których <strong>zamiast diod </strong>prostowniczych <strong>zastosowane są tranzystory</strong> (najczęściej MOSFET lub JBT). Prostowniki aktywne w porównaniu do pozostałych typów prostowników, są <strong>sterowane w układzie bardziej złożonym</strong>, przy czym podstawową metodą sterowania jest tu PWM. </p><figure id="6f4b1fed-8320-4807-be0f-9f8f2a2f4937" class="image"><a href="11%20Przekszta%C5%82tniki%20statyczne%20w%20uk%C5%82adach%20zasilania%20%204f4e0c81cd424000909508bf6605d2e9/Untitled%207.png"><img style="width:966px" src="11%20Przekszta%C5%82tniki%20statyczne%20w%20uk%C5%82adach%20zasilania%20%204f4e0c81cd424000909508bf6605d2e9/Untitled%207.png"/></a></figure><p id="fb12cbc6-e0e3-470e-91d4-ec4b5122332a" class="">Jedną z cech prostowników aktywnych jest <strong>możliwość ich łatwego przystosowania do pracy czterokwadrantowej</strong>, tj. z możliwością nie tylko pobierania energii z sieci, lecz również zwrotu energii do sieci. W klasycznych strukturach, możliwość zwrotu energii do sieci wymagała zastosowania dodatkowego przekształtnika. Zastosowanie sterowanych przez PWM prostowników aktywnych pozwala więc ograniczyć liczbę elementów elektronicznych - i przy tym także awaryjność układu. </p><figure id="7c76796f-f50b-47b9-8dbc-439e0d23baf0" class="image"><a href="11%20Przekszta%C5%82tniki%20statyczne%20w%20uk%C5%82adach%20zasilania%20%204f4e0c81cd424000909508bf6605d2e9/Untitled%208.png"><img style="width:1222px" src="11%20Przekszta%C5%82tniki%20statyczne%20w%20uk%C5%82adach%20zasilania%20%204f4e0c81cd424000909508bf6605d2e9/Untitled%208.png"/></a></figure><p id="c556a1c2-4b74-44a8-89d9-f5b89ce8a617" class="">Innymi zaletami prostowników aktywnych są możliwość pracy przy <strong>większej efektywności</strong> niż w przypadku innych prostowników oraz <strong>możliwość aktywnej kompensacji mocy biernej</strong> (sterowanie prądem wejścia tak, by był kształtem dopasowany do sinusoidy napięcia na wejściu). </p><p id="3e49820d-1722-4a57-8de6-ffab8cf315bd" class="">Metody sterowania prostownikami aktywnymi są często rozbudowane, ale istnieje tu <strong>możliwość zastosowania metod opartych na sterowaniu PWM</strong>, które umożliwiają wykorzystanie takich cech prostowników aktywnych, jak kompensacja współczynnika mocy.</p><p id="c57c09e0-f80d-4030-b423-a9681b090a5d" class="">Do powyższych metod należą <strong>metody wektorowe</strong>. Można wśród nich wymienić:</p><ul id="2abd5e13-35c3-4846-9eba-2886c1eaf801" class="bulleted-list"><li style="list-style-type:disc"><strong>VOC</strong>: napięciowo-zorientowana, polegająca na kontrolowaniu położenia i amplitudy wektora prądu sieci względem wektora napięcia sieci</li></ul><ul id="f3321160-f2b2-4dd6-b019-fb471204a77f" class="bulleted-list"><li style="list-style-type:disc"><strong>VFOC</strong>: strumieniowo-zorientowana, polegająca na kontrolowaniu położenia i amplitudy wektora prądu sieci względem wektora wirtualnego strumienia sieci</li></ul><ul id="73a012d8-b449-4a3e-a7d1-2ed114e96fdd" class="bulleted-list"><li style="list-style-type:disc"><strong>DPC</strong>: <em>direct power control - </em>metoda bezpośredniego sterowania mocą, w której sterowane są wartości chwilowe mocy czynnej i biernej przenoszonej przez prostownik; istnieją dwa warianty tej metody:<ul id="d3b895d6-07ad-486d-a856-061ad175f595" class="bulleted-list"><li style="list-style-type:circle"><strong>V-DPC</strong>: zorientowane napięciowo DPC, gdzie kontrola przepływu mocy czynnej i biernej realizowana jest na podstawie wiedzy o module i położeniu wektora napięcia sieci</li></ul><ul id="997c58e5-2d89-43f6-ab89-3d567fa3b3df" class="bulleted-list"><li style="list-style-type:circle"><strong>VF-DPC</strong>: zorientowane strumieniowo DPC, gdzie kontrola przepływu mocy czynnej i biernej realizowana jest na podstawie wiedzy o module i położeniu wektora wirtualnego strumienia sieci. </li></ul><figure id="78dfeb80-5825-437c-aa40-647937a25dd0" class="image"><a href="11%20Przekszta%C5%82tniki%20statyczne%20w%20uk%C5%82adach%20zasilania%20%204f4e0c81cd424000909508bf6605d2e9/Untitled%209.png"><img style="width:1014px" src="11%20Przekszta%C5%82tniki%20statyczne%20w%20uk%C5%82adach%20zasilania%20%204f4e0c81cd424000909508bf6605d2e9/Untitled%209.png"/></a></figure></li></ul><p id="601e367c-6ac7-4395-9fcb-720a8a662de8" class=""><strong>Źródła</strong></p><p id="aecec144-f3da-4a18-9f31-e86a46849a1f" class="">[1] <a href="https://en.wikipedia.org/wiki/Active_rectification">https://en.wikipedia.org/wiki/Active_rectification</a></p><p id="2c5f6f9c-5554-4d44-ba1c-4dbe5c02723b" class="">[2] <a href="http://kmnipe.pwr.edu.pl/files/prv/id35/zn-lab/ane/ANEZW/Cwiczenie6.pdf">http://kmnipe.pwr.edu.pl/files/prv/id35/zn-lab/ane/ANEZW/Cwiczenie6.pdf</a></p></div><h3 id="86647347-08bf-4034-ae9c-874b28596bff" class=""><details open=""><summary>c) impulsowe przekształtniki DC – DC prądu stałego z nieizolowanym wejściem i wyjściem, przetwornice z izolowanym wejściem i wyjściem</summary></details></h3><div class="indented"><p id="e39c8944-41e1-43c0-8b45-f11c9e06f311" class="">Przekształtniki DC-DC prądu stałego służą do przekształcania napięć i prądów stałych z jednego poziomu na drugie. Można wyróżnić kilka głównych topologii tego typu przekształtników, zależnie od funkcji i zastosowanej izolacji wejścia lub wyjścia. </p><figure id="3b47f098-ec12-4153-afa6-3f257ba4e3b4" class="image"><a href="11%20Przekszta%C5%82tniki%20statyczne%20w%20uk%C5%82adach%20zasilania%20%204f4e0c81cd424000909508bf6605d2e9/Untitled%2010.png"><img style="width:1287px" src="11%20Przekszta%C5%82tniki%20statyczne%20w%20uk%C5%82adach%20zasilania%20%204f4e0c81cd424000909508bf6605d2e9/Untitled%2010.png"/></a></figure><p id="1dcd111b-8aa2-491d-b263-b43b06059679" class="">Nazwa <em>impulsowe</em> pochodzi od zasady ich działania - są to przekształtniki z łącznikiem w formie sterowanego tranzystora (lub kilku), przewodzącego tylko w odpowiednich chwilach w okresie sterowania. Poniżej omówiono podstawowe topologie przekształtników impulsowych DC-DC.</p><p id="ebf40f39-baec-4312-9c27-604d2c6b8bab" class=""><strong>Przekształtnik Buck (obniżający napięcie)</strong></p><p id="4b2937e7-4d91-4497-b0f2-4abbc570cc01" class="">Przekształtnik typu Buck służy do obniżania napięcia. Jego zasada działania polega na tym, że łącznik na wejściu jest załączany i wyłączany. Wyłączenie tranzystora sprawia, że ze źródła do odbiornika nie płynie prąd, natomiast prąd istniejący już w odbiorniku (nie znika, bo w obwodzie jest cewka lub filtr LC) zamyka się przez diodę zerową. Im dłużej jest zamknięty tranzystor, tym wyższe jest napięcie na odbiorniku - przy czym nie będzie ono wyższe niż na wejściu przekształtnika. Na odbiorniku naprzemiennie pojawia się więc napięcie zasilania i napięcie cewki przekształtnika.</p><p id="7e8b85dc-a29b-4c15-861d-63413142358f" class="">Na przekształtniku typu Buck, na wyjściu odbiornika prąd jest ciągły.</p><figure id="eb93055b-e952-4524-951c-6eccfbc4de97" class="image"><a href="11%20Przekszta%C5%82tniki%20statyczne%20w%20uk%C5%82adach%20zasilania%20%204f4e0c81cd424000909508bf6605d2e9/Untitled%2011.png"><img style="width:425px" src="11%20Przekszta%C5%82tniki%20statyczne%20w%20uk%C5%82adach%20zasilania%20%204f4e0c81cd424000909508bf6605d2e9/Untitled%2011.png"/></a></figure><p id="bf0ea9ee-c96a-4aff-abf4-3b204ff9a326" class=""><strong>Przekształtnik Boost (podwyższający napięcie)</strong></p><p id="f2e98a86-f8d5-4f52-addd-a587ad5c875d" class="">W przekształtniku typu Boost, gdy tranzystor jest załączony, prąd płynie przez niego (zwarcie), ładując cewkę L. Gdy tranzystor jest wyłączony, zsumowane napięcie źródła oraz rozładowującej się cewki (energia pola magnetycznego cewki) podawane są na odbiornik. Wyłączenie tranzystora na stałe oznacza napięcie na wyjściu takie, jak na wejściu. Im wyższy współczynnik wypełnienia, tym wyższe napięcie na wyjściu przekształtnika.</p><p id="5cdbc99d-ac3b-48b4-a6ed-58ed9261b512" class="">Na przekształtniku typu boost, prąd wejściowy jest ciągły.</p><figure id="6746031a-6356-4053-8d04-31873eb4127c" class="image"><a href="11%20Przekszta%C5%82tniki%20statyczne%20w%20uk%C5%82adach%20zasilania%20%204f4e0c81cd424000909508bf6605d2e9/Untitled%2012.png"><img style="width:422px" src="11%20Przekszta%C5%82tniki%20statyczne%20w%20uk%C5%82adach%20zasilania%20%204f4e0c81cd424000909508bf6605d2e9/Untitled%2012.png"/></a></figure><p id="d7fa6818-21b6-4260-8853-5179b52c6ed3" class=""><strong>Przekształtnik Buck-Boost (obniżająco-podwyższający napięcie)</strong></p><p id="ed07e1b6-f48e-45df-9c47-1cd38642c617" class="">Przekształtnik Buck-Boost łączy w sobie topologie Buck i Boost. Pozwala on zarówno na podwyższanie jak i obniżanie napięcia, przy czym na jego wyjściu napięcie ma polaryzację odwrotną niż na wejściu. </p><p id="b2afb4ea-5375-4eaf-b99e-e5edf9ed2669" class="">Gdy tranzystor jest załączony, cewka L jest ładowana i prąd płynie tylko przez nią (w kierunku odbiornika - blokuje go dioda). Wyłączenie tranzystora sprawia, że na rozładowującej się cewce pojawia się napięcie, a prąd cewki rozładowuje się przez odbiornik. Stąd można zauważyć, że napięcie na odbiorniku można obniżyć praktycznie do 0 jak w przekształtniku Buck, można je też odpowiednią modulacją podwyższyć, modulując jak w przekształtniku Boost.</p><figure id="b6f38057-e48b-42b3-96c5-1d3e68fe4e0a" class="image"><a href="11%20Przekszta%C5%82tniki%20statyczne%20w%20uk%C5%82adach%20zasilania%20%204f4e0c81cd424000909508bf6605d2e9/Untitled%2013.png"><img style="width:435px" src="11%20Przekszta%C5%82tniki%20statyczne%20w%20uk%C5%82adach%20zasilania%20%204f4e0c81cd424000909508bf6605d2e9/Untitled%2013.png"/></a></figure><p id="94810da5-d8f5-4437-8adc-652a97b6b5a1" class=""><strong>Przekształtnik Čuka</strong></p><p id="195a27eb-7633-46e1-91d3-1e29538d17db" class="">Przekształtnik Čuka to alternatywna topologia złożonego przekształtnika podwyższająco-obniżającego napięcie. W tym przekształtniku, podobnie jak w buck-boost, napięcie na wyjściu ma polaryzację odwrotną od wejścia. </p><p id="829201d3-cda3-43f6-806c-a9b0153e1f12" class="">Gdy tranzystor jest wyłączony, prąd obydwu cewek zamyka się przez diodę. Kondensator C1 jest ładowany zarówno ze źródła, jak i z cewki L1. Energia magazynowana w L2 zasila natomiast odbiornik. </p><p id="1bcd0177-c3df-4e84-8311-a5ac3d2c4114" class="">Gdy tranzystor jest załączony, napięcie naładowanego kondensatora C1 blokuje diodę D2, natomiast prądy cewek L1 i L2 płyną przez tranzystor. Kondensator oddaje przy tym energię do odbiornika i cewki L2. Cewka L1 jest ładowana. </p><p id="075df53f-5f3d-487c-8684-ca6308dc956f" class="">Zaletą przekształtnika Čuka jest możliwość zredukowania praktycznie do 0 pulsacji prądu. Wadą - to, że do tego wygładzenia prądu potrzebuje relatywnie dużego kondensatora. </p><figure id="736cb095-36cb-4bbe-bd76-a769336a1379" class="image"><a href="11%20Przekszta%C5%82tniki%20statyczne%20w%20uk%C5%82adach%20zasilania%20%204f4e0c81cd424000909508bf6605d2e9/Untitled%2014.png"><img style="width:522px" src="11%20Przekszta%C5%82tniki%20statyczne%20w%20uk%C5%82adach%20zasilania%20%204f4e0c81cd424000909508bf6605d2e9/Untitled%2014.png"/></a></figure><p id="81c1f73c-209e-4c17-8fbb-4e5359db7d76" class=""><strong>Przekształtnik wielokwadrantowy (mostkowy lub półmostkowy)</strong></p><p id="805e4b23-aed8-4068-ade3-22b7c523e0dd" class="">Przekształtnik mostkowy ma tę zaletę, że może działać czterokwadrantowo, czyli umożliwia przepływ energii w dwie strony. Jego zasada działania jest podobna do falownika. </p><p id="a94992c7-356d-41b3-8835-bd5ba77fb101" class="">Sterowanie tego przekształtnika można realizować na dwa sposoby: PWM unipolarny lub bipolarny. W unipolarnym gałęzie mostka traktowane są jako dwie pary i sterowane jako pary. Napięcie na wyjściu przyjmuje tylko jedną biegunowość W bipolarnym - każdy tranzystor sterowany jest osobno, a napięcie przyjmuje trzy stany: 0, +1, -1 Ud. </p><figure id="f54a0043-0369-4fd1-b131-154337d43f88" class="image"><a href="11%20Przekszta%C5%82tniki%20statyczne%20w%20uk%C5%82adach%20zasilania%20%204f4e0c81cd424000909508bf6605d2e9/Untitled%2015.png"><img style="width:1126px" src="11%20Przekszta%C5%82tniki%20statyczne%20w%20uk%C5%82adach%20zasilania%20%204f4e0c81cd424000909508bf6605d2e9/Untitled%2015.png"/></a></figure><p id="083c15b2-3c1f-4a92-9d10-2e8b819b8e9b" class="">W przypadku układu mostkowego, można zmieniać zarówno kierunek prądu, jak i napięcia. Podobną topologią jest układ półmostkowy, w którym można zmienić tylko kierunek prądu. </p><figure id="3059cb4c-8423-466b-9ecd-af679557025d" class="image"><a href="11%20Przekszta%C5%82tniki%20statyczne%20w%20uk%C5%82adach%20zasilania%20%204f4e0c81cd424000909508bf6605d2e9/Untitled%2016.png"><img style="width:248px" src="11%20Przekszta%C5%82tniki%20statyczne%20w%20uk%C5%82adach%20zasilania%20%204f4e0c81cd424000909508bf6605d2e9/Untitled%2016.png"/></a></figure><p id="5d9fe8a5-21ad-47e3-bf02-3a41da77f97a" class=""><strong>Przekształtnik Flyback (dwutaktowy)</strong></p><p id="4ff9f905-9e48-4968-b5d1-aa257be9754d" class="">Przekształtnik Flyback oparty jest na topologii Buck-Boost. Ogólna koncepcja polega na tym, że do przekształtnika Buck-Boost, na jedną cewkę nawija się drugą, co wypadkowo tworzy transformator. </p><p id="5ca4b2d9-380e-4ead-a541-5e664ca624a6" class="">Gdy tranzystor S1 jest załączony, energia jest magazynowana w transformatorze L1, natomiast dioda D1 jest spolaryzowana zaporowo. Odbiornik pobiera energię z kondensatora C1. </p><p id="583cb64a-28bf-453f-8ad7-4eccd445dba2" class="">Gdy tranzystor jest wyłączony, napięcie indukuje się w uzwojeniu wtórnym, dioda staje się spolaryzowana w kierunku przewodzenia, i wypadkowo energia z transformatora jest przekazywana do kondensatora i odbiornika. </p><p id="b9369f32-3952-4b5f-82f4-1efa9d2ec349" class="">Układy Flyback służą do obniżania oraz podwyższania napięcia.</p><figure id="6dc5051c-9cfe-4639-9893-41f470b3911e" class="image"><a href="11%20Przekszta%C5%82tniki%20statyczne%20w%20uk%C5%82adach%20zasilania%20%204f4e0c81cd424000909508bf6605d2e9/Untitled%2017.png"><img style="width:784px" src="11%20Przekszta%C5%82tniki%20statyczne%20w%20uk%C5%82adach%20zasilania%20%204f4e0c81cd424000909508bf6605d2e9/Untitled%2017.png"/></a></figure><p id="0389efcf-d732-4d83-a04c-ca4c92abbaf1" class=""><strong>Przekształtnik Forward (jednotaktowy)</strong></p><p id="64c25dea-9724-48b3-8fe4-7010f5aec375" class="">Układ typu forward oparty jest o topologię Buck i posiada transformator zapewniający izolację galwaniczną, którego przekładnia może jednocześnie określać wypadkowe wzmocnienie całego układu. Układy tego typu pracują na wysokich częstotliwościach.  </p><p id="5f50f46e-a5da-41d9-a452-7d11f96cda54" class="">Gdy tranzystor T1 jest załączony, dioda D1 przewodzi - napięcie ze strony pierwotnej jest transformowane na stronę wtórną, zasilając odbiornik. Gdy tranzystor T1 jest wyłączony, przewodzą diody D2 i D3. Dioda D2 zamyka prąd odbiornika (płynący wciąż, bo cewka L utrzymuje napięcie). Dioda D3 przepuszcza prąd rozmagnesowujący.</p><p id="9d13893e-be2a-4894-95ff-f36598d6de95" class="">Przetwornica tego typu służy do obniżania napięcia, przy czym współczynnik wypełnienia współgra tu z przekładnią transformatora. Transformator nie służy tu do magazynowania energii, służy jedynie do jej przekazywania. Należy jednak brać pod uwagę energię magazynowaną w transformatorze, bo niepilnowana może popsuć przekształtnik. </p><figure id="383e0c50-6fbf-4423-a418-c6fd99cfcfb9" class="image"><a href="11%20Przekszta%C5%82tniki%20statyczne%20w%20uk%C5%82adach%20zasilania%20%204f4e0c81cd424000909508bf6605d2e9/Untitled%2018.png"><img style="width:422px" src="11%20Przekszta%C5%82tniki%20statyczne%20w%20uk%C5%82adach%20zasilania%20%204f4e0c81cd424000909508bf6605d2e9/Untitled%2018.png"/></a></figure><p id="4b9b17b3-cce5-4627-858e-4b2df79c6e5d" class=""><strong>Push-pull</strong></p><p id="78ca82f8-6065-478e-b398-a2c15bcb1381" class="">Przekształtnik Push-Pull bazuje na układzie falownika push-pull. Na wejście transformatora wysokiej częstotliwości podawany jest prostokątny sygnał AC. Układy tego typu steruje się metodą PWM.</p><p id="828b5c82-42d2-4a4f-8749-dacdac7078d1" class="">Gdy tranzystor T1 lub T2 jest załączony, energia jest podawana przez transformator na stronę wtórną. Prąd przez diody D1 lub D2 płynie do obciążenia poprzez cewkę. Gdy tranzystor jest wyłączony, energia do odbiornika płynie z cewki przez dwie połówki uzwojenia transformatora.</p><p id="af004646-4330-4d55-8a2a-6207c8e1b222" class="">Napięcie na wyjściu zależy od przekładni transformatora oraz współczynnika wypełnienia. Działanie jest tu podobne do przekształtnika typu Buck, więc napięcie na stronie wtórnej, podwyższone przez transformator, jest obniżane przez współczynnik wypełnienia. </p><figure id="b15f7a02-4f6c-4197-b3c1-5b7535b74ce5" class="image"><a href="11%20Przekszta%C5%82tniki%20statyczne%20w%20uk%C5%82adach%20zasilania%20%204f4e0c81cd424000909508bf6605d2e9/Untitled%2019.png"><img style="width:1538px" src="11%20Przekszta%C5%82tniki%20statyczne%20w%20uk%C5%82adach%20zasilania%20%204f4e0c81cd424000909508bf6605d2e9/Untitled%2019.png"/></a></figure><p id="ecac79cf-3d4b-4759-8af9-86fc72092c78" class=""><strong>Przekształtnik półmostkowy</strong></p><p id="529cd493-f846-4c34-ae4a-ebb4fb9642e2" class="">Przekształtnik półmostkowy bazuje na topologii buck. Transformator ma końcówkę uzwojenia wpiętą między dwa kondensatory, co pozwala na magazynowanie większej ilości energii. </p><p id="34f0d033-24a0-4161-bbb6-836c8f6dc16b" class="">W układzie tego typu, tranzystory T1 i T2 załączane są naprzemiennie, jest też okres gdy obydwa są wyłączone. Załączenie tranzystorów przekazuje energię na stronę wtórną. Gdy tranzystory są wyłączone, prąd odbioru zamyka się przez diody D5 i D6, cewkę oraz obciążenie. Czyli napięcie jest znowu podwyższane przez transformator, obniżane przez układ sterowania. </p><figure id="c4349646-eef2-4fa3-9d91-a6a4867b93d8" class="image"><a href="11%20Przekszta%C5%82tniki%20statyczne%20w%20uk%C5%82adach%20zasilania%20%204f4e0c81cd424000909508bf6605d2e9/Untitled%2020.png"><img style="width:767px" src="11%20Przekszta%C5%82tniki%20statyczne%20w%20uk%C5%82adach%20zasilania%20%204f4e0c81cd424000909508bf6605d2e9/Untitled%2020.png"/></a></figure><p id="cb08b6ff-307b-4087-8615-f236fb499152" class=""><strong>Przekształtnik mostkowy</strong></p><p id="50f607c4-4898-498b-81f4-2dd8c8b6a2d8" class="">Przekształtnik mostkowy jest podobny do półmostkowego, ale zawiera dwukrotnie większą liczbę łączników. Oznacza to, że tranzystory są mniej obciążone, nie stosuje się tu też kondensatorów dzielących napięcie wejściowe transformatora na pół (można natomiast wrzucić kondensator przed układ mostkowy).</p><p id="92b72572-5724-4cea-80ac-aadcd30d8cdc" class="">Układ sterowania jest tu nieco bardziej złożony, bo wymaga kluczowania czterech tranzystorów. Tranzystory kluczowane są parami. </p><figure id="7ed52ab7-fa17-4b8a-a5b9-91979ca7de3d" class="image"><a href="11%20Przekszta%C5%82tniki%20statyczne%20w%20uk%C5%82adach%20zasilania%20%204f4e0c81cd424000909508bf6605d2e9/Untitled%2021.png"><img style="width:793px" src="11%20Przekszta%C5%82tniki%20statyczne%20w%20uk%C5%82adach%20zasilania%20%204f4e0c81cd424000909508bf6605d2e9/Untitled%2021.png"/></a></figure><p id="6ffe96a9-d95f-4c5b-9d7d-e9f4f845ee48" class=""><strong>Stosowanie izolacji</strong></p><p id="bdfbae0f-b99e-4c08-9ae0-3eef4e94c705" class="">Izolację w przekształtnikach stosuje się między innymi po to, by:</p><ul id="36524ca9-f636-4ff8-b385-0692b7b31e59" class="bulleted-list"><li style="list-style-type:disc">zapewnić bezpieczeństwo w razie awarii - części o różnych poziomach napięcia są od siebie odizolowane;</li></ul><ul id="c08f38ae-cf0c-4fa1-b817-65c3454f6bdf" class="bulleted-list"><li style="list-style-type:disc">zapewnić większą odporność na zakłócenia sieciowe - obwody doziemne strony pierwotnej i wtórnej są od siebie oddzielone</li></ul><ul id="f3d9f096-1095-4882-b8a3-a6aa515a1410" class="bulleted-list"><li style="list-style-type:disc">znaczne obniżenie napięć bez podawania ich bezpośrednio na układ przekształtnika </li></ul><p id="1a639d61-abf7-4b3d-88dd-62bc15b0829d" class="">Izolacja jednak podwyższa koszty przekształtników, komplikuje ich układy i zwiększa gabaryty.</p><p id="2d57b05d-2b1b-4301-bb95-a832e27d9b4a" class=""><strong>Źródła</strong></p><p id="0c3bd272-351d-4396-91b1-973c3f3cc090" class="">[1] Materiały oraz notatki z wykładu <em>Przekształtniki energoelektroniczne w układach zasilania i sterowania 1 </em>(w tym skany książek od prowadzącego)</p><p id="357d2196-4a59-423c-a1e9-cfe9f7912c6a" class="">[2] Materiały z wykładu <em>Energoelektronika 1</em></p><p id="5b558d96-6115-4b36-b5f4-515aca4126dc" class="">[3] Ned Mohan - <em>Power Electronics</em></p><p id="45fcad0e-0438-40d3-af07-6e7f53e85a45" class="">[4] <a href="https://www.quora.com/Why-do-we-use-an-isolation-transformer-in-a-DC-DC-converter">https://www.quora.com/Why-do-we-use-an-isolation-transformer-in-a-DC-DC-converter</a></p><p id="db741f77-7073-43f7-b13b-a77a1c68cd4d" class="">[5] <a href="https://www.digikey.com/en/articles/use-isolated-dc-dc-converters-with-embedded-transformers-to-ease-assembly">https://www.digikey.com/en/articles/use-isolated-dc-dc-converters-with-embedded-transformers-to-ease-assembly</a></p></div><h3 id="2f5f08cc-6654-4d61-b1f2-f4cc566538a6" class=""><details open=""><summary>d) oddziaływanie przekształtników na sieć zasilającą, podstawowe sposoby ograniczenia tego oddziaływania</summary></details></h3><div class="indented"><p id="d7bda992-227f-4b20-8911-0f7753b25b31" class=""><strong>Oddziaływanie przekształtników na sieć zasilającą</strong></p><ul id="eced1764-98b1-400c-aee0-48524e00612a" class="bulleted-list"><li style="list-style-type:disc"><strong>pobieranie z sieci odkształconych prądów: </strong>podstawowy problem, z którego powstają inne; prądy pobierane przez odbiorniki zasilane z przekształtników są niesinusoidalne i jako takie mają zawartość wyższych harmonicznych, które reagują z innymi elementami sieci (reaktancje i pojemności linii, etc.)</li></ul><ul id="36c71050-14b3-4560-bedc-0247ffa33d5a" class="bulleted-list"><li style="list-style-type:disc"><strong>harmoniczne</strong>: działające układy prostowników diodowych (mostek Graetza) lub tyrystorowych pobierają z sieci prąd odkształcony, który płynąć przez przewody zasilające powoduje wygenerowanie wyższych harmonicznych w napięciu zasilającym; podobnie układy zasilania napędów elektrycznych mogą wprowadzać do sieci wyższe harmoniczne ze względu na rodzaj sterowania PWM</li></ul><ul id="180b9ada-d23e-4557-a489-495d7ee91c9b" class="bulleted-list"><li style="list-style-type:disc"><strong>trzecia harmoniczna</strong>: bardzo duża liczba odbiorników zasilanych z przekształtników generuje bardzo duże prądy trzeciej harmonicznej, które zamykają się przez przewody neutralne instalacji trójfazowych - co w przypadku instalacji w starych budynkach grozi nawet pożarami</li></ul><ul id="3d12df4f-b6c9-4ce3-b871-80384bfd8d7c" class="bulleted-list"><li style="list-style-type:disc"><strong>składowa przeciwna:</strong> pojawienie się w sieci zasilającej składowej przeciwnej powoduje, że moment obrotowy silników może zostać obniżony - jest to spowodowane przepływem prądów harmonicznych wyższych rzędów</li></ul><ul id="47abb5a2-1105-468b-ae8c-ed974b7ee97d" class="bulleted-list"><li style="list-style-type:disc"><strong>obniżenie współczynnika mocy</strong>: pobieranie z sieci odkształconych prądów sprawia, że odbiorniki mają z punktu widzenia sieci niski współczynnik mocy - zatem wypadkowo sprawność urządzeń jest niższa ze względu na moc bierną deformacji; oprócz tego może dochodzić do przesunięcia fazowego prądów względem napięć</li></ul><ul id="e8c35971-0991-4a69-90c4-430db6eb5917" class="bulleted-list"><li style="list-style-type:disc"><strong>spadki napięć:</strong> przekształtniki impulsowe działają praktycznie w stanach zwarć, co może powodować ucinanie przebiegu sinusoidy w sieci podczas działania takich urządzeń - zwłaszcza w stanach komutacji</li></ul><ul id="7c86488b-78c9-4e35-b9a1-513a678aa25c" class="bulleted-list"><li style="list-style-type:disc"><strong>zakłócenia wysokoczęstotliwościowe: </strong>szybkie przełączenia napięć dużej wartości oznaczają bardzo duże stromości narostu fal napięciowych, co w efekcie oddziałując z pojemnościami sieci może generować znaczne przepięcia i uszkadzać izolację</li></ul><ul id="dd2e2150-ce36-4171-8b90-0b1d87880562" class="bulleted-list"><li style="list-style-type:disc"><strong>zakłócenia elektromagnetyczne:</strong> wyżej opisane przepięcia mogą też generować duże chwilowe prądy harmonicznych o wysokich częstotliwościach - przepływ tych prądów o dużych wartościach generuje fale elektromagnetyczne wysokich częstotliwości, które mogą oddziaływać z urządzeniami bezprzewodowymi, komputerami, etc. w pobliżu</li></ul><ul id="27096ffb-b660-4555-ac34-d1b326eff23c" class="bulleted-list"><li style="list-style-type:disc"><strong>indukowanie prądów w łożyskach silników: </strong>przepływy wyższych harmonicznych przez uzwojenia silników mogą sprawiać, że strumienie magnetyczne indukowane dla tych harmonicznych zaczną indukować prądy w łożyskach silników</li></ul><ul id="7e1f10d8-61be-4da3-81cd-896bb5e7cb8b" class="bulleted-list"><li style="list-style-type:disc"><strong>zjawiska rezonansowe:</strong> pojawienie się wyższych harmonicznych może też powodować zjawiska rezonansowe, jak np. znaczne przepięcia na zaciskach silników prądu przemiennego, wiele razy w ciągu kilku sekund. </li></ul><p id="ec5e3ec1-d117-4287-a252-1408da12c68b" class=""><strong>Sposoby ograniczania przekształtników na sieć zasilającą</strong></p><ul id="c0ef4560-adb2-40e0-960a-cd06820b0b35" class="bulleted-list"><li style="list-style-type:disc"><strong>ograniczanie stosowania niesterowanych lub tyrystorowych prostowników tylko do układów małej mocy </strong></li></ul><ul id="53980c86-c940-4e31-8bf0-ae7732725cf9" class="bulleted-list"><li style="list-style-type:disc"><strong>stosowanie dławików:</strong> dławiki wygładzają prąd, ograniczając tempo ładowania kondensatorów po stronie DC układów, co w efekcie zmniejsza zawartość prądów wyższych harmonicznych - co jest skuteczne zwłaszcza w układach PWM</li></ul><ul id="f27146dc-a83b-4772-86f0-007961e5bd76" class="bulleted-list"><li style="list-style-type:disc"><strong>izolacja harmonicznych</strong>: poprzez zastosowanie transformatorów o połączeniach określonego typu, wyższe harmoniczne przestają być przenoszone do sieci (D/Y albo Y/Z układy połączeń)</li></ul><ul id="2d746954-aff0-4e9b-add5-49785516c838" class="bulleted-list"><li style="list-style-type:disc"><strong>metody wielopulsowe:</strong> działające przekształtniki można synchronizować w taki sposób, by wzajemnie eliminowały generowane przez siebie harmoniczne - przydatne są tu transformatory o uzwojeniach generujących określone przesunięcia fazowe</li></ul><ul id="e14cfde6-3b88-4fed-b1cc-01d1541df6c4" class="bulleted-list"><li style="list-style-type:disc"><strong>filtry pasywne:</strong> redukcję wyższych harmonicznych można osiągać przez stosowanie filtrów pasywnych szeregowych lub równoległych do odbiorników; filtry szeregowe w oparciu o rezonanse blokują określone harmoniczne, natomiast filtry równoległe je analogicznie zwierają ze sobą, przez co nie płyną one do odbiorników. <figure id="75042dd0-3b66-41c3-a0cc-a47770d273dc" class="image"><a href="11%20Przekszta%C5%82tniki%20statyczne%20w%20uk%C5%82adach%20zasilania%20%204f4e0c81cd424000909508bf6605d2e9/Untitled%2022.png"><img style="width:626px" src="11%20Przekszta%C5%82tniki%20statyczne%20w%20uk%C5%82adach%20zasilania%20%204f4e0c81cd424000909508bf6605d2e9/Untitled%2022.png"/></a></figure></li></ul><ul id="872826e7-6be2-4281-a72a-8078fc09779a" class="bulleted-list"><li style="list-style-type:disc"><strong>filtry aktywne</strong><ul id="70cc27fe-c030-4624-9ff2-06df6c6b289e" class="bulleted-list"><li style="list-style-type:circle"><strong>układy korekcji współczynnika mocy:</strong> specjalne przekształtniki dc-dc lub układy prostowników sterowanych w określony sposób pozwalają na sterowanie poborem mocy biernej oraz zawartością harmonicznych w pobieranych prądach; takie układy stosuje się przede wszystkim w prostownikach diodowych<figure id="fc713f16-5587-4cb5-90d6-16a4a7549eec" class="image"><a href="11%20Przekszta%C5%82tniki%20statyczne%20w%20uk%C5%82adach%20zasilania%20%204f4e0c81cd424000909508bf6605d2e9/Untitled%2023.png"><img style="width:519px" src="11%20Przekszta%C5%82tniki%20statyczne%20w%20uk%C5%82adach%20zasilania%20%204f4e0c81cd424000909508bf6605d2e9/Untitled%2023.png"/></a></figure></li></ul><ul id="61256705-606a-4b26-925d-ce819d73eb7c" class="bulleted-list"><li style="list-style-type:circle"><strong>prostowniki aktywne:</strong> specjalnie sterowane układy prostowników, które pozwalają na kontrolę współczynnika mocy - stosowane przede wszystkim tam gdzie potrzebna jest możliwość dwukierunkowego przepływu energii</li></ul></li></ul><ul id="a4c3581c-ba4a-43ab-8551-616cd5143931" class="bulleted-list"><li style="list-style-type:disc"><strong>kompensacja mocy biernej:</strong> stosuje się tu specjalne kompensatory nadążne lub przełączalne baterie kondensatorów ze sterownikiem prądu indukcyjnego; bardziej optymalnym rozwiązaniem jest tu jednak stosowanie filtrów aktywnych</li></ul><p id="bdecaad6-1263-4849-a07b-a8c5605ec523" class=""><strong>Źródła</strong></p><p id="f2ad82e4-9876-41b1-b462-18c2ead4f603" class="">[1] Angelo Baggini - <em>Handbook of power quality</em></p><p id="39593b83-df1f-4025-ba9e-2fd6f940bbb7" class="">[2] Ned Mohan - <em>Power Electronics</em></p><p id="24cc1d00-c699-4ef2-bdac-94167cd4a9f3" class="">[3] <a href="https://bezel.com.pl/2018/08/01/oddzialywanie-na-siec-zasilajaca/">https://bezel.com.pl/2018/08/01/oddzialywanie-na-siec-zasilajaca/</a></p></div></div></article></body></html>

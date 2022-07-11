@@ -1,0 +1,669 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>1. Wybrane zagadnienia teorii obwodów</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="e443d84e-c6d2-445a-85f0-53a7194d7561" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🪢</span></div><h1 class="page-title">1. Wybrane zagadnienia teorii obwodów</h1><table class="properties"><tbody><tr class="property-row property-row-select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesSelect"><path d="M7,13 C10.31348,13 13,10.31371 13,7 C13,3.68629 10.31348,1 7,1 C3.68652,1 1,3.68629 1,7 C1,10.31371 3.68652,13 7,13 Z M3.75098,5.32278 C3.64893,5.19142 3.74268,5 3.90869,5 L10.09131,5 C10.25732,5 10.35107,5.19142 10.24902,5.32278 L7.15771,9.29703 C7.07764,9.39998 6.92236,9.39998 6.84229,9.29703 L3.75098,5.32278 Z"></path></svg></span>Status</th><td><span class="selected-value select-value-color-green">Zrobione</span></td></tr><tr class="property-row property-row-person"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesPerson"><path d="M9.625,10.8465 C8.91187,10.2891 8.12088,9.926 7,9.26013 L7,8.71938 C7.21175,8.47612 7.392,8.176 7.53813,7.83213 C7.94587,7.7315 8.3125,7.33425 8.3125,7 C8.3125,6.51788 8.1095,6.32713 7.8715,6.17137 C7.8715,6.15562 7.875,6.14162 7.875,6.125 C7.875,5.41362 7.4375,3.5 5.25,3.5 C3.0625,3.5 2.625,5.4145 2.625,6.125 C2.625,6.14162 2.6285,6.15562 2.6285,6.17137 C2.3905,6.32713 2.1875,6.51788 2.1875,7 C2.1875,7.33425 2.55413,7.7315 2.96187,7.833 C3.108,8.176 3.28825,8.47612 3.5,8.71938 L3.5,9.26013 C2.37912,9.92513 1.58812,10.2882 0.875,10.8465 C0.041125,11.4984 0,12.4688 0,14 L10.5,14 C10.5,12.4688 10.4589,11.4984 9.625,10.8465 Z M13.125,7.3465 C12.4119,6.78912 11.6209,6.426 10.5,5.76013 L10.5,5.21938 C10.7118,4.97613 10.892,4.676 11.0381,4.33213 C11.4459,4.2315 11.8125,3.83425 11.8125,3.5 C11.8125,3.01787 11.6095,2.82713 11.3715,2.67138 C11.3715,2.65562 11.375,2.64162 11.375,2.625 C11.375,1.91363 10.9375,0 8.75,0 C6.5625,0 6.125,1.9145 6.125,2.625 C6.125,2.64162 6.1285,2.65562 6.1285,2.67138 C6.11188,2.68275 6.09787,2.69588 6.08125,2.70725 C7.83212,3.066 8.59688,4.54825 8.72813,5.74787 C8.97575,6.00863 9.1875,6.39625 9.1875,7 C9.1875,7.60288 8.771,8.20312 8.18388,8.51462 C8.127,8.624 8.06662,8.729 8.00275,8.82962 C8.155,8.91537 8.30025,8.99675 8.44025,9.07463 C9.08075,9.4325 9.63375,9.74137 10.164,10.1561 C10.3022,10.2638 10.4204,10.3801 10.5289,10.4991 L14,10.4991 C14,8.96875 13.9589,7.99837 13.125,7.3465 Z"></path></svg></span>Assign</th><td></td></tr></tbody></table></header><div class="page-body"><h3 id="c2a27764-6a98-411e-b2be-93e26016c04c" class=""><details open=""><summary>a) zastosowanie grafów przepływowych i schematów blokowych do analizy obwodów</summary></details></h3><div class="indented"><p id="af564cb1-ac25-4a00-b94a-646145c1da87" class=""><strong>Grafy przepływowe</strong></p><p id="7da36d8a-d26c-43cd-aa68-237816efe7aa" class="">Grafy przepływowe to sposób opisu przesyłu sygnałów w obwodach elektrycznych i układach automatyki. Opisując układ grafem przepływowym, zmienne układu rysuje się jako <strong>węzły</strong> połączone <strong>strzałkami</strong> wskazującymi <strong>kierunek przepływu sygnału</strong>. Założeniami tej metody jest fakt, że <strong>sygnały mogą płynąć w tylko jednym kierunku</strong>, określonym końcem strzałki. Powiązania są zatem przyczynowo-skutkowe. </p><figure id="3dbd4542-e315-461e-bb4f-5d3bdda661d5" class="image"><a href="1%20Wybrane%20zagadnienia%20teorii%20obwodo%CC%81w%20e443d84ec6d2445a85f053a7194d7561/Untitled.png"><img style="width:240px" src="1%20Wybrane%20zagadnienia%20teorii%20obwodo%CC%81w%20e443d84ec6d2445a85f053a7194d7561/Untitled.png"/></a><figcaption>Podstawowy zapis grafu przepływowego. x1 i y1 to zmienne, a11 to transmitancja której poddawany jest sygnał.</figcaption></figure><p id="ca2fd7cc-1f0f-4ff5-9ee2-1c746fb6b78e" class=""><strong>Każda strzałka ma natomiast przypisaną transmitancję</strong>, przez którą mnożony jest sygnał przekształcany z jednej zmiennej w drugą. Wykorzystanie grafów przepływowych i ich dostępnych przekształceń pozwala na obliczenie wypadkowej transmitancji całego rozpatrywanego układu. Do takich obliczeń wykorzystuję się <strong>teorię grafów zorientowanych</strong>.</p><p id="5079a905-3234-4f4a-945d-16128c04a61b" class="">Przykład zapisu czwórnika prądowego w postaci grafu przepływowego przedstawiono poniżej. </p><figure id="ea81065a-8f12-4410-a1f1-5f0d1cee3511" class="image"><a href="1%20Wybrane%20zagadnienia%20teorii%20obwodo%CC%81w%20e443d84ec6d2445a85f053a7194d7561/Untitled%201.png"><img style="width:800px" src="1%20Wybrane%20zagadnienia%20teorii%20obwodo%CC%81w%20e443d84ec6d2445a85f053a7194d7561/Untitled%201.png"/></a><figcaption>Przykładowy zapis czwórnika elektrycznego w postaci grafu przepływowego. y11, y21, y22 i y12 są tutaj transmitancjami pomiędzy zmiennymi. Należy tu zauważyć, że wejście i wyjście stanowią napięcia, natomiast pomiędzy nimi zmiennymi układu są prądy. Transmitancje opisują zatem, jak układ przekształca napięcia na prądy, a także jak prądy oddziałując z rezystancjami na wejściu i wyjściu pozwalają na uzyskanie napięć. </figcaption></figure><p id="ea79785e-b71c-4ef0-acf1-cbfac52615f9" class=""><strong>Schematy blokowe</strong></p><p id="4716bfbf-2eb1-47b1-931a-c3aeada0ef84" class="">Schematy blokowe to powszechniejsza, przynajmniej na W5, metoda przedstawiania układów automatyki czy obwodów elektrycznych. W schematach blokowych, <strong>bloki są transmitancjami</strong>, natomiast <strong>połączenia między nimi są zmiennymi </strong>- czyli zmienna jest jednocześnie wyjściem bloku i wejściem kolejnego. </p><figure id="2ca75136-09c8-4de8-bdfd-0b2a0a9d52f9" class="image"><a href="1%20Wybrane%20zagadnienia%20teorii%20obwodo%CC%81w%20e443d84ec6d2445a85f053a7194d7561/Untitled%202.png"><img style="width:488px" src="1%20Wybrane%20zagadnienia%20teorii%20obwodo%CC%81w%20e443d84ec6d2445a85f053a7194d7561/Untitled%202.png"/></a><figcaption>Przykładowy układ regulacji automatyki ze sprzężeniem zwrotnym, zapisany w postaci schematu blokowego.</figcaption></figure><p id="1ed5f87c-9c69-4ede-929c-595cbcbe363c" class="">Schematy blokowe można analizować przy wykorzystaniu tzw. <strong>algebry schematów blokowych</strong>, pozwalającej na upraszczanie układów wieloelementowych i sprowadzanie ich do pojedynczej transmitancji. </p><p id="2fffd1c7-c82a-42b7-a6b8-165d8a16b38d" class=""><strong>Podsumowanie</strong></p><p id="ab37ad86-ce8d-4ce2-a2c4-0a1e99f4c019" class="">Schematy blokowe oraz grafy przepływowe to metody matematyczne pozwalające opisywać rzeczywiste układy, złożone ze zbioru prostych elementów. Układy takie zapisuje się wybraną metodą, aby następnie analizować ich wypadkowy wpływ na przetwarzanie sygnału (zmiennej) wejściowego na wyjściowy.</p><p id="ac230d23-e44d-4f6e-ade0-924ceabee1d7" class="">Choć obie te metody mogą być stosowane dla różnego rodzaju układów fizycznych, to jednak ich główną domeną są układy regulacji automatycznej, a rzadziej obwody elektryczne.</p><h3 id="1ed27890-5df4-434b-a87a-8e42f243d29a" class=""><strong>Najważniejsze punkty</strong></h3><ul id="d4c8e7c5-de99-4709-9431-20eee9c43fd2" class="bulleted-list"><li style="list-style-type:disc">grafy przepływowe: węzły to zmienne, strzałki to transmitancje</li></ul><ul id="a757ef70-b96e-408c-bfcf-6b16c49b2c54" class="bulleted-list"><li style="list-style-type:disc">schematy blokowe: bloki to transmitancje, strzałki to sygnały</li></ul><ul id="55173bab-5889-4677-92e1-999b1b627b58" class="bulleted-list"><li style="list-style-type:disc">obie metody pozwalają na uproszczenie analizy układów - redukcja schematów blokowych i grafów węzłowych </li></ul><h3 id="f5db0222-bbef-4919-a0ec-cf4e603d245a" class=""><strong>Źródła</strong></h3><p id="8e548de5-db47-41ed-b58f-32bbe1a65d8f" class="">[1] <a href="https://en.wikipedia.org/wiki/Signal-flow_graph">https://en.wikipedia.org/wiki/Signal-flow_graph</a></p><p id="43ac6724-045d-4dbc-a177-a396d8ff053c" class="">[2] <a href="https://pl.wikipedia.org/wiki/Graf_przep%C5%82ywu_sygna%C5%82%C3%B3w">https://pl.wikipedia.org/wiki/Graf_przepływu_sygnałów</a></p><p id="a8ec9e40-1da3-44a7-9868-641d9433822b" class="">[3] <a href="https://pl.wikipedia.org/wiki/Schemat_blokowy_(automatyka)">https://pl.wikipedia.org/wiki/Schemat_blokowy_(automatyka)</a></p></div><h3 id="2826128d-83ff-46be-ad7d-80f5949a8d3f" class=""><details open=""><summary>b) obwody nieliniowe na przykładzie obwodu z łukiem elektrycznym i obwodów z rdzeniem ferromagnetycznym - zagadnienia stabilności i rezonansu</summary></details></h3><div class="indented"><p id="3d9408a0-d3ac-442e-9ecc-c5eeb6e6ce8f" class=""><strong>Obwody elektryczne nieliniowe</strong> to takie obwody, w których występuje <strong>co najmniej jeden element o nieliniowej charakterystyce</strong> lub kilka elementów nieliniowych, nierównoważących się nawzajem. <strong>Element nieliniowy</strong> to taki, którego <strong>charakterystyka prądowo-napięciowa nie może być opisana równaniem prostej</strong> <strong>y=ax+b</strong>. </p><p id="eca7b580-982a-48c2-a235-80b1bcb1e67d" class="">Zależnie od kształtu krzywej charakterystyki elementu, wyróżnia się elementy nieliniowe <strong>symetryczne, niesymetryczne, jednoznaczne i wieloznaczne</strong>. Symetryczne i niesymetryczne nazywa się zależnie od przebiegu charakterystyki w zakresie dodatnim i ujemnym. Jednoznaczne i wieloznaczne - zależnie od tego, czy pojawiają się w nich punkty na osi x z dwiema wartościami na osi y - czyli, w praktyce, wieloznaczne obwody to obwody z histerezą.</p><figure id="8a368bcd-a259-49f9-9942-64d0f1901207" class="image"><a href="1%20Wybrane%20zagadnienia%20teorii%20obwodo%CC%81w%20e443d84ec6d2445a85f053a7194d7561/Untitled%203.png"><img style="width:1146px" src="1%20Wybrane%20zagadnienia%20teorii%20obwodo%CC%81w%20e443d84ec6d2445a85f053a7194d7561/Untitled%203.png"/></a></figure><p id="5e76e0b4-4fac-43b5-aea5-4f70a8b4edfc" class="">W obwodach nieliniowych obowiązują prawa Kirchhoffa, zasada kompensacji, twierdzenie Thevenina i twierdzenie Nortona. Nie obowiązują natomiast prawo Ohma, zasada superpozycji i zasada wzajemności. </p><p id="259be17c-b553-4322-8722-bc69edf77cf8" class=""><strong>Stabilność</strong></p><p id="78b0a8ab-ebcf-4732-98cf-1fd1f534e148" class=""><strong>Stabilność układu</strong> definiuje się jako <strong>zdolność tego układu do powrotu do punktu równowagi po zmianie wymuszenia lub wystąpieniu zakłócenia</strong>. Znaczy to tyle, że w nowych warunkach pracy układ powinien przyjąć nowy punkt pracy zamiast np. w nieskończoność zwiększać obroty silnika czy prąd płynący przez obwód. </p><p id="53dfbe09-7ccd-4d7f-8302-7b0f4384252a" class="">Stabilność układów nieliniowych analizuje się przede wszystkim dwiema metodami Lapunowa. Pierwsza metoda Lapunowa to metoda pośrednia pozwalająca na badanie stabilności lokalnej, w obrębie pewnego punktu pracy. Druga metoda Lapunowa, nazywana bezpośrednią - służy do badania stabilności w ograniczonym lub nieograniczonym obszarze przestrzeni stanów układów nieliniowych.</p><p id="7e968f62-652d-4eb8-b0ed-23b865019069" class=""><strong>Rezonans</strong></p><p id="b13e480c-8575-4951-9ee4-9cae1f70f119" class="">Rezonans jest zjawiskiem fizycznym, w którym <strong>przy określonej częstotliwości sił wymuszających następuje znaczne zwiększenie amplitudy drgań układu</strong>. </p><p id="9f9b21d0-616c-4474-961a-c7aa6f8b84b0" class="">W obwodach elektrycznych, <strong>rezonans jest zjawiskiem pojawiającym się, gdy częstotliwość wymuszenia </strong>(np. napięcia)<strong> odpowiada częstotliwości rezonansowej obwodu</strong> (zależnej od impedancji elementów LC). <strong>Moc bierna pobierana przez obwód spada do zera</strong>.</p><p id="07a1ad1a-d7b1-40a8-9271-4a78138eb717" class="">W przypadku elementów LC <strong>szeregowych</strong>, występuje <strong>rezonans napięciowy</strong> i <strong>prąd znacznie wzrasta</strong>. W przypadku elementów LC <strong>równoległych</strong>, <strong>prąd maleje praktycznie do zera</strong>, ale jednocześnie <strong>wzrastają znacznie napięcia na elementach obwodu</strong>.  </p><p id="8ae40d6f-7701-4129-a9ca-f14cd4c4c5b7" class="">Rezonans elektryczny można wykorzystać do kompensacji mocy biernej (przez wyzerowanie prądu składowej biernej, czyli rezonans prądów), a także jako filtry lub wzmacniacze określonych częstotliwości w radiotechnice.</p><p id="8fc21622-9d7a-4763-b884-be04285013ec" class="">Szczególnym typem rezonansu jest <strong>ferrorezonans</strong>. Ferrorezonans pojawia się w obwodach, w których <strong>nieliniowa indukcyjność jest zasilona ze źródła z szeregowo wpiętą pojemnością i dojdzie do zakłócenia</strong> np. w postaci załączenia nowego odbiornika. W takim przypadku mogą wystąpić <strong>znaczne przetężenia i przepięcia </strong>w obwodzie. </p><p id="04e1fbef-79a2-41f5-833e-b1c08175ab6f" class=""><strong>Praktyczną sytuacją</strong> z ferrorezonansem jest np. wystąpienie w 3-fazowym układzie elektroenergetycznym <strong>zakłócenia w jednej z faz</strong>. Transformatory są elementami tylu L, linie kablowe - elementami typu C. Zakłócenie w jednej faz powoduje znaczne zmiany napięcia w pozostałych fazach. Ta gwałtowna zmiana może wywołać ferrorezonans, co z kolei może prowadzić do uszkodzenia izolacji w systemie.</p><p id="c51e902d-90ac-461a-91ed-7101380a1246" class=""><strong>Obwód z łukiem elektrycznym</strong></p><p id="de438a92-a9b9-4574-8688-0ced5438f6bb" class="">Obwód prądu stałego z łukiem elektrycznym jest przykładem obwodu nieliniowego. W takim obwodzie, elementem nieliniowym jest sam łuk elektryczny. Jego charakterystyka przecina się z liniową charakterystyką obwodu w dwóch miejscach. Te dwa punkty nazywa się kolejno punktem równowagi chwiejnej (A) i punktem równowagi stabilnej (B). Punkty te wydzielają dwa obszary napięcia obwodu: zakres dodatni, przy którym <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mfrac><mrow><mi>d</mi><mi>i</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">L\frac{di}{dt}&gt;0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.2251079999999999em;vertical-align:-0.345em;"></span><span class="mord mathnormal">L</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8801079999999999em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">d</span><span class="mord mathnormal mtight">t</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">d</span><span class="mord mathnormal mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span></span><span>﻿</span></span> oraz ujemny, przy którym <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mfrac><mrow><mi>d</mi><mi>i</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac><mo>&lt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">L\frac{di}{dt}&lt;0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.2251079999999999em;vertical-align:-0.345em;"></span><span class="mord mathnormal">L</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8801079999999999em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">d</span><span class="mord mathnormal mtight">t</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">d</span><span class="mord mathnormal mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span></span><span>﻿</span></span>. W zakresie dodatnim, prąd łuku wzrasta. W zakresie ujemnym - maleje.</p><figure id="e2916888-ef02-4f26-9f44-768929fde9b4" class="image"><a href="1%20Wybrane%20zagadnienia%20teorii%20obwodo%CC%81w%20e443d84ec6d2445a85f053a7194d7561/Untitled%204.png"><img style="width:850px" src="1%20Wybrane%20zagadnienia%20teorii%20obwodo%CC%81w%20e443d84ec6d2445a85f053a7194d7561/Untitled%204.png"/></a></figure><p id="205548dd-864d-4a89-a62b-738565ec8264" class="">Wytrącenie łuku z punktu równowagi A poprzez zmniejszenie prądu, powoduje jego zgaszenie - wejście w zakres ujemny napięć i w związku z tym dalsze osłabienie prądu. Jeżeli prąd w tym punkcie równowagi się zwiększy, prąd zacznie rosnąć i łuk znajdzie się ostatecznie w nowym punkcie pracy, czyli B. Zgaszenie łuku oznacza zatem wytrącenie obwodu z punktu równowagi, czyli de facto jego destabilizację. </p><figure id="2966fe40-0fdc-4f72-b358-75746818144c" class="image"><a href="1%20Wybrane%20zagadnienia%20teorii%20obwodo%CC%81w%20e443d84ec6d2445a85f053a7194d7561/Untitled%205.png"><img style="width:932px" src="1%20Wybrane%20zagadnienia%20teorii%20obwodo%CC%81w%20e443d84ec6d2445a85f053a7194d7561/Untitled%205.png"/></a></figure><p id="d9592393-c9c4-4bd4-afb7-b37dc95a31d1" class=""><strong>Obwód z rdzeniem ferromagnetycznym</strong></p><p id="0eb55d6c-796b-44d2-83d8-b6afa2c42ef1" class="">Obwód z rdzeniem ferromagnetycznym jest <strong>obwodem nieliniowym</strong> ze względu na <strong>histerezę rdzenia</strong> dławika, transformatora czy innej maszyny elektrycznej. Histereza opisuje zmianę indukcji magnetycznej materiału przy zmianie natężenia pola magnetycznego, któremu materiał jest poddawany. </p><p id="93f2200c-5173-4e30-b0cd-5e4b82023860" class="">W obwodzie elektrycznym, histereza sprawia że <strong>charakterystyka prądowo-napięciowa jest nieliniowa</strong> i od pewnego punktu, zwanego nasyceniem, <strong>zwiększenie płynącego w obwodzie prądu wymaga znacznego zwiększenia napięcia zasilającego</strong>. Ta właściwość obwodów magnetycznych sprawia, że są one podatne na zjawisko <strong>ferrorezonansu</strong>. </p><p id="75c85e2b-ca0d-4439-b48e-8bb7aa1791af" class=""><strong>Ferrorezonans</strong> w przypadku nieliniowej cewki wynika z faktu <strong>nieliniowego przebiegu reaktancji</strong>. Pojawienie się nagłego skoku napięcia w systemie trójfazowym wskutek zakłócenia w jednej faz może sprawić, że zmiana indukcyjności cewki w połączeniu z pojemnością lini kablowych spowoduje pojawienie się rezonansu. Ferrorezonans, w przeciwieństwie do rezonansu liniowego, objawia się skokową zmianą prądu lub napięcia. To może prowadzić do uszkodzenia linii czy izolacji transformatorów. </p><h3 id="225f4bae-3a84-4cf0-b588-d3ebdbba9118" class="">Najważniejsze punkty</h3><ul id="2fd89dd6-58fe-4426-9027-7431326bcae4" class="bulleted-list"><li style="list-style-type:disc">obwody liniowe to takie, w których występuje element nieliniowy</li></ul><ul id="6692ea7c-78f7-43d2-b206-6bf2ef6c92c6" class="bulleted-list"><li style="list-style-type:disc">element nieliniowy to taki, którego charakterystyka prądowo-napięciowa nie jest linią prostą</li></ul><ul id="2f2101ab-6b53-46d2-afb0-f7a1e090df5a" class="bulleted-list"><li style="list-style-type:disc">łuk elektryczny gasi się poprzez wytrącenie go poza stabilny punkt pracy na nieliniowej charakterystyce prądowo-napięciowej</li></ul><ul id="1180639f-eed1-42ed-a472-bf042cf2d19a" class="bulleted-list"><li style="list-style-type:disc">w obwodzie z rdzeniem magnetycznym występuje histereza - wzrost prądu powoduje duży wzrost napięcia lub wymaga dużego wzrostu napięcia</li></ul><ul id="d7900084-7eaf-4c34-b6f5-17aa79aa0248" class="bulleted-list"><li style="list-style-type:disc">histereza może powodować rezonans (ferrorezonans) gdy w układzie z elementem ferromagnetycznym dojdzie do zakłócenia - zmienia się jego reaktancja.</li></ul><h3 id="911b4ff8-2074-4db1-b63b-4780facc41ed" class=""><strong>Źródła</strong></h3><p id="9aa60557-76b8-4d30-a4c6-4aa08f901ba5" class="">[1] <a href="https://zoise.wel.wat.edu.pl/dydaktyka/WEL%20niestacjonarne/Wyklady/05_Obwody_nieliniowe_pradu_stalego.pdf">https://zoise.wel.wat.edu.pl/dydaktyka/WEL niestacjonarne/Wyklady/05_Obwody_nieliniowe_pradu_stalego.pdf</a></p><p id="9191a009-0390-4f4c-9b53-9dab27c5295b" class="">[2] <a href="https://pl.wikipedia.org/wiki/Stabilno%C5%9B%C4%87_uk%C5%82adu_automatycznej_regulacji#Stabilno%C5%9B%C4%87_uk%C5%82ad%C3%B3w_nieliniowych_i_niestacjonarnych">https://pl.wikipedia.org/wiki/Stabilność_układu_automatycznej_regulacji#Stabilność_układów_nieliniowych_i_niestacjonarnych</a></p><p id="ff09235c-b52a-4ea4-86e5-3296e49260b0" class="">[3] <a href="https://docplayer.pl/3362988-3-luk-elektryczny-pradu-stalego-i-przemiennego.html">https://docplayer.pl/3362988-3-luk-elektryczny-pradu-stalego-i-przemiennego.html</a></p><p id="293899f5-f9d6-4e1a-b141-e77f3ef730db" class="">[4] <a href="https://en.wikipedia.org/wiki/Resonance#RLC_series_circuits">https://en.wikipedia.org/wiki/Resonance#RLC_series_circuits</a></p><p id="977031e8-2ad5-4582-a528-d6afb29e62f3" class="">[5] <a href="https://en.wikipedia.org/wiki/Ferroresonance_in_electricity_networks">https://en.wikipedia.org/wiki/Ferroresonance_in_electricity_networks</a></p><p id="bfb7d57e-8711-4833-aed4-27aded833ed8" class="">[6] <a href="https://zoise.wel.wat.edu.pl/dydaktyka/ENERGETYKA/CW_6_Badanie_obwodow_magnetycznych.pdf">https://zoise.wel.wat.edu.pl/dydaktyka/ENERGETYKA/CW_6_Badanie_obwodow_magnetycznych.pdf</a></p></div><h3 id="9cb47efd-27e3-4e80-9833-09cb5fa3909b" class=""><details open=""><summary>c) opis układu cyfrowego za pomocą równania różnicowego - transmitancja układu cyfrowego</summary></details></h3><div class="indented"><p id="8bc5c588-8b3c-47cd-ba39-aeb8a8730187" class=""><strong>Układ cyfrowy</strong> to układ <strong>dyskretny</strong>. Oznacza to, że przynajmniej jeden jego sygnał ma charakter dyskretny, czyli przyjmuje tylko określone wartości tylko dla określonych chwil czasu - tzw. próbki. Próbki sygnału są przesunięte od siebie w czasie o okres próbkowania. </p><p id="8643e115-dbf4-49f0-98ac-11e9ac3f1dff" class=""><strong>Równania różnicowe</strong></p><p id="d4568e10-4c1a-49bf-b45c-d66fa13e5052" class="">Różnica pierwszego rzędu to po prostu zmiana wartości sygnału między następną a aktualną próbką, czyli: <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">Δ</mi><mi>f</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mo>=</mo><mi>f</mi><mo stretchy="false">(</mo><mi>n</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo><mo>−</mo><mi>f</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\Delta f(n)=f(n+1)-f(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">Δ</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></span><span>﻿</span></span>. Różnicę uzyskuję się poprzez zastąpienie czasu ciągłego (dt) operatorem dyskretnym różniczki czasu. Różnica jest analogią do różniczki w równaniu różniczkowym. Można też obliczać różnice wyższych rzędów, czyli niejako “pochodne” wyższych rzędów w równaniach dyskretnych.</p><p id="34750550-5c39-49fa-b3f8-e3960120896f" class="">Równanie różnicowe to sposób opisu układów dyskretnych analogiczny do zapisu układów ciągłych przez równania różniczkowe. Równanie różnicowe to suma różnic pierwszego i wyższych rzędów sygnału wejścia i wyjścia układu, zapisane w jednolitej postaci. Równanie różnicowe opisuje przebieg próbki w dziedzinie czasu i przyjmuje postać:</p><figure id="cddcb49e-df23-4ea6-b16f-86f348968d0e" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>0</mn></mrow><mi>n</mi></munderover><mfrac><msub><mi>a</mi><mi>i</mi></msub><msup><mi>T</mi><mi>i</mi></msup></mfrac><msup><mi mathvariant="normal">Δ</mi><mi>i</mi></msup><mi>y</mi><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo><mo>=</mo><munderover><mo>∑</mo><mrow><mi>l</mi><mo>=</mo><mn>0</mn></mrow><mi>m</mi></munderover><mfrac><msub><mi>n</mi><mi>l</mi></msub><msup><mi>T</mi><mi>l</mi></msup></mfrac><msup><mi mathvariant="normal">Δ</mi><mi>l</mi></msup><mi>u</mi><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\sum^n_{i=0}\frac{a_i}{T^i}\Delta^i y(k)=\sum^m_{l=0}\frac{n_l}{T^l}\Delta^l u(k)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.929066em;vertical-align:-1.277669em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.6513970000000002em;"><span style="top:-1.872331em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">0</span></span></span></span><span style="top:-3.050005em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span><span style="top:-4.3000050000000005em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.277669em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.1075599999999999em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.750664em;"><span style="top:-2.9890000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mord"><span class="mord">Δ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8746639999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span></span></span></span></span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.9535100000000005em;vertical-align:-1.302113em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.6513970000000002em;"><span style="top:-1.8478869999999998em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.01968em;">l</span><span class="mrel mtight">=</span><span class="mord mtight">0</span></span></span></span><span style="top:-3.0500049999999996em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span><span style="top:-4.300005em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">m</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.302113em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.1075599999999999em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7751079999999999em;"><span style="top:-2.9890000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.01968em;">l</span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.01968em;">l</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mord"><span class="mord">Δ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8991079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.01968em;">l</span></span></span></span></span></span></span></span><span class="mord mathnormal">u</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mclose">)</span></span></span></span></span></div></figure><p id="2163f516-79d9-4bc1-8043-d945e069d6cf" class="">Powyższe równanie ustosunkowuje wejście do wyjścia układu. Parametr k jest numerem rozpatrywanej próbki.</p><p id="e1a0b552-fe98-4e82-9bd4-23d77fa1d2a8" class=""><strong>Transmitancja układu cyfrowego</strong></p><p id="00cb8b8f-d532-4e44-a186-fd7150122adb" class=""><strong>Transmitancja dyskretna</strong> układu cyfrowego to <strong>stosunek dyskretnej transformaty Laplace’a sygnału wyjściowego Y(z) do transformaty sygnału wejściowego U(z)</strong>, przy założeniu <strong>zerowych warunków początkowych</strong>. Stąd równanie <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>G</mi><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo><mo>=</mo><mfrac><mrow><mi>Y</mi><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow><mrow><mi>U</mi><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">G(z)=\frac{Y(z)}{U(z)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">G</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.04398em;">z</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.53em;vertical-align:-0.52em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.01em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.10903em;">U</span><span class="mopen mtight">(</span><span class="mord mathnormal mtight" style="margin-right:0.04398em;">z</span><span class="mclose mtight">)</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.485em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.22222em;">Y</span><span class="mopen mtight">(</span><span class="mord mathnormal mtight" style="margin-right:0.04398em;">z</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.52em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span><span>﻿</span></span>.</p><p id="82302c84-6aae-4c72-82bb-b0eaf3c58a74" class="">W celu uzyskania transformat równań różnicowych stosuje się tzw. <strong>transformatę Z, czyli dyskretną wersję transformaty Laplace’a</strong>. Transformata Laplace’a ciągi (bo próbki dyskretne opisuje się ciągami) przekształca do zespolonej zmiennej ciągłej <em>z</em>. Transformata stosowana w analizie układów dyskretnych jest <strong>transformatą dwustronną</strong>, czyli obejmuje obszar od minus do plus nieskończoności.  </p><p id="1f75cade-4413-4467-8694-b587968513b4" class="">Dzięki transmitancji dyskretnej, układy dyskretne można analizować w sposób podobny do układów ciągłych pomimo dyskretyzacji. Można przy tym stosować kryteria podobne do tych układów oraz korzystać z podobnej algebry schematów blokowych.</p><h3 id="86f3318c-f6d9-4647-8c4e-f6f53966f5c7" class="">Najważniejsze punkty</h3><ul id="f9f0d866-0908-46bd-a1fb-f9c8c1549188" class="bulleted-list"><li style="list-style-type:disc">równanie różnicowe to odpowiednik równania różniczkowego dla układów dyskretnych; różnica polega na zastosowaniu operatora dyskretnego <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">Δ</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">\Delta t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord">Δ</span><span class="mord mathnormal">t</span></span></span></span></span><span>﻿</span></span> zamiast ciągłego <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">dt</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathnormal">d</span><span class="mord mathnormal">t</span></span></span></span></span><span>﻿</span></span></li></ul><ul id="c1a914eb-fbf1-47cd-95b5-edd8d5eeeb6c" class="bulleted-list"><li style="list-style-type:disc">transmitancja układu dyskretnego to stosunek transformaty <em><strong><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>z</mi></mrow><annotation encoding="application/x-tex">z</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.04398em;">z</span></span></span></span></span><span>﻿</span></span></strong></em> sygnału wyjścia takiego układu do transformaty <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>z</mi></mrow><annotation encoding="application/x-tex">z</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.04398em;">z</span></span></span></span></span><span>﻿</span></span> sygnału wejścia</li></ul><ul id="179b2321-0549-4c89-8785-dd620ad4efc0" class="bulleted-list"><li style="list-style-type:disc">transformata <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>z</mi></mrow><annotation encoding="application/x-tex">z</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.04398em;">z</span></span></span></span></span><span>﻿</span></span> to dyskretna forma transformaty Laplace’a, która ciągi (sygnał dyskretny to ciąg) przekształca na ciągłe zmienne zespolone <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>z</mi></mrow><annotation encoding="application/x-tex">z</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.04398em;">z</span></span></span></span></span><span>﻿</span></span></li></ul><p id="800c5640-05d5-4401-adcd-c128264f78a9" class=""><strong>Źródła</strong></p><p id="2448af04-b7ad-4a82-88ce-70a691679706" class="">[1] <a href="https://home.agh.edu.pl/~sypka/dydaktyka/materialy/2E_CPS_2020-2021_08_B.pdf">https://home.agh.edu.pl/~sypka/dydaktyka/materialy/2E_CPS_2020-2021_08_B.pdf</a> </p><p id="c95a998b-815f-4dfd-9b7f-df9f4103cc8f" class="">[2] <a href="http://wikizmsi.zut.edu.pl/uploads/6/63/Lab2_WDAC.pdf">http://wikizmsi.zut.edu.pl/uploads/6/63/Lab2_WDAC.pdf</a></p><p id="366b519f-fed1-4530-8633-86f283f3c869" class="">[3] <a href="https://ioisp.el.pcz.pl/images/instrukcje/air/Komputery%20w%20sterowaniu/Cw.4%20Dyskretne%20uklady%20liniowe.pdf">https://ioisp.el.pcz.pl/images/instrukcje/air/Komputery w sterowaniu/Cw.4 Dyskretne uklady liniowe.pdf</a></p></div><h3 id="ba8c6125-0cef-4aa8-b072-1a4aad6949c9" class=""><details open=""><summary>d) splot dyskretny oraz odpowiedź układu cyfrowego na dowolne wymuszenie</summary></details></h3><div class="indented"><p id="886fed0b-8709-44cf-8d95-6b3962f71a60" class=""><strong>Odpowiedź impulsowa</strong> h[n] układu cyfrowego to wyjście tego układu y[n], gdy wymuszenie x[n] jest deltą Koneckera <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>δ</mi><mo stretchy="false">[</mo><mi>n</mi><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">\delta[n]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.03785em;">δ</span><span class="mopen">[</span><span class="mord mathnormal">n</span><span class="mclose">]</span></span></span></span></span><span>﻿</span></span> - pojedynczym impulsem o wartości 1. Typowa odpowiedź impulsowa układu cyfrowego wygląda tak:</p><figure id="b170b968-f336-43f4-a82a-d3ba1b5673fb" class="image"><a href="1%20Wybrane%20zagadnienia%20teorii%20obwodo%CC%81w%20e443d84ec6d2445a85f053a7194d7561/Untitled%206.png"><img style="width:170px" src="1%20Wybrane%20zagadnienia%20teorii%20obwodo%CC%81w%20e443d84ec6d2445a85f053a7194d7561/Untitled%206.png"/></a></figure><p id="c55c481f-dd67-413a-97da-211f15ec5cc7" class="">Każda kolejna widoczna na niej “szpila” to wartość początkowa przemnożona kolejny raz przez 0,7 (niejako stała czasowa układu). Można to przedstawić w postaci następującego bloku:</p><figure id="387be2e9-90ee-4998-8934-8a78725009bf" class="image"><a href="1%20Wybrane%20zagadnienia%20teorii%20obwodo%CC%81w%20e443d84ec6d2445a85f053a7194d7561/Untitled%207.png"><img style="width:274px" src="1%20Wybrane%20zagadnienia%20teorii%20obwodo%CC%81w%20e443d84ec6d2445a85f053a7194d7561/Untitled%207.png"/></a></figure><p id="e6d91195-2a22-4a94-a6c6-c8f80620f094" class="">Stąd, jeżeli na wejściu damy wymuszenie <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo stretchy="false">[</mo><mi>n</mi><mo stretchy="false">]</mo><mo>=</mo><mn>6</mn><mi>δ</mi><mo stretchy="false">[</mo><mi>n</mi><mo>−</mo><mn>2</mn><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">x[n]=6\delta [n-2]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">x</span><span class="mopen">[</span><span class="mord mathnormal">n</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">6</span><span class="mord mathnormal" style="margin-right:0.03785em;">δ</span><span class="mopen">[</span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">2</span><span class="mclose">]</span></span></span></span></span><span>﻿</span></span>, wyglądające tak:</p><figure id="2e0095d3-6446-49c5-944b-91cf53a34710" class="image"><a href="1%20Wybrane%20zagadnienia%20teorii%20obwodo%CC%81w%20e443d84ec6d2445a85f053a7194d7561/Untitled%208.png"><img style="width:271px" src="1%20Wybrane%20zagadnienia%20teorii%20obwodo%CC%81w%20e443d84ec6d2445a85f053a7194d7561/Untitled%208.png"/></a></figure><p id="7a5b74d6-3821-4b42-ba88-6434e7ecbe02" class="">To <strong>odpowiedź układu będzie przemnożeniem wymuszenia przez odpowiedź impulsową</strong> - czyli jak poniżej:</p><figure id="c36bbe31-2727-42c8-bd0e-684007d1aa15" class="image"><a href="1%20Wybrane%20zagadnienia%20teorii%20obwodo%CC%81w%20e443d84ec6d2445a85f053a7194d7561/Untitled%209.png"><img style="width:297px" src="1%20Wybrane%20zagadnienia%20teorii%20obwodo%CC%81w%20e443d84ec6d2445a85f053a7194d7561/Untitled%209.png"/></a></figure><p id="440d90f6-8591-4774-8fc7-7317de47d1f8" class=""><strong>Odpowiedź y[n] na dowolne wymuszenie x[n] jest</strong> tak naprawdę <strong>superpozycją odpowiedzi impulsowych na poszczególne składowe wymuszenia</strong>. To znaczy, że jeżeli sygnał wymuszający to <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo stretchy="false">[</mo><mi>n</mi><mo stretchy="false">]</mo><mo>=</mo><mn>5</mn><mi>δ</mi><mo stretchy="false">[</mo><mi>n</mi><mo stretchy="false">]</mo><mo>+</mo><mn>6</mn><mi>δ</mi><mo stretchy="false">[</mo><mi>n</mi><mo>−</mo><mn>2</mn><mo stretchy="false">]</mo><mo>+</mo><mn>4</mn><mi>δ</mi><mo stretchy="false">[</mo><mi>n</mi><mo>−</mo><mn>5</mn><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">x[n]=5\delta[n]+6\delta[n-2]+4\delta[n-5]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">x</span><span class="mopen">[</span><span class="mord mathnormal">n</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">5</span><span class="mord mathnormal" style="margin-right:0.03785em;">δ</span><span class="mopen">[</span><span class="mord mathnormal">n</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">6</span><span class="mord mathnormal" style="margin-right:0.03785em;">δ</span><span class="mopen">[</span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">2</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">4</span><span class="mord mathnormal" style="margin-right:0.03785em;">δ</span><span class="mopen">[</span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">5</span><span class="mclose">]</span></span></span></span></span><span>﻿</span></span>, narysowany poniżej:</p><figure id="21069036-65a7-48dd-a655-bb1cf49fd117" class="image"><a href="1%20Wybrane%20zagadnienia%20teorii%20obwodo%CC%81w%20e443d84ec6d2445a85f053a7194d7561/Untitled%2010.png"><img style="width:266px" src="1%20Wybrane%20zagadnienia%20teorii%20obwodo%CC%81w%20e443d84ec6d2445a85f053a7194d7561/Untitled%2010.png"/></a></figure><p id="ef574738-7e02-46f2-afd4-46c31afe9f0f" class="">To odpowiedzią tego wymuszenia jest odpowiedź impulsowa na każdą “szpilę” z osobna, co wygląda jak poniżej.</p><figure id="9b67c51d-e7c2-4fd3-bf1e-e8d8baa6a783" class="image"><a href="1%20Wybrane%20zagadnienia%20teorii%20obwodo%CC%81w%20e443d84ec6d2445a85f053a7194d7561/Untitled%2011.png"><img style="width:311px" src="1%20Wybrane%20zagadnienia%20teorii%20obwodo%CC%81w%20e443d84ec6d2445a85f053a7194d7561/Untitled%2011.png"/></a></figure><p id="010dfdde-7b35-4fcd-b4db-0809febee852" class="">Odpowiedź układu na dowolne wymuszenie można więc przedstawić tak, jak powyżej. <strong>Dowolne wymuszenie dyskretne można przedstawić jako nieskończoną sumę delt Koneckera</strong>, co z zasady superpozycji pozwala określić odpowiedź układu na to wymuszenie. </p><p id="e69742ed-f825-41cf-b967-dec8f78e133b" class="">Patrząc na obrazek powyżej można więc zauważyć zależność:</p><figure id="edd82c1a-edb1-4137-bb12-b82aa68dd084" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>y</mi><mo stretchy="false">[</mo><mn>0</mn><mo stretchy="false">]</mo><mo>=</mo><mi>x</mi><mo stretchy="false">[</mo><mn>0</mn><mo stretchy="false">]</mo><mi>h</mi><mo stretchy="false">[</mo><mn>0</mn><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">y[0] = x[0]h[0]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mopen">[</span><span class="mord">0</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">x</span><span class="mopen">[</span><span class="mord">0</span><span class="mclose">]</span><span class="mord mathnormal">h</span><span class="mopen">[</span><span class="mord">0</span><span class="mclose">]</span></span></span></span></span></div></figure><figure id="00944ef0-82ba-4d2b-bf2e-119c4700cc62" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>y</mi><mo stretchy="false">[</mo><mn>1</mn><mo stretchy="false">]</mo><mo>=</mo><mi>x</mi><mo stretchy="false">[</mo><mn>0</mn><mo stretchy="false">]</mo><mi>h</mi><mo stretchy="false">[</mo><mn>1</mn><mo stretchy="false">]</mo><mo>+</mo><mi>x</mi><mo stretchy="false">[</mo><mn>1</mn><mo stretchy="false">]</mo><mi>h</mi><mo stretchy="false">[</mo><mn>0</mn><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">y[1] = x[0]h[1] + x[1]h[0]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mopen">[</span><span class="mord">1</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">x</span><span class="mopen">[</span><span class="mord">0</span><span class="mclose">]</span><span class="mord mathnormal">h</span><span class="mopen">[</span><span class="mord">1</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">x</span><span class="mopen">[</span><span class="mord">1</span><span class="mclose">]</span><span class="mord mathnormal">h</span><span class="mopen">[</span><span class="mord">0</span><span class="mclose">]</span></span></span></span></span></div></figure><figure id="83613765-9241-4b78-9f6a-cf542b9ad17a" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>y</mi><mo stretchy="false">[</mo><mn>2</mn><mo stretchy="false">]</mo><mo>=</mo><mi>x</mi><mo stretchy="false">[</mo><mn>0</mn><mo stretchy="false">]</mo><mi>h</mi><mo stretchy="false">[</mo><mn>2</mn><mo stretchy="false">]</mo><mo>+</mo><mi>x</mi><mo stretchy="false">[</mo><mn>1</mn><mo stretchy="false">]</mo><mi>h</mi><mo stretchy="false">[</mo><mn>1</mn><mo stretchy="false">]</mo><mo>+</mo><mi>x</mi><mo stretchy="false">[</mo><mn>2</mn><mo stretchy="false">]</mo><mi>h</mi><mo stretchy="false">[</mo><mn>0</mn><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">y[2] = x[0]h[2] + x[1]h[1] + x[2]h[0]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mopen">[</span><span class="mord">2</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">x</span><span class="mopen">[</span><span class="mord">0</span><span class="mclose">]</span><span class="mord mathnormal">h</span><span class="mopen">[</span><span class="mord">2</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">x</span><span class="mopen">[</span><span class="mord">1</span><span class="mclose">]</span><span class="mord mathnormal">h</span><span class="mopen">[</span><span class="mord">1</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">x</span><span class="mopen">[</span><span class="mord">2</span><span class="mclose">]</span><span class="mord mathnormal">h</span><span class="mopen">[</span><span class="mord">0</span><span class="mclose">]</span></span></span></span></span></div></figure><p id="4e5ce18f-aa74-41a1-beb5-eb1f11f9eff7" class="">I tak dalej, co można przedstawić ogólnie za pomocą sumy, w której x[k] to wymuszenie w próbce k, natomiast h[k] to odpowiedź impulsowa na wymuszenie w próbce k:</p><p id="388d1f41-e5bd-4ed0-82e5-3a29251958a7" class=""><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo stretchy="false">[</mo><mi>n</mi><mo stretchy="false">]</mo><mo>=</mo><msubsup><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mn>0</mn></mrow><mi>n</mi></msubsup><mi>x</mi><mo stretchy="false">[</mo><mi>k</mi><mo stretchy="false">]</mo><mi>h</mi><mo stretchy="false">[</mo><mi>n</mi><mo>−</mo><mi>k</mi><mo stretchy="false">]</mo><mo>=</mo><msubsup><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mn>0</mn></mrow><mi>n</mi></msubsup><mi>x</mi><mo stretchy="false">[</mo><mi>n</mi><mo>−</mo><mi>k</mi><mo stretchy="false">]</mo><mi>h</mi><mo stretchy="false">[</mo><mi>k</mi><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">y[n]=\sum^{n}_{k=0}x[k]h[n-k]=\sum^{n}_{k=0}x[n-k]h[k]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mopen">[</span><span class="mord mathnormal">n</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.104002em;vertical-align:-0.29971000000000003em;"></span><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.804292em;"><span style="top:-2.40029em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span><span class="mrel mtight">=</span><span class="mord mtight">0</span></span></span></span><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.29971000000000003em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal">x</span><span class="mopen">[</span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mclose">]</span><span class="mord mathnormal">h</span><span class="mopen">[</span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.104002em;vertical-align:-0.29971000000000003em;"></span><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.804292em;"><span style="top:-2.40029em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span><span class="mrel mtight">=</span><span class="mord mtight">0</span></span></span></span><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.29971000000000003em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal">x</span><span class="mopen">[</span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mclose">]</span><span class="mord mathnormal">h</span><span class="mopen">[</span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mclose">]</span></span></span></span></span><span>﻿</span></span> </p><p id="1219d08c-fb0e-4f35-b9a9-367e9dd273a3" class="">Powyższe równanie z prawej strony definiuje dwuargumentową operację pomiędzy ciągami x[n] i h[n]. Operacja ta to właśnie <strong>splot dyskretny.</strong></p><p id="1bf16b65-e250-4139-90a4-df30f82d9cc6" class="">Cały powyższy wywód mówi jedno: <strong>odpowiedź wymuszona y[n] układu liniowego jest równa splotowi dyskretnemu sygnału wejściowego x[n] z odpowiedzią impulsową h[n] tego układu</strong>. Stąd, <strong>żeby wyznaczyć sygnał wyjściowy y[n], wystarczy znaleźć odpowiedź impulsową h[n] układu i spleść ją z sygnałem wejściowym x[n]. Dotyczy to każdego wymuszenia.</strong></p><p id="398a43fd-9f14-47fc-a079-58cdeac7408d" class=""><strong>Własności splotu dyskretnego</strong></p><p id="140dbe6f-8144-4d6d-9cc7-559b3dbdc981" class="">Właściwością splotu dyskretnego jest to, że transformata Z splotu dwóch ciągów jest równa iloczynowi transformat tych ciągów, czyli <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mn>1</mn></msub><mo stretchy="false">[</mo><mi>n</mi><mo stretchy="false">]</mo><mo>∗</mo><msub><mi>f</mi><mn>2</mn></msub><mo stretchy="false">[</mo><mi>n</mi><mo stretchy="false">]</mo><mo>↔</mo><msub><mi>F</mi><mn>1</mn></msub><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo><msub><mi>F</mi><mn>2</mn></msub><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">f_1[n]*f_2[n]\lrarr F_1(z)F_2(z)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.10764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">[</span><span class="mord mathnormal">n</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.10764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">[</span><span class="mord mathnormal">n</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">↔</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">F</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.04398em;">z</span><span class="mclose">)</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">F</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.04398em;">z</span><span class="mclose">)</span></span></span></span></span><span>﻿</span></span>.</p><p id="e52d95ad-8211-4131-812a-5f5e6b5325a6" class="">Poza tym, splot jest:<div class="indented"><ul id="8d530a95-c559-4713-b878-d30184008421" class="bulleted-list"><li style="list-style-type:disc">operacją przemienną, czyli <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mn>1</mn></msub><mo stretchy="false">[</mo><mi>n</mi><mo stretchy="false">]</mo><mo>∗</mo><msub><mi>f</mi><mn>2</mn></msub><mo stretchy="false">[</mo><mi>n</mi><mo stretchy="false">]</mo><mo>=</mo><msub><mi>f</mi><mn>2</mn></msub><mo stretchy="false">[</mo><mi>n</mi><mo stretchy="false">]</mo><mo>∗</mo><msub><mi>f</mi><mn>1</mn></msub><mo stretchy="false">[</mo><mi>n</mi><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">f_1[n]*f_2[n]=f_2[n]*f_1[n]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.10764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">[</span><span class="mord mathnormal">n</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.10764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">[</span><span class="mord mathnormal">n</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.10764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">[</span><span class="mord mathnormal">n</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.10764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">[</span><span class="mord mathnormal">n</span><span class="mclose">]</span></span></span></span></span><span>﻿</span></span></li></ul><ul id="8461f1f5-dc3a-4655-b458-0e6820a6ca6a" class="bulleted-list"><li style="list-style-type:disc">operacją łączną, czyli <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">{</mo><msub><mi>f</mi><mn>1</mn></msub><mo stretchy="false">[</mo><mi>n</mi><mo stretchy="false">]</mo><mo>∗</mo><msub><mi>f</mi><mn>2</mn></msub><mo stretchy="false">[</mo><mi>n</mi><mo stretchy="false">]</mo><mo stretchy="false">}</mo><mo>∗</mo><msub><mi>f</mi><mn>3</mn></msub><mo stretchy="false">[</mo><mi>n</mi><mo stretchy="false">]</mo><mo>=</mo><msub><mi>f</mi><mn>1</mn></msub><mo stretchy="false">[</mo><mi>n</mi><mo stretchy="false">]</mo><mo>∗</mo><mo stretchy="false">{</mo><msub><mi>f</mi><mn>2</mn></msub><mo stretchy="false">[</mo><mi>n</mi><mo stretchy="false">]</mo><mo>∗</mo><msub><mi>f</mi><mn>3</mn></msub><mo stretchy="false">[</mo><mi>n</mi><mo stretchy="false">]</mo><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">\{f_1[n]*f_2[n]\}*f_3[n]=f_1[n]*\{f_2[n]*f_3[n]\}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">{</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.10764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">[</span><span class="mord mathnormal">n</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.10764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">[</span><span class="mord mathnormal">n</span><span class="mclose">]}</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.10764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">[</span><span class="mord mathnormal">n</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.10764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">[</span><span class="mord mathnormal">n</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">{</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.10764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">[</span><span class="mord mathnormal">n</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.10764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">[</span><span class="mord mathnormal">n</span><span class="mclose">]}</span></span></span></span></span><span>﻿</span></span></li></ul></div></p><h3 id="d5e068b6-ca62-4365-a21d-65804afd1d1a" class="">Najważniejsze punkty</h3><ul id="738e476d-1610-4d78-bbdf-90190a2b9a14" class="bulleted-list"><li style="list-style-type:disc">odpowiedź impulsowa układu to jego odpowiedź na deltę Koneckera - sygnał typu <em>szpila</em>; przebieg odpowiedzi impulsowej to spróbkowane zanikanie wykładnicze (każda kolejna próbka to ok. 0,7 poprzedniej)</li></ul><ul id="75bb690c-5db4-4f46-927e-cf486a624bbb" class="bulleted-list"><li style="list-style-type:disc">każde wymuszenie dyskretne można zapisać matematycznie jako sumę delt Koneckera </li></ul><ul id="4c6a5112-8fac-483c-927b-6bba47ee394e" class="bulleted-list"><li style="list-style-type:disc">odpowiedź układu dyskretnego na dowolne wymuszenie zapisane jako suma delt Koneckera, to po prostu superpozycja odpowiedzi impulsowych tego układu na każde z tych wymuszeń</li></ul><ul id="cc8a41db-9b00-4adc-b144-8b55ac79d750" class="bulleted-list"><li style="list-style-type:disc">splot dyskretny to operacja matematyczna, opisująca odpowiedź układu dyskretnego jako superpozycję odpowiedzi impulsowych na wymuszenia zapisane w postaci sumy delt Koneckera</li></ul><ul id="d1bbc3dd-7e31-4a96-a110-4574e1a40f0e" class="bulleted-list"><li style="list-style-type:disc">splot dyskretny opisuje odpowiedź układu dyskretnego na dowolne wymuszenie</li></ul><h3 id="8b7b7db8-c644-4a36-9bb4-5ab8a41f8116" class=""><strong>Źródła</strong></h3><p id="cfa4a0cf-8602-48b8-9dca-c5578974fe49" class="">[1] Athanasios Papoulis - <em>Obwody i układy</em></p></div></div></article></body></html>

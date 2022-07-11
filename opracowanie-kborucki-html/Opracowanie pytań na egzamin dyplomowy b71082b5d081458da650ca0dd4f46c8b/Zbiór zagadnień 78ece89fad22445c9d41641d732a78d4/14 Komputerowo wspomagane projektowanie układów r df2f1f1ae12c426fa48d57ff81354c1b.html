@@ -1,0 +1,669 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>14. Komputerowo wspomagane projektowanie układów regulacji</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="df2f1f1a-e12c-426f-a48d-57ff81354c1b" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🎚️</span></div><h1 class="page-title">14. Komputerowo wspomagane projektowanie układów regulacji</h1><table class="properties"><tbody><tr class="property-row property-row-select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesSelect"><path d="M7,13 C10.31348,13 13,10.31371 13,7 C13,3.68629 10.31348,1 7,1 C3.68652,1 1,3.68629 1,7 C1,10.31371 3.68652,13 7,13 Z M3.75098,5.32278 C3.64893,5.19142 3.74268,5 3.90869,5 L10.09131,5 C10.25732,5 10.35107,5.19142 10.24902,5.32278 L7.15771,9.29703 C7.07764,9.39998 6.92236,9.39998 6.84229,9.29703 L3.75098,5.32278 Z"></path></svg></span>Status</th><td><span class="selected-value select-value-color-green">Zrobione</span></td></tr><tr class="property-row property-row-person"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesPerson"><path d="M9.625,10.8465 C8.91187,10.2891 8.12088,9.926 7,9.26013 L7,8.71938 C7.21175,8.47612 7.392,8.176 7.53813,7.83213 C7.94587,7.7315 8.3125,7.33425 8.3125,7 C8.3125,6.51788 8.1095,6.32713 7.8715,6.17137 C7.8715,6.15562 7.875,6.14162 7.875,6.125 C7.875,5.41362 7.4375,3.5 5.25,3.5 C3.0625,3.5 2.625,5.4145 2.625,6.125 C2.625,6.14162 2.6285,6.15562 2.6285,6.17137 C2.3905,6.32713 2.1875,6.51788 2.1875,7 C2.1875,7.33425 2.55413,7.7315 2.96187,7.833 C3.108,8.176 3.28825,8.47612 3.5,8.71938 L3.5,9.26013 C2.37912,9.92513 1.58812,10.2882 0.875,10.8465 C0.041125,11.4984 0,12.4688 0,14 L10.5,14 C10.5,12.4688 10.4589,11.4984 9.625,10.8465 Z M13.125,7.3465 C12.4119,6.78912 11.6209,6.426 10.5,5.76013 L10.5,5.21938 C10.7118,4.97613 10.892,4.676 11.0381,4.33213 C11.4459,4.2315 11.8125,3.83425 11.8125,3.5 C11.8125,3.01787 11.6095,2.82713 11.3715,2.67138 C11.3715,2.65562 11.375,2.64162 11.375,2.625 C11.375,1.91363 10.9375,0 8.75,0 C6.5625,0 6.125,1.9145 6.125,2.625 C6.125,2.64162 6.1285,2.65562 6.1285,2.67138 C6.11188,2.68275 6.09787,2.69588 6.08125,2.70725 C7.83212,3.066 8.59688,4.54825 8.72813,5.74787 C8.97575,6.00863 9.1875,6.39625 9.1875,7 C9.1875,7.60288 8.771,8.20312 8.18388,8.51462 C8.127,8.624 8.06662,8.729 8.00275,8.82962 C8.155,8.91537 8.30025,8.99675 8.44025,9.07463 C9.08075,9.4325 9.63375,9.74137 10.164,10.1561 C10.3022,10.2638 10.4204,10.3801 10.5289,10.4991 L14,10.4991 C14,8.96875 13.9589,7.99837 13.125,7.3465 Z"></path></svg></span>Assign</th><td></td></tr></tbody></table></header><div class="page-body"><h3 id="9ba6d275-994a-43d3-8544-d36163bb2390" class=""><details open=""><summary>a) kaskadowa struktura regulacji a struktura sterowania z regulatorem stanu - schemat blokowy, zasada działania, dobór parametrów, właściwości</summary></details></h3><div class="indented"><p id="5887b1b3-38d8-434c-b200-86b0ae53175d" class=""><strong>Struktura kaskadowa</strong></p><p id="6a872083-0040-4538-be66-a25ebacee729" class="">W strukturze kaskadowej pojawiają się <strong>dwie pętle sterowania</strong>: nadrzędna oraz podrzędna. Każda z pętli ma swój regulator, który kompensuje określoną stałą czasową układu. W przypadku silnika prądu stałego, <strong>regulator prądu niweluje stałą czasową elektromagnetyczną silnika</strong>, natomiast <strong>regulator prędkości - stałą czasową mechaniczną</strong>.</p><figure id="bd05993e-0b8e-4206-9fff-c4396cb3cf12" class="image"><a href="14%20Komputerowo%20wspomagane%20projektowanie%20uk%C5%82ado%CC%81w%20r%20df2f1f1ae12c426fa48d57ff81354c1b/Untitled.png"><img style="width:1624px" src="14%20Komputerowo%20wspomagane%20projektowanie%20uk%C5%82ado%CC%81w%20r%20df2f1f1ae12c426fa48d57ff81354c1b/Untitled.png"/></a></figure><p id="795614a6-c333-4cd7-b838-35054f6b2f59" class="">Działanie układu polega na tym, że nadrzędny regulator prędkości, na podstawie uchybu prędkości, zadaje wartość prądu. Podrzędny regulator na podstawie uchybu prądu zadaje wartość napięcia przekształtnika. Pętla wewnętrzna jest zależna od sygnału pętli zewnętrznej.</p><p id="08359011-c27f-49d2-9b64-b19ffec300d1" class="">W strukturze kaskadowej stosuje się <strong>regulatory liniowe</strong>, najczęściej PI. Ich parametry można dobierać za pomocą uproszczonych <strong>kryteriów modułu i symetrii</strong> lub przy wykorzystaniu <strong>metody rozłożenia biegunów</strong> na podstawie równania charakterystycznego. </p><p id="dd95e887-af8a-423e-ab1c-4dad85e14e75" class="">Układ kaskadowy cechuje się tym, że <strong>dynamika pętli nadrzędnej jest zależna od dynamiki pętli podrzędnej</strong>. Jeżeli różnica czasów reakcji obu pętli jest niewielka, w układzie mogą pojawiać się oscylacje. Zasadniczą cechą jest natomiast to, że <strong>dwie pętle - prędkościowa i prądowa - sterowane są osobno</strong> przez dwa regulatory.</p><p id="4043bf1f-eadf-4e9f-907d-fc4a1cb48475" class=""><strong>Struktura sterowania z regulatorem stanu</strong></p><p id="21a5d4ed-dc44-4890-86d9-a76f05f231c0" class="">W przypadku struktury z regulatorem stanu, wszystkie sterowane zmienne są uwzględnione w pętli sprzężenia zwrotnego przy wejściu układu. Regulator stanu można stosować dla obiektów każdego rzędu. <strong>Struktura regulatora stanu bazuje na równaniach stanu obiektu</strong>. </p><figure id="b1703027-647c-419d-8343-ee819496ec26" class="image"><a href="14%20Komputerowo%20wspomagane%20projektowanie%20uk%C5%82ado%CC%81w%20r%20df2f1f1ae12c426fa48d57ff81354c1b/Untitled%201.png"><img style="width:779px" src="14%20Komputerowo%20wspomagane%20projektowanie%20uk%C5%82ado%CC%81w%20r%20df2f1f1ae12c426fa48d57ff81354c1b/Untitled%201.png"/></a></figure><p id="496b2996-71b7-444f-ad98-1efc0c7b8731" class="">Działanie regulatora stanu opiera się o <strong>jednoczesne sterowanie wszystkimi zmiennymi</strong>. Regulator uwzględnia każdą z nich w sprzężeniu zwrotnym na wejściu układu. Zmiana sygnałów wyjściowych powoduje zmianę uchybu. Uchyb jest tu sygnałem sterującym. </p><p id="b473eec7-1bc0-4cde-9002-ccec36d3147f" class=""><strong>Projektowanie układu z regulatorem stanu polega na wyznaczeniu wzmocnień w pętlach sprzężeń zwrotnych</strong> poszczególnych zmiennych. Wzmocnienia dobiera się <strong>metodą rozłożenia biegunów</strong>. Ponadto, na wejście układu można wprowadzić człon całkujący, który niweluje uchyb ustalony mogący pojawić się przy wystąpieniu zakłócenia. Oprócz tego, nie wszystkie zmienne można zawsze mierzyć, więc w przypadku sterowania przy użyciu regulatora stanu <strong>na ogół stosuje się estymatory</strong> zmiennych stanu. </p><figure id="92508f3e-2d1f-4e95-bd11-647d425be83d" class="image"><a href="14%20Komputerowo%20wspomagane%20projektowanie%20uk%C5%82ado%CC%81w%20r%20df2f1f1ae12c426fa48d57ff81354c1b/Untitled%202.png"><img style="width:732px" src="14%20Komputerowo%20wspomagane%20projektowanie%20uk%C5%82ado%CC%81w%20r%20df2f1f1ae12c426fa48d57ff81354c1b/Untitled%202.png"/></a></figure><p id="a497ed2d-94fe-42a5-b201-70fd4afd2e48" class="">Jak już wspomniano, regulator stanu <strong>steruje wszystkimi zmiennymi jednocześnie.</strong> Jest to najprostsza możliwa struktura regulacji. Regulator ten sprawdza się bardzo dobrze w systemach, w których zachodzi potrzeba <strong>kontrolowania dużej liczby zmiennych</strong> (stąd jego stosowanie w układach dwumasowych). Do wad regulatora stanu należy jego <strong>podatność na zmiany w układzie</strong>, <strong>trudność w nakładaniu ograniczeń</strong> na zmienne stanu (trzeba stosować zaawansowane techniki) oraz częsta <strong>konieczność stosowania estymatorów</strong> zmiennych stanu.</p><p id="e96ab18e-a09c-4fc6-9c4f-ecaf2e80ff45" class=""><strong>Podsumowując...</strong></p><p id="e18413e9-66ec-4fb3-8623-555e1d2a5ce0" class="">Podsumowując, struktura kaskadowa dobrze sprawdza się tam, gdzie chcemy wprowadzać ograniczenia zmiennych sterowanych, najlepiej w prostych, nieskomplikowanych układach. </p><p id="3d27c0e0-871d-448c-a821-92601f86a3a3" class="">Układ z regulatorem stanu natomiast najlepiej sprawdza się tam, gdzie potrzebna jest kontrola wielu sygnałów jednocześnie. Ze względu na prostotę (po prostu system wzmocnień), regulator stanu dobrze sprawdza się jako regulator w układach rozmytych lub adaptacyjnych.  </p><p id="4f2b6e53-f731-4be7-900e-1eec0d77c992" class=""><strong>Źródła</strong></p><p id="f19f551a-919b-4f28-87c0-323d1c968bd2" class="">[1] Notatki z wykładu <em>Komputerowo wspomagane projektowanie układów regulacji</em></p><p id="1d1abd99-2c46-4733-b0d9-9721a61a92c4" class="">[2] Materiały z wykładu <em>Automatyka napędu elektrycznego - zagadnienia wybrane</em></p><p id="69a9e655-6c2e-4317-b1ab-e18638483124" class="">[3] Roland Buchi, Markus Kottmann - <em>State regulator with observer - </em><a href="https://www.researchgate.net/profile/Mohamed_Mourad_Lafifi/post/initial_condition_for_observer/attachment/5dd92817cfe4a777d4f3b1fa/AS%3A828380303851520%401574512663125/download/State+Regulator+with+Observer.pdf">https://www.researchgate.net/profile/Mohamed_Mourad_Lafifi/post/initial_condition_for_observer/attachment/5dd92817cfe4a777d4f3b1fa/AS%3A828380303851520%401574512663125/download/State+Regulator+with+Observer.pdf</a></p><p id="e64479b6-3221-47ba-a16e-0d8d387d9aee" class="">[4] <a href="https://digitalcollection.zhaw.ch/bitstream/11475/3792/2/2010_Buechi_State-Space-Control-LQR-and-Observer.pdf">https://digitalcollection.zhaw.ch/bitstream/11475/3792/2/2010_Buechi_State-Space-Control-LQR-and-Observer.pdf</a></p><p id="bc861406-d077-44f9-8447-eeaa54d6b248" class="">[5] <a href="http://yadda.icm.edu.pl/baztech/element/bwmeta1.element.baztech-6c0892fc-8aa0-48eb-929f-1c3a42c5a357">http://yadda.icm.edu.pl/baztech/element/bwmeta1.element.baztech-6c0892fc-8aa0-48eb-929f-1c3a42c5a357</a></p></div><h3 id="b8627123-b716-427e-b416-3861ca1dc4c9" class=""><details open=""><summary>b) układ regulacji z regulatorami rozmytymi - struktury, metody projektowania</summary></details></h3><div class="indented"><p id="075739fa-2ce9-40af-9462-916605c728f5" class="">Układy regulacji z regulatorami rozmytymi bazują na regulatorach rozmytych. Regulatory rozmyte to regulatory, których prawo sterowania jest opisane regułami lingwistycznymi. Prawo sterowania to relacja między wejściem a wyjściem regulatora - np. w regulatorze PI jest to suma transmitancji członów P oraz I. </p><p id="080284f4-2b22-4e78-8dbf-9e18fa67e170" class="">Prawo sterowania regulatorów rozmytych operuje na zmiennych lingwistycznych, które można opisać za pomocą przesłanek i konkluzji. Przesłanki są to sygnały wejściowe, natomiast konkluzje - sygnały wejściowe. Bazowy “wzór” na funkcję sterowania to:</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="9735480c-bb3a-4313-ab52-144082c22033"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">JEŻELI &lt;przesłanka&gt; TO &lt;konkluzja&gt;</div></figure><p id="f7966b7c-7c40-4e23-bff9-2143101a445a" class="">W regulatorach rozmytych, wartości wejść są określane za pomocą funkcji przynależności. Funkcja przynależności przyjmuje wartości od 0 do 1. Sygnały wejściowe regulatora mają więc przypisane wartości funkcji przynależności. Im bardziej sygnał mieści się w zakresie opisanym funkcją przynależności, tym większą wartość przyjmuje ona dla tego sygnału. Na podstawie funkcji przynależności budowane są konkluzje.</p><figure id="978ce787-31b1-4322-92ea-da77af368344" class="image"><a href="14%20Komputerowo%20wspomagane%20projektowanie%20uk%C5%82ado%CC%81w%20r%20df2f1f1ae12c426fa48d57ff81354c1b/Untitled%203.png"><img style="width:650px" src="14%20Komputerowo%20wspomagane%20projektowanie%20uk%C5%82ado%CC%81w%20r%20df2f1f1ae12c426fa48d57ff81354c1b/Untitled%203.png"/></a></figure><p id="4cd3bb50-56ae-460f-9d7e-45d4be3721c4" class="">Działanie regulatora rozmytego polega na tym, że rozmywa on sygnały wejściowe, przypisując im określone wartości różnych funkcji przynależności - czyli tworzy przesłanki. </p><figure id="002a858d-ca62-47f2-b31d-ccaf4dc8e158" class="image"><a href="14%20Komputerowo%20wspomagane%20projektowanie%20uk%C5%82ado%CC%81w%20r%20df2f1f1ae12c426fa48d57ff81354c1b/Untitled%204.png"><img style="width:652px" src="14%20Komputerowo%20wspomagane%20projektowanie%20uk%C5%82ado%CC%81w%20r%20df2f1f1ae12c426fa48d57ff81354c1b/Untitled%204.png"/></a></figure><p id="86d7ecae-37ca-4d85-a777-78cd39a381be" class="">W następnym kroku, na podstawie przynależności sygnałów, dokonywane jest wnioskowanie.  Wnioskowanie przypisuje przesłanki do konkluzji, czyli na podstawie wartości funkcji przynależności sygnałów wejściowych, określa funkcję przynależności sygnału wyjściowego.</p><p id="8c65c234-1dc2-4a27-a4b3-523747d08c00" class="">Po wnioskowaniu następuje wyostrzanie, czyli przypisanie konkretnej wartości wyjścia regulatora.</p><figure id="d42b38ba-5d61-4699-b0b5-45bd260c486e" class="image"><a href="14%20Komputerowo%20wspomagane%20projektowanie%20uk%C5%82ado%CC%81w%20r%20df2f1f1ae12c426fa48d57ff81354c1b/Untitled%205.png"><img style="width:775px" src="14%20Komputerowo%20wspomagane%20projektowanie%20uk%C5%82ado%CC%81w%20r%20df2f1f1ae12c426fa48d57ff81354c1b/Untitled%205.png"/></a></figure><p id="520cb4f1-0e30-4bf3-9216-8bbc55485ad6" class=""><strong>Rodzaje regulatorów rozmytych</strong></p><p id="74b6fc8f-f3a4-4a89-a25e-410b16c43a55" class="">Wyróżnia się dwa rodzaje regulatorów rozmytych: regulatory Mamdaniego oraz regulatory TSK. </p><p id="f762c41d-c832-462f-85ba-dccd9daa19d9" class=""><strong>Regulatory Mamdaniego</strong> mają funkcje przynależności dla wejść oraz funkcję przynależności dla wyjść (wyjścia). Wskutek defuzyfikacji (wyostrzania) uzyskuje się tu jednoznaczną wartość. Regulatory Mamdaniego są przystosowane do stosowania reguł lingwistycznych.</p><figure id="0986c9a2-220f-4aa4-a278-c78ad3631d07" class="image"><a href="14%20Komputerowo%20wspomagane%20projektowanie%20uk%C5%82ado%CC%81w%20r%20df2f1f1ae12c426fa48d57ff81354c1b/Untitled%206.png"><img style="width:802px" src="14%20Komputerowo%20wspomagane%20projektowanie%20uk%C5%82ado%CC%81w%20r%20df2f1f1ae12c426fa48d57ff81354c1b/Untitled%206.png"/></a></figure><p id="41ab59d3-e969-4e37-8241-5742440be63e" class=""><strong>Regulatory TSK</strong> (Takagi-Sugeno-Kanga) zawierają natomiast konkluzję funkcyjną, czyli konkluzja nie ma określonej wartości, lecz wartość określoną poprzez funkcję wartości zmiennych wejściowych. Wyjście nie jest defuzyfikowane. Regulatory TSK są przystosowane do analizy matematycznej.</p><figure id="de70fac3-6c69-432e-8463-aa4db5e6e2ad" class="image"><a href="14%20Komputerowo%20wspomagane%20projektowanie%20uk%C5%82ado%CC%81w%20r%20df2f1f1ae12c426fa48d57ff81354c1b/Untitled%207.png"><img style="width:770px" src="14%20Komputerowo%20wspomagane%20projektowanie%20uk%C5%82ado%CC%81w%20r%20df2f1f1ae12c426fa48d57ff81354c1b/Untitled%207.png"/></a></figure><p id="825658d1-ecf9-4cf8-9a46-3a6cf0e8006a" class="">Regulatory Mamdaniego wykorzystuje się na ogół przy niewielkiej liczbie wejść. Regulatory TSK wykorzystuje się tam, gdzie liczba wejść jest znacząca - regulatory te są bardziej skomplikowane. </p><p id="8dd5ecfa-db42-4cc3-9a3d-5c379c4a5a04" class=""><strong>Struktury układów sterowania z regulatorami rozmytymi</strong></p><p id="4af10ce1-4db5-4ead-84cd-7a73aaab68e4" class="">Regulatory rozmyte w układach sterowania napędami stosuje się jako zastępstwo regulatorów PI. Sygnałami wejściowymi są tu uchyb oraz zmiana (pochodna) uchybu. </p><figure id="32418d43-4b39-4611-be91-09e1976f2b75" class="image"><a href="14%20Komputerowo%20wspomagane%20projektowanie%20uk%C5%82ado%CC%81w%20r%20df2f1f1ae12c426fa48d57ff81354c1b/Untitled%208.png"><img style="width:454px" src="14%20Komputerowo%20wspomagane%20projektowanie%20uk%C5%82ado%CC%81w%20r%20df2f1f1ae12c426fa48d57ff81354c1b/Untitled%208.png"/></a></figure><p id="77f1d89c-569a-4898-bdf8-afb7101049dc" class=""><strong>Metody projektowania układów sterowania z regulatorami rozmytymi</strong></p><p id="56605109-bce6-42e8-ba8d-79be28ab5519" class="">Projektowanie regulatorów rozmytych typu Mamdaniego polega na zdefiniowaniu funkcji przynależności wejść i wyjść. Oznacza to zdefiniowanie bazy reguł. Funkcje te mogą być oparte na doświadczeniu operatorów i nie muszą być liniowe. Należy pamiętać, że reguły nie powinny być ze sobą sprzeczne, ale powinny przy tym zapewniać pokrycie całego zbioru wartości sygnałów.</p><p id="691c2ed9-6c6b-45ea-b97c-24335b111d7e" class="">W regulatorach typu TSK należy natomiast zdefiniować funkcje przynależności sygnałów wejściowych oraz na ich podstawie bazę reguł, która określa wzmocnienia dla funkcji wyjścia regulatora. </p><p id="29893945-52d1-4d85-b2ad-b3f9ba93533c" class="">Powyższe regulatory można projektować m.in. w środowisku Matlab przy wykorzystaniu odpowiednich wtyczek, ułatwiających opisywanie reguł (funkcji przynależności). </p><p id="d7bd70e9-4cbc-4cb8-91ce-c08fc753bed9" class=""><strong>Źródła</strong></p><p id="b556836b-2422-4ec0-8ca0-233cc0a5d585" class="">[1] <a href="http://www.cs.put.poznan.pl/pzakrzewski/iss/iss_wyk%C5%82ad_3.pdf">http://www.cs.put.poznan.pl/pzakrzewski/iss/iss_wykład_3.pdf</a></p><p id="8eb29afd-8cd7-400d-bbd2-67a1f91911c6" class="">[2] <a href="https://www.researchgate.net/post/What_is_the_difference_between_Mamdani_Method_and_Takagi-Sugeno-kang_Method_TSK">https://www.researchgate.net/post/What_is_the_difference_between_Mamdani_Method_and_Takagi-Sugeno-kang_Method_TSK</a></p><p id="ab9e4fb0-2250-4adc-866f-2d1171bd9b19" class="">[3] <a href="https://yadda.icm.edu.pl/yadda/element/bwmeta1.element.baztech-d8413fca-a7a6-4e26-92bb-d22d9636876c/c/Drozdz.pdf">https://yadda.icm.edu.pl/yadda/element/bwmeta1.element.baztech-d8413fca-a7a6-4e26-92bb-d22d9636876c/c/Drozdz.pdf</a></p><p id="e1ed99c7-109c-4a16-9057-6ab715eca192" class="">[4] <a href="https://eti.pg.edu.pl/documents/176593/26523587/ProsteRegRozmyte.pdf">https://eti.pg.edu.pl/documents/176593/26523587/ProsteRegRozmyte.pdf</a></p><p id="83e7099f-e243-406c-9a83-4283904be073" class="">[5] <a href="https://we.pb.edu.pl/kair/wp-content/uploads/sites/4/2020/10/rozmyte.pdf">https://we.pb.edu.pl/kair/wp-content/uploads/sites/4/2020/10/rozmyte.pdf</a></p><p id="bdbd7192-dfa4-4fdb-9d01-02668cfa0a27" class="">[6] Notatki z wykładu <em>Komputerowo wspomagane projektowanie układów regulacji</em></p></div><h3 id="6cf64f7d-c8fd-4367-b24e-2af9ff4546b2" class="block-color-yellow_background"><details open=""><summary>c) sterowanie predykcyjne układów dynamicznych - idea sterowania, metoda projektowania, właściwości</summary></details></h3><div class="indented"><p id="f20af93b-b9f2-4677-86cb-aecb65421be4" class="">Sterowanie predykcyjne polega na przewidywaniu przyszłych stanów obiektu sterowanego na podstawie jego modelu matematycznego. W sterowaniu tym porównuje się obecny stan obiektu z jego przewidywanym przyszłym stanem i stara się zminimalizować uchyb sterowanej wielkości. </p><p id="1781fcb5-220d-4429-916b-702764749d32" class="">Liczba przewidywanych przedziałów czasowych (kroków) w przypadku sterowań nazywana jest <strong>horyzontem sterowań</strong>, natomiast w przypadku wyjść - czyli zachowań obiektu - <strong>horyzontem predykcji</strong>. Horyzont predykcji jest zawsze większy niż horyzont sterowań. </p><p id="44957edf-e7a5-4912-9eb1-10101bab3732" class="">Obliczenia stanów obiektów w horyzoncie sterowań i horyzoncie predykcji opiera się o model matematyczny, który musi zostać sformułowany. Po każdej zmianie sterowania, obliczenia są wykonywane ponownie dla nowego stanu początkowego.  </p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="f154a04f-65d1-42b5-8567-9d5b3fa9375c"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Idea sterowania predykcyjnego polega na tym, że minimalizuje się błąd, który jeszcze nie powstał. </div></figure><p id="9db0d200-ed4a-4f95-9da4-20224d60cf47" class=""><strong>Idea algorytmu sterowania i sformułowanie funkcji celu</strong></p><p id="2849ab75-c31d-4091-8b49-613a1abdc4b9" class="">Przy stosowaniu sterowania predykcyjnego, należy zdefiniować funkcję celu, czyli wskaźnik jakości sterowania, oparty o model matematyczny obiektu. Przy predykcji dąży się do takiego doboru sterowań, aby wartość zdefiniowanego wskaźnika jakości minimalizować - wykonuje się zatem obliczenia różnych wariantów sterowań układem, a następnie wybiera to, przy którym wskaźnik jakości przyjmuje najmniejszą wartość.</p><p id="a512cb34-5aaa-4546-ade2-e8346d9d2b2d" class="">Oprócz wskaźników jakości sterowania, w algorytmie sterowania predykcyjnego należy uwzględnić również ograniczenia wielkości sterowanych - i dopiero po ich uwzględnieniu, dokonywać procesu minimalizacji funkcji celu.</p><p id="9503af6b-6b80-4a25-a3e0-55baedb367e5" class="">Idea algorytmu sterowania polega na tym, że w pierwszej chwili wyznacza się wartość wektora stanu (poprzez pomiar lub estymację). Jest to określenie warunków początkowych.</p><p id="8811cf02-2bce-4120-b539-e8d5ef000eff" class="">Następnie rozwiązuje się problem optymalizacyjny, minimalizując określony wskaźnik jakości sterowania w celu wyznaczenia sekwencji sterowań. Następnie wprowadza się określone sterowanie na obiekt. Proces ten jest iteracyjny - powtarza się z każdym krokiem. </p><figure id="0f2752dc-20f2-4cfa-aed0-d681834e7216" class="image"><a href="14%20Komputerowo%20wspomagane%20projektowanie%20uk%C5%82ado%CC%81w%20r%20df2f1f1ae12c426fa48d57ff81354c1b/Untitled%209.png"><img style="width:506px" src="14%20Komputerowo%20wspomagane%20projektowanie%20uk%C5%82ado%CC%81w%20r%20df2f1f1ae12c426fa48d57ff81354c1b/Untitled%209.png"/></a></figure><p id="1fd01281-5ec7-401a-9bab-374dbd09e218" class="">Sterowanie predykcyjne można dzielić na sterowanie online i offline. To pierwsze polega na przeprowadzaniu predykcji w czasie działania układu - co wymaga bardzo szybkich obliczeń, skraca więc horyzont predykcji i sterowania. Natomiast sterowanie offline pozwala na przeprowadzanie predykcji poza obiektem, a następnie wprowadzeniu wartości optymalnych sterowania na obiekt, w postaci np. lookup-tables, </p><p id="ff49859c-4fdc-4f24-98b7-09f4f0c5d09d" class=""><strong>Metoda projektowania</strong></p><ol type="1" id="f3b40748-d229-4927-b38c-1325b7bcc834" class="numbered-list" start="1"><li><strong>Zdefiniowanie modelu obiektu</strong>. To na modelu opierają się wszystkie predykcje i obliczenia w układzie predykcyjnym, więc im lepsze odwzorowanie rzeczywistego obiektu, tym lepsze działanie układu.</li></ol><ol type="1" id="20dd6e29-f9b7-4937-ae17-49484c14ed4a" class="numbered-list" start="2"><li><strong>Określenie kryterium jakości regulacji</strong>. Kryteria jakości regulacji są pewnymi działaniami na uchybach wielkości sterowanych i generalnie dąży się do ich minimalizacji. Na potrzeby układów predykcyjnych, kryteria jakości regulacji są tym, wobec czego optymalizowane jest sterowanie - np. efektywność energetyczna. </li></ol><ol type="1" id="d7024d36-3853-4717-8392-63964605fe38" class="numbered-list" start="3"><li><strong>Zdefiniowanie horyzontów predykcji i sterowania. </strong>Horyzont predykcji mówi, na ile próbek do przodu obliczane są wartości sygnału wyjściowego przy określonym sterowaniu. Horyzont sterowania definiuje natomiast liczbę próbek, po których sygnał sterujący powinien dojść do zera, czyli układ powinien osiągnąć wartość zadaną. </li></ol><ol type="1" id="69dbe293-36f5-4b70-be33-e4efd0023fd6" class="numbered-list" start="4"><li><strong>Zdefiniowanie trajektorii odniesienia. Opcjonalnie. </strong>Trajektorię odniesienia definiuje się jako pożądaną zmianę wielkości sterowanej. Dąży się do takiego sterowania, by rzeczywista trajektoria była jak najbliżej trajektorii odniesienia. </li></ol><p id="95a3a1bc-a42a-4de7-bfdc-0a517ee6f194" class=""><strong>Właściwości układu</strong></p><p id="d678d537-adbb-46cf-ab9f-f3e38c071b00" class="">Sterowanie predykcyjne pozwala na uwzględnianie ograniczeń nałożonych na wielkości regulowane i sterujące już na etapie projektowania regulatora. Sterowanie to sprawdza się dobrze w układach nieliniowych.</p><p id="8fe6d8e7-238a-4ad2-9837-8a02620dc88a" class="">Ponadto, możliwość predykcji stanów obiektów złożonych pozwala na sterowanie układami trudnymi (oscylacyjnymi, niestabilnymi, nieliniowymi, niestacjonarnymi). Sterowanie to jest również mało wrażliwe na zmiany parametrów obiektu.</p><p id="878e063c-bb1f-483a-953d-4a863580d702" class="">Do wad należy duża wrażliwość na zmiany struktury obiektu, złożoność obliczeniowa oraz trudność w modelowaniu sterowanego obiektu. Ponadto, sterowanie online wymaga bardzo szybkiego procesora obliczeniowego co sprawia, że częściej stosuje się rozwiązania offline.</p><p id="4f0e4dd7-e5e4-4e3a-a9a2-421d99bcb313" class=""><strong>Źródła</strong></p><p id="e7cddda3-f340-4a47-afba-2cc2baaebad4" class="">[1] Notatki i materiały z wykładu <em>Automatyka napędu elektrycznego - zagadnienia wybrane</em></p><p id="a7c4bd1b-89ed-49f3-b931-a82a53fe18f3" class="">[2] Wikipedia <a href="https://pl.wikipedia.org/wiki/Sterowanie_predykcyjne#Zalety_i_wady_regulacji_predykcyjnej">https://pl.wikipedia.org/wiki/Sterowanie_predykcyjne#Zalety_i_wady_regulacji_predykcyjnej</a> </p></div><h3 id="3e902d92-32bb-453c-9dc4-afba806c66b9" class=""><details open=""><summary>d) sterowanie ślizgowe układów dynamicznych - idea sterowania, metoda projektowania, właściwości</summary></details></h3><div class="indented"><p id="2483a577-3012-4d78-b3b9-99344b4aa741" class=""><strong>Idea sterowania</strong></p><p id="1d353da7-3238-478d-900c-30319701ef53" class="">W sterowaniu ślizgowym mamy do czynienia z regulacją określonych wielkości poprzez <strong>załączanie naprzemiennie dwóch stanów przekształtnika</strong>, <strong>zależnie od aktualnego położenia trajektorii fazowej układu względem funkcji (prostej) przełączeń na płaszczyźnie fazowej</strong>. </p><p id="20aca73d-d936-4936-bbb5-4c7a0d083d7b" class="">Nazwa sterowania pochodzi od ruchu ślizgowego, w którym przełączanie dwustanowe powoduje zmianę kierunku trajektorii wielkości sterowanej. Pod<strong>ążanie po za prostą przełączeń polega na jej wielokrotnym przecinaniu, przy możliwie jak najbliższym położeniu względem niej</strong>.</p><figure id="232d3e4f-ffde-46c9-9a38-b278e47685fd" class="image"><a href="14%20Komputerowo%20wspomagane%20projektowanie%20uk%C5%82ado%CC%81w%20r%20df2f1f1ae12c426fa48d57ff81354c1b/Untitled%2010.png"><img style="width:547px" src="14%20Komputerowo%20wspomagane%20projektowanie%20uk%C5%82ado%CC%81w%20r%20df2f1f1ae12c426fa48d57ff81354c1b/Untitled%2010.png"/></a></figure><p id="de2e81b9-b34e-4014-bf0d-6d169bddbd22" class=""><strong>Projektowanie</strong></p><p id="698fd8b5-b096-4145-9c7f-50b1307c5230" class="">Idea sterowania ślizgowego opiera się właśnie o <strong>zdefiniowanie prostej przełączeń na płaszczyźnie fazowej</strong>, na której <strong>osią x jest uchyb wielkości</strong>, natomiast <strong>osią y jest dynamika (pochodna) tego uchybu</strong>, czyli de facto dynamika sterowanej wielkości. Chcemy, żeby trajektoria uchybu dążyła do 0 - czyli do punktu zadanego - po linii prostej, ponieważ to oznacza możliwie najlepszą dynamikę, czyli dynamikę członu inercyjnego. </p><p id="d9e0d766-dcae-4097-bb55-6d76c51c6182" class="">Podstawowy układ ślizgowy działa w oparciu o funkcję signum. Stan załączeń zależy od aktualnego znaku funkcji przełączającej definiowanej dla danego obiektu. Stąd właśnie idea cecha sterowania ślizgowego, czyli przełączanie dwustanowe. Istnieją jednak również inne możliwości wykonania sterowania ślizgowego, niż funkcja signum. </p><p id="d78b75b9-a3f4-42ce-b978-fde01cbff40d" class="">Zaprojektowanie układu ze sterowaniem ślizgowym polega zatem na <strong>określeniu funkcji przełączeń</strong> oraz <strong>wybraniu funkcji przełączającej</strong>. </p><figure id="5305ee0e-9826-41ca-bc55-f8a74ba17cf1" class="image"><a href="14%20Komputerowo%20wspomagane%20projektowanie%20uk%C5%82ado%CC%81w%20r%20df2f1f1ae12c426fa48d57ff81354c1b/Untitled%2011.png"><img style="width:590px" src="14%20Komputerowo%20wspomagane%20projektowanie%20uk%C5%82ado%CC%81w%20r%20df2f1f1ae12c426fa48d57ff81354c1b/Untitled%2011.png"/></a></figure><p id="1fa68534-69ff-47e0-bb55-d2b4ca1edec0" class="">Na przykładzie sterowania silnikiem prądu stałego, sterowanie ślizgowe polega na wymuszeniu zadanej prędkości obrotowej poprzez naprzemienne załączanie napięcia <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>+</mo><msub><mi>U</mi><mrow><mi>d</mi><mi>c</mi></mrow></msub></mrow><annotation encoding="application/x-tex">+U_{dc}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord">+</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10903em;">U</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.10903em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">d</span><span class="mord mathnormal mtight">c</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span><span>﻿</span></span> i <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><msub><mi>U</mi><mrow><mi>d</mi><mi>c</mi></mrow></msub></mrow><annotation encoding="application/x-tex">-U_{dc}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord">−</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10903em;">U</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.10903em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">d</span><span class="mord mathnormal mtight">c</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span><span>﻿</span></span>, przy czym napięcie twornika staje się napięciem uśrednionym, zależnie od czasu ząłączeń poszczególnych poziomów napięć.</p><p id="cfd53476-dc96-4dd3-b6fb-1015fc7eeccd" class=""><strong>Zalety sterowania ślizgowego:</strong></p><ul id="8a44dd9b-d492-4c06-96c2-d3bcabaf9e09" class="bulleted-list"><li style="list-style-type:disc"><strong>Prostota sterowania</strong>: dwustanowe przełączanie jest sterowaniem naturalnym dla każdego przekształtnika. Takie przełączanie sprowadza się do przełączania par tranzystorów naprzemiennie, ze stałą czasową <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>T</mi><mi>c</mi></msub></mrow><annotation encoding="application/x-tex">T_c</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">c</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span><span>﻿</span></span>.</li></ul><ul id="1bd3b129-4a4e-48bf-ae5d-446c356d9821" class="bulleted-list"><li style="list-style-type:disc">Gdy funkcja przełączająca osiąga 0, układ znajduje się w stanie ustalonym. Następuje to po czasie <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>3</mn><msub><mi>T</mi><mi>c</mi></msub></mrow><annotation encoding="application/x-tex">3T_c</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord">3</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">c</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span><span>﻿</span></span>, czyli po trzykrotności stałej czasowej regulatora. Jest to <strong>sterowanie łatwe do “ustawienia”,</strong> bo jego dynamika sprowadza się tylko do tego parametru (przy zdefiniowanej funkcji przełączającej).</li></ul><ul id="5e4c5f61-2848-4d5b-a50b-72fa52355b75" class="bulleted-list"><li style="list-style-type:disc"><strong>Algorytm sterowania jest bardzo prosty</strong>: nie trzeba dobierać nastaw, ustalamy <strong>tylko czas do ustalenia wartości zadanej</strong>. Nie ma tu również regulatorów liniowych, w strukturze sterowania ślizgowego pojawiają się tylko proste operacje arytmetyczne i algebraiczne</li></ul><ul id="3abe5660-94eb-41d1-9df1-43a95b144e10" class="bulleted-list"><li style="list-style-type:disc"><strong>Redukcja rzędu układu</strong>: silnik to układ 2 rzędu. Przez zaprojektowanie regulatora ślizgowego z założoną dynamiką 1 rzędu, otrzymujemy wypadkowo dynamikę 1 rzędu - układ staje się układem inercyjnym. </li></ul><ul id="538d95af-2acc-4871-b8c3-aa3a4750fd8a" class="bulleted-list"><li style="list-style-type:disc">Sterowanie ślizgowe jest <strong>sterowaniem odpornym</strong>. <strong>Niewrażliwość na zakłócenia i zmiany parametrów</strong>: w przypadku regulatorów PI, mamy do czynienia ze stałymi czasowymi, w oparciu o które nastraja się regulatory. Przy zmianie parametrów układów, stałe czasowe ulegają zmianie, co musi być kompensowane, żeby zachować pożądaną dynamikę układu. <strong>W regulatorach ślizgowych nie ma nastaw</strong> - są to regulatory sztywne - więc <strong>dynamika nie zależy od parametrów obiektu sterowanego</strong>.</li></ul><p id="8396eba5-0474-4288-a658-d49bdaee13ac" class=""><strong>Wady sterowania ślizgowego:</strong></p><ul id="ba304336-c690-4b13-a9df-4efe66e7081c" class="bulleted-list"><li style="list-style-type:disc">Algorytm sterowania wymaga <strong>różniczkowania sygnału wielkości sterowanej</strong>, co powoduje wzmacnianie wszelkich szumów w układzie </li></ul><ul id="fb7394c4-4006-44be-a99d-99a61f90b927" class="bulleted-list"><li style="list-style-type:disc">Sterowanie ślizgowe to <strong>bezpośrednie sterowanie prędkością obrotową</strong>. W najprostszym przypadku oznacza to, że <strong>nie mamy kontroli nad prądem i momentem</strong> silnika.</li></ul><ul id="a9de0fe6-c513-4a85-9fdd-8ead88bd9847" class="bulleted-list"><li style="list-style-type:disc"><strong>Chattering</strong>: w związku z dwustanowym przełączaniem, w układzie występują <strong>tętnienia prądu i momentu silnika</strong>. </li></ul><ul id="76ba9fb4-9782-4af5-bc72-29f51aed0483" class="bulleted-list"><li style="list-style-type:disc"><strong>Brak członu całkującego</strong> w układzie stwarza <strong>ryzyko powstania uchybu ustalonego</strong> odpowiedzi układu</li></ul><ul id="d8373181-cf8e-4488-8976-427ad05db976" class="bulleted-list"><li style="list-style-type:disc">Przebieg trajektorii sterowania względem funkcji przełączającej powoduje, że w układach ze sterowaniem ślizgowym <strong>częstotliwość przełączeń przekształtnika jest zmienna</strong>.</li></ul><p id="20cac2ac-82f4-4da9-bb53-9b54fa5d8877" class=""><strong>Źródła</strong></p><p id="e7fbb453-4ef0-4fc6-a3aa-12c8f7351ce0" class="">[1] Materiały i notatki z wykładu <em>Automatyka napędu elektrycznego - zagadnienia wybrane</em></p></div></div></article></body></html>

@@ -1,0 +1,669 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>10. Termokinetyka urządzeń elektrycznych i elektronicznych</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="b0bce39d-cce0-4ae8-af2b-16fd43b612b5" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🌡️</span></div><h1 class="page-title">10. Termokinetyka urządzeń elektrycznych i elektronicznych</h1><table class="properties"><tbody><tr class="property-row property-row-select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesSelect"><path d="M7,13 C10.31348,13 13,10.31371 13,7 C13,3.68629 10.31348,1 7,1 C3.68652,1 1,3.68629 1,7 C1,10.31371 3.68652,13 7,13 Z M3.75098,5.32278 C3.64893,5.19142 3.74268,5 3.90869,5 L10.09131,5 C10.25732,5 10.35107,5.19142 10.24902,5.32278 L7.15771,9.29703 C7.07764,9.39998 6.92236,9.39998 6.84229,9.29703 L3.75098,5.32278 Z"></path></svg></span>Status</th><td><span class="selected-value select-value-color-green">Zrobione</span></td></tr><tr class="property-row property-row-person"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesPerson"><path d="M9.625,10.8465 C8.91187,10.2891 8.12088,9.926 7,9.26013 L7,8.71938 C7.21175,8.47612 7.392,8.176 7.53813,7.83213 C7.94587,7.7315 8.3125,7.33425 8.3125,7 C8.3125,6.51788 8.1095,6.32713 7.8715,6.17137 C7.8715,6.15562 7.875,6.14162 7.875,6.125 C7.875,5.41362 7.4375,3.5 5.25,3.5 C3.0625,3.5 2.625,5.4145 2.625,6.125 C2.625,6.14162 2.6285,6.15562 2.6285,6.17137 C2.3905,6.32713 2.1875,6.51788 2.1875,7 C2.1875,7.33425 2.55413,7.7315 2.96187,7.833 C3.108,8.176 3.28825,8.47612 3.5,8.71938 L3.5,9.26013 C2.37912,9.92513 1.58812,10.2882 0.875,10.8465 C0.041125,11.4984 0,12.4688 0,14 L10.5,14 C10.5,12.4688 10.4589,11.4984 9.625,10.8465 Z M13.125,7.3465 C12.4119,6.78912 11.6209,6.426 10.5,5.76013 L10.5,5.21938 C10.7118,4.97613 10.892,4.676 11.0381,4.33213 C11.4459,4.2315 11.8125,3.83425 11.8125,3.5 C11.8125,3.01787 11.6095,2.82713 11.3715,2.67138 C11.3715,2.65562 11.375,2.64162 11.375,2.625 C11.375,1.91363 10.9375,0 8.75,0 C6.5625,0 6.125,1.9145 6.125,2.625 C6.125,2.64162 6.1285,2.65562 6.1285,2.67138 C6.11188,2.68275 6.09787,2.69588 6.08125,2.70725 C7.83212,3.066 8.59688,4.54825 8.72813,5.74787 C8.97575,6.00863 9.1875,6.39625 9.1875,7 C9.1875,7.60288 8.771,8.20312 8.18388,8.51462 C8.127,8.624 8.06662,8.729 8.00275,8.82962 C8.155,8.91537 8.30025,8.99675 8.44025,9.07463 C9.08075,9.4325 9.63375,9.74137 10.164,10.1561 C10.3022,10.2638 10.4204,10.3801 10.5289,10.4991 L14,10.4991 C14,8.96875 13.9589,7.99837 13.125,7.3465 Z"></path></svg></span>Assign</th><td></td></tr></tbody></table></header><div class="page-body"><h3 id="43815ef5-e438-4ab7-a7f4-49ad5b25c0c9" class=""><details open=""><summary>a) mechanizmy przewodzenia ciepła w ciałach stałych, ciekłych i gazowych. Przewodzenie ciepła w układach jedno- i wielowarstwowych o różnej geometrii - prawo Fouriera</summary></details></h3><div class="indented"><h3 id="1b7caa08-0036-4fbe-97b0-646b800d15b8" class="">Przewodzenie ciepła w płynach</h3><p id="4c7abdf1-7acb-4f1a-8329-4b1527f38914" class="">Przewodzenie ciepła może występować w ciałach stałych, ciekłych i gazowych. <strong>W płynach</strong> (czyli gazach i cieczach), <strong>przewodzenie ciepła polega na zderzaniu się ze sobą cząstek poruszających się z różną prędkością</strong>. Mówimy, że cząstki o większej prędkości mają większą temperaturę i w trakcie zderzeń, przekazują ją (w postaci energii kinetycznej) do innych cząstek. Na ogół przewodzenie ciepła w płynach jest połączone z konwekcją. Jeżeli chodzi o ciecze, przewodzenie ciepła jest bardziej złożone ze względu na oddziaływania międzycząsteczkowe płynu o większej gęstości. </p><h3 id="c38870b3-576a-4a33-a645-44eb9684ac0e" class="">Przewodzenie ciepła w ciałach stałych</h3><p id="e120179b-4071-47f2-a9b1-9d272ead0a1a" class=""><strong>W ciałach stałych, przewodzenie ciepła polega na przekazywaniu energii drgań siatki krystalicznej</strong>, ruchu swobodnych elektronów, wzbudzeniu magnetycznym lub promieniowaniu elektromagnetycznym. Drgania siatki dotyczą w zasadzie wszystkich ciał stałych. </p><p id="7f730d70-e7aa-4f56-baf0-fae844412cda" class="">Siatka krystaliczna materiału ma większe drgania przy wyższej temperaturze i są one przekazywane do przylegających cząstek o niższej temperaturze. </p><p id="25101f8b-521f-43a7-ba96-77f9502384ee" class="">Ruch swobodnych elektronów (gazu elektronowego) powoduje ich zderzanie się z siatką krystaliczną i wzbudzanie jej drgań - logiczne jest zatem, że zjawisko to występuje tylko w materiałach dobrze przewodzących. </p><p id="45ea0f60-295a-4dfd-b164-66b2e9f9d1e3" class="">Wzbudzenie magnetyczne wynika z występowania dipoli magnetycznych i ich momentów, których oddziaływanie ma wpływ na przepływ ciepła w materiale. Natomiast oddziaływanie elektromagnetyczne dotyczy materiałów przezroczystych, w które może wnikać.</p><h3 id="1f621c16-eaec-43e1-8ad6-9dd9c8e27e4f" class="">Prawo Fouriera</h3><p id="a9fdf3c1-9689-4693-8167-83f7103ca5c5" class="">Prawo Fouriera to sformułowanie fizycznego spostrzeżenia, zgodnie z którym przewodzenie ciepła zachodzi zawsze w kierunku od wyższej do niższej temperatury, tym szybciej im wyższa powierzchnia styku dwóch materiałów i tym lepiej, im wyższa przewodność cieplna rozpatrywanego materiału. Można to zapisać wzorem:</p><figure id="5f62d74f-5c20-4a79-aa6d-f2ccb182799f" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mfrac><msub><mi>q</mi><mi>x</mi></msub><mi>A</mi></mfrac><mo>=</mo><mo>−</mo><mi>k</mi><mfrac><mrow><mi>d</mi><mi>T</mi></mrow><mrow><mi>d</mi><mi>x</mi></mrow></mfrac><mo>→</mo><mfrac><msub><mi>q</mi><mi>x</mi></msub><mi>A</mi></mfrac><mi>L</mi><mo>=</mo><mo>−</mo><mi>k</mi><mfrac><mrow><msub><mi>T</mi><mn>1</mn></msub><mo>−</mo><msub><mi>T</mi><mn>2</mn></msub></mrow><mi>L</mi></mfrac></mrow><annotation encoding="application/x-tex">\frac{q_x}{A}=-k \frac{dT}{dx}\rarr\frac{q_x}{A}L=-k\frac{T_1-T_2}{L}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.7935599999999998em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.1075599999999999em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">A</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">q</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">x</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.05744em;vertical-align:-0.686em;"></span><span class="mord">−</span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.37144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">d</span><span class="mord mathnormal">x</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">d</span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">→</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.7935599999999998em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.1075599999999999em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">A</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">q</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">x</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mord mathnormal">L</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.04633em;vertical-align:-0.686em;"></span><span class="mord">−</span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.36033em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">L</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></div></figure><p id="723ccf03-16d7-4898-a0dd-754bd13f9ace" class="">Gdzie <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>q</mi><mi>x</mi></msub></mrow><annotation encoding="application/x-tex">q_x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">q</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">x</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span><span>﻿</span></span> jest strumieniem ciepła w kierunku x wyrażonym w W, A to powierzchnia styku materiałów, k - przewodność cieplna materiału [<style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mi>W</mi><mrow><mi>m</mi><mo>⋅</mo><mi>K</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{W}{m\cdot K}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.217331em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.872331em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">m</span><span class="mbin mtight">⋅</span><span class="mord mathnormal mtight" style="margin-right:0.07153em;">K</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.13889em;">W</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span><span>﻿</span></span>], natomiast <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mi>T</mi><mi mathvariant="normal">/</mi><mi>d</mi><mi>x</mi></mrow><annotation encoding="application/x-tex">dT/dx</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">d</span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mord">/</span><span class="mord mathnormal">d</span><span class="mord mathnormal">x</span></span></span></span></span><span>﻿</span></span> to gradient temperatury w kierunku x, <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi></mrow><annotation encoding="application/x-tex">L</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal">L</span></span></span></span></span><span>﻿</span></span> - miejsce w grubości materiału.</p><h3 id="588de344-6585-45bb-8be5-f1b446294b7e" class="">Przewodzenie ciepła w układach jedno- i wielowarstwowych o różnej geometrii</h3><p id="57ea57b8-324c-45dc-a1d5-5b58c1da423d" class="">Przewodzenie ciepła w <strong>układach płaskich</strong> jest zagadnieniem dosyć prostym. Strumień cieplny można tu potraktować tak, jak prąd w obwodach elektrycznych. Różnica temperatur to napięcie. Przewodność cieplna, powierzchnia styku i długość w materiale (długość jako określone miejsce w grubości ściany z materiału) tworzą opór cieplny. </p><p id="d865569b-440f-4af7-83c9-e1c8d4781438" class="">Układy tego typu można rozpatrywać podobnie do obwodów elektrycznych. Jeżeli ściany ułożone są w szeregu, to można policzyć wypadkowy strumień cieplny (jak prąd) z różnicy temperatur na dwóch końcach układu i ich oporu cieplnego. Potem temperatury w poszczególnych miejscach (jak napięcie) wylicza się po prostu mnożąc strumień przez opór cieplny. W obwodach równoległych sprawa ma się analogicznie. </p><figure id="02ecaa01-a0d2-4d34-810b-38ff4b757e48" class="image"><a href="10%20Termokinetyka%20urza%CC%A8dzen%CC%81%20elektrycznych%20i%20elektr%20b0bce39dcce04ae8af2b16fd43b612b5/Untitled.png"><img style="width:295px" src="10%20Termokinetyka%20urza%CC%A8dzen%CC%81%20elektrycznych%20i%20elektr%20b0bce39dcce04ae8af2b16fd43b612b5/Untitled.png"/></a></figure><figure id="6067c540-eaa0-49aa-95a2-d76bdef31ca5" class="image"><a href="10%20Termokinetyka%20urza%CC%A8dzen%CC%81%20elektrycznych%20i%20elektr%20b0bce39dcce04ae8af2b16fd43b612b5/Untitled%201.png"><img style="width:456px" src="10%20Termokinetyka%20urza%CC%A8dzen%CC%81%20elektrycznych%20i%20elektr%20b0bce39dcce04ae8af2b16fd43b612b5/Untitled%201.png"/></a></figure><p id="87d128fd-aefe-400b-af4d-52909586242f" class=""><strong>Układy cylindryczne</strong> są bardziej złożone, bo ciepło rozchodzi się jednocześnie w wielu kierunkach (od środka do zewnątrz układu), przy czym powierzchnie wewnętrzna i zewnętrzna materiału są różne. Uwzględnienie tych cech układów cylindrycznych sprowadza się w uproszczeniu do zastosowania logarytmów wiążących promienie wewnętrzne i zewnętrzne cylindrów. Wyprowadzenie tych zależności zaczyna się od współrzędnych biegunowych.</p><p id="391c816e-8158-4f3b-a06c-b65a4e6ebff8" class="">Ułożenie koncentrycznie cylindrów termoprzewodzących znowu sprowadza się do analizy układu podobnego do obwodu elektrycznego, przy czym sposób liczenia oporu cieplnego wynika tu z wspomnianych wyżej zależności logarytmicznych. </p><p id="45c4e299-fc27-4306-83ce-b708d514ee22" class="">Ogólnie, opór cieplny w układzie cylindrycznym zależy od logarytmu naturalnego stosunku większego promienia do mniejszego i maleje wraz z długością materiału, bo to od długości cylindra zależy powierzchnia styku. </p><figure id="83b2c4fb-29cb-4b3e-a053-2221da97851a" class="image"><a href="10%20Termokinetyka%20urza%CC%A8dzen%CC%81%20elektrycznych%20i%20elektr%20b0bce39dcce04ae8af2b16fd43b612b5/Untitled%202.png"><img style="width:252px" src="10%20Termokinetyka%20urza%CC%A8dzen%CC%81%20elektrycznych%20i%20elektr%20b0bce39dcce04ae8af2b16fd43b612b5/Untitled%202.png"/></a></figure><p id="b6b69ebe-9124-4a97-90e1-e7e63d22c330" class=""><strong>Układy sferyczne, </strong>podobnie jak cylindryczne, w celu wyprowadzenia uproszczonych zależności, należy rozpatrywać we współrzędnych biegunowych. Ostateczna zależność na opór cieplny wynika z proporcji promieni sfer do iloczynu tych promieni. </p><figure id="e0a089e0-a169-4a86-9d03-f94c9e8e240d" class="image"><a href="10%20Termokinetyka%20urza%CC%A8dzen%CC%81%20elektrycznych%20i%20elektr%20b0bce39dcce04ae8af2b16fd43b612b5/Untitled%203.png"><img style="width:280px" src="10%20Termokinetyka%20urza%CC%A8dzen%CC%81%20elektrycznych%20i%20elektr%20b0bce39dcce04ae8af2b16fd43b612b5/Untitled%203.png"/></a></figure><p id="d4a393bd-3bb4-4353-9366-e2caacb4f84c" class=""><strong>Źródła:</strong></p><p id="698455b5-6770-4382-a46e-29f7bd43938a" class="">[1] Wiśniewski, Wiśniewski - <em>Wymiana Ciepła</em></p><p id="a034c76c-af8c-4e51-9ded-34ef28cb635c" class="">[2] William S. Janna - <em>Engineering Heat Transfer, Third Edition</em></p></div><h3 id="73481fc1-17de-4f66-937e-0ba4da501c1d" class=""><details open=""><summary>b) konwekcja swobodna i wymuszona - istota zjawiska, ogólne zasady doboru kryteriów do obliczeń cieplnych w układach elektrycznych</summary></details></h3><div class="indented"><p id="2c29ebd5-9936-4d33-a6f8-d564aa8d5b3e" class=""><strong>Konwekcja</strong> to sposób przewodzenia ciepła związany z <strong>ruchem płynów</strong>. Jeżeli ruch płynów jest spowodowany <strong>zewnętrznym czynnikiem</strong>, takim jak działanie pompy lub wentylatora, mówimy o <strong>konwekcji wymuszonej</strong>. Jeżeli ciesz porusza się głównie ze względu na wynikającą z różnicy temperatur <strong>różnicę gęstości</strong> - czyli płyn gęstszy opada, rzadszy - unosi się - mówimy o <strong>konwekcji naturalnej</strong>.</p><p id="cc68d136-9359-4d4a-aaa8-485117394e46" class=""><strong>Przejmowanie ciepła</strong> to wymiana ciepła między powierzchnią ciała stałego a opływającym ją płynem. Gęstość strumienia przejmowanego ciepła określana jest prawem Newtona (prawo stygnięcia), które wiąże różnice temperatur ciała stałego i płynu przy wykorzystaniu współczynnika przejmowania ciepła (<style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mi>W</mi><mrow><msup><mi>m</mi><mn>2</mn></msup><mi>K</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{W}{m^2K}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.217331em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.872331em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathnormal mtight">m</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7463142857142857em;"><span style="top:-2.786em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mord mathnormal mtight" style="margin-right:0.07153em;">K</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.13889em;">W</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span><span>﻿</span></span>).</p><p id="80d50b3f-bd38-492f-9fd5-f11eef1285bb" class="">Jeżeli mówimy o obliczeniach cieplnych w układach elektrycznych, chodzi nam tu głównie o sposób w jaki konwekcja wymuszona - czyli np. działanie wentylatora - przejmuje ciepło z obwodów urządzenia. Czyli interesuje nas strumień przejmowanego ciepła lub jego gęstość.</p><p id="b4633605-50ec-4e19-b57d-2c31d7a4c007" class="">Liczenie strumienia cieplnego z <strong>prawa Newtona</strong> wymaga obliczenia <strong>współczynnika przejmowania ciepła</strong>. Współczynnik przejmowania ciepła zależy od prędkości cieczy i rodzaju przepływu warstwy przyściennej (laminarny - cząstki płyną równolegle do siebie; turbulentny - tory ruchu cząstek przecinają się), a także od lepkości, gęstości i przewodności cieplnej płynu.</p><p id="3daa0c0d-7e70-43ba-a2cd-d11378170258" class="">Kryterium do obliczeń cieplnych dobiera się na podstawie kilku czynników, ale podstawowymi są rodzaj przepływu (turbulentny / laminarny), kształtu kanału (opływanie płaskiej ściany to co innego niż ruch w kanale cylindrycznym) i rodzaju płynu, przy czym rodzaj płynu zawiera w sobie wspomniane wyżej właściwości fizyczne - lepkość, gęstość, przewodność cieplną. Wszystkie te wielkości są ze sobą wiązane przez różne współczynniki takie, jak liczba Nusselta, liczba Reynoldsa, liczba Prandtla czy liczba Eckerta. </p><p id="d06f14cf-c9f0-4b3e-8f21-c610e5d314a2" class=""><strong>Źródła:</strong></p><p id="0ee2cb83-51aa-465d-94b0-84be9d1fffc0" class="">[1] Wiśniewski, Wiśniewski - <em>Wymiana Ciepła</em></p><p id="99011448-3e3b-47e8-8e78-76090c7d5b84" class="">[2] William S. Janna - <em>Engineering Heat Transfer, Third Edition</em></p><p id="41d423f6-47c1-423d-a91b-c18cc1f82d0e" class="">[3] Materiały z wykładu <em>Termokinetyka urządzeń elektrycznych i elektronicznych</em></p></div><h3 id="e12a6fb1-4e5d-4ed4-aa9d-79d8d6878843" class=""><details open=""><summary>c) rury cieplne - budowa i zasada działania, zalety, typy. Zastosowanie rur cieplnych w układach chłodzących</summary></details></h3><div class="indented"><h3 id="c0f16f1a-2c73-4d40-9361-593f95b3157e" class="">Budowa i zasada działania</h3><p id="d5983908-6354-43f3-a764-7054bed53e07" class="">Rurka ciepła to szczelnie zamknięta rurka lub pojemnik o innym kształcie, której przestrzeń jest częściowo wypełniona cieczą. Ciecz do rurki dobiera się zależnie od temperatury pracy rurki i oczekiwanej gęstości strumienia ciepła. </p><p id="dcd23ff2-d80a-440b-ae43-0d58cbc3ab06" class="">Rurka jest zbudowana z trzech stref: parownika, strefy adiabatycznej oraz skraplacza. Do parownika doprowadzane jest ciepło powodujące odparowanie cieczy. Strefa adiabatyczna służy do transportu ciepła bez wymiany z otoczeniem. Skraplacz natomiast służy do oddawania ciepła na zewnątrz, a swoją nazwę zawdzięcza temu, że to w nim para w rurce ulega skropleniu. Skropliny w takiej rurce przemieszczają się pod wpływem sił kapilarnych (sił między parą a cieczą) przeciwnie do kierunku pary. Proces parowania, transportu i skraplania zachodzi w sposób ciągły.</p><figure id="c6fe9e80-80e3-41d4-adf4-0fc3a2308082" class="image"><a href="10%20Termokinetyka%20urza%CC%A8dzen%CC%81%20elektrycznych%20i%20elektr%20b0bce39dcce04ae8af2b16fd43b612b5/Untitled%204.png"><img style="width:1294px" src="10%20Termokinetyka%20urza%CC%A8dzen%CC%81%20elektrycznych%20i%20elektr%20b0bce39dcce04ae8af2b16fd43b612b5/Untitled%204.png"/></a></figure><p id="38524377-a33c-4014-b245-a95cffddf0d7" class="">Wewnętrzna powierzchnia rurki jest pokryta na ogół strukturami kapilarnymi, natomiast jej zewnętrzna powierzchnia j pokryta jest izolacją termiczną. Struktury kapilarne to po prostu odpowiednie ukształtowanie powierzchni wewnętrznej rurki tak, by wytworzyć różnicę ciśnienia kapilarnego między skraplaczem a parownikiem. Są to na ogół tzw. knoty wykonane z metalowych siatek umieszczonych na obwodzie lub w środku rurki. </p><p id="3e7830aa-b8a8-40c7-9fda-c7048f03519b" class="">Struktury kapilarne mogę być po prostu podłużnymi rowkami, ale są też pewne konstrukcje, które tworzą tzw. diodę cieplną, czyli rurkę umożliwiającą przepływ ciepła w tylko jedną stronę. </p><figure id="aa7bf1f0-8a8e-48ed-908c-37938e90737d" class="image"><a href="10%20Termokinetyka%20urza%CC%A8dzen%CC%81%20elektrycznych%20i%20elektr%20b0bce39dcce04ae8af2b16fd43b612b5/Untitled%205.png"><img style="width:1334px" src="10%20Termokinetyka%20urza%CC%A8dzen%CC%81%20elektrycznych%20i%20elektr%20b0bce39dcce04ae8af2b16fd43b612b5/Untitled%205.png"/></a></figure><h3 id="9d1b8578-ea4d-4f29-8839-7099099018ec" class="">Typy rur cieplnych</h3><p id="172fc6d7-140f-460d-8707-941bfd27ec32" class="">Rurki cieplne można rozróżniać ze względu na sposób działania. Wśród nich można wymienić:</p><ul id="893298b1-1145-4e71-9458-af707ceff213" class="bulleted-list"><li style="list-style-type:disc"><strong>grawitacyjne rury cieplne (termosyfony)</strong> - kondensat przemieszcza się w nich pod wpływem siły ciężkości</li></ul><ul id="bd20a010-36ec-42d5-8915-bd31167acec4" class="bulleted-list"><li style="list-style-type:disc"><strong>klasyczne rury cieplne</strong> - kondensat przemieszcza się w nich ze względu na różnicę ciśnień kapilarnych</li></ul><ul id="afe93740-88aa-4f24-ae78-def99b5f6742" class="bulleted-list"><li style="list-style-type:disc"><strong>wirujące rury cieplne</strong> - transport kondensatu następuje dzięki działaniu siły odśrodkowej</li></ul><ul id="bee1e69b-b197-488a-b652-2c8de2c15a9a" class="bulleted-list"><li style="list-style-type:disc"><strong>termosyfony antygrawitacyjne</strong> - skraplacz jest tu poniżej parownika, a kondensat przemieszcza się w postaci dwufazowej mieszaniny w osobnym (wewnętrznym) przewodzie posiadającym dodatkowy grzejnik</li></ul><ul id="4ca52298-0c70-49a8-8f52-083db2fb8dcb" class="bulleted-list"><li style="list-style-type:disc"><strong>mikrorurki</strong> - są to płaskie płytki lub zestawy cienkich rurek, stosowane głównie w laptopach i elektronice;</li></ul><ul id="5c52c44f-ab57-442b-b12c-a8f48788babc" class="bulleted-list"><li style="list-style-type:disc"><strong>rurki ciepła o zmiennym przewodnictwie</strong> - rurki w których jest możliwość regulacji wielkości powierzchni wymiany ciepła dzięki obecności “korka” z nieskraplającego się gazu.</li></ul><h3 id="8c51a3ff-61d7-4b90-a091-f1ee44dc6c05" class="">Zalety</h3><p id="fabca4d6-9a99-473c-95be-1e18a20bdf22" class="">Podstawową zaletą rurek cieplnych jest to, że wskutek procesów parowania i skraplania czynnika roboczego (czyli z wykorzystaniem ciepła utajonego), uzyskuje się <strong>bardzo duże gęstości przekazywanego strumienia ciepła</strong> przy niewielkich różnicach temperatur. Dzięki temu, współczynniki przewodzenia ciepła takich rurek są znacznie większe nawet niż w przypadku najlepiej przewodzących ciepło metali. </p><p id="3dd87774-30cd-4586-8136-5c7a6098565a" class="">Kolejną zaletą są <strong>szerokie możliwości zastosowania</strong> ze względu na fakt, że to od czynnika cieplnego zależą docelowe temperatury pracy. Jasne, poszczególne czynniki mogą mieć relatywnie małą rozpiętość temperaturową, ale wypadkowo można spreparować rury cieplne do pracy tak w pobliżu zera kelwina, jak i w temperaturze rzędu 2000 stopni celsjusza.</p><p id="8195ba48-f853-495e-918a-add86e9a3179" class="">Ze względu na różne rozmiary konstrukcyjne, rurki cieplne można stosować zarówno w niewielkiej elektronice pokroju laptopów, jak i do chłodzenia większych maszyn i urządzeń.</p><h3 id="9d32983c-d65d-45e5-92c5-c0811bc7d89a" class="">Zastosowanie</h3><p id="8700986f-73f5-4953-a529-baa413d791e0" class="">Rurki ciepła sprawdzają się w wielu dziedzinach, wśród których można wymienić:</p><ul id="b749422b-b6f0-4068-906a-d1fe6051f225" class="bulleted-list"><li style="list-style-type:disc">technika kosmiczna - wyrównywanie temperatur, transport ciepła</li></ul><ul id="a6e4f794-5792-42bc-811e-b78c5fd4f1de" class="bulleted-list"><li style="list-style-type:disc">elektronika - chłodzenie części czynnych, zasilaczy, procesorów, wzmacniaczy, konsol, etc.</li></ul><ul id="2eb15c5f-0388-48dc-9adc-02deb10fc31d" class="bulleted-list"><li style="list-style-type:disc">budownictwo - stabilizacja temperatury gruntu wokół fundamentów i podpór w obszarach arktycznych, rozmrażanie oblodzonych dróg, etc. </li></ul><ul id="16e62559-68eb-461d-bac7-82182cf695fb" class="bulleted-list"><li style="list-style-type:disc">przemysłowe wymienniki ciepła - w tym zastosowanie wymienników z rurkami ciepła w systemach klimatyzacyjnych</li></ul><ul id="3048871f-ed64-442f-ae06-07148275e168" class="bulleted-list"><li style="list-style-type:disc">lotnictwo - termiczna regulacja w samolotach cywilnych i wojskowych;</li></ul><p id="2252f191-d858-4666-8a09-8b0be5e5f9ea" class="">Ciekawym zastosowaniem są wymienniki cieplne z rurkami ciepła w systemach klimatyzacyjnych. Pobierają one ciepło z nagrzanego powietrza w pomieszczeniu i oddają je do otoczenia, przy czym nie mają ruchomych części, oferują wysoką sprawność, niskie spadki ciśnienia przepływającego powietrza, brak zapotrzebowania na energię z zewnątrz, bezobsługowość i długi okres użytkowania. </p><p id="564a6765-dea5-419e-adf9-4258772efae3" class="">Poniżej fotka - rurki ciepła zamontowane do chłodnicy procesora:</p><figure id="3a2a7ccf-cb94-4a28-8972-43d0785edaf8" class="image"><a href="10%20Termokinetyka%20urza%CC%A8dzen%CC%81%20elektrycznych%20i%20elektr%20b0bce39dcce04ae8af2b16fd43b612b5/Untitled%206.png"><img style="width:1024px" src="10%20Termokinetyka%20urza%CC%A8dzen%CC%81%20elektrycznych%20i%20elektr%20b0bce39dcce04ae8af2b16fd43b612b5/Untitled%206.png"/></a></figure><p id="fb133a2f-fc65-4f63-841f-2e7ac81989b0" class=""><strong>Źródła</strong></p><p id="ed8a51d0-95ce-45f6-8e03-3e939d490caf" class="">[1] Wiśniewski, Wiśniewski - <em>Wymiana Ciepła</em></p><p id="9eb46752-3b16-4983-8b34-c9b08b9a06b5" class="">[2] Pabiś, Koszut - <em>Rurki ciepła - zasada działania, budowa, zastosowania - </em><a href="https://repozytorium.biblos.pk.edu.pl/redo/resources/31775/file/suwFiles/PabisA_RurkiCiepla.pdf">https://repozytorium.biblos.pk.edu.pl/redo/resources/31775/file/suwFiles/PabisA_RurkiCiepla.pdf</a></p></div><h3 id="e7a6f04a-c3da-4b47-b69f-1f41958a1695" class=""><details open=""><summary>d) zjawiska termoelektryczne - rodzaje i sposób wykorzystania do chłodzenia urządzeń elektrycznych i elektronicznych</summary></details></h3><div class="indented"><h3 id="69418340-2253-458c-9c42-28769cc3dd32" class="">Zjawiska termoelektryczne</h3><p id="f7b1fe71-7d8c-4c8c-8865-b1feca6efdde" class="">Zjawiska termoelektryczne polegają na bezpośredniej transformacji różnicy temperatury na napięcie elektryczne lub napięcia elektrycznego na różnicę temperatur. Wśród zjawisk termoelektrycznych wyróżnia się trzy podstawowe: zjawisko Seebecka, zjawisko Peltiera oraz zjawisko Thomsona. </p><p id="b2f2fadd-4adb-4e19-90ac-7298c6f44fc0" class=""><strong>Zjawisko Peltiera</strong> polega na tym, że podczas przepływu prądu stałego przez styk dwóch różnych materiałów powoduje, że jeden z tych materiałów się nagrzewa, drugi chłodzi. Zjawisko to jest niezależne od ciepła Joule’a-Lenza (nagrzewaniu się rezystancji). Wynika to z przechodzenia elektronów między półprzewodnikiem a przewodnikiem. Przeskok elektronu z przewodnika na półprzewodnik mogą wykonać tylko elektrony o dużej energii, co powoduje wychładzanie się metalu. W drugą stronę, elektrony przeskakujące z półprzewodnika na metal oddają dużą porcję energii przeskakując z pasma przewodnictwa, nagrzewając tym samym metal. </p><p id="cd98d1e8-b96a-402f-bba2-12929b705355" class=""><strong>Zjawisko Seebecka</strong> polega na tym, że na styku dwóch różnych materiałów przewodzących, w przypadku ich różnych temperatur, powstaje siła elektromotoryczna. W półprzewodnikach wynika to z faktu, że w materiale o różnej temperaturze na obu końcach zmienia się gęstość koncentracji nośników ładunku - wskutek czego zależnie od rodzaju przewodnictwa, nośniki ładunku przemieszczają się w określonym kierunku (elektrony w półprzewodniku typu “n” uciekają do zimniejszego końca próbki i nadają mu potencjał ujemny). W przewodnikach, wolne elektrony nabierają energii kinetycznej i przemieszczają się w kierunku zimnego końca próbki. Zjawisko to opisuje się współczynnikiem Seebecka. </p><p id="190cca8b-bbc5-4a9e-b0bf-e1f8a4df1131" class=""><strong>Zjawisko Thomsona</strong> polega na tym, że przy przepływie prądu przez próbkę półprzewodnika na której występuje różnica temperatur, próbka wydziela (lub pobiera z otoczenia) pewną ilość ciepła, niezależną od ciepła Joule’a-Lenza. Wynika to z faktu różnorodnej koncentracji nośników ładunku w takiej próbce (co wynika znowu z różnicy temperatur) i występowania prądu dyfuzji. Zewnętrzne pole elektryczne może być zgodne lub przeciwne do prądu dyfuzji. Jeżeli zewnętrzne pole jest zgodne z polem wynikającym z prądu dyfuzji materiału, dochodzi do chłodzenia próbki. W przeciwnym razie, dodatkowa praca pola zewnętrznego wykonana na nośnikach ładunku powoduje dodatkowe nagrzewanie próbki. </p><h3 id="d5b91dee-d03e-4239-ae7c-a97174cbf1a5" class="">Wykorzystanie zjawisk termoelektrycznych</h3><p id="4fd201d7-6dc9-405c-9146-fba6375dd5ab" class="">Zjawiska termoelektryczne wykorzystywane są w technice do systemów ogrzewania, chłodzenia i pomiarów temperatury. </p><p id="72735ebf-ab19-46d5-aab5-3dd909a5633d" class=""><strong>Zjawisko Peltiera</strong> wykorzystuje się do budowania pomp ciepła, służących do chłodzenia i nagrzewania różnych obiektów. Gradient temperatury na półprzewodniku powoduje powstanie siły elektromotorycznej i odpowiedni obwód jest w stanie ją wyprowadzić na zewnątrz w postaci prądu elektrycznego.</p><p id="a28dc0b9-ae70-4fd3-8439-202ca69b3017" class=""><strong>Zjawisko Seebecka </strong>wykorzystuje się natomiast do produkcji termopar. Termopary reagują na różnicę temperatur w których umieszczono ich spoiny. To znaczy, że termopara działa z temperaturą odniesienia (termostatyzacją) - jedno złącze jest umieszczone w temperaturze badanej, drugie - w temperaturze odniesienia. Powstające napięcie pozwala na określenie różnicy temperatur. Efekt Seebecka stosuje się też do budowy termostosów, które konwertują energię cieplną na elektryczną. </p><p id="ddeccc46-ff15-4410-9fb9-a5e460406f33" class=""><strong>Źródła</strong></p><p id="91053abd-5274-491a-b299-d4bf7cbef78c" class="">[1] <a href="https://pl.wikipedia.org/wiki/Zjawisko_termoelektryczne">https://pl.wikipedia.org/wiki/Zjawisko_termoelektryczne</a></p><p id="a278fc63-2090-4b10-a8f1-8cec771a7ab1" class="">[2] <a href="https://pl.wikipedia.org/wiki/Termopara">https://pl.wikipedia.org/wiki/Termopara</a></p><p id="886e5ba2-2e0d-4f68-8c1e-58dfd8baee42" class="">[3] Materiały z wykładu <em>Materiały elektromagnetyczne</em></p></div><h3 id="5f381626-3c77-4bef-bf85-1930a3325b2e" class="block-color-yellow_background"><details open=""><summary>e) promieniowanie cieplne - opis zjawiska, podstawowych praw i parametrów. Ekrany cieplne</summary></details></h3><div class="indented"><h3 id="e805ae90-441c-4925-ad09-852062a10f7c" class="">Opis zjawiska i podstawowych praw</h3><p id="46a1ff0a-ed6b-472a-b593-cb41fd88e767" class=""><strong>Promieniowanie cieplne </strong>to przekazywanie ciepła poprzez fale elektromagnetyczne. Konwencjonalnie, jako radiację cieplną określa się przede wszystkim tę część fal elektromagnetycznych, która klasyfikowana jest jako promieniowanie podczerwone. </p><p id="3f690dbd-aea4-49e7-89f6-7f647102d96e" class="">Przewodzenie cieplne i konwekcja to mechanizmy przekazywania ciepła opierające się o fizyczne medium. <strong>Promieniowanie cieplne</strong> wyróżnia się na ich tle tym, że <strong>może odbywać się również w próżni</strong> i odbywa się poprzez fale elektromagnetyczne. Na dodatek, do przekazywanie ciepła przez promieniowanie <strong>nie wymaga różnicy temperatur</strong>. Promieniowanie elektromagnetyczne jest emitowane.</p><p id="5ecc193c-5bff-4bfe-9b7e-e5e54579e43a" class="">To, jaki strumień ciepła (albo gęstość strumienia ciepła) emituje ciało, zależy od czwartej potęgi jego temperatury. W idealnym przypadku, nazywanym <strong>ciałem doskonale czarnym</strong>, strumień ciepła zależy tylko od temperatury ciała, jego powierzchni oraz stałej Boltzmanna, zgodnie ze wzorem, nazywanym <strong>prawem Stefana-Boltzmanna</strong>:</p><figure id="086cac44-8249-411b-a210-2088feb7e2e9" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>q</mi><mi>r</mi></msub><mo>=</mo><mi>σ</mi><mi>A</mi><msup><mi>T</mi><mn>4</mn></msup></mrow><annotation encoding="application/x-tex">q_r=\sigma AT^4</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">q</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">r</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8641079999999999em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">σ</span><span class="mord mathnormal">A</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">4</span></span></span></span></span></span></span></span></span></span></span></span></div></figure><p id="faf6ccae-f036-425c-9f86-8bd22c234ed5" class=""><strong>Widmo promieniowania</strong> ciała doskonale czarnego - czyli wykres pokazujący, ile energii ciało wypromieniowuje w postaci fal elektromagnetycznych o określonej częstotliwości - wygląda jak poniżej. Różnymi kolorami oznaczono widma promieniowania ciał o różnych temperaturach (5000K, 4000K itd.) Strumień ciepła ciała doskonale czarnego to po prostu pole pod takim wykresem. Obydwie te rzeczy są opisane <strong>prawem Plancka.</strong></p><figure id="11fa9e3f-3821-4c11-ae3f-4a7d8739b494" class="image"><a href="10%20Termokinetyka%20urza%CC%A8dzen%CC%81%20elektrycznych%20i%20elektr%20b0bce39dcce04ae8af2b16fd43b612b5/Untitled%207.png"><img style="width:1920px" src="10%20Termokinetyka%20urza%CC%A8dzen%CC%81%20elektrycznych%20i%20elektr%20b0bce39dcce04ae8af2b16fd43b612b5/Untitled%207.png"/></a></figure><p id="4134db67-cefc-48f3-981e-173fdfce755d" class="">Na widmie promieniowania widać, że natężenie promieniowania jest różne dla różnych długości fal, a jego maksimum przypada gdzieś w zakresie światła widzialnego albo podczerwieni. Widać też, że im niższa temperatura, tym bardziej maksymalne natężenie - i całe widmo - przesuwa się w stronę dłuższych fal, czyli w stronę fal podczerwonych. To zjawisko opisywane jest <strong>prawem Wiena. </strong></p><p id="49b182a9-0a75-4471-a179-2018ea1d1107" class="">W naturze rzadko zdarza się jednak, żeby ciała miały widmo promieniowania takie, jak na rysunku powyżej. Często poszczególne długości fal są “powycinane” - np. dwutlenek węgla emituje bardzo mało energii w zakresie podczerwieni (m.in. dlatego nazywa się go gazem cieplarnianym - bo ogranicza ilość ciepła oddawanego przez Ziemię w przestrzeń kosmiczną). Ciało o takim ograniczonym spektrum promieniowania w różnych zakresach nazywa się <strong>ciałem szarym</strong>. </p><h3 id="6336f4bf-570b-4e76-b6d6-2b57810c9f04" class="">Podstawowe parametry</h3><p id="d6549300-1f6e-4ef6-9209-4d3a2dda8b50" class="">Emitowane przez ciało szare ciepło jest mniejsze niż emitowane przez ciało doskonale czarne i stosunek tej emisji do emisji ciała doskonale czarnego nazywa się <strong>emisyjnością. </strong>Emisyjność przyjmuje wartości od 0 do 1. </p><p id="d31c3919-c613-4070-8fe6-6c26ff2a6b75" class="">Wyróżnia się przy tym różne rodzaje emisyjności. Podstawowa to <strong>emisyjność kierunkowa</strong>, czyli opisany wyżej ułamek, ale w stosunku do promieniowania emitowanego w jednym kierunku. Inna to <strong>półsferyczna</strong>, czyli opisująca rzeczywistą powierzchnię ciała. W każdym przypadku mówi się też o emisyjności <strong>panchromatycznej </strong>(czyli obejmującej całe spektrum) lub <strong>monochromatycznej </strong>(opisującej określoną długość fali). Ot, nomenklatura.</p><p id="827dc57c-7a5c-4201-a692-02e866bb4162" class="">Inne podstawowe parametry opisujące promieniowanie cieplne to <em>absorpcyjność</em>, <em>refleksyjność</em> oraz <em>przepuszczalność</em>. Każdy z nich to współczynnik o wartości od 0 do 1. Wszystkie z nich (włączając w to emisyjność) zależą od powierzchni opisywanego ciała.</p><p id="c8559f2b-6236-48ac-9bf5-0e22799d0048" class=""><strong>Absorpcyjność </strong>opisuje ilość energii pochłanianej przez ciało jako ułamek energii docierającej do niego. Przy tej samej temperaturze, absorpcyjność powierzchni może być równa jej emisyjności w określonym kierunku. Czarne auto jednocześnie dobrze pochłania ciepło i je emituje, nagrzewając wszystko dookoła - inaczej nagrzewałoby się w nieskończoność.</p><p id="ab2bdda1-0cab-456c-ad05-be8dd13908ab" class=""><strong>Refleksyjność </strong>to ułamek energii odbitej przez ciało. Energia odbita to po prostu odbite fale elektromagnetyczne, niepochłaniane przez ciało. Śnieg o białej powierzchni odbija sporą część promieniowania, czyli ma wysoką refleksyjność. </p><p id="5a4f7f24-8f0e-4bbb-a776-101c047ea908" class=""><strong>Przepuszczalność </strong>to ułamek promieniowania elektromagnetycznego, które przechodzi przez ciało, ale nie jest pochłaniane ani odbijane - po prostu przelatuje. W naturze w zasadzie każdy materiał ma bardzo niską przepuszczalność, bliską zera. Nawet szkło całkiem nieźle pochłania ciepło i nie ma aż tak dobrej przepuszczalności. Dla uzyskania wysokiej przepuszczalności robi się specjalne materiały, ale nawet w nich dotyczy to przede wszystkim określonej części widma.</p><p id="3faa83ad-11b9-483e-ad45-48ab7ad10be5" class="">Oprócz tego istnieją jeszcze <strong>współczynniki konfiguracji</strong>, które opisują właściwości promieniowania docierającego do różnych układów geometrycznych. Opisują np. jaka część energii dociera do pokoju, gdy promieniowanie wpada przez okno - bo przecież inna ilość dociera do ściany naprzeciw okna, a inna do ściany z oknem. Ale raczej nikt o to nie będzie męczyć buły na egzaminie.</p><p id="bfc52354-53c4-4a6c-9a35-6e8a1fd9436c" class="">Z wielkości dotyczących samego promieniowania, można natomiast wymienić dwie. Są nimi:</p><ul id="97904a75-aa3d-43a6-afff-a428872e5481" class="bulleted-list"><li style="list-style-type:disc"><strong>natężenie promieniowania </strong>- jest to strumień promieniowania wysyłany w jednostkowy kąt bryłowy, wyrażony jako wat na steradian [W/sr]; </li></ul><ul id="7f524a86-485d-495c-9d81-71e51ed2ec9e" class="bulleted-list"><li style="list-style-type:disc"><strong>strumień promieniowania</strong> - energia niesiona przez promieniowanie przechodzące przez określoną płaszczyznę w jednostce czasu, wyrażona w watach [W]; </li></ul><ul id="6cb82450-d6b7-4586-8932-7feb39c57d63" class="bulleted-list"><li style="list-style-type:disc"><strong>irradiancja </strong>- moc jaką przenosi promieniowanie przez płaszczyznę jednostkową, wyrażona w watach na metr kwadratowy [W/m2]; </li></ul><h3 id="d42d3a03-f1a4-427e-b026-c968023a533a" class="">Podstawowe prawa</h3><p id="40c0186f-7451-43a7-b3ef-affc33949fe4" class="">W promieniowaniu cieplnym można wyróżnić cztery podstawowe prawa, z czego wszystkie z nich zostały już wyżej opisane. Są to:</p><ul id="4dd22a6e-100b-4897-999f-84a112f2aeaf" class="bulleted-list"><li style="list-style-type:disc"><strong>Prawo Kirchhoffa</strong> - zgodnie z nim, dana powierzchnia przy stałej temperaturze ma taką samą emisyjność co absorpcyjność.</li></ul><ul id="7e33a3c6-463e-497b-8d01-1cf46d49f3b9" class="bulleted-list"><li style="list-style-type:disc"><strong>Prawo Stefana-Boltzmanna</strong> - zgodnie z nim, ilość energii wypromieniowywanej przez ciało jest proporcjonalna do czwartej potęgi temperatury tego ciała.</li></ul><ul id="2c4effc1-8219-44b5-99b3-53daf20c1986" class="bulleted-list"><li style="list-style-type:disc"><strong>Prawo Plancka</strong> - prawo to opisuje emisję promieniowania ciała doskonale czarnego - to z niego bierze się widmo promieniowania na obrazku opisanym wcześniej i to z niego wynika, że ilość wypromieniowanej energii jest polem pod tym wykresem.</li></ul><ul id="5063e3ea-03a8-42fa-aeea-5f7d3e3df3e2" class="bulleted-list"><li style="list-style-type:disc"><strong>Prawo Wiena</strong> - mówi, że wraz ze wzrostem temperatury ciała, jego widmo promieniowania przenosi się w stronę fal krótkich. Dlatego gorące słoneczko wali w nas  dużą dawką ultrafioletu. </li></ul><h3 id="42ec07e4-32ca-42a1-b38f-276933b9e64e" class="">Ekrany cieplne</h3><p id="2e8fbeaa-3093-4d71-a61a-761ff6e9471e" class="">Mając na uwadze wszystko co zostało wyżej opisane, łatwo jest wywnioskować, że <strong>ekran cieplny </strong>to prosty “izolator” ciepła, który nie tyle izoluje ciepło (bo nie ma tu termoprzewodnictwa), co po prostu <strong>odbija promieniowanie elektromagnetyczne</strong>, zwłaszcza w zakresie fal podczerwonych. Oznacza to, że ekran cieplny to po prostu <strong>materiał o wysokim współczynniku refleksyjności</strong>. </p><p id="c2dc1e63-3e50-4dab-8368-af821cb54a16" class="">Ekrany cieplne stosuje się w szeroko pojętym budownictwie i chłodnictwie. Pozwalają one na dobre zachowanie temperatury ze względu na odbijanie z powrotem promieniowania podczerwonego. Przy zastosowaniu konstrukcji dwuwarstwowej, wypełnionej np. powietrzem, taki ekran cieplny może jednocześnie blokować przepływ ciepła przez przewodzenie.</p><p id="3b71e7f7-a9e3-449c-a2da-32acb89f4036" class=""><strong>Źródła:</strong></p><p id="c2f1d0e1-5ce8-4c98-8c9d-6eda85dda7f9" class="">[1] Wiśniewski, Wiśniewski - <em>Wymiana Ciepła</em></p><p id="c02843e9-a082-40f2-ae2a-12fac25bcbf6" class="">[2] William S. Janna - <em>Engineering Heat Transfer, Third Edition</em></p><p id="7d969c6a-1d34-4deb-862b-fd1e02b72c66" class="">[3] <a href="https://pl.wikipedia.org/wiki/Cia%C5%82o_doskonale_czarne">https://pl.wikipedia.org/wiki/Ciało_doskonale_czarne</a> </p><p id="f67b1d13-d73d-46c2-ad48-ad3c1a20a95f" class="">[4] <a href="https://pl.wikipedia.org/wiki/Prawo_Wiena">https://pl.wikipedia.org/wiki/Prawo_Wiena</a> </p><p id="67df61b3-371f-4b55-9d9c-d3417fe29584" class="">[5] <a href="https://pl.wikipedia.org/wiki/Prawo_Plancka">https://pl.wikipedia.org/wiki/Prawo_Plancka</a> </p><p id="365097f9-3b63-495b-95be-23d0bf1ccfac" class="">[6] Popkiewicz, Kardaś, Malinowski - <em>Nauka o klimacie </em></p><p id="254a4eb6-5bad-478d-974e-268160a48b94" class="">[7] <a href="https://pl.wikipedia.org/wiki/Refleksyjna_izolacja_termiczna">https://pl.wikipedia.org/wiki/Refleksyjna_izolacja_termiczna</a></p><p id="090ab2f0-40e9-4792-b7fb-7aececedd966" class="">[8] <a href="https://pl.wikipedia.org/wiki/Strumie%C5%84_promieniowania">https://pl.wikipedia.org/wiki/Strumień_promieniowania</a> </p><p id="045e70e8-710e-470b-9787-4d4bba429073" class="">[9] <a href="https://pl.wikipedia.org/wiki/Irradiancja">https://pl.wikipedia.org/wiki/Irradiancja</a> </p><p id="58708bb7-043e-459e-afc2-30ca0e8de2ba" class="">[10] <a href="https://pl.wikipedia.org/wiki/Nat%C4%99%C5%BCenie_promieniowania">https://pl.wikipedia.org/wiki/Natężenie_promieniowania</a> </p></div></div></article></body></html>

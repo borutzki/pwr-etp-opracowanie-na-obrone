@@ -1,0 +1,669 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>3. Pomiary wielkości nieelektrycznych</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2edbfb57-b7b2-48f0-984e-76ce75021531" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">📏</span></div><h1 class="page-title">3. Pomiary wielkości nieelektrycznych</h1><table class="properties"><tbody><tr class="property-row property-row-select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesSelect"><path d="M7,13 C10.31348,13 13,10.31371 13,7 C13,3.68629 10.31348,1 7,1 C3.68652,1 1,3.68629 1,7 C1,10.31371 3.68652,13 7,13 Z M3.75098,5.32278 C3.64893,5.19142 3.74268,5 3.90869,5 L10.09131,5 C10.25732,5 10.35107,5.19142 10.24902,5.32278 L7.15771,9.29703 C7.07764,9.39998 6.92236,9.39998 6.84229,9.29703 L3.75098,5.32278 Z"></path></svg></span>Status</th><td><span class="selected-value select-value-color-green">Zrobione</span></td></tr><tr class="property-row property-row-person"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesPerson"><path d="M9.625,10.8465 C8.91187,10.2891 8.12088,9.926 7,9.26013 L7,8.71938 C7.21175,8.47612 7.392,8.176 7.53813,7.83213 C7.94587,7.7315 8.3125,7.33425 8.3125,7 C8.3125,6.51788 8.1095,6.32713 7.8715,6.17137 C7.8715,6.15562 7.875,6.14162 7.875,6.125 C7.875,5.41362 7.4375,3.5 5.25,3.5 C3.0625,3.5 2.625,5.4145 2.625,6.125 C2.625,6.14162 2.6285,6.15562 2.6285,6.17137 C2.3905,6.32713 2.1875,6.51788 2.1875,7 C2.1875,7.33425 2.55413,7.7315 2.96187,7.833 C3.108,8.176 3.28825,8.47612 3.5,8.71938 L3.5,9.26013 C2.37912,9.92513 1.58812,10.2882 0.875,10.8465 C0.041125,11.4984 0,12.4688 0,14 L10.5,14 C10.5,12.4688 10.4589,11.4984 9.625,10.8465 Z M13.125,7.3465 C12.4119,6.78912 11.6209,6.426 10.5,5.76013 L10.5,5.21938 C10.7118,4.97613 10.892,4.676 11.0381,4.33213 C11.4459,4.2315 11.8125,3.83425 11.8125,3.5 C11.8125,3.01787 11.6095,2.82713 11.3715,2.67138 C11.3715,2.65562 11.375,2.64162 11.375,2.625 C11.375,1.91363 10.9375,0 8.75,0 C6.5625,0 6.125,1.9145 6.125,2.625 C6.125,2.64162 6.1285,2.65562 6.1285,2.67138 C6.11188,2.68275 6.09787,2.69588 6.08125,2.70725 C7.83212,3.066 8.59688,4.54825 8.72813,5.74787 C8.97575,6.00863 9.1875,6.39625 9.1875,7 C9.1875,7.60288 8.771,8.20312 8.18388,8.51462 C8.127,8.624 8.06662,8.729 8.00275,8.82962 C8.155,8.91537 8.30025,8.99675 8.44025,9.07463 C9.08075,9.4325 9.63375,9.74137 10.164,10.1561 C10.3022,10.2638 10.4204,10.3801 10.5289,10.4991 L14,10.4991 C14,8.96875 13.9589,7.99837 13.125,7.3465 Z"></path></svg></span>Assign</th><td></td></tr></tbody></table></header><div class="page-body"><h3 id="849ddd6e-fed1-4691-8eb2-c989df75532c" class=""><details open=""><summary>a) metody stykowe pomiaru temperatury - błędy metod</summary></details></h3><div class="indented"><p id="1d5d3b03-32f6-4e70-92b8-f8e93aae73ff" class=""><strong>Termopary</strong></p><p id="3e439c44-92c2-4b35-ab8b-a72fcaf8e431" class="">Podstawową metodą stykowego badania temperatury jest wykorzystanie termopary. Termopary są oparte na zjawisku Seebecka, w którym różnica temperatur na materiale powoduje powstanie napięcia między punktami o różnych temperaturach. Zależność Seebecka jest liniowa. </p><p id="e9dea938-fbf9-4f29-8206-b99d5d818873" class="">Błędy metod pomiarowych w termoparach wynikają z tego, że czułości termopar nie mają przebiegu liniowego - powstające napięcie nie jest wprost proporcjonalne do mierzonej temperatury. Dlatego pomiar termoparą jest możliwy tylko na pewnym zakresie temperatur, zależnie od typu termopary. Typy są unormowane.</p><p id="e6783da9-5522-4976-9563-d882151240a8" class="">W celu linearyzacji termopar, stosuje się współczynniki (poprawki) na przetwornikach.</p><p id="837e0f97-a450-4722-ab54-8d41d16790e5" class=""><strong>Rezystancyjne czujniki temperatury</strong></p><ul id="ee856f23-08d4-42a0-93a3-6141636419d2" class="bulleted-list"><li style="list-style-type:disc"><strong>Czujniki metalowe</strong>: wykorzystuje się tu zmiany rezystancji przy zmianach temperatury materiału. Podobnie jak w przypadku termopar, funkcja rezystywności nie jest wprost proporcjonalna do temperatury. Dlatego czujniki np. platynowe wykorzystuje się tylko dla określonego zakresu temperatur, zależnie od zastosowanego materiału. Platyna ma najszerszy zakres liniowy.</li></ul><ul id="6c1404e1-36ac-4152-aafe-d367ee3e8df1" class="bulleted-list"><li style="list-style-type:disc"><strong>Termistory półprzewodnikowe PTC i NTC</strong>: są to czujniki zbudowane z materiałów półprzewodnikowych, których rezystancja silnie zmienia się wraz ze zmianami temperatury. Wyróżnia się czujniki PTC i NTC, o dodatnim lub ujemnym współczynniku temperaturowym rezystancji. Ich błędy pomiarowe biorą się głównie z tego, że współczynniki temperaturowe rezystancji silnie zmieniają się wraz z temperaturą. Ich charakterystyki rezystancji w funkcji temperatury przedstawiane są w skalach logarytmicznych, co powoduje że wymagane są układy do linearyzacji. </li></ul><ul id="ed3a1860-453b-4542-8186-19c69b8bf32b" class="bulleted-list"><li style="list-style-type:disc"><strong>Czujniki półprzewodnikowe:</strong> mówi się tu o diodach i tranzystorach, jako scalonych czujnikach temperatury. Ich zaletami są duża czułość i liniowość charakterystyki, natomiast wadą jest mały zakres pomiarowy. Charakterystyki nie są idealnie liniowe, ale lepsze niż w pozostałych czujnikach. </li></ul><p id="d086a99d-cdf0-464f-adfc-3fa5283922d4" class=""><strong>Ogólne źródła błędów przy stykowych pomiarach temperatury:</strong></p><p id="20a7d4ef-da78-4cd9-9174-52521efe62d3" class="">Po pierwsze, przyłożenie termometru czy innego czujnika powoduje pobranie pewnej ilości ciepła z mierzonego punktu. Wprowadza to zakłócenie termiczne badanego obiektu. Jest to podstawowym źródłem błędu pomiarowego.</p><p id="841564f4-f86a-4991-8d60-73bcc160102f" class="">Powyższy błąd można zmniejszyć przez zastosowanie płytki pośredniczącej z pastą przewodzącą na obiekcie, do której można przyłączyć stykowy czujnik. </p><p id="8a7ba791-5f10-4f30-a4e3-32d87445022c" class="">Druga rzecz: w przypadku pomiaru temperatur cieczy i gazów, błąd pomiaru może być generowany dlatego, że element na którym zamocowany jest czujnik w rurze, może odprowadzać ciepło. Dlatego pomiar wykazuje niższą temperaturę, niż ma ciecz czy gaz przepływające przez rurę. </p><p id="bbb8ddd9-e524-43f7-95a4-325495c3f959" class="">Eliminacja powyższego błędu sprowadza się do zmniejszania wypromieniowywania ciepła z czujnika. Osiąga się to przez stosowanie przesłon ograniczających promieniowanie, polerowanie osłon czujnika (zmniejszenie współczynnika emisyjności powierzchni) oraz zwiększenie współczynnika wnikania ciepła - czyli zwiększenie prędkości przepływu gazu czy cieczy w rurze. </p><h3 id="7d7e337b-c740-454f-a7d9-766e6c060f00" class="">Najważniejsze punkty</h3><ul id="abde4c95-2fa4-4a5a-aefe-0cff9cf1c9f9" class="bulleted-list"><li style="list-style-type:disc">do pomiaru stykowego wykorzystuje się termopary (zjawisko Seebecka) lub czujniki rezystancyjne (oparte o zmiany rezystancji materiału przy zmianie temperatury)</li></ul><ul id="c807a492-8e85-445d-bb36-68e242c06a11" class="bulleted-list"><li style="list-style-type:disc">czujniki rezystancyjne to metale (np. platyna), termistory PTC i NTC (półprzewodniki) oraz czujniki półprzewodnikowe (oparte o diody i tranzystory)</li></ul><ul id="aee9a692-1766-4704-9977-dc5cdb9f79fb" class="bulleted-list"><li style="list-style-type:disc">wszystkie czujniki i termopary mają nieliniowe charakterystyki i trzeba wprowadzać odpowiednie poprawki</li></ul><ul id="92fe61be-9eb6-4c70-a603-4ccc8986ecdb" class="bulleted-list"><li style="list-style-type:disc">wszystkie metody pomiaru stykowego mogą pobierać pewną ilość ciepła z miejsca styku z próbką, co zmienia temperaturę w miejscu pomiaru</li></ul><ul id="5248c95a-71db-4e76-9f03-c37461e8da5f" class="bulleted-list"><li style="list-style-type:disc">powyższe dwa punkty to podstawowe błędy metod stykowych</li></ul><h3 id="3476635a-7c06-4a8a-87a2-721398364baf" class=""><strong>Źródła:</strong></h3><p id="390f272f-a5fb-4b66-8081-1e1f8ee2985e" class="">[1] Materiały z wykładu <em>Pomiary elektryczne wielkości nieelektrycznych</em></p></div><h3 id="03964d53-e4ab-4d8d-9aa1-f8295d51136f" class=""><details open=""><summary>b) pomiary tensometryczne - pomiar momentu skręcającego na wale</summary></details></h3><div class="indented"><p id="9421578d-3be1-4e7a-9e41-3cf43ee01495" class=""><strong>Typy tensometrów</strong></p><p id="434692aa-20d3-4bcb-95fa-416d419d4713" class="">Wyróżnia się dwa podstawowe rodzaje tensometrów: tensometry oporowe oraz tensometry półprzewodnikowe.</p><p id="fd162655-7705-45ed-9a8f-87836a3e76d5" class=""><strong>Tensometry oporowe</strong> opierają się o najprostszy wzór na rezystancję, <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi><mo>=</mo><mi>ρ</mi><mfrac><mi>l</mi><mi>S</mi></mfrac></mrow><annotation encoding="application/x-tex">R=\rho \frac{l}{S}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.2251079999999999em;vertical-align:-0.345em;"></span><span class="mord mathnormal">ρ</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8801079999999999em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.05764em;">S</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.01968em;">l</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span><span>﻿</span></span>, oraz o fakt, że przy rozciąganiu metalowego elementu, zwęża się on. Spadek przekroju i wzrost długości powodują wzrost rezystancji materiału. Zmianę grubości materiału przy zmianie jego długości wiąże współczynnik Poissona. </p><p id="9fecfe49-ce77-4632-9372-10bb8281b270" class="">Względna zmiana rezystancji tensometru wiąże się ze zmianą jego długości tzw. <strong>współczynnikiem czułości tensometru </strong>(dla tensometrii oporowej: 2 - 4). Współczynnik ten zależy od wspołczynnika Poissona.</p><p id="bbc76403-90a9-45b5-ba8e-da813c253b0a" class="">Tensometry oporowe stosuje się w zakresie rozciągania sprężystego. Zbyt mocne rozciągnięcie może je uszkodzić.</p><p id="3c726295-4726-46ef-955e-9690afe09380" class="">Pomiary w tensometrii oporowej wykonuje się na ogół w układach mostkowych. Ze względu na relatywnie niewielką czułość, duże naprężenia nie powodują dużej zmiany rezystancji tensometru.</p><p id="3566e33c-dde8-4b04-9dd7-663d423fc876" class=""><strong>Tensometry półprzewodnikowe</strong> opierają się o efekt piezorezystancyjny, zgodnie z którym rezystancja tensometru zmienia się wraz ze zwiększaniem naprężenia. Efekt ten jest związany z deformacją sieci krystalicznej materiału półprzewodnikowego. W praktyce, tensometry półprzewodnikowe dzięki innej naturze zjawisk zachodzących w nich, oferują dużo większą czułość na naprężenia, niż tensometry oporowe (współczynnik czułości tensometru przyjmuje wartości rzędu 40 - 400)</p><figure id="1908256a-1a80-4266-9ec2-c20c7cad29e5" class="image"><a href="3%20Pomiary%20wielkos%CC%81ci%20nieelektrycznych%202edbfb57b7b248f0984e76ce75021531/Untitled.png"><img style="width:620px" src="3%20Pomiary%20wielkos%CC%81ci%20nieelektrycznych%202edbfb57b7b248f0984e76ce75021531/Untitled.png"/></a></figure><p id="b63e9645-8041-45d7-8df8-712901e474f1" class="">Ogólnie, tensometry najczęściej wykonuje się jako foliowe. Dawniej stosowano tensometry drutowe. Tensometry foliowe można budować w postaci membran, co służy np. do pomiaru ciśnienia.</p><p id="1dc5e050-a1a9-4448-93bc-c49a335571d0" class=""><strong>Zastosowania tensometrów</strong></p><p id="4c5a44ea-46aa-4782-bee0-2837ac0017ed" class="">Tensometry stosuje się wszędzie tam, gdzie potrzebna jest znajomość sił działających na obiekt. Dlatego są one stosowane w czujnikach siły, momentu, wagach kuchennych, przy ciśnieniomierzach, przepływomierzach czy nawet czujnikach przesunięcia. </p><p id="bb134a8a-c1cf-407f-a2f4-ff4ef82c120c" class=""><strong>Pomiar momentu skręcającego na wale</strong></p><p id="43934d0d-b99e-4671-a8f2-91afe03db487" class="">Tensometry można wykorzystywać do czujników momentu skręcającego na wale. </p><p id="946abf7e-ad35-4af7-a15b-f40c3c50150f" class="">Można wyróżnić dwa rodzaje czujników momentu:</p><ul id="05808d75-2c4d-4131-a2b7-ef466b64c344" class="bulleted-list"><li style="list-style-type:disc"><strong>Czujniki momentu do pomiaru wałów statycznych (reakcyjne): </strong>stosowane tam, gdzie wał się nie obraca, a jest poddawany tylko skręceniu. Tego typu czujniki nie muszą się obracać. Można je wykonać w postaci dwóch elementów - jednego przymocowanego nieruchomo, drugiego na wale silnika. Między tymi elementami (kołnierzami) umieszcza się tensometr. Ściskanie tensometru umożliwia pomiar siły, czyli de facto momentu, działającego na czujnik</li></ul><ul id="85047d98-6175-483e-ae54-f96a80982fe4" class="bulleted-list"><li style="list-style-type:disc"><strong>Czujniki momentu do pomiaru na wałach ruchomych: a</strong>by zmierzyć moment, tensometr montuje się na tzw. elemencie torsyjnym, którego skręcenie jest proporcjonalne do momentu przenoszonego z wału silnika na wał maszyny roboczej. Skręcenie mierzone jest właśnie tensometrem w układzie mostkowym. Jeżeli parametry materiału, z którego wykonany jest element torsyjny, są znane - można na podstawie wyniku pomiaru obliczyć moment elektromagnetyczny. <p id="897202e0-5ee0-430b-8add-c82e41e0fe2d" class="">W związku z tym, że czujniki tego typu muszą się obracać na wale, komunikacja i dostarczanie zasilania coraz częściej zapewniane są w sposób bezprzewodowy (komunikacja radiowa oraz zasilanie indukcyjne). </p></li></ul><h3 id="286f42f1-4297-4d6a-b388-dda929169db1" class="">Najważniejsze punkty</h3><ul id="a53e3c51-e1f2-4a65-b256-7980fe22480a" class="bulleted-list"><li style="list-style-type:disc">tensometry dzieli się na oporowe (zmiana rezystancji wskutek zmiany geometrii czujnika) oraz półprzewodnikowe (efekt piezorezystancyjny - nacisk powoduje powstanie napięcia)</li></ul><ul id="af23730d-64fd-4c60-a883-2e11bb50bc08" class="bulleted-list"><li style="list-style-type:disc">tensometry stosuje się tam, gdzie trzeba wykonać pomiar sił, naprężeń i ciśnień - np. wagi, czujniki siły i momentu, przepływomierze, etc.</li></ul><ul id="cb8fe867-b5bf-4e3a-9456-7287f96659a2" class="bulleted-list"><li style="list-style-type:disc">czujniki momentu statyczne: do wału silnika doczepiony element obracający się z nim, element ten naciska na nieruchomy element hamujący - duży nacisk to słaby moment (silnik jest cały czas zahamowany)</li></ul><ul id="c672a692-7f6e-4e06-a4ce-1cbb249387ed" class="bulleted-list"><li style="list-style-type:disc">czujniki momentu na wałach ruchomych: tensometr umieszcza się na elemencie torsyjnym, który skręca się przy oddziaływaniu na niego momentu silnika; skręcenie elementu torsyjnego odkształca tensometr i pozwala na pomiar działającego odkształcenia - stąd oblicza się moment</li></ul><h3 id="77499ffd-8a43-46a1-b7d0-4977d2c9262b" class=""><strong>Źródła:</strong></h3><p id="e1103018-b4eb-4448-a44e-7e6c726562fa" class="">[1] Materiały z wykładu <em>Pomiary elektryczne wielkości nieelektrycznych</em></p><p id="a21e4b65-6eec-47bb-b73f-f41348d0f458" class="">[2] <a href="https://www.futek.com/torque-meter">https://www.futek.com/torque-meter</a></p><p id="d88e1231-c652-4ff3-b7c7-9e49d88689ce" class="">[3] <a href="https://tilkom.pl/catalog/czujnik-momentu-obrotowego/">https://tilkom.pl/catalog/czujnik-momentu-obrotowego/</a></p></div><h3 id="3bf95d20-956a-4512-b513-6394ace9e000" class=""><details open=""><summary>c) pomiary natężenia przepływu</summary></details></h3><div class="indented"><p id="cfdcfd9a-7379-4f8d-a4a5-0fad09cc7970" class="">Wszelkie pomiary natężenia przepływu opierają się o dwa równania, opisujące prawa dla dynamiki gazów i płynów. Pierwsze z nich to tzw. równanie stanu gazu doskonałego:</p><figure id="d4bdd92a-3dbf-40ae-aeb7-f6fc7b455539" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>p</mi><mo>=</mo><mfrac><mrow><mi>n</mi><mi>R</mi><mi>T</mi></mrow><mi>V</mi></mfrac><mo>→</mo><mfrac><mrow><mi>p</mi><mi>V</mi></mrow><mi>T</mi></mfrac><mo>=</mo><mi>n</mi><mi>R</mi><mo>=</mo><mi>c</mi><mi>o</mi><mi>n</mi><mi>s</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">p=\frac{nRT}{V} \to \frac{pV}{T}=nR=const</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathnormal">p</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.04633em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.36033em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.22222em;">V</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">n</span><span class="mord mathnormal" style="margin-right:0.13889em;">RT</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">→</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.0463299999999998em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3603299999999998em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">T</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">p</span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal">n</span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathnormal">co</span><span class="mord mathnormal">n</span><span class="mord mathnormal">s</span><span class="mord mathnormal">t</span></span></span></span></span></div></figure><p id="2c878455-39af-408e-a3de-47155ba9f961" class="">Drugie to równanie Bernoulliego: </p><figure id="c2991e9b-d255-4551-8b4c-714f41243ba2" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>p</mi><mo>+</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mi>ρ</mi><msup><mi>v</mi><mn>2</mn></msup><mo>+</mo><mi>ρ</mi><mi>g</mi><mi>h</mi><mo>=</mo><mi>c</mi><mi>o</mi><mi>n</mi><mi>s</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">p+\frac{1}{2}\rho v^2+\rho g h=const</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7777700000000001em;vertical-align:-0.19444em;"></span><span class="mord mathnormal">p</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:2.00744em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.32144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mord mathnormal">ρ</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathnormal">ρ</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mord mathnormal">h</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathnormal">co</span><span class="mord mathnormal">n</span><span class="mord mathnormal">s</span><span class="mord mathnormal">t</span></span></span></span></span></div></figure><p id="734d4e04-0148-4dea-a890-70906c9dee1d" class="">W których p - ciśnienie; n - liczba cząstek (masa); T - temperatura bezwzględna gazu; R - uniwersalna stała gazowa; h - wysokość (położenie), g - przyspieszenie ziemskie; <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ρ</mi></mrow><annotation encoding="application/x-tex">\rho</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathnormal">ρ</span></span></span></span></span><span>﻿</span></span> - gęstość cieczy lub gazu.</p><p id="1ba47486-32cf-493b-8981-f38ecaf746f9" class="">Z pierwszego równania wynika, że dla stałej masy gazu, temperatura, objętość i ciśnienie dopasowują swoje proporcje do siebie. Z drugiego równania wynika natomiast, że suma ciśnienia, energii kinetycznej i energii potencjalnej cieczy są w przybliżeniu stałe. Oznacza to tyle, że jak prędkość cieczy rośnie na tej samej wysokości, to ciśnienie spada. Jak ciśnienie i wysokość rosną, to spada prędkość - i tak dalej. </p><p id="016c34da-aebb-40aa-8de2-b9793583d3ec" class="">Pierwsze równanie pozwala na wyprowadzenie metod pomiaru przepływu gazu. Drugie równanie pozwala na wyprowadzenie metod pomiaru przepływu cieczy. </p><p id="176de51f-f518-4f61-af0b-ec905d5dd07b" class=""><strong>Typy pomiarów przepływu płynów:</strong></p><p id="94521559-d5d6-41ee-8987-5c559116b0bf" class="">Zasadniczo, można wyróżnić cztery różne zasady działania przepływomierzy:</p><ul id="85da1ed1-fe44-4b9b-877d-e2dc64cf7da0" class="bulleted-list"><li style="list-style-type:disc"><strong>Pomiar różnicy ciśnienia</strong>: przepływ oblicza się z różnicy mierzonych ciśnień. Do tego typu metod należą zwężki, kryzy, dysze, rotametry i rurki Pitota</li></ul><ul id="fe509091-0ebc-4d73-99e0-d4d05cf812e1" class="bulleted-list"><li style="list-style-type:disc"><strong>Liczniki płynów</strong>: są to np. liczniki bębnowe, z owalnymi wirnikami czy z mimośrodową komorą wirnikową.</li></ul><ul id="b0ceb648-97d3-4c1e-910a-8e1525a68d06" class="bulleted-list"><li style="list-style-type:disc"><strong>Pomiar prędkości</strong>:<strong> </strong>pomiar przepływu opiera się tu o wielkości stricte mechaniczne, gdzie prędkość przepływu jest przekształcana bezpośrednio na inną wielkość, np. przepływomierze turbinkowe, elektromagnetyczne, ultradźwiękowe</li></ul><ul id="baa0b780-8e3b-451c-b03a-fffd404e4f5a" class="bulleted-list"><li style="list-style-type:disc"><strong>Pomiar przepływu masy</strong>: pomiary zależne od tego, jaka masa płynu została przepuszczona przez przepływomierz, chodzi tu np. o przepływomierze Coriolisa czy kalorymetryczne. </li></ul><p id="671352f4-2bb8-4103-958e-f7a566fb58df" class=""><strong>Metody pomiary przepływu płynów:</strong></p><ul id="614e92e4-d3fa-4df7-b5d1-3b0c669cee88" class="bulleted-list"><li style="list-style-type:disc"><strong>Metoda zwężkowa:</strong> w rurze wprowadza się przegrodę zwężającą. Jeżeli mamy stałą wysokość, to z równania Bernoulliego wynika, że suma energii kinetycznej i ciśnienia musi pozostawać stała. Przez zwężkę ciecz płynie z większą prędkością (bo płynie ta sama masa i objętość cieczy, ale przekrój przepływu się zmniejsza - przepływ rośnie). Ciśnienie za zwężką jest mniejsze, niż ciśnienie przed nią. Na podstawie znanych przekrojów rury i zwężki, a także gęstości płynu, można z różnicy ciśnień obliczyć przepływ cieczy.<figure id="186ae862-4283-46f4-a101-c37c28357621" class="image"><a href="3%20Pomiary%20wielkos%CC%81ci%20nieelektrycznych%202edbfb57b7b248f0984e76ce75021531/Untitled%201.png"><img style="width:619px" src="3%20Pomiary%20wielkos%CC%81ci%20nieelektrycznych%202edbfb57b7b248f0984e76ce75021531/Untitled%201.png"/></a></figure></li></ul><ul id="2a792051-dcad-4d56-ab66-d481ea66993a" class="bulleted-list"><li style="list-style-type:disc"><strong>Rurka spiętrzająca Pitota:</strong> w tej metodzie, do rury z cieczą doprowadza się dwie rurki. Jedna jedynie styka się z rurą i mierzy ciśnienie statyczne cieczy - jakaś ilość cieczy jest w nią wciskana. Druga rurka jest doprowadzona w środek przepływu i płynąca ciecz jest w nią wciskana mocniej. Różnica między wskazaniem drugiej rurki i pierwszej rurki to ciśnienie dynamiczne przepływu. <figure id="738c03a1-98b6-491f-96fc-6df20c8dfa8e" class="image"><a href="3%20Pomiary%20wielkos%CC%81ci%20nieelektrycznych%202edbfb57b7b248f0984e76ce75021531/Untitled%202.png"><img style="width:582px" src="3%20Pomiary%20wielkos%CC%81ci%20nieelektrycznych%202edbfb57b7b248f0984e76ce75021531/Untitled%202.png"/></a></figure></li></ul><ul id="b5981deb-bea0-44c1-a301-e4d08f638cdf" class="bulleted-list"><li style="list-style-type:disc"><strong>Przepływomierz pływakowy (rotametr):</strong> w tej konstrukcji, w rurociągu pionowym umieszczony jest pływak o gęstości większej niż gęstość cieczy. Pływak opada, zamykając rurociąg. Im większy jest przepływ, tym wyżej pływak unosi się nad wlotem rurociągu. Siła cieczy napierającej na pływak jest równoważona przez oddziaływanie grawitacyjne, więc pływak w pewnym punkcie się zatrzymuje. Wysokość pływaka wyznacza nam przepływ, przy czym jest to zależność nieliniowa. <figure id="49177eba-edfb-4b7a-bbfc-834d9dd0d2b7" class="image"><a href="3%20Pomiary%20wielkos%CC%81ci%20nieelektrycznych%202edbfb57b7b248f0984e76ce75021531/Untitled%203.png"><img style="width:616px" src="3%20Pomiary%20wielkos%CC%81ci%20nieelektrycznych%202edbfb57b7b248f0984e76ce75021531/Untitled%203.png"/></a></figure></li></ul><ul id="da8f939a-d55f-444c-985f-ce99f55578fe" class="bulleted-list"><li style="list-style-type:disc"><strong>Przepływomierz wirnikowy (turbinkowy):</strong> w tym przypadku w rurze montuje się wiatraczek o określonym kącie nachylenia łopatek. Przepływająca ciecz (lub gaz) powoduje obrót wiatraczka. Prędkość obrotowa jest proporcjonalna do przepływu, więc jej pomiar pozwala na określenie przepływu w rurze.<figure id="26f695de-5920-459a-a502-b3e74f34d250" class="image"><a href="3%20Pomiary%20wielkos%CC%81ci%20nieelektrycznych%202edbfb57b7b248f0984e76ce75021531/Untitled%204.png"><img style="width:624px" src="3%20Pomiary%20wielkos%CC%81ci%20nieelektrycznych%202edbfb57b7b248f0984e76ce75021531/Untitled%204.png"/></a></figure></li></ul><ul id="fd2afc99-4dc3-440c-b3a3-1ee6dea42a9d" class="bulleted-list"><li style="list-style-type:disc"><strong>Przepływomierz wirowy: </strong>w rurze wprowadza się prostopadłą przegrodę, która powoduje miejscowe zawirowania w przepływającej cieczy. Wskutek wiru, w badanym medium następuje zakłócenie komunikacji np. falami ultradźwiękowymi. Pomiar zakłóceń jest proporcjonalny do szybkości przepływu. <figure id="1d013635-f060-4d14-84b7-664cd458f58a" class="image"><a href="3%20Pomiary%20wielkos%CC%81ci%20nieelektrycznych%202edbfb57b7b248f0984e76ce75021531/Untitled%205.png"><img style="width:409px" src="3%20Pomiary%20wielkos%CC%81ci%20nieelektrycznych%202edbfb57b7b248f0984e76ce75021531/Untitled%205.png"/></a></figure></li></ul><ul id="cc94685e-e1ba-4919-b5e4-34cf2700d472" class="bulleted-list"><li style="list-style-type:disc"><strong>Przepływomierz elektromagnetyczny:</strong> przepływomierz tego typu stosuje się tam, gdzie ciecz ma właściwości przewodzące. Na rurze naprzeciw siebie umieszcza się wie elektrody, a prostopadle do nich umieszcza się cewki AC lub DC. Cewka zasilona napięciem powoduje wzbudzenie prądów wirowych w cieczy. Te indukują napięcie na elektrodach pomiarowych, wskutek względnego przemieszczenia ładunków względem elektrod. Im wyższy przepływ, tym wyższe indukowane napięcie.<figure id="68fbab8f-cbbc-420e-9e99-49644db10439" class="image"><a href="3%20Pomiary%20wielkos%CC%81ci%20nieelektrycznych%202edbfb57b7b248f0984e76ce75021531/Untitled%206.png"><img style="width:406px" src="3%20Pomiary%20wielkos%CC%81ci%20nieelektrycznych%202edbfb57b7b248f0984e76ce75021531/Untitled%206.png"/></a></figure></li></ul><ul id="189f0841-c1bd-4f0c-8cb6-b842ecadd304" class="bulleted-list"><li style="list-style-type:disc"><strong>Przepływomierz kalorymetryczny:</strong> istnieje kilka konstrukcji przepływomierzy kalorymetrycznych. Ich działanie polega na tym, że w rurze umieszcza się element grzejny. Ciecz przepływając przez niego ogrzewa się. Przepływomierz mierzy temperatury przed grzejnikiem i za grzejnikiem. Im szybciej ciecz się porusza, tym cieplejsza dopływa do drugiego punktu pomiarowego. Czyli im większa różnica temperatur między termometrami, tym wyższy przepływ. <figure id="624478c2-59e3-49c6-8374-71414f328166" class="image"><a href="3%20Pomiary%20wielkos%CC%81ci%20nieelektrycznych%202edbfb57b7b248f0984e76ce75021531/Untitled%207.png"><img style="width:625px" src="3%20Pomiary%20wielkos%CC%81ci%20nieelektrycznych%202edbfb57b7b248f0984e76ce75021531/Untitled%207.png"/></a></figure></li></ul><ul id="ef9a6d5c-7f88-4dcc-8863-d55a48c16f98" class="bulleted-list"><li style="list-style-type:disc"><strong>Przepływomierz Coriolisa (żyroskopowy): </strong>opiera się o działanie siły Coriolisa oddziałującej na obracające się rurki, w których płynie ciecz. Przy stałej prędkości obrotowej, większy przepływ cieczy (większa prędkość cieczy) powoduje większe odchylenie się rurek od płaszczyzny obrotu.</li></ul><ul id="9ffc3788-771c-40c9-9aac-45d1bc1a4503" class="bulleted-list"><li style="list-style-type:disc"><strong>Przepływomierz ultradźwiękowy: </strong>w tej konstrukcji, ciecz przepuszczana jest przez rurkę, w której od nadajnika do odbiornika rozchodzą się fale akustyczne. Szybszy przepływ sprawia, że fale docierają do odbiornika szybciej, więc tempo rozchodzenia się ich jest proporcjonalne do przepływu. <figure id="f75471a6-b70d-48dd-b8b7-38de14ad342c" class="image"><a href="3%20Pomiary%20wielkos%CC%81ci%20nieelektrycznych%202edbfb57b7b248f0984e76ce75021531/Untitled%208.png"><img style="width:773px" src="3%20Pomiary%20wielkos%CC%81ci%20nieelektrycznych%202edbfb57b7b248f0984e76ce75021531/Untitled%208.png"/></a></figure></li></ul><h3 id="e71d9c95-f106-44e2-baf6-67501218c3ac" class="">Najważniejsze punkty</h3><ul id="0d490621-8500-41ea-be44-8adc0a7b5230" class="bulleted-list"><li style="list-style-type:disc">pomiary przepływu opierają się o znane zależności gazu doskonałego oraz równania Bernoulliego </li></ul><ul id="d05856f6-a5a4-429d-8632-678d089001f0" class="bulleted-list"><li style="list-style-type:disc">zasady działania przepływomierzy: pomiar różnicy ciśnienia, liczniki cieczy, pomiar prędkości cieczy, pomiar przepływu masy</li></ul><ul id="01ab64f9-b0ce-4121-b413-c74b06370e25" class="bulleted-list"><li style="list-style-type:disc">przykładowe przepływomierze: zwężkowy, z rurką Pitota, elektromagnetyczny, turbinkowy, pływakowy, ultradźwiękowy, Coriolisa, kalorymetryczny</li></ul><ul id="1835d23b-51c5-4c10-8344-37943537101c" class="bulleted-list"><li style="list-style-type:disc">przepływomierz zwężkowy: w rurze wprowadza się zwężkę i mierzy ciśnienie za nią i przed nią; z różnicy ciśnień i parametrów cieczy oblicza się przepływ</li></ul><ul id="5c065972-dc2a-44d8-ae3c-67574f17948b" class="bulleted-list"><li style="list-style-type:disc">przepływomierz z rurką Pitota: do kanału z cieczą wkłada się rurkę - im większe ciśnienie dynamiczne, tym wyższy stan cieczy w tej rurce (więcej cieczy jest w nią wpychane)</li></ul><ul id="e93c7f19-23bf-462a-b1f8-290f19742e94" class="bulleted-list"><li style="list-style-type:disc">kalorymetryczny: w jednym punkcie podgrzewa się gaz lub ciecz, w drugim mierzy temperaturę; duża różnica temperatur oznacza, że ciecz płynie powoli i ma czas stygnąć</li></ul><h3 id="78cbe833-09e1-4ff0-bb11-556e4fadf576" class=""><strong>Źródła:</strong></h3><p id="645f82fd-8572-4761-bf62-a1710146aa49" class="">[1] Materiały z wykładu <em>Pomiary elektryczne wielkości nieelektrycznych</em></p><p id="f513d4c5-f926-4905-baa5-193727e1b61a" class="">[2] <a href="https://www.princeton.edu/~asmits/Bicycle_web/Bernoulli.html">https://www.princeton.edu/~asmits/Bicycle_web/Bernoulli.html</a></p></div><h3 id="46c983a3-aeff-4d35-86d9-d02828d38aa2" class=""><details open=""><summary>d) pomiary ciśnienia</summary></details></h3><div class="indented"><p id="d6e99265-38e0-4276-b011-1210a585aa96" class=""><strong>Podstawowe wielkości</strong></p><p id="daf22885-4535-423b-95ce-c49ed40bfd95" class="">W przypadku ciśnienia, zawsze mówimy o sile oddziałującej na pewną powierzchnię, wyrażonej w paskalach, czyli N/m^2. Jednak można tu wyróżnić trzy różne typy pomiarów:</p><ul id="00ca815b-487b-4347-99f0-246bc7eabcad" class="bulleted-list"><li style="list-style-type:disc"><strong>Ciśnienie absolutne</strong>, czyli ciśnienie mierzone w odniesieniu do próżni absolutnej. Pomiar ciśnienia atmosferycznego przy powierzchni ziemi jest pomiarem ciśnienia absolutnego.</li></ul><ul id="c1924f50-7167-4ba1-8132-4587f7199524" class="bulleted-list"><li style="list-style-type:disc"><strong>Ciśnienie różnicowe</strong>, czyli różnicę ciśnień między dwoma punktami poboru ciśnienia.</li></ul><ul id="d32002c4-49f1-48db-86ed-07c9616dcad0" class="bulleted-list"><li style="list-style-type:disc"><strong>Ciśnienie względne</strong>, czyli nadciśnienie lub podciśnienie mierzone w odniesieniu do ciśnienia atmosferycznego. </li></ul><figure id="bb0b9e80-4c3f-47a8-b110-85c0fff62761" class="image"><a href="3%20Pomiary%20wielkos%CC%81ci%20nieelektrycznych%202edbfb57b7b248f0984e76ce75021531/Untitled%209.png"><img style="width:584px" src="3%20Pomiary%20wielkos%CC%81ci%20nieelektrycznych%202edbfb57b7b248f0984e76ce75021531/Untitled%209.png"/></a></figure><p id="82e0c957-dcf1-4d88-ab4a-20ce6a536daf" class=""><strong>Urządzenia do pomiaru ciśnienia</strong></p><p id="a4d0bf09-6db7-41ea-91b2-fec1bf68dbef" class="">Wśród urządzeń do pomiaru ciśnienia można wyróżnić zarówno urządzenia analogowe, jak i elektroniczne. Wśród analogowych można znaleźć manometry i barometry różnej konstrukcji. Wśród urządzeń elektronicznych, wyróżnia się przetworniki rezystancyjne czy pojemnościowe. Mówiąc dokładniej:</p><ul id="78e3ccab-797f-4add-9f76-12254ddf0f0a" class="bulleted-list"><li style="list-style-type:disc"><strong>Manometr z rurką Bourdona: </strong>proste urządzenie do pomiaru ciśnienia. Ma w konstrukcji rurkę podłączoną do mierzonego procesu. Wzrost ciśnienia w rurce powoduje jej odkształcenie się, natomiast odkształcenie rurki powoduje ruch wskazówki. Odkształcenie to na ogół po prostu rozszerzenie rurki i nacisk na wskazówkę. <figure id="5717d6af-9827-4407-832d-80f1b0286cc2" class="image"><a href="3%20Pomiary%20wielkos%CC%81ci%20nieelektrycznych%202edbfb57b7b248f0984e76ce75021531/Untitled%2010.png"><img style="width:558px" src="3%20Pomiary%20wielkos%CC%81ci%20nieelektrycznych%202edbfb57b7b248f0984e76ce75021531/Untitled%2010.png"/></a></figure></li></ul><ul id="98209749-8b84-4a7f-bac4-9b3260cb1bbf" class="bulleted-list"><li style="list-style-type:disc"><strong>Manometr z puszką membranową: </strong>w tym urządzeniu nie ma rurki, jest za to membrana. Większe ciśnienie oznacza większy nacisk na membranę. Membrana się rozszerza. Membrana jest sprzężona ze wskazówką manometru, więc jej rozszerzenie powoduje ruch wskazówki. <figure id="1c4e3498-08e4-4732-98b4-76898dc18e34" class="image"><a href="3%20Pomiary%20wielkos%CC%81ci%20nieelektrycznych%202edbfb57b7b248f0984e76ce75021531/Untitled%2011.png"><img style="width:389px" src="3%20Pomiary%20wielkos%CC%81ci%20nieelektrycznych%202edbfb57b7b248f0984e76ce75021531/Untitled%2011.png"/></a></figure></li></ul><ul id="2417ae19-4883-4c08-9685-cf5403fede55" class="bulleted-list"><li style="list-style-type:disc"><strong>Tensometryczne pomiary ciśnienia: </strong>w specjalnych typach mierników ciśnienia, można zastosować tensometry w układzie mostkowym, zamontowane na tej samej belce. Na belkę działają ciśnienie procesu i ciśnienie odniesienia. Różnica ciśnień powoduje odkształcenie belki w jedną ze stron - zależnie od tego, które jest większe. Odkształcenie belki zmienia rezystancje tensometrów - jeden się ściska, drugi rozszerza. Zmiany rezystancji można zmierzyć i w ten sposób uzyskać różnicę między ciśnieniem mierzonym a ciśnieniem odniesienia. <figure id="a32c5a28-7a91-44dd-a3e5-cdd006e80823" class="image"><a href="3%20Pomiary%20wielkos%CC%81ci%20nieelektrycznych%202edbfb57b7b248f0984e76ce75021531/Untitled%2012.png"><img style="width:325px" src="3%20Pomiary%20wielkos%CC%81ci%20nieelektrycznych%202edbfb57b7b248f0984e76ce75021531/Untitled%2012.png"/></a></figure></li></ul><ul id="1f8c194a-b90f-48c2-ae09-6adb38c097f6" class="bulleted-list"><li style="list-style-type:disc"><strong>Pojemnościowe przetworniki ciśnienia: </strong>ciśnienie odniesienia i ciśnienie procesu oddziałują na membranę między okładkami kondensatora. Stąd, membrana stanowi kondensator zarówno z górną jak i z dolną okładką. Przesunięcie okładki w jedną ze stron powoduje zmiany pojemności kondensatorów. Zmiany pojemności przelicza się na ciśnienie. Układ zasila się napięciem przemiennym.<figure id="be6e20b2-eaf7-48b5-bf3e-dae8ca14fa80" class="image"><a href="3%20Pomiary%20wielkos%CC%81ci%20nieelektrycznych%202edbfb57b7b248f0984e76ce75021531/Untitled%2013.png"><img style="width:573px" src="3%20Pomiary%20wielkos%CC%81ci%20nieelektrycznych%202edbfb57b7b248f0984e76ce75021531/Untitled%2013.png"/></a></figure></li></ul><ul id="77c8de24-7ea5-48d6-9aee-e9feef1fcdd9" class="bulleted-list"><li style="list-style-type:disc"><strong>Rezystancyjne przetworniki ciśnienia: </strong>ciśnienie procesu powoduje przesuwanie się regulatora rezystora w układzie mostka Wheatstone’a. Zmiana ta powoduje zmianę rezystancji mierzonej w układzie. To również można przeliczyć na ciśnienie. <figure id="49d4ac12-373e-40bc-b1f0-8eedf2622485" class="image"><a href="3%20Pomiary%20wielkos%CC%81ci%20nieelektrycznych%202edbfb57b7b248f0984e76ce75021531/Untitled%2014.png"><img style="width:531px" src="3%20Pomiary%20wielkos%CC%81ci%20nieelektrycznych%202edbfb57b7b248f0984e76ce75021531/Untitled%2014.png"/></a></figure></li></ul><ul id="ebdfb024-0a73-4c31-bc87-3eb166b2958a" class="bulleted-list"><li style="list-style-type:disc"><strong>Przetworniki ciśnienia z transformatorem różnicowym:</strong> w tym przypadku ciśnienie powoduje przesuwanie rdzenia w transformatorze różnicowym z dwoma uzwojeniami wtórnymi. Zależnie od kierunku przesunięcia rdzenia, na jednym z uzwojeń powstaje napięcie wyższe, na drugim - niższe. Różnice napięć można przeliczać na ciśnienie. <figure id="3e4fe84b-2f14-42e2-8a8f-d4fa272b25fc" class="image"><a href="3%20Pomiary%20wielkos%CC%81ci%20nieelektrycznych%202edbfb57b7b248f0984e76ce75021531/Untitled%2015.png"><img style="width:503px" src="3%20Pomiary%20wielkos%CC%81ci%20nieelektrycznych%202edbfb57b7b248f0984e76ce75021531/Untitled%2015.png"/></a></figure></li></ul><ul id="31cea9d3-ef1a-4f66-93e3-43c64ecf9f88" class="bulleted-list"><li style="list-style-type:disc"><strong>Barometry cieczowe: </strong>w tego typu urządzeniach ciecz wprowadzona jest do u-rurki, na której dwóch końcach działają różne ciśnienia. Mogą to być ciśnienie odniesienia i ciśnienie procesu, mogą być ciśnienie atmosferyczne lub próżnia. W podstawowym układzie, przemieszczenie cieczy powoduje zmianę wskazania ciśnienia, bo następuje wskutek różnicy ciśnień. Z jednej strony u-rurki ciecz się podnosi, z drugiej opada. W bardziej zaawansowanej konstrukcji, ruch cieczy może powodować przesuwanie się położenia rdzenia transformatora różnicowego. <figure id="0925a5bc-0c5e-4671-b973-ca053d2b4204" class="image"><a href="3%20Pomiary%20wielkos%CC%81ci%20nieelektrycznych%202edbfb57b7b248f0984e76ce75021531/Untitled%2016.png"><img style="width:655px" src="3%20Pomiary%20wielkos%CC%81ci%20nieelektrycznych%202edbfb57b7b248f0984e76ce75021531/Untitled%2016.png"/></a></figure></li></ul><h3 id="663a30a7-9ac3-4337-848b-102abd783260" class="">Najważniejsze punkty</h3><ul id="40fef79e-99ec-4723-ad18-300ee4deb60e" class="bulleted-list"><li style="list-style-type:disc"><strong>manometr z rurką Bourdona</strong>: większe ciśnienie odkształca rurkę, odkształcona rurka przesuwa wskazówkę</li></ul><ul id="23080a18-1ea8-49ac-a479-23d15abc0756" class="bulleted-list"><li style="list-style-type:disc"><strong>manometr z puszką membranową</strong>: nacisk na membranę ją odkształca, odkształcona membrana porusza wskazówką</li></ul><ul id="f20c9e05-fe29-48d7-8a7f-a8c99739075f" class="bulleted-list"><li style="list-style-type:disc"><strong>pomiar tensometryczny</strong>: na membranie jest tensometr, ciśnienie odkształca membranę i jednocześnie tensometr - efekt piezoelektryczny podaje sygnał proporcjonalny do ciśnienia</li></ul><ul id="463708e7-ad75-4c83-8fa0-97e549d50336" class="bulleted-list"><li style="list-style-type:disc"><strong>czujnik pojemnościowy</strong>: na okładkę kondensatora działa ciśnienie, im większe tym okładki bliżej, im okładki bliżej tym pojemność układu mniejsza, pomiar pojemności pozwala na pomiar ciśnienia</li></ul><ul id="28e3169b-6958-4c46-bbe7-44bd41c968dc" class="bulleted-list"><li style="list-style-type:disc"><strong>czujnik rezystancyjny</strong>: ciśnienie działa na element zmieniający rezystancję regulowanego rezystora, zmiana rezystancji zmienia sygnał pomiarowy</li></ul><ul id="a1dfeb1b-9f75-43bd-ad38-1452812a2a7d" class="bulleted-list"><li style="list-style-type:disc"><strong>układ z transformatorem różnicowym</strong>: działanie ciśnienia przesuwa rdzeń transformatora różnicowego, na dwóch uzwojeniach przez to pojawiają się różne napięcia</li></ul><ul id="02466ede-57b6-44b6-b63e-6a446960778f" class="bulleted-list"><li style="list-style-type:disc"><strong>barometr cieczowy</strong>: w u-rurce jest ciecz; na ciecz działa ciśnienie - im większe, tym wyżej jest ona na drugim końcu rurki</li></ul><h3 id="58d6f863-b64a-4a68-a541-469966130096" class=""><strong>Źródła</strong></h3><p id="6bc4f201-1847-48d6-a4c0-b5ffaaf9e87a" class="">[1] Materiały z wykładu <em>Pomiary elektryczne wielkości nieelektrycznych</em></p><p id="0c9930e4-ecf8-422f-a9f8-47c6d8936fdd" class="">[2] Instrukcja do laboratorium <em>Pomiary elektryczne wielkości nieelektrycznych: Badanie czujników i przetworników ciśnienia</em></p></div><h3 id="ebd62950-27d8-4712-a7d6-a1aecc1bbb10" class=""><details open=""><summary>e) pomiar wilgotności</summary></details></h3><div class="indented"><p id="74556d2c-2302-4245-a87a-79bc480a6880" class="">Pomiary wilgotności to de facto pomiary ciśnienia cząstkowego pary wodnej zawartej w powietrzu, czyli - mówiąc prościej - pomiar tego, jak dużo pary wodnej znajduje się w powietrzu. </p><p id="5d8df48e-ec76-4a91-8add-b9ca6d6beb64" class=""><strong>Podstawowe wielkości</strong></p><p id="d34815dd-5a06-47e7-995b-29024c051e1c" class="">W przypadku wilgotności, można wyróżnić dwie podstawowe wielkości:</p><ul id="26725aae-728a-42c3-a6bd-763d98b0e0ab" class="bulleted-list"><li style="list-style-type:disc">wilgotność bezwzględną, czyli dosłownie masę wody w jednostce objętości powietrza, co wyraża się na ogół w [g/m^3]</li></ul><ul id="0dd6c084-dd20-4692-85bc-ec9dcbef9d99" class="bulleted-list"><li style="list-style-type:disc">wilgotność względną, wyrażoną w [%], która mówi, ile wody jest w powietrzu w odniesieniu do maksymalnej ilości wody, która może być w powietrzu o tej temperaturze. Im wyższa temperatura, tym więcej wody może <em>pomieścić</em> powietrze, tj. ciśnienie pary nasyconej rośnie. </li></ul><p id="ed0ac9fa-c1f7-4d0b-96c5-1f53fcb1f00b" class=""><strong>Fizyczne podstawy pomiarów wilgotności</strong></p><p id="89aa3e92-845a-41ee-b776-9af788c88433" class="">Wśród metod pomiaru wilgotności powietrza można wymienić:</p><ul id="ea8ac6bb-c821-4ff6-bcbc-bb44fe23f04a" class="bulleted-list"><li style="list-style-type:disc">pomiar masy pary pochłoniętej przez absorbent (higrometry grawimetryczne)</li></ul><ul id="5f79e93f-c5a1-4449-b48c-d3c97a6aab07" class="bulleted-list"><li style="list-style-type:disc">analizę zmiany parametrów powietrza (tłumienie określonych częstotliwości promieniowania podczerwonego, zmiana prędkości rozchodzenia się fal elektromagnetycznych)</li></ul><ul id="d7fd8f3b-1a1a-41e1-ba0a-083f3a1f1a2c" class="bulleted-list"><li style="list-style-type:disc">badanie zmian parametrów materiałów (np. wydłużanie się wilgotnych włosów czy nici nylonowych)</li></ul><ul id="a87df5a6-a93a-4d1a-8653-2c741f6652d6" class="bulleted-list"><li style="list-style-type:disc">pomiary charakterystycznych temperatur (np. temperatura punktu rosy)</li></ul><p id="45b34020-e0d6-4f4b-b328-619dcfc66a69" class=""><strong>Urządzenia do pomiaru wilgotności</strong></p><p id="21aa810b-1f6c-4e03-80e1-78086cf312c6" class="">Wśród urządzeń do pomiaru wilgotności można wymienić:</p><ul id="0beba1ff-76aa-49bc-8641-78e39acaa7cd" class="bulleted-list"><li style="list-style-type:disc"><strong>Psychrometr Augusta: </strong>urządzenie składające się z dwóch termometrów, z czego jeden jest w zwilżanej koszulce. Woda ze zwilżonego termometru odparowuje, pobierając ciepło (tzw. ciepło utajone), więc wskazanie tego termometru spada. W przypadku 100% wilgotności powietrza, woda nie odparowuje, natomiast przy 0% - odparowuje bardzo szybko. Oznacza to tyle, że im większa różnica temperatur na termometrach, tym mniejsza wilgotność względna powietrza. W celu eliminacji wpływu ruchu powietrza na wynik pomiaru, stosuje się też <strong>psychrometr Assmanna,</strong> w którym przepływ powietrza jest po prostu wymuszany na zadanym poziomie. <figure id="e7f7c3b3-4dec-4da4-ad4b-a9c84d872a22" class="image"><a href="3%20Pomiary%20wielkos%CC%81ci%20nieelektrycznych%202edbfb57b7b248f0984e76ce75021531/Untitled%2017.png"><img style="width:449px" src="3%20Pomiary%20wielkos%CC%81ci%20nieelektrycznych%202edbfb57b7b248f0984e76ce75021531/Untitled%2017.png"/></a></figure></li></ul><ul id="95e934b1-6c04-4d65-bb65-371bb49d848b" class="bulleted-list"><li style="list-style-type:disc"><strong>Higrometry punktu rosy</strong>: urządzenia, w których miejscowo ochładza się powietrze i sprawdza, przy jakiej temperaturze para wodna skrapla się np. na lusterku. Temperatura ta jest temperaturą punktu rosy i pozwala na odczyt z krzywych psychrometrycznych wilgotności względnej powietrza w aktualnej temperaturze. <figure id="6e0e77b8-4b20-432e-9c65-611d3b90acbb" class="image"><a href="3%20Pomiary%20wielkos%CC%81ci%20nieelektrycznych%202edbfb57b7b248f0984e76ce75021531/Untitled%2018.png"><img style="width:571px" src="3%20Pomiary%20wielkos%CC%81ci%20nieelektrycznych%202edbfb57b7b248f0984e76ce75021531/Untitled%2018.png"/></a></figure></li></ul><ul id="ed804af2-ff69-488d-8daf-437ea641254f" class="bulleted-list"><li style="list-style-type:disc"><strong>Higrometr włosowy</strong>: urządzenie to opiera pomiar o zmianę geometrycznych wymiarów materiałów. Badaną wielkością jest długość włosa, aktualnie nylonowego. Większa wilgotność powoduje wydłużenie włosa, a odczyt tej długości pozwala na zbadanie zmiany wilgotności<figure id="1370c42c-ce96-44e7-9960-3556849f0527" class="image"><a href="3%20Pomiary%20wielkos%CC%81ci%20nieelektrycznych%202edbfb57b7b248f0984e76ce75021531/Untitled%2019.png"><img style="width:410px" src="3%20Pomiary%20wielkos%CC%81ci%20nieelektrycznych%202edbfb57b7b248f0984e76ce75021531/Untitled%2019.png"/></a></figure></li></ul><ul id="2650cb29-5762-47db-a1dc-a110bb19ebeb" class="bulleted-list"><li style="list-style-type:disc"><strong>Higrometr absorpcyjny: </strong>urządzenie działa na podobnej zasadzie, co higrometr włosowy. Większa wilgoć powoduje większe odkształcenie membrany, która naciska na tensometry. Odkształcenie jej zmniejsza nacisk na tensometry, co powoduje zmianę sygnału pomiarowego. <figure id="f7a391cd-b0a4-41c6-a15b-44d76e9dc5ce" class="image"><a href="3%20Pomiary%20wielkos%CC%81ci%20nieelektrycznych%202edbfb57b7b248f0984e76ce75021531/Untitled%2020.png"><img style="width:315px" src="3%20Pomiary%20wielkos%CC%81ci%20nieelektrycznych%202edbfb57b7b248f0984e76ce75021531/Untitled%2020.png"/></a></figure></li></ul><ul id="0f6e4795-840e-473f-b1aa-56994bdf4539" class="bulleted-list"><li style="list-style-type:disc"><strong>Higrometr z czujnikami impedancyjnymi: </strong>zasada działania tego higrometru opiera się o pomiar parametrów elektrycznych materiałów. Wraz ze zmianą wilgotności, zmieniają się rezystancja czy pojemność materiałów elektrycznych. Zmiana tych wielkości powoduje zmianę sygnału pomiarowego, co pozwala na odczyt wilgotności. <figure id="f45a04cf-5917-4f83-b481-ef184b7df0f0" class="image"><a href="3%20Pomiary%20wielkos%CC%81ci%20nieelektrycznych%202edbfb57b7b248f0984e76ce75021531/Untitled%2021.png"><img style="width:809px" src="3%20Pomiary%20wielkos%CC%81ci%20nieelektrycznych%202edbfb57b7b248f0984e76ce75021531/Untitled%2021.png"/></a></figure></li></ul><h3 id="6e921469-ac67-469c-8745-f6978fe60f9a" class="">Najważniejsze punkty</h3><ul id="d77c12c5-c9ff-4745-8abe-7c3d6d9cd283" class="bulleted-list"><li style="list-style-type:disc">mierzy się wilgotność względną lub bezwzględną</li></ul><ul id="4abadcf9-4708-4b04-ad39-d385b062f6fe" class="bulleted-list"><li style="list-style-type:disc">urządzenia pomiarowe: psychrometr Augusta, higrometr włosowy, higrometr punktu rosy, higrometr absorpcyjny, higrometr z czujnikiem impedancyjnym</li></ul><ul id="bc06edbe-1f47-439a-b43e-0e2f2565b62d" class="bulleted-list"><li style="list-style-type:disc">psychrometr Augusta: dwa termometry, jeden zwilżony - jeżeli wilgotność jest mała, ze zwilżonego odparowuje woda i pobierze ciepło utajone; termometr pokaże niższą temperaturą - im wyższa różnica temperatur, tym niższa wilgotność</li></ul><ul id="525321f6-dda9-4f66-840e-0494e065014c" class="bulleted-list"><li style="list-style-type:disc">higrometr punktu rosy: schładza się powierzchnię lusterka w którym odbite jest światło; przy temperaturze punktu rosy, para wodna skrapla się na lusterku i odbicie światła jest osłabione - to jest punkt rosy</li></ul><h3 id="d138be12-168d-40df-be3b-e6f9dccd7a23" class=""><strong>Źródła:</strong></h3><p id="d403fd73-ca9a-4f04-9799-88634c503952" class="">[1] Materiały z wykładu <em>Pomiary elektryczne wielkości nieelektrycznych</em></p><p id="b5465d02-3b84-4038-bdc5-a4a2de9d1062" class="">[2] Instrukcja do laboratorium <em>Pomiary elektryczne wielkości nieelektrycznych: Pomiary wilgotności </em></p></div></div></article></body></html>

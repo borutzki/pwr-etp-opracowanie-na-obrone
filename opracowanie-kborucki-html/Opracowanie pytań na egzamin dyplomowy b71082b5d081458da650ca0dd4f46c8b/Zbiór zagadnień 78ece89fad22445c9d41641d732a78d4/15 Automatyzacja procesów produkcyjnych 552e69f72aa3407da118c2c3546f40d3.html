@@ -1,0 +1,671 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>15. Automatyzacja procesów produkcyjnych</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="552e69f7-2aa3-407d-a118-c2c3546f40d3" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🤖</span></div><h1 class="page-title">15. Automatyzacja procesów produkcyjnych</h1><table class="properties"><tbody><tr class="property-row property-row-select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesSelect"><path d="M7,13 C10.31348,13 13,10.31371 13,7 C13,3.68629 10.31348,1 7,1 C3.68652,1 1,3.68629 1,7 C1,10.31371 3.68652,13 7,13 Z M3.75098,5.32278 C3.64893,5.19142 3.74268,5 3.90869,5 L10.09131,5 C10.25732,5 10.35107,5.19142 10.24902,5.32278 L7.15771,9.29703 C7.07764,9.39998 6.92236,9.39998 6.84229,9.29703 L3.75098,5.32278 Z"></path></svg></span>Status</th><td><span class="selected-value select-value-color-green">Zrobione</span></td></tr><tr class="property-row property-row-person"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesPerson"><path d="M9.625,10.8465 C8.91187,10.2891 8.12088,9.926 7,9.26013 L7,8.71938 C7.21175,8.47612 7.392,8.176 7.53813,7.83213 C7.94587,7.7315 8.3125,7.33425 8.3125,7 C8.3125,6.51788 8.1095,6.32713 7.8715,6.17137 C7.8715,6.15562 7.875,6.14162 7.875,6.125 C7.875,5.41362 7.4375,3.5 5.25,3.5 C3.0625,3.5 2.625,5.4145 2.625,6.125 C2.625,6.14162 2.6285,6.15562 2.6285,6.17137 C2.3905,6.32713 2.1875,6.51788 2.1875,7 C2.1875,7.33425 2.55413,7.7315 2.96187,7.833 C3.108,8.176 3.28825,8.47612 3.5,8.71938 L3.5,9.26013 C2.37912,9.92513 1.58812,10.2882 0.875,10.8465 C0.041125,11.4984 0,12.4688 0,14 L10.5,14 C10.5,12.4688 10.4589,11.4984 9.625,10.8465 Z M13.125,7.3465 C12.4119,6.78912 11.6209,6.426 10.5,5.76013 L10.5,5.21938 C10.7118,4.97613 10.892,4.676 11.0381,4.33213 C11.4459,4.2315 11.8125,3.83425 11.8125,3.5 C11.8125,3.01787 11.6095,2.82713 11.3715,2.67138 C11.3715,2.65562 11.375,2.64162 11.375,2.625 C11.375,1.91363 10.9375,0 8.75,0 C6.5625,0 6.125,1.9145 6.125,2.625 C6.125,2.64162 6.1285,2.65562 6.1285,2.67138 C6.11188,2.68275 6.09787,2.69588 6.08125,2.70725 C7.83212,3.066 8.59688,4.54825 8.72813,5.74787 C8.97575,6.00863 9.1875,6.39625 9.1875,7 C9.1875,7.60288 8.771,8.20312 8.18388,8.51462 C8.127,8.624 8.06662,8.729 8.00275,8.82962 C8.155,8.91537 8.30025,8.99675 8.44025,9.07463 C9.08075,9.4325 9.63375,9.74137 10.164,10.1561 C10.3022,10.2638 10.4204,10.3801 10.5289,10.4991 L14,10.4991 C14,8.96875 13.9589,7.99837 13.125,7.3465 Z"></path></svg></span>Assign</th><td></td></tr></tbody></table></header><div class="page-body"><h3 id="a0388483-a107-4f38-a013-b8264542abb8" class=""><details open=""><summary>a) struktury przemysłowych systemów sterowania</summary></details></h3><div class="indented"><p id="1a539865-422e-4cbc-bdd7-09ca54123ee2" class="">Wśród struktur przemysłowych systemów sterowania można wymienić:</p><ul id="189ce9d2-997d-4286-b817-3ad9bbf2c99c" class="bulleted-list"><li style="list-style-type:disc"><strong>sterowanie lokalne</strong> - jest to indywidualne sterowanie procesem, w którym wykorzystuje się sterownik PLC na miejscu wykonywania procesu. Do wizualizacji można wykorzystać lokalne panele HMI. </li></ul><ul id="ea33e58d-c5a5-4d97-b8e2-71cc3dfaad9d" class="bulleted-list"><li style="list-style-type:disc"><strong>sterowanie zintegrowane (rozproszone) </strong>- sterowanie z jednego miejsca wielu urządzeń procesu przemysłowego, czyli jeden system obsługuje całą linię produkcyjną</li></ul><ul id="b25d1e1f-d691-4383-8b4c-6d56398a7674" class="bulleted-list"><li style="list-style-type:disc"><strong>sterowanie zdalne</strong> - sterowanie stosowane w przypadku istnienia większych odległości między urządzeniem sterującym i sterowanym</li></ul><figure id="edd66c0c-ccad-43ff-811c-65ab4e0bbc6f" class="image"><a href="15%20Automatyzacja%20proceso%CC%81w%20produkcyjnych%20552e69f72aa3407da118c2c3546f40d3/Untitled.png"><img style="width:801px" src="15%20Automatyzacja%20proceso%CC%81w%20produkcyjnych%20552e69f72aa3407da118c2c3546f40d3/Untitled.png"/></a></figure><p id="0dcba10f-d6e8-4913-8be0-7111ca908795" class="">Systemy sterowania lokalnego realizuje się w oparciu o pojedyncze sterowniki PLC.</p><p id="e4a7a4bb-9fb8-4a10-af79-2fbe63aef67e" class="">Sterowanie rozproszone opiera się już na systemach typu SCADA i DCS:</p><ul id="f35db958-40bd-4e68-a137-8fad7deef4fb" class="bulleted-list"><li style="list-style-type:disc"><strong>SCADA</strong> - <em>Supervisory Control And Data Acquisition</em><strong><em> - </em></strong>system sterowania nadrzędnego i zbierania danych, który dopełnia i rozszerza możliwości sterowników, realizując w warstwie sterowania nadrzędnego takie funkcje jak komunikacja z urządzeniami obiektowymi (sterowniki, regulatory), zbieranie i przetwarzanie zmiennych procesowych i ich archiwizacji, tworzenie interfejsu operatora wraz z wizualizacją wartości mierzonych czy generowanie raportów, sygnałów alarmowych czy diagnostyki zasobów, komunikacji i redundancji</li></ul><ul id="9d36b095-880f-4821-a70a-865330fe6a3e" class="bulleted-list"><li style="list-style-type:disc"><strong>DCS </strong>- <em>Distributed Control System </em>- system tego typu odpowiada za sterowanie i wizualizację procesu przemysłowego w oparciu o wspólną bazę danych (tagów) do sterowania i wizualizacji (w PLC i SCADA bazy te są rozdzielone); DCS jest przy tym bardzo skalowalny</li></ul><p id="3dd562b6-7faa-410f-add2-94eb7ce5e70d" class="">Systemy typu DCS są dedykowane dla określonych obiektów sterowania (obiektów przemysłowych), opiera się o zaawansowane algorytmy takie jak sieci neuronowe, a przy tym ma wspólną bazę danych wizualizacji i sterowania, komponenty jednego producenta, dużą niezawodność i wymaganie co do nadzoru procesu.</p><p id="4ec8cd74-a18e-472c-8a9f-463fdea75b78" class="">SCADA dla odmiany to system elastyczny, uniwersalny i optymalizowany przede wszystkim dla algorytmów sterowania dyskretnego. Dopuszcza stosowanie urządzeń różnych producentów, przy czym PLC i SCADA mogą działać niezależnie od siebie. </p><h3 id="8376764c-f466-4106-8ef5-1f9a27f55a30" class="">Źródła</h3><p id="ee3bb5d0-82b8-4aeb-8187-089dff5adb84" class="">[1] Materiały z wykładu <em>Automatyka procesów produkcyjnych</em></p><p id="bc8a433c-57c0-4b23-a66c-386795f59e3e" class="">[2] Materiały z wykładu <em>Automatyka procesów produkcyjnych - zagadnienia wybrane</em></p></div><h3 id="ba026c1c-b440-4113-83d9-002aba4c6845" class=""><details open=""><summary>b) sterowniki PLC - budowa, zasada działania i języki programowania</summary></details></h3><div class="indented"><h3 id="5a458484-4563-4a9f-a08f-109a6919990f" class=""><strong>Budowa sterowników PLC</strong></h3><p id="e7fcc1a6-c4a3-445c-9936-68dabaead40d" class="">Generalnie, wyróżnia się sterowniki <strong>kompaktowe</strong> oraz <strong>modułowe</strong>. Kompaktowe mają wszystkie elementy wymagane do pracy w jednej obudowie. Modułowe mają funkcjonalność taką, jaką moduły do nich dobrane.</p><p id="d6253420-22c4-4665-ad94-63f58a34a5ab" class="">Ogólnie, w podstawowej wersji sterownik PLC składa się z: </p><ul id="cd500a17-1e53-47b6-96bd-0ab3a4084a3c" class="bulleted-list"><li style="list-style-type:disc"><strong>zasilacza</strong> na ogół 24 V lub 110VAC / 230 VAC o dużej sprawności</li></ul><ul id="dedb79ad-2289-4537-b442-1ad07c4f8589" class="bulleted-list"><li style="list-style-type:disc"><strong>jednostki centralnej CPU: </strong>mikroprocesor z systemem operacyjnym, pamięcią, programem, etc., co łącznie służy do wykonywania rozkazów. Mikroprocesory na ogół 8-, 16- i 32-bitowe. Pamięci RAM i EEPROM lub FLASH EPROM.</li></ul><ul id="fa584b8a-95fa-4228-b3fe-668488f5390c" class="bulleted-list"><li style="list-style-type:disc"><strong>modułu wejść cyfrowych</strong> - przetworniki C/C do obsługi sygnałów dyskretnych </li></ul><ul id="f50eaad1-824b-4172-a581-1a278a71ec6c" class="bulleted-list"><li style="list-style-type:disc"><strong>modułu wyjść cyfrowych</strong> - przetworniki C/C do zadawania sygnałów dyskretnych</li></ul><ul id="07491311-6464-4489-b0b5-ed3620d86ecc" class="bulleted-list"><li style="list-style-type:disc"><strong>modułu wejść analogowych</strong> - przetworniki A/C do obsługi sygnałów ciągłych</li></ul><ul id="81e68395-e2cb-4846-b3b2-20506b3c34b2" class="bulleted-list"><li style="list-style-type:disc"><strong>modułu wyjść analogowych</strong> - przetworniki C/A do zadawania sygnałów ciągłych</li></ul><ul id="1bc63999-d2e6-4111-9360-e9ca9a22b378" class="bulleted-list"><li style="list-style-type:disc"><strong>modułów komunikacyjnych</strong>: interfejsy służące do komunikacji z innymi urządzeniami systemu sterowania w sieci przemysłowej, np. czujniki, urządzenia HMI, inne sterowniki, komputery, etc.</li></ul><ul id="b260b255-2fd9-4eb9-82d7-b4ed912ed052" class="bulleted-list"><li style="list-style-type:disc"><strong>modułów specjalnych </strong>do rozszerzenia możliwości urządzenia - np. moduły do pomiaru temperatury, szybkich liczników (np. 1MHz), generatorów PWM, pozycjonowania osi, precyzyjnych wejść analogowych, etc.</li></ul><figure id="8fb20e97-cd5a-473e-ab1b-822a5d35fba1" class="image"><a href="15%20Automatyzacja%20proceso%CC%81w%20produkcyjnych%20552e69f72aa3407da118c2c3546f40d3/Untitled%201.png"><img style="width:698px" src="15%20Automatyzacja%20proceso%CC%81w%20produkcyjnych%20552e69f72aa3407da118c2c3546f40d3/Untitled%201.png"/></a></figure><h3 id="1492ae19-3050-4f22-a22f-bfbbff4c5247" class="">Zasada działania</h3><p id="2b7d48f0-19b0-4ac0-ad47-1038e6b9f105" class="">Sterownik PLC działa zgodnie z programem zapisanym w pamięci. Taki program to ciąg rozkazów logicznych wykonywanych sekwencyjnie, jeden po drugim. Pojedynczy rozkaz to najmniejsza część programu sterującego i składa się z operacji określającej rodzaj wykonywanej funkcji oraz argumentów określających sygnały wejściowe i wyjściowe sterownika. Można tu wykonywać operacje logiczne i arytmetyczne, odczyt i zapis danych do i z pamięci.</p><p id="00d2e854-e06c-4e9d-8948-d65fd6966430" class="">Sterownik pracuje w cyklach, przy czym każdy z nich wygląda tak jak poprzedni:</p><ul id="5cbd0404-78ea-4fb8-8ad0-f86d37e79dc7" class="bulleted-list"><li style="list-style-type:disc"><strong>inicjalizacja</strong>: sprawdzenie poprawności obwodów i konfiguracji sprzętowej</li></ul><ul id="3a5b770e-048a-4cc2-8eeb-abe996e24592" class="bulleted-list"><li style="list-style-type:disc"><strong>odczyt sygnałów wejściowych</strong>: sprawdzenie specjalnego obszaru pamięci pod kątem nowych danych</li></ul><ul id="92cffa25-e0e9-4edf-b00a-5fd242371c60" class="bulleted-list"><li style="list-style-type:disc"><strong>wykonanie programu użytkownika</strong>: przetwarzanie instrukcji programu sterującego i zapisanie nowych stanów wyjść do specjalnej części pamięci</li></ul><ul id="cbd32ac7-ad57-49d4-b0b9-ea0e449878a6" class="bulleted-list"><li style="list-style-type:disc"><strong>zapis sygnałów wyjściowych sterownika: </strong>pobranie z pamięci stanów wyjść i ich aktualizacja</li></ul><ul id="e99b475c-6b12-4a87-af86-1f230b6634d6" class="bulleted-list"><li style="list-style-type:disc"><strong>obsługa komunikacji:</strong> jeżeli sterownik komunikuje się sieciowo z czymś z zewnątrz, to właśnie w tym etapie pracy</li></ul><ul id="2ef6b8fc-a498-4b24-b290-44929a9fb848" class="bulleted-list"><li style="list-style-type:disc"><strong>autodiagnostyka</strong>: sprawdzenie poprawności działania sterownika, np. poprzez sprawdzenie wartości napięcia zasilania, stanu baterii pamięci itp. </li></ul><figure id="12bef430-ca59-4128-99bd-0512ded5bbc1" class="image"><a href="15%20Automatyzacja%20proceso%CC%81w%20produkcyjnych%20552e69f72aa3407da118c2c3546f40d3/Untitled%202.png"><img style="width:417px" src="15%20Automatyzacja%20proceso%CC%81w%20produkcyjnych%20552e69f72aa3407da118c2c3546f40d3/Untitled%202.png"/></a></figure><h3 id="ed5f515e-9a26-42fe-806b-89292f547bf2" class="">Języki programowania</h3><p id="42ae5624-5439-4f8f-8a49-f800ced7646a" class="">Języki programowania sterowników PLC dzieli się na graficzne i tekstowe. </p><p id="a5b8a421-b193-4bf0-a4ac-4838021a4c43" class="">Wśród języków tekstowych można wymienić: </p><ul id="d1b58597-0634-493b-bd0f-cc765232cee7" class="bulleted-list"><li style="list-style-type:disc"><strong>IL: </strong><em>Instruction List </em>- język niskopoziomowy składający się z zestawu instrukcji takich jak operacje logiczne i arytmetyczne, funkcje czasowe i licznikowe, operacje porównania i transferu danych. Jest to język podobny do asemblera, bardzo wydajny.</li></ul><ul id="9233a893-55e3-486b-9b82-3cf5ea6b1f32" class="bulleted-list"><li style="list-style-type:disc"><strong>ST:</strong> <em>Structured Text -</em> język wysokopoziomowy, podobny do Basica czy Pascala. Pozwala na używanie wyrażeń i instrukcji takich jak IF ELSE, zamiast operatorów zorientowanych maszynowo jak OR XOR. </li></ul><p id="2b467faa-bc40-4190-8f86-14d4f9bc3002" class="">Wśród języków graficznych można wymienić:</p><ul id="2ea6fe36-bc82-4f9e-bd53-a74a60bad552" class="bulleted-list"><li style="list-style-type:disc"><strong>FBD</strong>: <em>Functional Block Diagram</em> - język graficzny wzorowany na schematach ideowych stosowanych w elektronice, gdzie pokazany jest przepływ sygnałów i topologia połączeń układów scalonych. Charakterystyczne elementy języka to bloki i elementy sterujące (łączniki), oparte o przepływ sygnałów.</li></ul><ul id="42d30ac7-5bd8-4fe0-b28b-ae05ac10d65a" class="bulleted-list"><li style="list-style-type:disc"><strong>LD: </strong><em>Ladder Diagram </em>- język graficzny, który opiera się na symbolach elektrycznych układów sterowania w technice stykowo-przekaźnikowej. Podstawowymi elementami są styki, przedstawiające wartości logiczne sygnałów wejściowych i zmiennych boolowskich oraz dwustanowe wyjścia, odzwierciedlające cewki przekaźnika. Wykorzystuje się tu też bloki funkcyjne takie jak liczniki, komparatory, etc.</li></ul><h3 id="18f0f181-3a0d-42fd-aa78-09beee46488c" class="">Źródła</h3><p id="31ae717f-39d5-409d-9662-ce018ddf84c8" class="">[1] M. Pawlak - <em>Sterowniki Programowalne</em></p></div><h3 id="c51df6fc-79be-48d1-ab0f-646a3581846c" class=""><details open=""><summary>c) systemy komunikacyjne w automatyce przemysłowej</summary></details></h3><div class="indented"><h3 id="dbff7c67-1734-4d2d-9f7c-699d3bac8662" class="">Ogólny podział</h3><p id="9f5875e1-d995-409a-a340-5151738aa18d" class=""><strong>Sieci komunikacyjne</strong> można podzielić <strong>ze względu na rozmiar</strong> na:</p><ul id="20944a18-8e18-458c-a45a-7fbc63f310e1" class="bulleted-list"><li style="list-style-type:disc"><strong>sieci lokalne (LAN)</strong>, o zasięgu kilku kilometrów</li></ul><ul id="3535d0cb-63b7-4c64-b6e2-1d9c6958a365" class="bulleted-list"><li style="list-style-type:disc"><strong>sieci metropolitalne (MAN)</strong>, obejmujące obszar od kilkunastu do kilkudziesięciu kilometrów, na ogół zespół miejski</li></ul><ul id="d0793b69-1d28-48d9-97e8-d76bc0c415c9" class="bulleted-list"><li style="list-style-type:disc"><strong>sieci rozległe (WAN)</strong>, obejmujące swym zasięgiem region, kraj lub cały świat.</li></ul><p id="76368c7e-8f7b-4f20-9745-f21b575e1591" class="">Wśród <strong>topologii sieci</strong> można wyróżnić:</p><ul id="87fc0a5e-f40e-4592-98e8-3578482c5206" class="bulleted-list"><li style="list-style-type:disc">magistralowe</li></ul><ul id="e837ce1e-fe8a-4409-8fdb-790df1e409a7" class="bulleted-list"><li style="list-style-type:disc">pierścieniowe</li></ul><ul id="b109458a-b9dd-4475-b938-f3bf4c643837" class="bulleted-list"><li style="list-style-type:disc">osiowe</li></ul><ul id="6bcdd5cc-3c2a-4b3c-a260-817551ed6074" class="bulleted-list"><li style="list-style-type:disc">gwiaździste</li></ul><ul id="355c8c22-b3fc-4042-bf49-3af30f9d4f0b" class="bulleted-list"><li style="list-style-type:disc">nieregularne</li></ul><figure id="297eb47b-7bd2-4f84-8415-621d8842dd47" class="image"><a href="15%20Automatyzacja%20proceso%CC%81w%20produkcyjnych%20552e69f72aa3407da118c2c3546f40d3/Untitled%203.png"><img style="width:751px" src="15%20Automatyzacja%20proceso%CC%81w%20produkcyjnych%20552e69f72aa3407da118c2c3546f40d3/Untitled%203.png"/></a></figure><p id="779f0f82-30dd-4623-829c-5b13d339a467" class=""><strong>Sieci przemysłowe</strong> to specyficzna grupa sieci lokalnych, w których postawiony jest nacisk na wysoką <strong>niezawodność</strong> i <strong>przewidywalność</strong> przebiegu komunikacji. W takich sieciach nacisk nie jest stawiany na przepustowość łącz, lecz na terminowość przekazu informacji - ze względu na konieczność szybkiego reagowania układów sterowania na zmiany odczytów czujników itp. </p><p id="37e80af0-2a11-4c3a-ac45-476e8e0774ac" class="">Połączenie ze sobą kilku standardowych sieci przemysłowych może doprowadzić do powstania sieci rozległej o nieregularnej strukturze. </p><h3 id="a69bbd08-c1d5-4d60-b0c6-be0474f00104" class="">Warstwy sieci</h3><p id="648d0b39-0a89-46b0-bd94-65bd559f2267" class="">Sieci komunikacyjne można dzielić na warstwy zgodnie z modelem warstwowym Fieldbus. W przypadku sieci przemysłowych, wygodnym podziałem jest podział analogiczny do sieci TCP/IP lub ISO/OSI, w którym wyróżnia się trzy warstwy:</p><ul id="78730738-d638-4392-82e7-424c42b34bc5" class="bulleted-list"><li style="list-style-type:disc"><strong>poziom czujników i elementów wykonawczych [Sensor / Actuator Level] </strong>- należą do niego wszelkiego rodzaju czujniki (przyciski, przełączniki, czujniki indukcyjne, pojemnościowe, enkodery, etc.) oraz elementy wykonawcze (zawory, lampki, generatory akustyczne, proste napędy). Komunikację optymalizuje się pod kątem bitowego przesyłu informacji (zera i jedynki).</li></ul><ul id="8436b432-cc21-4834-8af5-a33f03c6924d" class="bulleted-list"><li style="list-style-type:disc"><strong>poziom sterowania [Device Level] </strong>- należą do niego bardziej skomplikowane czujniki i elementy wykonawcze oraz moduły o 8 lub więcej modułach I/O, np. skanery i czytniki kodów, przetworniki ciśnienia, temperatury, przepływu, napędy z reg. prędkości stacje operatorskie. Przepływ informacji zachodzi tu domyślnie w bajtach (1 bajt = 8 bitów). </li></ul><ul id="85c3ff3a-5f1d-44ae-836d-2ef250a06a3c" class="bulleted-list"><li style="list-style-type:disc"><strong>poziom zarządzania [Field Level] </strong>- urządzenia na tym poziomie to wyspy urządzeń automatyki, na tym poziomie też łączy się je między sobą i podłącza do większych jednostek. Wymiana danych idzie w sposób blokowych, czyli całych pakietach (32- lub 64- bajty); na tym poziomie często zachodzi przesył danych między poziomem sterowania a poziomami nadrzędnymi, jak np. ERP, MIS czy sieciami biurowymi.</li></ul><figure id="33d16006-88a2-40e9-a2b8-b9444ec524d1" class="image"><a href="15%20Automatyzacja%20proceso%CC%81w%20produkcyjnych%20552e69f72aa3407da118c2c3546f40d3/Untitled%204.png"><img style="width:595px" src="15%20Automatyzacja%20proceso%CC%81w%20produkcyjnych%20552e69f72aa3407da118c2c3546f40d3/Untitled%204.png"/></a><figcaption>Model warstwowy sieci typu Fieldbus</figcaption></figure><h3 id="e90f4812-8ac8-4db1-ade8-5d8f0dc70527" class="">Protokoły</h3><p id="8df852cc-ec05-44d6-bc54-d40be707c98e" class="">Każdy poziom sieci charakteryzuje się swoimi własnymi protokołami, podobnie jak w sieciach internetowych. Jako przykłady można wymienić tu kolejno:</p><ul id="8b246091-84e0-4318-a130-ef6c160e5a55" class="bulleted-list"><li style="list-style-type:disc"><strong>poziom czujników i elementów wykonawczych: </strong>Seriplex, AS-Interface</li></ul><ul id="c25305ae-6f8d-4c5d-9ce9-de79f7ce2378" class="bulleted-list"><li style="list-style-type:disc"><strong>poziom sterowania:</strong> CANOpen, DeviceNet, Device WorldFIP, InterBus, PRofiBus, SDS, Modbus</li></ul><ul id="925df315-05ff-4175-8af4-8a300b7cc408" class="bulleted-list"><li style="list-style-type:disc"><strong>poziom zarządzania:</strong> ControlNet, FF (Fieldbus), P-Net, ProfiNet Profibus FMS, WorldFIP.</li></ul><p id="b21db5e2-81c0-4ab3-87e6-4bfc73bb1af3" class="">Protokoły komunikacyjne są określone normą IEC61158 i przypisane dla konkretnych warstw sieci w modelu OSI. </p><h3 id="3b6c126b-f67d-4b04-9883-e1831c0f57d7" class="">Źródła</h3><p id="5f73a77c-e0ad-4069-89b1-06fd8482c56b" class="">[1] Materiały z wykładu <em>Automatyka procesów produkcyjnych</em></p><p id="f37ebb14-b5c8-4b71-b8ae-142a53d41f07" class="">[2] Materiały z wykładu <em>Automatyka procesów produkcyjnych - zagadnienia wybrane</em></p></div><h3 id="8b191441-3a3a-45d9-8932-7fd1a38a2f99" class="block-color-yellow_background"><details open=""><summary>d) analogowe i cyfrowe interfejsy w przemysłowych systemach pomiarowo-sterujących</summary></details></h3><div class="indented"><h3 id="674c0bb4-cc61-40b9-952a-5baa56c88bd9" class="">Podstawowe definicje</h3><p id="e74cb145-d753-428e-b6db-420a126033a8" class=""><strong>Interfejs</strong> - urządzenie pozwalające na połączenie ze sobą dwóch lub więcej urządzeń, które bez niego nie mogłyby ze sobą współpracować. Interfejsem może być gniazdo lub kabel, może być też inne urządzenie. </p><p id="826100c4-d295-442e-9fc6-51492a62c27e" class="">Gniazdo na płycie głównej komputera jest interfejsem, w który wkłada się np. kartę graficzną, ale i sama karta jest również interfejsem umożliwiającym współpracę monitora z resztą systemu komputerowego. Idąc dalej, monitor jako całe urządzenie to także interfejs, bo posiada swój własny interfejs w postaci ekranu, który połączony jest bezprzewodowo z patrzącym na niego użytkownikiem posiadającym interfejs w postaci narządu wzroku. Potencjometry sterujące monitorem, a obecnie coraz częściej panel sterujący z przyciskami, to drugi, obok ekranu, interfejs monitora.</p><p id="f2b462ea-1c6c-4238-8830-718a8f27e0ef" class=""><strong>System pomiarowo-sterujący - </strong>zestaw współpracujących urządzeń pomiarowych i sterujących współpracujących ze sobą w celu zbierania, porównywania, rejestracji i przetwarzania sygnałów o mierzonych wielkościach fizycznych w celu określenia stanu obiektu i zmiany sterowanych wielkości. </p><p id="8b514593-cf85-4869-95e8-5b9faab40d7a" class="">W celu standaryzacji parametrów wejściowych i wyjściowych aparatury, stosuje się standardowe sygnały pomiarowe i kontrolne - analogowe lub cyfrowe. Wśród sygnałów analogowych można wymienić <strong>sygnały napięciowe </strong>(0-10 V, +- 15V, +- 5V) oraz <strong>sygnały prądowe </strong>(0-20 mA, 4-20 mA). Na ogół sygnały prądowe stosowane są chętniej, ze względu na mniejsze zakłócenia. </p><p id="4b180879-db82-43af-a953-6da15b4c2d9f" class=""><strong>Interfejsy szeregowe</strong></p><p id="5f9bbbb3-38af-45fe-adf4-0f7db9965ada" class="">Wśród interfejsów szeregowych można wymienić takie interfejsy jak RS-232C, RS-449, RS-422A, RS-423A, RS-530, RS-485, HART, IEC 1158-2, PROFIBUS, MicroLAN, CAN. </p><p id="c197f4d4-08cc-4a8c-a393-cfb1cd93b769" class=""><strong>Interfejsy równoległe</strong></p><p id="990e2d8e-43bf-443b-8163-b6ef8858babe" class="">Interfejsy równoległe oferują większą prędkość transmisji niż interfejsy szeregowe. Dane są przesyłane w wielobitowych słowach, bez konieczności stosowania podziału strumienia bitów na słowa z dodatkowymi funkcjami kontrolnymi i korekcyjnymi. </p><p id="4c152f28-b078-4579-8ef9-668e46509797" class="">Wśród interfejsów równoległych można wymienić: Centronics (IEEE 1284), IEC-625.</p><h3 id="d3420c8f-6e06-435a-9e1c-056e83e8129f" class="">Interfejsy analogowe</h3><p id="d051e7c5-abf7-4ec0-b50b-d13b3d2fe3f8" class="">Wśród interfejsów analogowych trudno wymienić jakieś rozsądne opcje. Na ogół analogowe sygnały są przetwarzane przez odpowiednie przetworniki na sygnały cyfrowe i poddawane obróbce w takiej formie, stąd interfejsy analogowe są często raczej czujnikami i fizycznymi elementami układu.</p><p id="f70e2411-ff70-4522-8de7-56eb6120301f" class="">Do interfejsów analogowych systemów przemysłowych można zaliczyć również te elementy, które odpowiadają za interakcje na linii użytkownik-urządzenie, czyli klawiatury, ekrany, przyciski, pokrętła itp. </p><h3 id="556bbf48-7597-487d-9b4f-f01b653bfb5d" class="">Interfejsy cyfrowe</h3><p id="90f85ad8-1ed5-42e4-b160-702c620ec557" class="">Interfejsy cyfrowe służą najczęściej do komunikacji i przesyłania danych między urządzeniami. </p><p id="644b93fc-35d7-413c-b6fc-cf7ff6b42406" class="">Interfejsy te można dzielić na <strong>synchroniczne</strong> oraz <strong>asynchroniczne</strong>. W przypadku <strong>synchronicznej komunikacji</strong>, poszczególne bity czy słowa wysyłane są w <strong>równych przedziałach czasu</strong>, co może sprawić że informacje zostaną utracone przy desynchronizacji. W <strong>transmisji asynchronicznej</strong>, dane są wysyłane w <strong>nierównych odstępach czasu</strong>, przy czym pojawiają się <strong>bloki początku i końca transmisji</strong>. Jest to częściej stosowana metoda transmisji.</p><p id="c110b082-39f1-487a-a798-7af935aa23ad" class="">Interfejsy cyfrowe można też dzielić na <strong>szeregowe</strong> i <strong>równoległe</strong>. Transmisja szeregowa to przesyłanie danych bit po bicie zgodnie z taktami zegara synchronizującego. Transmisja równoległa to przesyłanie ciągu słów (długość słowa zależnie od standardu) kolejno słowo po słowie synchronicznie - bity są wysyłane równolegle. </p><p id="9a777e2f-16d2-4bea-889c-70249703d4d9" class="">Interfejsy cyfrowe w systemach przemysłowych wykorzystuje się głównie do przesyłu informacji między urządzeniami w ramach różnych sieci przemysłowych. </p><h3 id="0c42bd3a-fc91-4f8b-babb-2dbe8e05536e" class="">Transmisja bezprzewodowa</h3><p id="a07c0ac5-d202-4e62-92b8-124b21d87310" class="">Do transmisji na małe odległości można stosować również inne interfejsy, takie jak Bluetooth, IRDA czy ZigBee. Na większe odległości dane przesyła się z zastosowaniem interfejsów takich jak WLAN (systemy radiowe), GSM/GPRS czy inne sieci komórkowe takie jak EDGE, HSDPA, LTE i 5G. </p><h3 id="14c5e118-275b-4701-9832-3ed52eeb978a" class="">Wybrane interfejsy i protokoły</h3><p id="17502f00-9686-4c08-906a-e599a105de1f" class=""><strong>RS-232C</strong></p><p id="1b59d77c-fc64-46e2-9a5e-ea0ac6f232a3" class="">Interfejs szeregowy RS-232C to zdefiniowany sposób połączenia dwóch urządzeń końcowych. Urządzenia są połączone z linią telefoniczną poprzez modem. </p><p id="5220414e-544d-499d-a1f1-7f414376ebff" class=""><strong>MicroLAN</strong></p><p id="0097ca62-0d8f-40a0-b8b1-9d9d5c830916" class="">W tym systemie możliwa jest komunikacja między jednym układem master (komputer, mikrokontroler) i wieloma elementami slave (czujniki itp.). System MicroLAN składa się z układu nadrzędnego, oprogramowania, połączeń i zespołu elementów typu slave (w tym przetworniki, czujniki, układy pamięci). Linia MicroLAN jest sterowana przez interfejs RS-232C. </p><p id="c901239d-9a15-4264-8148-7218d1a654fe" class=""><strong>PROFIBUS</strong></p><p id="0fa9086d-a44d-4ff2-8b71-820c75bc4a72" class="">PROFIBUS (Process Field Bus) to rodzina lokalnych sieci przemysłowych w trzech wersjach, zależnie od warstwy sterowania. W standardzie PROFIBUS DP lub FMS jako warstwę fizyczną stosuje się sieć RS-485. Długość kabla (100-1200m) zależy od szybkości transmisji (9,6 - 1500 kbit/s). </p><p id="65e5ed87-7991-4843-954b-e54ee2d9960c" class=""><strong>HART</strong></p><p id="675920e0-34d3-44ad-bde9-f08a9585f842" class="">Hart to protokół komunikacyjny oparty o standard 4-20 mA. Służy głównie do zmiany nastaw i diagnostyki. W protokole tym jeden cykl 1200 Hz oznacza binarne 1, dwa cykle 2200 Hz - binarne 0. Na sygnał analogowy prądu nakładany jest sygnał cyfrowy komunikacyjny i tak złożona informacja jest przesyłana dalej. Sygnały są tu analogowe. </p><figure id="a60cc83e-5b64-408a-b4d2-00fcedd27d22" class="image"><a href="15%20Automatyzacja%20proceso%CC%81w%20produkcyjnych%20552e69f72aa3407da118c2c3546f40d3/Untitled%205.png"><img style="width:396px" src="15%20Automatyzacja%20proceso%CC%81w%20produkcyjnych%20552e69f72aa3407da118c2c3546f40d3/Untitled%205.png"/></a></figure><p id="d7555c08-875b-4010-81e9-0b073a3ab17b" class=""><strong>AS-Interface</strong></p><p id="6158a6f6-5c73-4da8-a04a-8a3ad137ac6f" class="">Actuator Sensor Interface to otwarty standard łączący punkty binarne. Służy głównie do kontroli czujników, elementów wykonawczych i urządzeń wejściowo-wyjściowych. Dystans działania takiej sieci ASI to ok. 300 m. Jednym kablem 2-żyłowym dostarczane jest zasilanie oraz transmisja danych. </p><p id="4c3320ec-c584-42c7-a8fa-5bed01dd2526" class=""><strong>CAN</strong></p><p id="98d89780-4bfe-43df-bde1-de94826be7cf" class=""><em>Controlled Area Network</em> to sieć o różnych zastosowaniach, zależnie od standardu. Sieci CAN występują w różnych strukturach (linearna, gwiaździsta, pierścieniowa) i służą do transmisji sygnałów między urządzeniami. Sterowniki muszą posiadać blok przetwarzający przesyłane informacje (kontroler CAN) oraz układ nadawczo-odbiorczy. Odpowiadają one za nadawanie danym konkretnej postaci i komunikacji z magistralą. Magistrala to dwa przewody (high i low) złączone w skrętkę. Bity są przesyłane tak, by były symetryczne względem siebie. </p><p id="3b07b056-3054-456b-b5b0-6ad7d88fd89f" class="">Elementy podłączone do magistrali CAN nazywa się modułami lub węzłami. Cechą CAN są duża szybkość transmisji danych uzależniona od długości magistrali, duża odporność na zakłócenia oraz elastyczność systemu co do liczby podłączonych elementów. CAN wymaga użycia czujników wyposażonych w wyjścia cyfrowe. </p><p id="449fdb7f-d635-4747-99b5-d5399b61bf05" class=""><strong>EtherCAT</strong></p><p id="0c96a2eb-e9fe-4d61-adeb-87ebe510b9b6" class="">W tym interfejsie sieci komunikacyjnej węzeł master wysyła ramkę ethernetową do wszystkich slave’ów. Ramka jest interpretowana przez każdy odbiornik pod kątem tego, czy jakieś dane zostały wysłane do niego. Jeżeli tak, fragment ramki jest odczytywany i przesyłana jest informacja zwrotna potwierdzająca odbiór. </p><p id="063715ff-9683-43df-bf25-a0f8f50a5707" class="">Sieci EtherCAT pracują w logicznej topologii pierścienia</p><p id="8c85cd72-24eb-4f2f-a5b1-12b3d0c68650" class=""><strong>Centronics (IEEE-1284)</strong></p><p id="e25a81c9-3edb-4ec5-a356-e178a45df177" class="">Interfejs Centronics służy na ogół do połączenia drukarek z komputerami i przesyłania danych w obydwu kierunkach. Jest on jednak używany też w urządzeniach pomiarowych (oscyloskopy, analizatory widma) i pozwala na wysyłanie danych do drukarki bez komputera. </p><p id="68c484cb-c6db-47b4-8a22-1d0cbd61811e" class=""><strong>DeviceNet</strong></p><p id="2c2a449c-690d-4028-8040-e6f838b96ba5" class="">Ten protokół jest oparty o technologię CAN. Komunikuje on ze sobą urządzenia przemysłowe takie jak wyłączniki krańcowe, czujniki fotoelektryczne, zawory wielodrożne, rozruszniki silników, przyciski sterujące, czytniki kodów kreskowych, przemienniki częstotliwości, panele operatorskie itp. </p><p id="e3f06f7c-d016-44e3-a5f8-431ec18ff5d7" class="">DeviceNET wymaga niskiej szerokości pasma, bo ma mały format ramki, co jest zaletą. Wymaga dzięki temu mniejszego procesora.</p><p id="89c0a9ed-7ecf-47eb-aa4c-ce585d1d0135" class=""><strong>Ethernet/IP </strong></p><p id="127856be-1c9f-43f3-a5dd-ad335390f080" class="">Protokół ten opiera się o dwa rodzaje wiadomości: diagnostyczne i konfiguracyjne przesyłane protokołem TCP, oraz dane przesyłane w czasie rzeczywistym, UDP. Ethernet/IP pozwala na priorytetyzację przesyłanych pakietów i synchronizację zegarów czasu rzeczywistego w rozproszonych systemach. Do synchronizacji wykorzystywany jest protokół PTP, precyzyjnie synchronizujący czas do najważniejszego zegara w sieci. </p><h3 id="f641c30e-0e33-4d9e-906e-0717906a0e5b" class="">Źródła</h3><p id="95ea049c-1cf6-45d4-85ac-98126da87543" class="">[1] Materiały z wykładu <em>Automatyka procesów produkcyjnych</em></p><p id="c05af520-be38-4bc0-9873-72c907c160f1" class="">[2] Materiały z wykładu <em>Automatyka procesów produkcyjnych - zagadnienia wybrane</em></p><p id="b1977cf3-7385-4ecd-a968-6e538b1de468" class="">[3] Robert Czabanowski - <em>Sensory i systemy pomiarowe</em></p><p id="f4b59591-b917-4ed5-93f3-8c0aa7e43693" class="">[4] <a href="https://pl.wikipedia.org/wiki/Interfejs_(urz%C4%85dzenie)">https://pl.wikipedia.org/wiki/Interfejs_(urządzenie)</a></p><p id="89542721-ab11-4f17-abac-d212102f5357" class="">[5] M. Pawlak - <em>Sterowniki Programowalne</em></p><p id="03fbd1d2-a19a-4a64-9eb1-98df6c74ce67" class="">
+</p><p id="b6cddc8d-af5b-4abb-8945-6497c9ca4076" class="">
+</p></div></div></article></body></html>
