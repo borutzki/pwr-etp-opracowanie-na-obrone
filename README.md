@@ -1,6 +1,7 @@
 # Opracowanie zagadnień na egzamin dyplomowy
-Politechnika Wrocławska
-Wydział: Elektryczny, W-5
+**Politechnika Wrocławska**
+
+*Wydział Elektryczny, W-5*
 - Kierunek: Elektrotechnika ETK
 - Specjalność: Elektrotechnika Przemysłowa ETP
 - Stopień II - studia magisterskie
