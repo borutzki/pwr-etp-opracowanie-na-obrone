@@ -12,12 +12,15 @@ Niniejsze opracowanie napisałem samodzielnie od zera, opierając się o materia
 
 Opracowanie zamieszczam w trzech formatach:
 - eksport z programu Notion w formacie HTML,
+- eksport z programu Notion w formacie Markdown + CSV,
 - pliki PDF z każdym z głównych zagadnień,
 - plik PDF łączący wszystkie zagadnienia razem.
+
+Oryginalne (i prawdopodobnie najbardziej aktualne) opracowanie można znaleźć [na mojej publicznej stronie w usłudze Notion](https://borutzki.notion.site/Opracowanie-pyta-na-egzamin-dyplomowy-b71082b5d081458da650ca0dd4f46c8b).
 
 # Od autora
 Mam nadzieję, że repozytorium pomoże jak największej liczbie osób przejść bez problemu egzamin dyplomowy po studiach magisterskich. Udostępniam całe to opracowanie za darmo, żeby nie zaginęło w odmętach mojego dysku. 
 
-Powodzenia na studiach, nie dajcie się wysłać na dziekankę ;)
+Tak poza tym - powodzenia na studiach, nie dajcie się wysłać na dziekankę. 
 
 __*mgr inż. Kacper Borucki*__
