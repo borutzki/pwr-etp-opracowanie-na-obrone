@@ -25,3 +25,8 @@ Mam nadzieję, że repozytorium pomoże jak największej liczbie osób przejść
 Tak poza tym - powodzenia na studiach, nie dajcie się wysłać na dziekankę. 
 
 __*mgr inż. Kacper Borucki*__
+
+## Kawka
+Materiały udostępniam za darmo. Jeżeli chcesz docenić mój wkład, po prostu postaw mi kawę ;) \
+\
+<a href="https://www.buymeacoffee.com/kborucki" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
